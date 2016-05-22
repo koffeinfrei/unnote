@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  template: template0
+
+development:
+  <<: *default
+  database: mykonote_development
+
+test:
+  <<: *default
+  database: mykonote_test
+
+production:
+  <<: *default
+  database: rails_production
+  username: app
