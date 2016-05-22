@@ -13,6 +13,10 @@ gem 'slim-rails'
 gem 'uglifier'
 gem 'unicorn'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap-material-design'
+end
+
 group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
