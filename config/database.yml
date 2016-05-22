@@ -3,6 +3,10 @@ default: &default
   encoding: unicode
   pool: 5
   template: template0
+  username: <%= ENV['POSTGRESQL_USER'] || '' %>
+  password: <%= ENV['POSTGRESQL_PASSWORD'] || '' %>
+  host: <%= ENV['POSTGRESQL_HOST'] || 'localhost' %>
+  port: <%= ENV['POSTGRESQL_PORT'] || 5432 %>
 
 development:
   <<: *default
