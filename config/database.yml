@@ -6,7 +6,7 @@ default: &default
   username: <%= ENV['POSTGRESQL_USER'] || '' %>
   password: <%= ENV['POSTGRESQL_PASSWORD'] || '' %>
   host: <%= ENV['POSTGRESQL_HOST'] || 'localhost' %>
-  port: <%= ENV['BOXEN_POSTGRESQL_PORT'] || 5432 %>
+  port: <%= ENV['POSTGRESQL_PORT'] || 5432 %>
 
 development:
   <<: *default
