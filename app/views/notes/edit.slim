@@ -1,0 +1,7 @@
+= simple_form_for(@note, html: { class: 'form-horizontal' }) do |f| 
+  .form-inputs
+    = f.input :title
+    = f.input :content
+
+  .form-actions
+    = f.button :submit
