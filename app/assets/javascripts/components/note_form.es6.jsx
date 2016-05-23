@@ -22,6 +22,26 @@ class NoteForm extends React.Component {
       </form>
     );
   }
+
+  componentDidMount () {
+    var $this = $(ReactDOM.findDOMNode(this));
+
+    // TODO: rails asset path
+    $.trumbowyg.svgPath = '/assets/trumbowyg/images/icons.svg';
+    $this.find('textarea').trumbowyg({
+      btns: [
+        ['formatting'],
+        'btnGrp-semantic',
+        'btnGrp-lists',
+        ['link'],
+        ['insertImage'],
+        'btnGrp-justify',
+        ['horizontalRule'],
+        ['removeformat'],
+        ['fullscreen']
+      ]
+    });
+  }
 }
 
 NoteForm.propTypes = {

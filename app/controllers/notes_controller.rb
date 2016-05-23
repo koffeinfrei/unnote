@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   def index
     @notes = Note.all
+
     render component: 'NoteList', props: { notes: @notes }
   end
 

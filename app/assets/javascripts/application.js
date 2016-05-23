@@ -5,6 +5,7 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require trumbowyg/trumbowyg
 //= require_tree .
 
 $.material.init();
