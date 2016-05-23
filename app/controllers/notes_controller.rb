@@ -6,5 +6,7 @@ class NotesController < ApplicationController
   def edit
     @notes = Note.all
     @note = Note.find(params[:id])
+
+    render component: 'NoteForm', props: { notes: @notes, note: @note }
   end
 end
