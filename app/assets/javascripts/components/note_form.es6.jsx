@@ -10,13 +10,12 @@ class NoteForm extends React.Component {
               className="string optional form-control"
               id="note_title"
               name="note[title]"
-              value={this.props.note.title}
+              value={this.props.title}
             />
           </div>
           <div className="form-group text optional note_content">
            <label className="text optional control-label" htmlFor="note_content">Content</label>
-           <textarea id="note_content" className="text optional form-control" name="note[content]">
-            {this.props.note.content}
+           <textarea id="note_content" className="text optional form-control" name="note[content]" value={this.props.content}>
            </textarea>
           </div>
         </div>
@@ -26,6 +25,6 @@ class NoteForm extends React.Component {
 }
 
 NoteForm.propTypes = {
-  notes: React.PropTypes.array,
-  note: React.PropTypes.object
+  notes: React.PropTypes.string,
+  content: React.PropTypes.string
 };
