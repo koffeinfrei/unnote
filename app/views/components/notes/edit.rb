@@ -1,5 +1,5 @@
 module Components
-  module Note
+  module Notes
     class Edit < React::Component::Base
 
       param :notes
@@ -25,7 +25,7 @@ module Components
 
       def render
         div do
-          params.note.title
+          params.note[:title]
         end
       end
     end

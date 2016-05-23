@@ -6,5 +6,4 @@ Opal.load('components');
 //= require bootstrap-sprockets
 //= require bootstrap-material-design
 //= require_tree .
-
-$.material.init();
+// $.material.init();
