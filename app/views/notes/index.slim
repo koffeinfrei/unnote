@@ -1,3 +1,1 @@
-ul
-  - @notes.each do |note|
-    li= link_to note.title, [:edit, note]
+= render 'index', notes: @notes

@@ -4,6 +4,7 @@ class NotesController < ApplicationController
   end
 
   def edit
+    @notes = Note.all
     @note = Note.find(params[:id])
   end
 end
