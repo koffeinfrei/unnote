@@ -6,5 +6,6 @@ class NotesController < ApplicationController
   def edit
     @notes = Note.all
     @note = Note.find(params[:id])
+    render_component notes: @notes, note: @note
   end
 end
