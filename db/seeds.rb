@@ -5,3 +5,8 @@ seed Note, { title: 'Bring to the table win-win survival strategies' }, {
            'clickthroughs from DevOps. Nanotechnology immersion along the information' \
            'highway will close the loop on focusing solely on the bottom line.'
 }
+
+seed Note, { title: 'Leverage agile frameworks' }, {
+  content: 'Iterative approaches to corporate strategy foster collaborative' \
+           'thinking to further the overall value proposition.'
+}
