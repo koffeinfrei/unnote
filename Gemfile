@@ -12,6 +12,14 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'uglifier'
 gem 'unicorn'
+gem 'reactive_rails_generator'
+gem 'reactive-ruby'
+gem 'react-rails', '~> 1.3.0'
+gem 'opal-rails', '>= 0.8.1'
+gem 'therubyracer', platforms: :ruby
+gem 'react-router-rails', '~>0.13.3'
+gem 'reactive-router'
+gem 'reactive-record'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-material-design'

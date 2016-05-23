@@ -115,6 +115,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.16.0)
     rake (11.1.2)
+    reactive_rails_generator (0.2.1)
+      rails (>= 4.0.0)
     ref (2.0.0)
     sass (3.4.22)
     sass-rails (5.0.4)
@@ -171,6 +173,7 @@ DEPENDENCIES
   pg
   rails (~> 4.2.5)
   rails-assets-bootstrap-material-design!
+  reactive_rails_generator
   sass-rails
   simple_form
   slim-rails
@@ -181,4 +184,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.11.2
+   1.12.4
