@@ -2,7 +2,7 @@ class NoteEdit extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { note: { title: '', content: '', id: Math.random().toString(36).substr(2) } };
+    this.state = { title: '', content: '', id: Math.random().toString(36).substr(2) };
   }
 
   render() {
@@ -12,7 +12,7 @@ class NoteEdit extends React.Component {
           <NoteList url={this.props.url} handleNoteClick={this.handleNoteClick.bind(this)} />
         </div>
         <div className="col-md-8">
-          <NoteForm note={this.state.note} />
+          <NoteForm id={this.state.id} title={this.state.title} content={this.state.content} />
         </div>
       </div>
     );
@@ -21,12 +21,12 @@ class NoteEdit extends React.Component {
   handleNoteClick(note, e) {
     e.preventDefault();
 
-    this.setState({ note: note });
+    this.setState({ id: note.id, title: note.title, content: note.content });
     history.pushState({}, "", "/notes/" + note.id + "/edit");
   }
 
   handleAfterCreate(note) {
-    this.setState({ note: note });
+    this.setState({ id: note.id });
   }
 
   componentDidMount() {

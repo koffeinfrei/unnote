@@ -3,9 +3,9 @@ class NoteForm extends React.Component {
     super(props, context);
 
     this.state = {
-      id: this.props.note.id,
-      title: this.props.note.title,
-      content: this.props.note.content
+      id: this.props.id,
+      title: this.props.title,
+      content: this.props.content
     };
   }
 
@@ -40,15 +40,11 @@ class NoteForm extends React.Component {
   }
 
   handleTitleChange(e) {
-    this.setState({ title: e.target.value });
-
-    this.handleChange();
+    this.setState({ title: e.target.value }, this.handleChange);
   }
 
   handleContentChange(e) {
-    this.setState({ content: e.target.value });
-
-    this.handleChange();
+    this.setState({ content: e.target.value }, this.handleChange);
   }
 
   handleChange() {
@@ -70,13 +66,23 @@ class NoteForm extends React.Component {
 
   // a different note is shown (i.e. NoteEdit was re-rendered)
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      id: nextProps.note.id,
-      title: nextProps.note.title,
-      content: nextProps.note.content
-    });
+    // a different note is shown
+    if (nextProps.id !== this.state.id) {
+      this.editorNeedsReRender = true;
 
-    this.editorNeedsReRender = true;
+      this.setState({
+        id: nextProps.id,
+        title: nextProps.title,
+        content: nextProps.content
+      });
+    }
+    // a new entry was saved, we now got the id
+    // from the server
+    else {
+      this.setState({
+        id: nextProps.id
+      });
+    }
   }
 
   // only re-render the editor when `componentWillReceiveProps`

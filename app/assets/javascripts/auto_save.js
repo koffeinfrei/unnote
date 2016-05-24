@@ -55,9 +55,7 @@ class AutoSave {
             // TODO: update react with actual id
           }
 
-          if (method === 'POST') {
-            this.onCreated(data);
-          }
+          this.onCreated(data);
         },
         error: function(xhr, status, err) {
           console.error(url, status, err.toString());
