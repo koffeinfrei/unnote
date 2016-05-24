@@ -11,7 +11,11 @@ class NoteList extends React.Component {
         <div className="list-group-item">
           <div className="row-content">
             <h4 className="list-group-item-heading">
-              <a href="#" key={note.id} onClick={this.props.handleNoteClick.bind(this, note)}>{note.title}</a>
+              <a
+                href="#"
+                key={note.id}
+                onClick={this.props.handleNoteClick.bind(this, note)}
+              >{note.title}</a>
             </h4>
           </div>
         </div>

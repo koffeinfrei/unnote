@@ -2,7 +2,7 @@ class NoteEdit extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { note: { title: '', content: '' } };
+    this.state = { note: { title: '', content: '', id: Math.random().toString(36).substr(2) } };
   }
 
   render() {

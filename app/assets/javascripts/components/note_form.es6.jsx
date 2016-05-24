@@ -1,4 +1,14 @@
 class NoteForm extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      id: this.props.note.id,
+      title: this.props.note.title,
+      content: this.props.note.content
+    };
+  }
+
   render() {
     return (
       <form className="simple_form form-horizontal">
@@ -10,7 +20,8 @@ class NoteForm extends React.Component {
               className="string optional form-control"
               id="note_title"
               name="note[title]"
-              value={this.props.note.title}
+              value={this.state.title}
+              onChange={this.handleTitleChange.bind(this)}
             />
           </div>
           <div className="form-group text optional note_content">
@@ -19,7 +30,7 @@ class NoteForm extends React.Component {
              className="text optional form-control"
              id="note_content"
              name="note[content]"
-             value={this.props.note.content}
+             value={this.state.content}
            >
            </textarea>
           </div>
@@ -28,16 +39,52 @@ class NoteForm extends React.Component {
     );
   }
 
+  handleTitleChange(e) {
+    this.setState({ title: e.target.value });
+
+    this.handleChange();
+  }
+
   handleContentChange(e) {
-    console.debug('content changed', e.target.value);
+    this.setState({ content: e.target.value });
+
+    this.handleChange();
+  }
+
+  handleChange() {
+    localStorage.setItem(
+      'note-' + this.state.id,
+      JSON.stringify(
+        {
+          title: this.state.title,
+          content: this.state.content
+        }
+      )
+    );
   }
 
   componentDidMount() {
     this.renderEditor();
   }
 
+  // a different note is shown (i.e. NoteEdit was re-rendered)
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      id: nextProps.note.id,
+      title: nextProps.note.title,
+      content: nextProps.note.content
+    });
+
+    this.editorNeedsReRender = true;
+  }
+
+  // only re-render the editor when `componentWillReceiveProps`
+  // was called prior
   componentDidUpdate() {
-    this.renderEditor();
+    if (this.editorNeedsReRender) {
+      this.editorNeedsReRender = false;
+      this.renderEditor();
+    }
   }
 
   renderEditor() {
@@ -54,13 +101,13 @@ class NoteForm extends React.Component {
         'btnGrp-semantic',
         'btnGrp-lists',
         ['link'],
-        ['insertImage'],
         'btnGrp-justify',
         ['horizontalRule'],
         ['removeformat'],
         ['fullscreen']
       ]
     });
-    $editor.on('tbwchange', this.handleContentChange);
+    $editor.on('tbwchange', this.handleContentChange.bind(this));
+    $editor.on('tbwpaste', this.handleContentChange.bind(this));
   }
 }
