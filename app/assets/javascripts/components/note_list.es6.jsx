@@ -8,8 +8,14 @@ class NoteList extends React.Component {
   render () {
     var commentNodes = this.state.notes.map((note) => {
       return (
-        <div className="list-group-item">
+        <div className="list-group-item" key={note.id}>
+          <div className="row-action-primary">
+            <i className="material-icons">note</i>
+          </div>
           <div className="row-content">
+            <div class="least-content">
+              {moment(note.created_at).fromNow()}
+            </div>
             <h4 className="list-group-item-heading">
               <a
                 href="#"
@@ -18,13 +24,18 @@ class NoteList extends React.Component {
               >{note.title}</a>
             </h4>
           </div>
+          <div className="list-group-separator"></div>
         </div>
       );
     });
 
     return (
-      <div className="list-group">
-        {commentNodes}
+      <div>
+        <Navbar />
+        <div className="list-group">
+          {commentNodes}
+        </div>
+        <AddNoteButton />
       </div>
     );
   }

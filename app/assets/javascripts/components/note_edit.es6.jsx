@@ -22,5 +22,6 @@ class NoteEdit extends React.Component {
     e.preventDefault();
 
     this.setState({ note: note });
+    history.pushState({}, "", "/notes/" + note.id + "/edit");
   }
 }

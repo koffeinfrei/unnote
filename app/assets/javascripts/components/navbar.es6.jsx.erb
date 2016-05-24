@@ -1,0 +1,21 @@
+class Navbar extends React.Component {
+  render () {
+    return (
+      <div className="navbar navbar-info">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <a className="navbar-brand">
+              <img src="<%= asset_path 'logo-donkeywhite.png' %>" className="navbar-logo" />
+              <span>Mykonote</span>
+            </a>
+          </div>
+          <div>
+            <div className="navbar-right">
+              <i className="material-icons navbar-toggle">search</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
