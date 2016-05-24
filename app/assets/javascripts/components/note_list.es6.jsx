@@ -6,12 +6,12 @@ class NoteList extends React.Component {
   }
 
   render () {
-    var commentNodes = this.state.notes.map(function(note) {
+    var commentNodes = this.state.notes.map((note) => {
       return (
         <div className="list-group-item">
           <div className="row-content">
             <h4 className="list-group-item-heading">
-              {note.title}
+              <a href="#" key={note.id} onClick={this.props.handleNoteClick.bind(this, note)}>{note.title}</a>
             </h4>
           </div>
         </div>

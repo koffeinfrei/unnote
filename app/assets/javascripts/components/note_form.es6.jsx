@@ -1,11 +1,5 @@
 class NoteForm extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = { title: '', content: '' };
-  }
-
-  render () {
+  render() {
     return (
       <form className="simple_form form-horizontal">
         <div className="form-inputs">
@@ -16,7 +10,7 @@ class NoteForm extends React.Component {
               className="string optional form-control"
               id="note_title"
               name="note[title]"
-              value={this.state.title}
+              value={this.props.note.title}
             />
           </div>
           <div className="form-group text optional note_content">
@@ -25,7 +19,7 @@ class NoteForm extends React.Component {
              className="text optional form-control"
              id="note_content"
              name="note[content]"
-             value={this.state.content}
+             value={this.props.note.content}
            >
            </textarea>
           </div>
@@ -34,12 +28,27 @@ class NoteForm extends React.Component {
     );
   }
 
-  componentDidMount () {
-    var $this = $(ReactDOM.findDOMNode(this));
+  handleContentChange(e) {
+    console.debug('content changed', e.target.value);
+  }
 
+  componentDidMount() {
+    this.renderEditor();
+  }
+
+  componentDidUpdate() {
+    this.renderEditor();
+  }
+
+  renderEditor() {
     // TODO: rails asset path
     $.trumbowyg.svgPath = '/assets/trumbowyg/images/icons.svg';
-    $this.find('textarea').trumbowyg({
+
+    const $form = $(ReactDOM.findDOMNode(this));
+    const $editor = $form.find('textarea');
+
+    $editor.trumbowyg('destroy');
+    $editor.trumbowyg({
       btns: [
         ['formatting'],
         'btnGrp-semantic',
@@ -52,5 +61,6 @@ class NoteForm extends React.Component {
         ['fullscreen']
       ]
     });
+    $editor.on('tbwchange', this.handleContentChange);
   }
 }
