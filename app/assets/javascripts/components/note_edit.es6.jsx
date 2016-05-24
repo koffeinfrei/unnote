@@ -25,7 +25,11 @@ class NoteEdit extends React.Component {
     history.pushState({}, "", "/notes/" + note.id + "/edit");
   }
 
+  handleAfterCreate(note) {
+    this.setState({ note: note });
+  }
+
   componentDidMount() {
-    new AutoSave().startPolling();
+    new AutoSave(this.handleAfterCreate.bind(this)).startPolling();
   }
 }

@@ -1,10 +1,14 @@
 class AutoSave {
+  constructor(onCreated) {
+    this.onCreated = onCreated;
+  }
+
   static get POLLING_INTERVAL() {
     return 2000;
   }
 
   startPolling() {
-    setInterval(this.sync, AutoSave.POLLING_INTERVAL);
+    setInterval(this.sync.bind(this), AutoSave.POLLING_INTERVAL);
   }
 
   sync() {
@@ -44,11 +48,15 @@ class AutoSave {
         method: method,
         dataType: 'json',
         data: data,
-        success: function(data) {
+        success: (data) => {
           // if the content is still the same -> clear from localStorage
           if (note_raw === localStorage.getItem(key)) {
             localStorage.removeItem(key);
             // TODO: update react with actual id
+          }
+
+          if (method === 'POST') {
+            this.onCreated(data);
           }
         },
         error: function(xhr, status, err) {
