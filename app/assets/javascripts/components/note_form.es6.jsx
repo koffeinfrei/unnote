@@ -56,6 +56,7 @@ class NoteForm extends React.Component {
       'note-' + this.state.id,
       JSON.stringify(
         {
+          id: this.state.id,
           title: this.state.title,
           content: this.state.content
         }
