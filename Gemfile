@@ -14,6 +14,7 @@ gem 'slim-rails'
 gem 'trumbowyg2-rails'
 gem 'uglifier'
 gem 'unicorn'
+gem 'momentjs-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-material-design'
