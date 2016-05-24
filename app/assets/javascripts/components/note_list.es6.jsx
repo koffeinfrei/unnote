@@ -5,7 +5,7 @@ class NoteList extends React.Component {
     this.state = { notes: [] };
   }
 
-  render () {
+  render() {
     var commentNodes = this.state.notes.map((note) => {
       return (
         <div className="list-group-item" key={note.id}>
@@ -40,16 +40,31 @@ class NoteList extends React.Component {
     );
   }
 
-  componentDidMount () {
+  componentDidMount() {
+    this.updateList();
+  }
+
+  componentDidUpdate() {
+    if (this.listNeedsUpdate) {
+      this.listNeedsUpdate = false;
+      this.updateList();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.listNeedsUpdate = true;
+  }
+
+  updateList() {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
-      success: function(data) {
+      success: (data) => {
         this.setState({ notes: data });
-      }.bind(this),
-      error: function(xhr, status, err) {
+      },
+      error: (xhr, status, err) => {
         console.error(this.props.url, status, err.toString());
-      }.bind(this)
+      }
     });
   }
 }
