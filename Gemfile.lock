@@ -80,6 +80,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
+    momentjs-rails (2.11.1)
+      railties (>= 3.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
@@ -185,6 +187,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 3.3.6)
   jquery-rails
+  momentjs-rails
   pg
   rails (~> 4.2.5)
   rails-assets-bootstrap-material-design!
