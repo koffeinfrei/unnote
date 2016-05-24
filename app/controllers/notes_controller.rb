@@ -1,14 +1,9 @@
 class NotesController < ApplicationController
   def index
-    @notes = Note.all
-
-    render component: 'NoteList', props: { notes: @notes }
+    render component: 'NoteList', props: { url: api_notes_path }
   end
 
   def edit
-    @notes = Note.all
-    @note = Note.find(params[:id])
-
-    render component: 'NoteEdit', props: { notes: @notes, note: @note }
+    render component: 'NoteEdit', props: { url: api_notes_path }
   end
 end

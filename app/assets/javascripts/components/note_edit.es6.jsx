@@ -3,17 +3,12 @@ class NoteEdit extends React.Component {
     return (
       <div>
         <div className="col-md-4">
-          <NoteList notes={this.props.notes} />
+          <NoteList url={this.props.url} />
         </div>
         <div className="col-md-8">
-          <NoteForm title={this.props.note.title} content={this.props.note.content} />
+          <NoteForm url={this.props.url} />
         </div>
       </div>
     );
   }
 }
-
-NoteEdit.propTypes = {
-  notes: React.PropTypes.array,
-  note: React.PropTypes.object
-};

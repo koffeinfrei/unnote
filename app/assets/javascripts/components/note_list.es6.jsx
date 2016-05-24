@@ -1,6 +1,12 @@
 class NoteList extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { notes: [] };
+  }
+
   render () {
-    var commentNodes = this.props.notes.map(function(note) {
+    var commentNodes = this.state.notes.map(function(note) {
       return (
         <div className="list-group-item">
           <div className="row-content">
@@ -11,13 +17,24 @@ class NoteList extends React.Component {
         </div>
       );
     });
+
     return (
       <div className="list-group">
         {commentNodes}
       </div>
-    );}
-}
+    );
+  }
 
-NoteList.propTypes = {
-  notes: React.PropTypes.array
-};
+  componentDidMount () {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      success: function(data) {
+        this.setState({ notes: data });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  }
+}

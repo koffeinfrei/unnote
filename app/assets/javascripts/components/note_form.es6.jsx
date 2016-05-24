@@ -1,4 +1,10 @@
 class NoteForm extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { title: '', content: '' };
+  }
+
   render () {
     return (
       <form className="simple_form form-horizontal">
@@ -10,12 +16,17 @@ class NoteForm extends React.Component {
               className="string optional form-control"
               id="note_title"
               name="note[title]"
-              value={this.props.title}
+              value={this.state.title}
             />
           </div>
           <div className="form-group text optional note_content">
            <label className="text optional control-label" htmlFor="note_content">Content</label>
-           <textarea id="note_content" className="text optional form-control" name="note[content]" value={this.props.content}>
+           <textarea
+             className="text optional form-control"
+             id="note_content"
+             name="note[content]"
+             value={this.state.content}
+           >
            </textarea>
           </div>
         </div>
@@ -43,8 +54,3 @@ class NoteForm extends React.Component {
     });
   }
 }
-
-NoteForm.propTypes = {
-  notes: React.PropTypes.string,
-  content: React.PropTypes.string
-};
