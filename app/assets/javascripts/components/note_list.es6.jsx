@@ -30,12 +30,8 @@ class NoteList extends React.Component {
     });
 
     return (
-      <div>
-        <Navbar />
-        <div className="list-group">
-          {commentNodes}
-        </div>
-        <AddNoteButton />
+      <div className="list-group">
+        {commentNodes}
       </div>
     );
   }
