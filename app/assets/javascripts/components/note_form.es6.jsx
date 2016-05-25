@@ -67,7 +67,9 @@ class NoteForm extends React.Component {
   // a different note is shown (i.e. NoteEdit was re-rendered)
   componentWillReceiveProps(nextProps) {
     // a different note is shown
-    if (nextProps.id !== this.state.id) {
+    // if the id is non-numeric the current note
+    // is a new (i.e. unsaved) note
+    if (nextProps.id !== this.state.id && $.isNumeric(this.state.id)) {
       this.editorNeedsReRender = true;
 
       this.setState({
