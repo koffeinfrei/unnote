@@ -64,25 +64,28 @@ class NoteForm extends React.Component {
     this.renderEditor();
   }
 
-  // a different note is shown (i.e. NoteEdit was re-rendered)
   componentWillReceiveProps(nextProps) {
-    // a different note is shown
-    // if the id is non-numeric the current note
+    if (nextProps.id === this.state.id) {
+      return;
+    }
+
+    // a new entry was saved, we now got the id
+    // from the server
+    if (!$.isNumeric(this.state.id) && (this.state.title != '' || this.state.content != '')) {
+      this.setState({
+        id: nextProps.id
+      });
+    }
+    // a different note is shown.
+    // if the id is non-numeric, the current note
     // is a new (i.e. unsaved) note
-    if (nextProps.id !== this.state.id && $.isNumeric(this.state.id)) {
+    else {
       this.editorNeedsReRender = true;
 
       this.setState({
         id: nextProps.id,
         title: nextProps.title,
         content: nextProps.content
-      });
-    }
-    // a new entry was saved, we now got the id
-    // from the server
-    else {
-      this.setState({
-        id: nextProps.id
       });
     }
   }
