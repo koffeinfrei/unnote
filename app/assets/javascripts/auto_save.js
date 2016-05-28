@@ -1,28 +1,41 @@
 class AutoSave {
-  constructor(onCreated) {
-    this.onCreated = onCreated;
+  constructor(onServerSync) {
+    this.onServerSyncCallback = onServerSync;
+
+    this.setSyncStatus();
   }
 
   static get POLLING_INTERVAL() {
-    return 2000;
+    return 3000;
   }
 
   startPolling() {
-    setInterval(this.sync.bind(this), AutoSave.POLLING_INTERVAL);
+    setInterval(this.syncToServer.bind(this), AutoSave.POLLING_INTERVAL);
   }
 
-  sync() {
+  setChange(note) {
+    this.onServerSyncCallback({ isSynced: false });
+
+    localStorage.setItem(
+      'note-' + note.id,
+      JSON.stringify(
+        {
+          id: note.id,
+          title: note.title,
+          content: note.content
+        }
+      )
+    );
+  }
+
+  syncToServer() {
     if (jQuery.active) {
       return;
     }
 
-    for (var i = 0, len = localStorage.length; i < len; ++i) {
-      const key = localStorage.key(i);
+    var keys = this.getLocalStorageKeys();
 
-      if (!key.startsWith('note-')) {
-        continue;
-      }
-
+    for (var key of keys) {
       const note_raw = localStorage.getItem(key);
       const note = JSON.parse(note_raw);
 
@@ -52,15 +65,38 @@ class AutoSave {
           // if the content is still the same -> clear from localStorage
           if (note_raw === localStorage.getItem(key)) {
             localStorage.removeItem(key);
-            // TODO: update react with actual id
           }
 
-          this.onCreated(data);
+          this.onChange(data);
         },
         error: function(xhr, status, err) {
           console.error(url, status, err.toString());
         }
       });
     }
+  }
+
+  setSyncStatus() {
+    this.onChange({});
+  }
+
+  onChange(note) {
+    var isSynced = this.getLocalStorageKeys().length === 0;
+    this.onServerSyncCallback($.extend(note, { isSynced: isSynced }));
+  }
+
+  getLocalStorageKeys() {
+    var keys = [];
+    var length = localStorage.length;
+
+    for (var i = 0; i < length; ++i) {
+      var key = localStorage.key(i);
+
+      if (key.startsWith('note-')) {
+        keys.push(key);
+      }
+    }
+
+    return keys;
   }
 }

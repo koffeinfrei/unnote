@@ -11,11 +11,16 @@ class NoteEdit extends React.Component {
         <div className="col-md-4">
           <Navbar />
           <NoteList url={this.props.url} handleNoteClick={this.handleNoteClick.bind(this)} />
-          <AddNoteButton handleNewNoteClick={this.handleNewNoteClick.bind(this)} />
         </div>
         <div className="col-md-8">
-          <NoteForm id={this.state.id} title={this.state.title} content={this.state.content} />
+          <NoteForm
+            id={this.state.id}
+            title={this.state.title}
+            content={this.state.content}
+            handleChange={this.handleEditChange.bind(this)} />
+          <SaveStateLabel isSynced={this.state.isSynced} />
         </div>
+        <AddNoteButton handleNewNoteClick={this.handleNewNoteClick.bind(this)} />
       </div>
     );
   }
@@ -33,12 +38,17 @@ class NoteEdit extends React.Component {
     this.setState(this.getNewNoteAttributes());
   }
 
-  handleAfterCreate(note) {
-    this.setState({ id: note.id });
+  handleEditChange(note) {
+    this.autoSave.setChange(note);
+  }
+
+  handleServerSync(data) {
+    this.setState(data);
   }
 
   componentDidMount() {
-    new AutoSave(this.handleAfterCreate.bind(this)).startPolling();
+    this.autoSave = new AutoSave(this.handleServerSync.bind(this));
+    this.autoSave.startPolling();
   }
 
   getNewNoteAttributes() {

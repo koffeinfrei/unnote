@@ -48,15 +48,12 @@ class NoteForm extends React.Component {
   }
 
   handleChange() {
-    localStorage.setItem(
-      'note-' + this.state.id,
-      JSON.stringify(
-        {
-          id: this.state.id,
-          title: this.state.title,
-          content: this.state.content
-        }
-      )
+    this.props.handleChange(
+      {
+        id: this.state.id,
+        title: this.state.title,
+        content: this.state.content
+      }
     );
   }
 
