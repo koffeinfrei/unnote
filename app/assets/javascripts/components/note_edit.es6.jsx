@@ -10,7 +10,10 @@ class NoteEdit extends React.Component {
       <div>
         <div className="col-md-4">
           <Navbar />
-          <NoteList url={this.props.url} handleNoteClick={this.handleNoteClick.bind(this)} />
+          <NoteList
+            url={this.props.url}
+            isSynced={this.state.isSynced}
+            handleNoteClick={this.handleNoteClick.bind(this)} />
         </div>
         <div className="col-md-8">
           <NoteForm

@@ -48,7 +48,10 @@ class NoteList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.listNeedsUpdate = true;
+    if (nextProps.isSynced) {
+      console.log('notelist', nextProps);
+      this.listNeedsUpdate = true;
+    }
   }
 
   updateList() {
