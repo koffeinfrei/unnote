@@ -5,18 +5,8 @@ class Api::NotesController < ApplicationController
     render json: @notes
   end
 
-  def create
-    @note = Note.new(note_params)
-
-    if @note.save
-      render json: @note, status: :created
-    else
-      render json: @note.errors, status: :unprocessable_entity
-    end
-  end
-
   def update
-    @note = Note.find(params[:id])
+    @note = Note.find_or_initialize_by(uid: params[:id])
 
     if @note.update_attributes(note_params)
       render json: @note, status: :ok
@@ -28,6 +18,6 @@ class Api::NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit([:title, :content])
+    params.require(:note).permit([:uid, :title, :content])
   end
 end

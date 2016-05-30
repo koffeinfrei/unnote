@@ -3,7 +3,7 @@ class NoteForm extends React.Component {
     super(props, context);
 
     this.state = {
-      id: this.props.id,
+      uid: this.props.uid,
       title: this.props.title,
       content: this.props.content
     };
@@ -50,7 +50,7 @@ class NoteForm extends React.Component {
   handleChange() {
     this.props.handleChange(
       {
-        id: this.state.id,
+        uid: this.state.uid,
         title: this.state.title,
         content: this.state.content
       }
@@ -62,29 +62,18 @@ class NoteForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.id === this.state.id) {
+    if (nextProps.uid === this.state.uid) {
       return;
     }
 
-    // a new entry was saved, we now got the id
-    // from the server
-    if (!$.isNumeric(this.state.id) && (this.state.title != '' || this.state.content != '')) {
-      this.setState({
-        id: nextProps.id
-      });
-    }
     // a different note is shown.
-    // if the id is non-numeric, the current note
-    // is a new (i.e. unsaved) note
-    else {
-      this.editorNeedsReRender = true;
+    this.editorNeedsReRender = true;
 
-      this.setState({
-        id: nextProps.id,
-        title: nextProps.title,
-        content: nextProps.content
-      });
-    }
+    this.setState({
+      uid: nextProps.uid,
+      title: nextProps.title,
+      content: nextProps.content
+    });
   }
 
   // only re-render the editor when `componentWillReceiveProps`

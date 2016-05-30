@@ -8,7 +8,7 @@ class NoteList extends React.Component {
   render() {
     var commentNodes = this.state.notes.map((note) => {
       return (
-        <div className="list-group-item" key={note.id}>
+        <div className="list-group-item" key={note.uid}>
           <div className="row-action-primary">
             <i className="material-icons">note</i>
           </div>
@@ -19,7 +19,6 @@ class NoteList extends React.Component {
             <h4 className="list-group-item-heading">
               <a
                 href="#"
-                key={note.id}
                 onClick={this.props.handleNoteClick.bind(this, note)}
               >{note.title}</a>
             </h4>

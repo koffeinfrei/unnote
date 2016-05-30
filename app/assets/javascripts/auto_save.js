@@ -17,10 +17,10 @@ class AutoSave {
     this.onServerSyncCallback({ isSynced: false });
 
     localStorage.setItem(
-      'note-' + note.id,
+      'note-' + note.uid,
       JSON.stringify(
         {
-          id: note.id,
+          uid: note.uid,
           title: note.title,
           content: note.content
         }
@@ -43,24 +43,11 @@ class AutoSave {
       let method;
       let data;
 
-      // update
-      if ($.isNumeric(note.id)) {
-        url = '/api/notes/' + note.id;
-        method = 'PUT';
-        data = { id: note.id, note: note };
-      }
-      // create
-      else {
-        url = '/api/notes/';
-        method = 'POST';
-        data = { note: note };
-      }
-
       $.ajax({
-        url: url,
-        method: method,
+        url: '/api/notes/' + note.uid,
+        method: 'PUT',
         dataType: 'json',
-        data: data,
+        data: { note: note },
         success: (data) => {
           // if the content is still the same -> clear from localStorage
           if (note_raw === localStorage.getItem(key)) {
