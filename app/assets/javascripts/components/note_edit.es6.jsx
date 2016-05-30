@@ -2,7 +2,16 @@ class NoteEdit extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = this.getNewNoteAttributes();
+    if (props.uid) {
+      this.state = {
+        uid: props.uid,
+        title: props.title,
+        content: props.content
+      };
+    }
+    else {
+      this.state = this.getNewNoteAttributes();
+    }
   }
 
   render() {

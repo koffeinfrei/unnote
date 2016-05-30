@@ -4,6 +4,12 @@ class NotesController < ApplicationController
   end
 
   def edit
-    render component: 'NoteEdit', props: { url: api_notes_path }
+    @note = Note.find_by_uid(params[:id])
+    render component: 'NoteEdit', props: {
+      url: api_notes_path,
+      uid: @note.uid,
+      title: @note.title,
+      content: @note.content
+    }
   end
 end

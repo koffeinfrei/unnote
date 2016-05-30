@@ -31,6 +31,9 @@ class NoteForm extends React.Component {
              id="note_content"
              name="note[content]"
              value={this.state.content}
+             // react complains about a missing handler on mutable fields.
+             // we don't need actually this, as we handle changes on the RTE.
+             onChange={this.noOp}
            >
            </textarea>
           </div>
@@ -108,4 +111,6 @@ class NoteForm extends React.Component {
     $editor.on('tbwchange', this.handleContentChange.bind(this));
     $editor.on('tbwpaste', this.handleContentChange.bind(this));
   }
+
+  noOp() {}
 }
