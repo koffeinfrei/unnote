@@ -48,13 +48,13 @@ class AutoSave {
         method: 'PUT',
         dataType: 'json',
         data: { note: note },
-        success: (data) => {
+        success: () => {
           // if the content is still the same -> clear from localStorage
           if (note_raw === localStorage.getItem(key)) {
             localStorage.removeItem(key);
           }
 
-          this.onChange(data);
+          this.setSyncStatus();
         },
         error: function(xhr, status, err) {
           console.error(url, status, err.toString());
@@ -64,12 +64,8 @@ class AutoSave {
   }
 
   setSyncStatus() {
-    this.onChange({});
-  }
-
-  onChange(note) {
     var isSynced = this.getLocalStorageKeys().length === 0;
-    this.onServerSyncCallback($.extend(note, { isSynced: isSynced }));
+    this.onServerSyncCallback({ isSynced: isSynced });
   }
 
   getLocalStorageKeys() {
