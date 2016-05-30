@@ -18,10 +18,11 @@ class NoteEdit extends React.Component {
     return (
       <div>
         <div className="col-md-4">
-          <Navbar />
+          <Navbar handleSearchEnter={this.handleSearchEnter.bind(this)} />
           <NoteList
             url={this.props.url}
             isSynced={this.state.isSynced}
+            searchQuery={this.state.searchQuery}
             handleNoteClick={this.handleNoteClick.bind(this)} />
         </div>
         <div className="col-md-8">
@@ -57,6 +58,10 @@ class NoteEdit extends React.Component {
 
   handleServerSync(data) {
     this.setState(data);
+  }
+
+  handleSearchEnter(e) {
+    this.setState({ searchQuery: e.target.value });
   }
 
   componentDidMount() {

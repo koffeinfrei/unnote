@@ -6,7 +6,9 @@ gem 'rails', '~> 4.2.5'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
+gem 'momentjs-rails'
 gem 'pg'
+gem 'pg_search'
 gem 'react-rails'
 gem 'sass-rails'
 gem 'simple_form'
@@ -14,7 +16,6 @@ gem 'slim-rails'
 gem 'trumbowyg2-rails'
 gem 'uglifier'
 gem 'unicorn'
-gem 'momentjs-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-material-design'

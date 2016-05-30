@@ -1,5 +1,5 @@
 class Navbar extends React.Component {
-  render () {
+  render() {
     return (
       <div className="navbar navbar-info">
         <div className="container-fluid">
@@ -10,8 +10,14 @@ class Navbar extends React.Component {
             </a>
           </div>
           <div>
-            <div className="navbar-right">
-              <i className="material-icons navbar-toggle">search</i>
+            <div className="navbar-form navbar-right">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="string optional form-control"
+                  placeholder="Search"
+                  onChange={this.props.handleSearchEnter} />
+              </div>
             </div>
           </div>
         </div>

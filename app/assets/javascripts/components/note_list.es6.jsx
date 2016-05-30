@@ -2,7 +2,7 @@ class NoteList extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { notes: [], isSynced: false };
+    this.state = { notes: [], isSynced: false, searchQuery: '' };
   }
 
   render() {
@@ -47,13 +47,21 @@ class NoteList extends React.Component {
       this.listNeedsUpdate = true;
     }
 
-    this.setState( { isSynced: nextProps.isSynced });
+    if (this.state.searchQuery !== nextProps.searchQuery) {
+      this.listNeedsUpdate = true;
+    }
+
+    this.setState( {
+      isSynced: nextProps.isSynced,
+      searchQuery: nextProps.searchQuery
+    });
   }
 
   updateList() {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
+      data: { search: this.state.searchQuery },
       success: (data) => {
         this.setState({ notes: data });
       },
