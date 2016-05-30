@@ -15,7 +15,7 @@ class Api::NotesController < ApplicationController
     @note = Note.find_or_initialize_by(uid: params[:id])
 
     if @note.update_attributes(note_params)
-      render json: @note, status: :ok
+      render json: {}, status: :ok
     else
       render json: @note.errors, status: :unprocessable_entity
     end
