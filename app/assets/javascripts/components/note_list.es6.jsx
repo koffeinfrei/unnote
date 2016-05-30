@@ -2,7 +2,7 @@ class NoteList extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { notes: [] };
+    this.state = { notes: [], isSynced: false };
   }
 
   render() {
@@ -35,10 +35,6 @@ class NoteList extends React.Component {
     );
   }
 
-  componentDidMount() {
-    this.updateList();
-  }
-
   componentDidUpdate() {
     if (this.listNeedsUpdate) {
       this.listNeedsUpdate = false;
@@ -47,10 +43,11 @@ class NoteList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isSynced) {
-      console.log('notelist', nextProps);
+    if (!this.state.isSynced && nextProps.isSynced) {
       this.listNeedsUpdate = true;
     }
+
+    this.setState( { isSynced: nextProps.isSynced });
   }
 
   updateList() {
