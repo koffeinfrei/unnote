@@ -23,6 +23,8 @@ end
 group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do
