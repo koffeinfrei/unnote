@@ -32,13 +32,14 @@ class NoteEdit extends React.Component {
     e.preventDefault();
 
     this.setState({ uid: note.uid, title: note.title, content: note.content });
-    history.pushState({}, "", "/notes/" + note.uid + "/edit");
+    history.pushState({}, '', '/notes/' + note.uid + '/edit');
   }
 
   handleNewNoteClick(e) {
     e.preventDefault();
 
     this.setState(this.getNewNoteAttributes());
+    history.pushState({}, '', '/notes');
   }
 
   handleEditChange(note) {
