@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   layout :set_layout
 
   def layout
-    'application'
+    'public'
   end
 
   private

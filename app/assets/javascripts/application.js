@@ -9,4 +9,6 @@
 //= require moment
 //= require_tree .
 
-$.material.init();
+$(function () {
+  $.material.init();
+});
