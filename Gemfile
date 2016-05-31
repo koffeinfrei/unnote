@@ -5,10 +5,12 @@ gem 'rails', '~> 4.2.5'
 # gems sorted alphabetically
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'devise'
 gem 'jquery-rails'
 gem 'momentjs-rails'
 gem 'pg'
 gem 'pg_search'
+gem 'pundit'
 gem 'react-rails'
 gem 'sass-rails'
 gem 'simple_form'
@@ -22,10 +24,14 @@ source 'https://rails-assets.org' do
 end
 
 group :development, :test do
-  gem 'spring'
-  gem 'spring-commands-rspec'
+  gem 'capybara'
+  gem 'database_cleaner'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 group :development do

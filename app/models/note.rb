@@ -9,6 +9,8 @@ class Note < ActiveRecord::Base
     using: { tsearch: { prefix: true } }
   )
 
+  belongs_to :user
+
   scope :default_ordered, -> { order(created_at: :desc) }
 
   def to_param
