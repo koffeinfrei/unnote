@@ -5,6 +5,7 @@ gem 'rails', '~> 4.2.5'
 # gems sorted alphabetically
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bower-rails'
 gem 'devise'
 gem 'jquery-rails'
 gem 'momentjs-rails'
@@ -18,10 +19,6 @@ gem 'slim-rails'
 gem 'trumbowyg2-rails'
 gem 'uglifier'
 gem 'unicorn'
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap-material-design'
-end
 
 group :development, :test do
   gem 'capybara'
