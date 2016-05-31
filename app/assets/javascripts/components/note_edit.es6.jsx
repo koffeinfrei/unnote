@@ -21,6 +21,7 @@ class NoteEdit extends React.Component {
           <Navbar handleSearchEnter={this.handleSearchEnter.bind(this)} />
           <NoteList
             url={this.props.url}
+            activeNoteUid={this.state.uid}
             isSynced={this.state.isSynced}
             searchQuery={this.state.searchQuery}
             handleNoteClick={this.handleNoteClick.bind(this)} />

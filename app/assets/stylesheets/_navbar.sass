@@ -8,3 +8,15 @@
   top: 15px
   width: 100%
   text-align: center
+
+.list-group
+  .note-navigation-item
+    cursor: pointer
+
+    &.active
+      &:hover, &:focus
+        background: transparent
+        outline: 0
+
+      .list-group-item-heading, .list-group-item-text
+        color: $list-group-active-color

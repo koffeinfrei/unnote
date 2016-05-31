@@ -8,20 +8,22 @@ class NoteList extends React.Component {
   render() {
     var commentNodes = this.state.notes.map((note) => {
       return (
-        <div className="list-group-item" key={note.uid}>
-          <div className="row-action-primary">
-            <i className="material-icons">note</i>
-          </div>
-          <div className="row-content">
-            <div class="least-content">
-              {moment(note.created_at).fromNow()}
+        <div key={note.uid}>
+          <div
+            className={this.getItemCssClass(note)}
+            onClick={this.handleNoteClick.bind(this, note)}>
+
+            <div className="row-action-primary">
+              <i className="material-icons">note</i>
             </div>
-            <h4 className="list-group-item-heading">
-              <a
-                href="#"
-                onClick={this.props.handleNoteClick.bind(this, note)}
-              >{note.title}</a>
-            </h4>
+            <div className="row-content">
+              <div class="least-content">
+                {moment(note.created_at).fromNow()}
+              </div>
+              <h4 className="list-group-item-heading">
+                {note.title}
+              </h4>
+            </div>
           </div>
           <div className="list-group-separator"></div>
         </div>
@@ -33,6 +35,15 @@ class NoteList extends React.Component {
         {commentNodes}
       </div>
     );
+  }
+
+  getItemCssClass(note) {
+    cssClass = "list-group-item note-navigation-item"
+    if (note.uid === this.props.activeNoteUid) {
+      cssClass += ' active';
+    }
+
+    return cssClass;
   }
 
   componentDidUpdate() {
@@ -55,6 +66,13 @@ class NoteList extends React.Component {
       isSynced: nextProps.isSynced,
       searchQuery: nextProps.searchQuery
     });
+  }
+
+  handleNoteClick(note, e) {
+    $('.note-navigation-item').removeClass('active');
+    $(e.currentTarget).addClass('active');
+
+    this.props.handleNoteClick(note, e);
   }
 
   updateList() {
