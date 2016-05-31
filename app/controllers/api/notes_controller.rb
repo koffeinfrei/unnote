@@ -17,7 +17,12 @@ class Api::NotesController < AuthenticatedController
   def update
     @note = Note.find_or_initialize_by(uid: params[:id])
 
-    authorize @note
+    if @note.new_record?
+      authorize @note, :create?
+      @note.user = current_user
+    else
+      authorize @note
+    end
 
     if @note.update_attributes(note_params)
       render json: {}, status: :ok
