@@ -89,8 +89,7 @@ class NoteForm extends React.Component {
   }
 
   renderEditor() {
-    // TODO: rails asset path
-    $.trumbowyg.svgPath = '/assets/trumbowyg/images/icons.svg';
+    $.trumbowyg.svgPath = '<%= asset_path('trumbowyg/dist/ui/icons.svg') %>';
 
     const $form = $(ReactDOM.findDOMNode(this));
     const $editor = $form.find('textarea');

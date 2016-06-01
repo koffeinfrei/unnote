@@ -216,10 +216,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.4)
-    trumbowyg2-rails (2.1.0.2)
-      rails (>= 3.1)
-      railties (>= 3.1)
-      sass (>= 3.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -260,7 +256,6 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   therubyracer
-  trumbowyg2-rails
   uglifier
   unicorn
 

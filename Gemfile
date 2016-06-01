@@ -15,7 +15,6 @@ gem 'react-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'trumbowyg2-rails'
 gem 'uglifier'
 gem 'unicorn'
 

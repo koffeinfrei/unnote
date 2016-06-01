@@ -5,7 +5,7 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require trumbowyg/trumbowyg
+//= require trumbowyg/dist/trumbowyg
 //= require moment
 //= require_tree .
 

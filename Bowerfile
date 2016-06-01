@@ -1,2 +1,3 @@
-asset 'bootstrap-material-design'
-asset 'bootstrap-sass', '3.3.6'
+asset 'bootstrap-material-design', '~0.5.9'
+asset 'bootstrap-sass', '~3.3.6'
+asset 'trumbowyg', '~2.1.0'
