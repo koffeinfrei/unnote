@@ -7,6 +7,7 @@
 //= require components
 //= require trumbowyg/dist/trumbowyg
 //= require momentjs/moment
+//= require bootbox/bootbox
 //= require_tree .
 
 $(function () {

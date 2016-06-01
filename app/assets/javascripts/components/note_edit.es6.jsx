@@ -24,7 +24,8 @@ class NoteEdit extends React.Component {
             activeNoteUid={this.state.uid}
             isSynced={this.state.isSynced}
             searchQuery={this.state.searchQuery}
-            handleNoteClick={this.handleNoteClick.bind(this)} />
+            handleNoteClick={this.handleNoteClick.bind(this)}
+            handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)} />
         </div>
         <div className="col-md-8">
           <NoteForm
@@ -46,11 +47,41 @@ class NoteEdit extends React.Component {
     history.pushState({}, '', '/notes/' + note.uid + '/edit');
   }
 
+  handleDeleteNoteClick(note, e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    bootbox.confirm('Are you sure? <br> The note will be permanently deleted.', (result) => {
+      if (!result) {
+        return;
+      }
+
+      this.setState({ isSynced: false });
+
+      $.ajax({
+        url: '/api/notes/' + note.uid,
+        method: 'DELETE',
+        dataType: 'json',
+      })
+      .done(() => {
+        localStorage.removeItem('note-' + note.uid);
+
+        if (this.state.uid === note.uid) {
+          this.setNewNote();
+        }
+      })
+      .fail(function(xhr, status, err) {
+        console.error(url, status, err.toString());
+      })
+      .always(() => {
+        this.setState({ isSynced: true });
+      });
+    });
+  }
+
   handleNewNoteClick(e) {
     e.preventDefault();
-
-    this.setState(this.getNewNoteAttributes());
-    history.pushState({}, '', '/notes');
+    this.setNewNote();
   }
 
   handleEditChange(note) {
@@ -72,6 +103,11 @@ class NoteEdit extends React.Component {
 
   getNewNoteAttributes() {
     return { title: '', content: '', uid: Uuid.generateV4() }
+  }
+
+  setNewNote() {
+    this.setState(this.getNewNoteAttributes());
+    history.pushState({}, '', '/notes');
   }
 }
 

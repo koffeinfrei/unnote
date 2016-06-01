@@ -31,6 +31,18 @@ class Api::NotesController < AuthenticatedController
     end
   end
 
+  def destroy
+    @note = Note.find_by(uid: params[:id])
+
+    authorize @note
+
+    if @note.destroy
+      render json: {}, status: :ok
+    else
+      render json: @note.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def note_params

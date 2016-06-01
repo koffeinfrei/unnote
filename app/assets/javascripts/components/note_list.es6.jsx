@@ -17,7 +17,12 @@ class NoteList extends React.Component {
               <i className="material-icons">lightbulb_outline</i>
             </div>
             <div className="row-content">
-              <div class="least-content">
+              <div
+                className="action-secondary"
+                onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
+                <i className="material-icons">delete</i>
+              </div>
+              <div className="list-group-item-subheading">
                 {moment(note.updated_at).fromNow()}
               </div>
               <h4 className="list-group-item-heading">
