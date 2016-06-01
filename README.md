@@ -3,6 +3,22 @@
 The note taking app that doesn't suck.
 Made under the Mykonian sun.
 
+## Development setup
+
+To get the application started the following steps are required.
+
+* standard rails setup routine
+
+  ```bash
+  $ bundle
+  $ rake db:setup
+  ```
+
+* 3rd party javascripts and stylesheets are managed using bower
+  ([bower-rails](https://github.com/rharriso/bower-rails))
+
+  `$ rake bower:install`
+
 ## License
 
     Copyright 2016 Panter AG <info@panter.ch>
