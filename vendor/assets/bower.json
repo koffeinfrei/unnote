@@ -3,6 +3,7 @@
   "dependencies": {
     "bootstrap-material-design": "~0.5.9",
     "bootstrap-sass": "~3.3.6",
-    "trumbowyg": "~2.1.0"
+    "trumbowyg": "~2.1.0",
+    "momentjs": "~2.13.0"
   }
 }

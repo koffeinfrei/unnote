@@ -6,7 +6,7 @@
 //= require react_ujs
 //= require components
 //= require trumbowyg/dist/trumbowyg
-//= require moment
+//= require momentjs/moment
 //= require_tree .
 
 $(function () {
