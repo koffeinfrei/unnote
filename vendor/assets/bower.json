@@ -1,6 +1,7 @@
 {
   "name": "dsl-generated dependencies",
   "dependencies": {
-    "bootstrap-material-design": "latest"
+    "bootstrap-material-design": "latest",
+    "bootstrap-sass": "3.3.6"
   }
 }

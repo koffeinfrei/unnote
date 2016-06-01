@@ -1,1 +1,2 @@
 asset 'bootstrap-material-design'
+asset 'bootstrap-sass', '3.3.6'

@@ -4,7 +4,6 @@ gem 'rails', '~> 4.2.5'
 
 # gems sorted alphabetically
 
-gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bower-rails'
 gem 'devise'
 gem 'jquery-rails'
