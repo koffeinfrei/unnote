@@ -39,10 +39,6 @@ class AutoSave {
       const note_raw = localStorage.getItem(key);
       const note = JSON.parse(note_raw);
 
-      let url;
-      let method;
-      let data;
-
       $.ajax({
         url: '/api/notes/' + note.uid,
         method: 'PUT',
