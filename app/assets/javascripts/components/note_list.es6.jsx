@@ -14,7 +14,7 @@ class NoteList extends React.Component {
             onClick={this.handleNoteClick.bind(this, note)}>
 
             <div className="row-action-primary">
-              <i className="material-icons">note</i>
+              <i className="material-icons">lightbulb_outline</i>
             </div>
             <div className="row-content">
               <div class="least-content">
