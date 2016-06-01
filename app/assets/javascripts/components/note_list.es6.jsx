@@ -18,7 +18,7 @@ class NoteList extends React.Component {
             </div>
             <div className="row-content">
               <div class="least-content">
-                {moment(note.created_at).fromNow()}
+                {moment(note.updated_at).fromNow()}
               </div>
               <h4 className="list-group-item-heading">
                 {note.title}

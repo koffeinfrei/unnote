@@ -11,7 +11,7 @@ class Note < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :default_ordered, -> { order(created_at: :desc) }
+  scope :default_ordered, -> { order(updated_at: :desc) }
 
   def to_param
     uid
