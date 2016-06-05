@@ -8,16 +8,28 @@ class Navbar extends React.Component {
               <img src="<%= asset_path 'logo-donkeywhite.png' %>" className="navbar-logo" />
               <span>Mykonote</span>
             </a>
+            <button
+              data-target=".notes-list"
+              data-toggle="collapse"
+              className="navbar-toggle navbar-hamburger-button" type="button">
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <button
+              data-target=".search-bar"
+              data-toggle="collapse"
+              className="navbar-toggle navbar-search-button" type="button">
+              <i className="material-icons">search</i>
+            </button>
           </div>
-          <div>
-            <div className="navbar-form navbar-right">
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="string optional form-control"
-                  placeholder="Search"
-                  onChange={this.props.handleSearchEnter} />
-              </div>
+          <div className="navbar-form navbar-right search-bar collapse in-sm">
+            <div className="form-group">
+              <input
+                type="text"
+                className="string optional form-control"
+                placeholder="Search"
+                onChange={this.props.handleSearchEnter} />
             </div>
           </div>
         </div>

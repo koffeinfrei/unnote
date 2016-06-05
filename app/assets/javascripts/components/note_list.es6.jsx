@@ -36,7 +36,7 @@ class NoteList extends React.Component {
     });
 
     return (
-      <div className="list-group">
+      <div className="list-group notes-list collapse in">
         {commentNodes}
       </div>
     );
