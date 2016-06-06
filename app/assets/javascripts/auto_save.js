@@ -43,18 +43,18 @@ class AutoSave {
         url: '/api/notes/' + note.uid,
         method: 'PUT',
         dataType: 'json',
-        data: { note: note },
-        success: () => {
-          // if the content is still the same -> clear from localStorage
-          if (note_raw === localStorage.getItem(key)) {
-            localStorage.removeItem(key);
-          }
-
-          this.setSyncStatus();
-        },
-        error: function(xhr, status, err) {
-          console.error(url, status, err.toString());
+        data: { note: note }
+      })
+      .done(() => {
+        // if the content is still the same -> clear from localStorage
+        if (note_raw === localStorage.getItem(key)) {
+          localStorage.removeItem(key);
         }
+
+        this.setSyncStatus();
+      })
+      .fail(function(xhr, status, err) {
+        console.error(url, status, err.toString());
       });
     }
   }

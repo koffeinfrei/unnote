@@ -73,7 +73,7 @@ class NoteEdit extends React.Component {
         }
       })
       .fail(function(xhr, status, err) {
-        console.error(url, status, err.toString());
+        console.error(note.uid, status, err.toString());
       })
       .always(() => {
         this.setState({ isSynced: true });

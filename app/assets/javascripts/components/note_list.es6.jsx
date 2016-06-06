@@ -101,13 +101,13 @@ class NoteList extends React.Component {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
-      data: { search: this.state.searchQuery },
-      success: (data) => {
-        this.setState({ notes: data });
-      },
-      error: (xhr, status, err) => {
-        console.error(this.props.url, status, err.toString());
-      }
+      data: { search: this.state.searchQuery }
+    })
+    .done((data) => {
+      this.setState({ notes: data });
+    })
+    .fail((xhr, status, err) => {
+      console.error(this.props.url, status, err.toString());
     });
   }
 }
