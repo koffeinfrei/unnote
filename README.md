@@ -1,7 +1,20 @@
 # Mykonote
 
-The note taking app that doesn't suck.
-Made under the Mykonian sun.
+The note taking app that doesn't suck. Made under the Mykonian sun.
+
+The goal of this projet is to provide a solid note taking app with just the
+core functionality. There won't be any fancy unnecessary features such as a
+chat.
+
+What Mykonote offers:
+
+* a solid richtext editor which works properly without ruining the formatting
+* mobile support
+* offline support, so you don't lose data when the connection is bad or even
+  missing
+* a simple and fast user experience
+* an always available search
+* a donkey logo
 
 ## Development setup
 
@@ -15,7 +28,8 @@ To get the application started the following steps are required.
   ```
 
 * 3rd party javascripts and stylesheets are managed using bower
-  ([bower-rails](https://github.com/rharriso/bower-rails))
+  ([bower-rails](https://github.com/rharriso/bower-rails)). You need to have
+  npm and bower installed for this to work.
 
   `$ rake bower:install`
 
