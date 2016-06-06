@@ -4,6 +4,7 @@ class NoteEdit extends React.Component {
 
     if (props.uid) {
       this.state = {
+        isInitialEdit: true,
         uid: props.uid,
         title: props.title,
         content: props.content
@@ -23,6 +24,7 @@ class NoteEdit extends React.Component {
             url={this.props.url}
             activeNoteUid={this.state.uid}
             isSynced={this.state.isSynced}
+            isInitialEdit={this.state.isInitialEdit}
             searchQuery={this.state.searchQuery}
             handleNoteClick={this.handleNoteClick.bind(this)}
             handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)} />

@@ -10,7 +10,7 @@ class NoteList extends React.Component {
       return (
         <div key={note.uid}>
           <div
-            className={this.getItemCssClass(note)}
+            className={this.getListItemCssClass(note)}
             onClick={this.handleNoteClick.bind(this, note)}>
 
             <div className="row-action-primary">
@@ -36,16 +36,27 @@ class NoteList extends React.Component {
     });
 
     return (
-      <div className="list-group notes-list collapse in">
+      <div className={this.getListCssClass()}>
         {commentNodes}
       </div>
     );
   }
 
-  getItemCssClass(note) {
-    cssClass = "list-group-item note-navigation-item"
+  getListItemCssClass(note) {
+    let cssClass = 'list-group-item note-navigation-item';
     if (note.uid === this.props.activeNoteUid) {
       cssClass += ' active';
+    }
+
+    return cssClass;
+  }
+
+  getListCssClass() {
+    // in-sm: show always for non-mobile view
+    let cssClass = 'list-group notes-list collapse in-sm';
+    // show on mobile when not accessing a direct edit url
+    if (!this.props.isInitialEdit) {
+      cssClass += ' in';
     }
 
     return cssClass;
@@ -76,6 +87,12 @@ class NoteList extends React.Component {
   handleNoteClick(note, e) {
     $('.note-navigation-item').removeClass('active');
     $(e.currentTarget).addClass('active');
+
+    // FIXME: find a proper way to check for mobile mode
+    let hamburgerMenu = $('.navbar-hamburger-button');
+    if (hamburgerMenu.is(':visible')) {
+      hamburgerMenu.click();
+    }
 
     this.props.handleNoteClick(note, e);
   }
