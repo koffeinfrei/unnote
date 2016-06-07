@@ -45,17 +45,8 @@ class AutoSave {
         dataType: 'json',
         data: { note: note }
       })
-      .done(() => {
-        // if the content is still the same -> clear from localStorage
-        if (note_raw === localStorage.getItem(key)) {
-          localStorage.removeItem(key);
-        }
-
-        this.setSyncStatus();
-      })
-      .fail(function(xhr, status, err) {
-        console.error(url, status, err.toString());
-      });
+      .done(() => this.ajaxDone(key, note_raw))
+      .fail(this.ajaxFail);
     }
   }
 
@@ -77,5 +68,18 @@ class AutoSave {
     }
 
     return keys;
+  }
+
+  ajaxDone(key, note_raw) {
+    // if the content is still the same -> clear from localStorage
+    if (note_raw === localStorage.getItem(key)) {
+      localStorage.removeItem(key);
+    }
+
+    this.setSyncStatus();
+  }
+
+  ajaxFail(xhr, status, err) {
+    console.error(url, status, err.toString());
   }
 }
