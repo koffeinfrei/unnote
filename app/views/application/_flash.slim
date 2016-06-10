@@ -1,9 +1,2 @@
-- if notice
-  .alert.alert-dismissible.alert-info
-    button data-dismiss="alert" class="close" type="button" ×
-    = notice
-
-- if alert
-  .alert.alert-dismissible.alert-warning
-    button data-dismiss="alert" class="close" type="button" ×
-    = alert
+= react_component('NoticeFlash', message: notice)
+= react_component('AlertFlash', message: alert)
