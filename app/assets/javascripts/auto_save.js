@@ -38,15 +38,16 @@ class AutoSave {
     for (var key of keys) {
       const note_raw = localStorage.getItem(key);
       const note = JSON.parse(note_raw);
+      const url = '/api/notes/' + note.uid;
 
       $.ajax({
-        url: '/api/notes/' + note.uid,
+        url: url,
         method: 'PUT',
         dataType: 'json',
         data: { note: note }
       })
       .done(() => this.ajaxDone(key, note_raw))
-      .fail(this.ajaxFail);
+      .fail((xhr, status, error) => this.ajaxFail(xhr, status, error, url));
     }
   }
 
@@ -79,7 +80,12 @@ class AutoSave {
     this.setSyncStatus();
   }
 
-  ajaxFail(xhr, status, err) {
-    console.error(url, status, err.toString());
+  ajaxFail(xhr, status, error, url) {
+    // 0 == UNSENT -> most probably no internet connection
+    if (xhr.readyState === 0) {
+      return;
+    }
+    AlertFlash.show('Something went sideways: ' + error.toString());
+    console.error('url: ', url, 'xhr: ', xhr, 'status: ', status, 'err: ', error.toString());
   }
 }

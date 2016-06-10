@@ -106,8 +106,9 @@ class NoteList extends React.Component {
     .done((data) => {
       this.setState({ notes: data });
     })
-    .fail((xhr, status, err) => {
-      console.error(this.props.url, status, err.toString());
+    .fail((xhr, status, error) => {
+      AlertFlash.show('Watch out, the list is not up to date.');
+      console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
     });
   }
 }

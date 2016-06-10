@@ -72,8 +72,14 @@ class NoteEdit extends React.Component {
           this.setNewNote();
         }
       })
-      .fail(function(xhr, status, err) {
-        console.error(note.uid, status, err.toString());
+      .fail(function(xhr, status, error) {
+        var message = 'Oh my, the note could not be deleted.';
+        // 0 == UNSENT -> most probably no internet connection
+        if (xhr.readyState === 0) {
+          message += "Please check your internet connection (Well yes, sorry, deleting in offline mode is not yet suppported)."
+        }
+        AlertFlash.show(message);
+        console.error('note.uid: ', note.uid, 'status: ', status, 'error: ', error.toString());
       })
       .always(() => {
         this.setState({ isSynced: true });
