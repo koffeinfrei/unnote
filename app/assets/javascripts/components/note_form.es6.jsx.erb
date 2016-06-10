@@ -11,7 +11,7 @@ class NoteForm extends React.Component {
 
   render() {
     return (
-      <form className="simple_form form-horizontal">
+      <form className="simple_form form-horizontal" onSubmit={this.handleFormSubmit}>
         <div className="form-inputs">
           <div className="form-group string optional note_title">
             <label className="string optional control-label" htmlFor="note_title">Title</label>
@@ -40,6 +40,13 @@ class NoteForm extends React.Component {
         </div>
       </form>
     );
+  }
+
+  // prevent form submission by hitting enter.
+  // changes will be asynchronously saved by ajax.
+  handleFormSubmit(e) {
+    e.preventDefault();
+    return false;
   }
 
   handleTitleChange(e) {
