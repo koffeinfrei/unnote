@@ -1,3 +1,9 @@
+.navbar-notes,
+.notes-list,
+.list-group-item
+  @media (max-width: $screen-sm-min)
+    @include make-row
+
 .navbar-logo, .navbar-brand .navbar-logo
   height: 100%
   display: inline-block
@@ -5,9 +11,10 @@
 
 .save-state
   position: absolute
-  top: 15px
+  top: 13px
   width: 100%
   text-align: center
+  z-index: 1
 
 .list-group
   .note-navigation-item
@@ -38,12 +45,14 @@
 .navbar-hamburger-button,
 .navbar-search-button
   margin-bottom: 0
+  z-index: 2
 
 .navbar-hamburger-button
   padding-top: 9px
 
 .navbar-search-button
   padding-top: 5px
+  margin-right: 0
 
 .search-bar
   border-bottom: 0
