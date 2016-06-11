@@ -13,8 +13,7 @@ class NoteForm extends React.Component {
     return (
       <form className="simple_form form-horizontal" onSubmit={this.handleFormSubmit}>
         <div className="form-inputs">
-          <div className="form-group string optional note_title">
-            <label className="string optional control-label" htmlFor="note_title">Title</label>
+          <div className="form-group form-group-no-label string optional note_title">
             <input
               type="text"
               className="string optional form-control"
@@ -22,10 +21,10 @@ class NoteForm extends React.Component {
               name="note[title]"
               value={this.state.title}
               onChange={this.handleTitleChange.bind(this)}
+              placeholder="Title"
             />
           </div>
-          <div className="form-group text optional note_content">
-           <label className="text optional control-label" htmlFor="note_content">Content</label>
+          <div className="form-group form-group-no-label text optional note_content">
            <textarea
              className="text optional form-control"
              id="note_content"
