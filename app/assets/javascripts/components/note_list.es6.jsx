@@ -10,7 +10,7 @@ class NoteList extends React.Component {
       var previewImageUrl = this.getPreviewImageUrl(note);
       var noteAvatar;
       if (previewImageUrl) {
-        noteAvatar = <img src={this.getPreviewImageUrl(note)} className="img-circle" />
+        noteAvatar = <img src={this.getPreviewImageUrl(note)} className="circle" />
       }
       else {
         noteAvatar = <i className="material-icons">lightbulb_outline</i>
@@ -21,7 +21,7 @@ class NoteList extends React.Component {
             className={this.getListItemCssClass(note)}
             onClick={this.handleNoteClick.bind(this, note)}>
 
-            <div className="row-action-primary">
+            <div className="row-picture">
               {noteAvatar}
             </div>
             <div className="row-content">
@@ -30,12 +30,12 @@ class NoteList extends React.Component {
                 onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
                 <i className="material-icons">delete</i>
               </div>
-              <div className="list-group-item-subheading">
-                {moment(note.updated_at).fromNow()}
-              </div>
               <h4 className="list-group-item-heading">
                 {note.title}
               </h4>
+              <div className="list-group-item-text">
+                {moment(note.updated_at).fromNow()}
+              </div>
             </div>
           </div>
           <div className="list-group-separator"></div>
