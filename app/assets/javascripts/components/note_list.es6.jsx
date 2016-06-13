@@ -7,6 +7,14 @@ class NoteList extends React.Component {
 
   render() {
     var commentNodes = this.state.notes.map((note) => {
+      var previewImageUrl = this.getPreviewImageUrl(note);
+      var noteAvatar;
+      if (previewImageUrl) {
+        noteAvatar = <img src={this.getPreviewImageUrl(note)} className="img-circle" />
+      }
+      else {
+        noteAvatar = <i className="material-icons">lightbulb_outline</i>
+      }
       return (
         <div key={note.uid}>
           <div
@@ -14,7 +22,7 @@ class NoteList extends React.Component {
             onClick={this.handleNoteClick.bind(this, note)}>
 
             <div className="row-action-primary">
-              <i className="material-icons">lightbulb_outline</i>
+              {noteAvatar}
             </div>
             <div className="row-content">
               <div
@@ -110,5 +118,15 @@ class NoteList extends React.Component {
       AlertFlash.show('Watch out, the list is not up to date.');
       console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
     });
+  }
+
+  getPreviewImageUrl(note) {
+    match = note.content.match(/<img?.* src=['"]([^'"]+)['"]?.*>/);
+    if (match) {
+      return match[1];
+    }
+    else {
+      return null;
+    }
   }
 }
