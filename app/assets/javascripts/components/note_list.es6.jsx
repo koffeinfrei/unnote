@@ -7,14 +7,6 @@ class NoteList extends React.Component {
 
   render() {
     var commentNodes = this.state.notes.map((note) => {
-      var previewImageUrl = this.getPreviewImageUrl(note);
-      var noteAvatar;
-      if (previewImageUrl) {
-        noteAvatar = <img src={this.getPreviewImageUrl(note)} className="circle" />
-      }
-      else {
-        noteAvatar = <i className="material-icons">lightbulb_outline</i>
-      }
       return (
         <div key={note.uid}>
           <div
@@ -22,7 +14,7 @@ class NoteList extends React.Component {
             onClick={this.handleNoteClick.bind(this, note)}>
 
             <div className="row-picture">
-              {noteAvatar}
+              {this.getNoteAvatar(note)}
             </div>
             <div className="row-content">
               <div
@@ -127,6 +119,16 @@ class NoteList extends React.Component {
     }
     else {
       return null;
+    }
+  }
+
+  getNoteAvatar(note) {
+    var previewImageUrl = this.getPreviewImageUrl(note);
+    if (previewImageUrl) {
+      return <img src={previewImageUrl} className="circle" />;
+    }
+    else {
+      return <i className="material-icons">subject</i>;
     }
   }
 }
