@@ -111,7 +111,8 @@ class NoteForm extends React.Component {
         ['horizontalRule'],
         ['removeformat'],
         ['fullscreen']
-      ]
+      ],
+      autogrow: true
     });
     $editor.on('tbwchange', this.handleContentChange.bind(this));
     $editor.on('tbwpaste', this.handleContentChange.bind(this));
