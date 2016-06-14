@@ -14,7 +14,7 @@ class AutoSave {
   }
 
   setChange(note) {
-    this.onServerSyncCallback({ isSynced: false });
+    this.setSyncStatus(false);
 
     localStorage.setItem(
       'note-' + note.uid,
@@ -51,8 +51,21 @@ class AutoSave {
     }
   }
 
-  setSyncStatus() {
-    var isSynced = this.getLocalStorageKeys().length === 0;
+  setSyncStatus(isSynced) {
+    if (isSynced === undefined) {
+      isSynced = this.getLocalStorageKeys().length === 0;
+    }
+
+    if (isSynced) {
+      window.onbeforeunload = undefined;
+    }
+    else {
+      window.onbeforeunload = function() {
+        return "Behold! You have unsynchronized changes. " +
+          "If you leave the page now, your changes won't be saved to the server.\n" +
+          "(Your data won't be lost, but it will only remain locally in your browser)";
+      };
+    }
     this.onServerSyncCallback({ isSynced: isSynced });
   }
 
