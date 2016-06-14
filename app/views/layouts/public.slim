@@ -5,8 +5,8 @@ html
 
   body
     .container-fluid
+      = render 'flash'
       .row
         .col-md-6.col-md-offset-3
           .well
-            = render 'flash'
             = yield
