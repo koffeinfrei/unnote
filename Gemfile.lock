@@ -240,6 +240,10 @@ GEM
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
+    sprockets-es6 (0.9.0)
+      babel-source (>= 5.8.11)
+      babel-transpiler
+      sprockets (>= 3.0.0)
     sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -296,6 +300,8 @@ DEPENDENCIES
   slim-rails
   spring
   spring-commands-rspec
+  sprockets
+  sprockets-es6
   therubyracer
   uglifier
   unicorn

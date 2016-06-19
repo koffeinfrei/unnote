@@ -15,6 +15,8 @@ gem 'react-rails'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'slim-rails'
+gem 'sprockets'
+gem 'sprockets-es6'
 gem 'uglifier'
 gem 'unicorn'
 
