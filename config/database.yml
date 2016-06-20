@@ -16,7 +16,7 @@ default: &default
   port: <%= ENV['POSTGRESQL_PORT'] %>
   <% end %>
 
-development:
+development: &development
   <<: *default
   database: mykonote_development
 
@@ -28,3 +28,6 @@ production:
   <<: *default
   database: rails_production
   username: app
+
+local_production:
+  <<: *development
