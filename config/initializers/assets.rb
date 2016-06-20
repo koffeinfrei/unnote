@@ -18,3 +18,6 @@ Rails.application.config.assets.paths += bower_asset_paths
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += bower_precompile_paths
+
+# Workaround for react server side rendering
+Rails.application.config.assets.precompile += %w(server_rendering.js)

@@ -4,11 +4,11 @@
 //= require bootstrap-material-design
 //= require react
 //= require react_ujs
+//= require auto_save
 //= require components
 //= require trumbowyg/dist/trumbowyg
 //= require momentjs/moment
 //= require bootbox/bootbox
-//= require_tree .
 
 $(function () {
   $.material.init();
