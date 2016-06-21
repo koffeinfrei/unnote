@@ -285,6 +285,7 @@ DEPENDENCIES
   database_cleaner
   devise
   jquery-rails
+  nokogiri
   panter-rails-deploy
   pg
   pg_search
