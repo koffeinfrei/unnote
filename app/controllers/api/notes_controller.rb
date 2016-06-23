@@ -11,7 +11,13 @@ class Api::NotesController < AuthenticatedController
 
     @notes = policy_scope(@notes.default_ordered)
 
-    render json: @notes
+    @notes = @notes.limit(current_page * Kaminari.config.default_per_page)
+
+    render json: {
+      notes: @notes,
+      current_page: current_page,
+      has_more_pages: @notes.page(current_page).next_page.present?
+    }
   end
 
   def update
@@ -47,5 +53,9 @@ class Api::NotesController < AuthenticatedController
 
   def note_params
     params.require(:note).permit([:uid, :title, :content])
+  end
+
+  def current_page
+    (params[:page].presence || 1).to_i
   end
 end
