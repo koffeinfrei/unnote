@@ -41,34 +41,40 @@ class NoteList extends React.Component {
       );
     });
 
-    var moreNotesLink = null;
+    var nextPageLink = null;
     if (this.state.hasMorePages) {
-      moreNotesLink = (
-        <a className="list-more" href="#" onClick={this.handleNextPageClick.bind(this)}>
-          <i className="material-icons list-more-icon">expand_more</i>
-          <div className="list-more-spinner hidden">
-            <svg
-              className="spinner"
-              viewBox="0 0 66 66"
-              xmlns="http://www.w3.org/2000/svg">
-              <circle
-                className="path"
-                fill="none"
-                stroke-width="6"
-                stroke-linecap="round"
-                cx="33"
-                cy="33"
-                r="30"></circle>
-            </svg>
-          </div>
-        </a>
+      nextPageLink = (
+        <div className="list-more list-more-next-page">
+          <a href="#" onClick={this.handleNextPageClick.bind(this)}>
+            <i className="material-icons list-more-icon">expand_more</i>
+          </a>
+        </div>
       );
     }
+
+    var listSpinner = (
+      <div className="list-more list-more-spinner hidden">
+        <svg
+          className="spinner"
+          viewBox="0 0 66 66"
+          xmlns="http://www.w3.org/2000/svg">
+          <circle
+            className="path"
+            fill="none"
+            stroke-width="6"
+            stroke-linecap="round"
+            cx="33"
+            cy="33"
+            r="30"></circle>
+        </svg>
+      </div>
+    );
 
     return (
       <div className={this.getListCssClass()}>
         {commentNodes}
-        {moreNotesLink}
+        {nextPageLink}
+        {listSpinner}
       </div>
     );
   }
@@ -133,19 +139,20 @@ class NoteList extends React.Component {
     $(e.currentTarget).blur();
 
     this.setState({ currentPage: this.state.currentPage + 1 }, () => {
-      this.toggleNextPageClick(false);
       this.updateList();
     });
   }
 
   updateList() {
+    this.toggleListMore(false);
+
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       data: { search: this.state.searchQuery, page: this.state.currentPage }
     })
     .done((data) => {
-      this.toggleNextPageClick(true);
+      this.toggleListMore(true);
 
       this.setState({
         notes: data.notes,
@@ -154,7 +161,7 @@ class NoteList extends React.Component {
       });
     })
     .fail((xhr, status, error) => {
-      this.toggleNextPageClick(true);
+      this.toggleListMore(true);
 
       AlertFlash.show('Watch out, the list is not up to date.');
       console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
@@ -181,13 +188,13 @@ class NoteList extends React.Component {
     }
   }
 
-  toggleNextPageClick(linkIsVisible) {
+  toggleListMore(linkIsVisible) {
     if (linkIsVisible) {
-      $('.list-more-icon').removeClass('hidden');
+      $('.list-more-next-page').removeClass('hidden');
       $('.list-more-spinner').addClass('hidden');
     }
     else {
-      $('.list-more-icon').addClass('hidden');
+      $('.list-more-next-page').addClass('hidden');
       $('.list-more-spinner').removeClass('hidden');
     }
   }
