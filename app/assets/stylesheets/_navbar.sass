@@ -1,3 +1,10 @@
+.notes-list
+  @media (min-width: $screen-sm-min)
+    overflow-y: auto
+    // 60px is from .navbar .navbar-brand (which is a static value
+    // in material design sass)
+    height: calc(100vh - 60px - #{$navbar-margin-bottom})
+
 .navbar-notes,
 .notes-list,
 .list-group-item
