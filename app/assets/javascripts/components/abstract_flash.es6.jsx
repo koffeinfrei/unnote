@@ -46,8 +46,11 @@ class AbstractFlash extends React.Component {
   getAdditionalCssClass() {
   }
 
+  getName() {
+  }
+
   static getEventName() {
-    return 'flash.' + this.name.replace('Flash', '').toLowerCase();
+    return 'flash.' + this.prototype.getName();
   }
 
   static show(message) {
