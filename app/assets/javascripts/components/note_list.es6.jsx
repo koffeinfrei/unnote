@@ -125,9 +125,8 @@ class NoteList extends React.Component {
     $('.note-navigation-item').removeClass('active');
     $(e.currentTarget).addClass('active');
 
-    // FIXME: find a proper way to check for mobile mode
-    let hamburgerMenu = $('.navbar-hamburger-button');
-    if (hamburgerMenu.is(':visible')) {
+    if (ViewportMode.isMobileMode()) {
+      const hamburgerMenu = $('.navbar-hamburger-button');
       hamburgerMenu.click();
     }
 
