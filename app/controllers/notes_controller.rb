@@ -2,7 +2,7 @@ class NotesController < AuthenticatedController
   def index
     authorize Note
 
-    render component: 'NoteEdit', props: { url: api_notes_path }
+    render :edit
   end
 
   def edit
@@ -10,11 +10,6 @@ class NotesController < AuthenticatedController
 
     authorize @note
 
-    render component: 'NoteEdit', props: {
-      url: api_notes_path,
-      uid: @note.uid,
-      title: @note.title,
-      content: @note.content
-    }
+    render :edit
   end
 end

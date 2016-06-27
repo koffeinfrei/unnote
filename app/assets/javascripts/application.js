@@ -10,6 +10,7 @@
 //= require auto_save
 //= require components
 //= require viewport_mode
+//= require jquery-throttle-debounce/jquery.ba-throttle-debounce
 //
 //= require trumbowyg/dist/trumbowyg
 //= require momentjs/moment

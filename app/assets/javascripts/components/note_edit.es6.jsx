@@ -13,6 +13,8 @@ class NoteEdit extends React.Component {
     else {
       this.state = this.getNewNoteAttributes();
     }
+
+    this.handleSearchEnterDebounced = $.debounce(500, this.handleSearchEnterDebounced);
   }
 
   render() {
@@ -103,6 +105,11 @@ class NoteEdit extends React.Component {
   }
 
   handleSearchEnter(e) {
+    e.persist();
+    this.handleSearchEnterDebounced(e);
+  }
+
+  handleSearchEnterDebounced(e) {
     this.setState({ searchQuery: e.target.value });
   }
 
