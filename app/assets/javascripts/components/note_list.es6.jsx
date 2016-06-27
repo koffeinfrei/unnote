@@ -145,26 +145,38 @@ class NoteList extends React.Component {
   updateList() {
     this.toggleListMore(false);
 
-    $.ajax({
+    if (this.updateListRequest) {
+      this.updateListRequest.abort();
+    }
+
+    this.updateListRequest = $.ajax({
       url: this.props.url,
       dataType: 'json',
       data: { search: this.state.searchQuery, page: this.state.currentPage }
-    })
-    .done((data) => {
-      this.toggleListMore(true);
-
-      this.setState({
-        notes: data.notes,
-        currentPage: data.current_page,
-        hasMorePages: data.has_more_pages
-      });
-    })
-    .fail((xhr, status, error) => {
-      this.toggleListMore(true);
-
-      AlertFlash.show('Watch out, the list is not up to date.');
-      console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
     });
+
+    this.updateListRequest
+      .done((data) => {
+        this.toggleListMore(true);
+
+        this.setState({
+          notes: data.notes,
+          currentPage: data.current_page,
+          hasMorePages: data.has_more_pages
+        });
+      })
+      .fail((xhr, status, error) => {
+        // it's not a failure when the request was aborted by a subsequent
+        // request (see call to `abort()` above).
+        if (error === 'abort') {
+          return;
+        }
+
+        this.toggleListMore(true);
+
+        AlertFlash.show('Watch out, the list is not up to date.');
+        console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
+      });
   }
 
   getPreviewImageUrl(note) {
