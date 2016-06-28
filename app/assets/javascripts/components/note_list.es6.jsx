@@ -99,6 +99,10 @@ class NoteList extends React.Component {
     return cssClass;
   }
 
+  componentDidMount() {
+    this.toggleListMore(false);
+  }
+
   componentDidUpdate() {
     if (this.listNeedsUpdate) {
       this.listNeedsUpdate = false;
@@ -137,14 +141,14 @@ class NoteList extends React.Component {
     e.preventDefault();
     $(e.currentTarget).blur();
 
+    this.toggleListMore(false);
+
     this.setState({ currentPage: this.state.currentPage + 1 }, () => {
       this.updateList();
     });
   }
 
   updateList() {
-    this.toggleListMore(false);
-
     if (this.updateListRequest) {
       this.updateListRequest.abort();
     }
