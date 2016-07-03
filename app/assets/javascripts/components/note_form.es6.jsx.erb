@@ -25,16 +25,10 @@ class NoteForm extends React.Component {
             />
           </div>
           <div className="form-group form-group-no-label text optional note_content">
-           <textarea
-             className="text optional form-control"
-             id="note_content"
-             name="note[content]"
-             value={this.state.content}
-             // react complains about a missing handler on mutable fields.
-             // we don't need actually this, as we handle changes on the RTE.
-             onChange={this.noOp}
-           >
-           </textarea>
+            <div
+              dangerouslySetInnerHTML={ { __html: this.state.content }}
+              ref={(c) => this.$noteContent = $(c)}
+            ></div>
           </div>
         </div>
       </form>
@@ -53,7 +47,7 @@ class NoteForm extends React.Component {
   }
 
   handleContentChange(e) {
-    this.setState({ content: e.target.value }, this.handleChange);
+    this.setState({ content: this.$noteContent.html() }, this.handleChange);
   }
 
   handleChange() {
@@ -71,49 +65,39 @@ class NoteForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.uid === this.state.uid) {
-      return;
+    if (nextProps.uid !== this.state.uid) {
+      // a different note is shown.
+      this.setState({
+        uid: nextProps.uid,
+        title: nextProps.title,
+        content: nextProps.content
+      });
     }
-
-    // a different note is shown.
-    this.editorNeedsReRender = true;
-
-    this.setState({
-      uid: nextProps.uid,
-      title: nextProps.title,
-      content: nextProps.content
-    });
   }
 
-  // only re-render the editor when `componentWillReceiveProps`
-  // was called prior
-  componentDidUpdate() {
-    if (this.editorNeedsReRender) {
-      this.editorNeedsReRender = false;
-      this.renderEditor();
-    }
+  shouldComponentUpdate(nextProps, nextState) {
+    // don't rerender if the RTE content change. the cursor jumps to the
+    // beginning of the content if we re-initialize the RTE content.
+    return nextProps.title !== this.state.title || nextProps.uid !== this.state.uid;
   }
 
   renderEditor() {
     $.trumbowyg.svgPath = '<%= asset_path('trumbowyg/dist/ui/icons.svg') %>';
 
-    const $form = $(ReactDOM.findDOMNode(this));
-    const $editor = $form.find('textarea');
-
-    $editor.trumbowyg('destroy');
-    $editor.trumbowyg({
-      btns: [
-        ['formatting'],
-        'btnGrp-semantic',
-        'btnGrp-lists',
-        ['link'],
-        ['removeformat'],
-        ['fullscreen']
-      ],
-      autogrow: true
-    });
-    $editor.on('tbwchange', this.handleContentChange.bind(this));
-    $editor.on('tbwpaste', this.handleContentChange.bind(this));
+    this.$noteContent
+      .trumbowyg({
+        btns: [
+          ['formatting'],
+          'btnGrp-semantic',
+          'btnGrp-lists',
+          ['link'],
+          ['removeformat'],
+          ['fullscreen']
+        ],
+        autogrow: true
+      })
+      .on('tbwchange', this.handleContentChange.bind(this))
+      .on('tbwpaste', this.handleContentChange.bind(this));
   }
 
   noOp() {}

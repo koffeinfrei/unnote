@@ -12,7 +12,7 @@
 //= require viewport_mode
 //= require jquery-throttle-debounce/jquery.ba-throttle-debounce
 //
-//= require trumbowyg/dist/trumbowyg
+//= require trumbowyg
 //= require momentjs/moment
 //= require bootbox/bootbox
 
