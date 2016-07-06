@@ -20,28 +20,34 @@ class NoteEdit extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-md-8 col-md-offset-4">
-          <SaveStateLabel isSynced={this.state.isSynced} />
+        <div className="row">
+          <div className="col-md-12">
+            <div className="navbar navbar-info navbar-notes">
+              <Navbar handleSearchEnter={this.handleSearchEnter.bind(this)} />
+              <SaveStateLabel isSynced={this.state.isSynced} />
+            </div>
+          </div>
         </div>
-        <div className="col-md-4">
-          <Navbar handleSearchEnter={this.handleSearchEnter.bind(this)} />
-          <NoteList
-            url={this.props.url}
-            activeNoteUid={this.state.uid}
-            isSynced={this.state.isSynced}
-            isInitialEdit={this.state.isInitialEdit}
-            searchQuery={this.state.searchQuery}
-            handleNoteClick={this.handleNoteClick.bind(this)}
-            handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)} />
+        <div className="row">
+          <div className="col-md-4">
+            <NoteList
+              url={this.props.url}
+              activeNoteUid={this.state.uid}
+              isSynced={this.state.isSynced}
+              isInitialEdit={this.state.isInitialEdit}
+              searchQuery={this.state.searchQuery}
+              handleNoteClick={this.handleNoteClick.bind(this)}
+              handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)} />
+          </div>
+          <div className="col-md-8">
+            <NoteForm
+              uid={this.state.uid}
+              title={this.state.title}
+              content={this.state.content}
+              handleChange={this.handleEditChange.bind(this)} />
+          </div>
+          <AddNoteButton handleNewNoteClick={this.handleNewNoteClick.bind(this)} />
         </div>
-        <div className="col-md-8">
-          <NoteForm
-            uid={this.state.uid}
-            title={this.state.title}
-            content={this.state.content}
-            handleChange={this.handleEditChange.bind(this)} />
-        </div>
-        <AddNoteButton handleNewNoteClick={this.handleNewNoteClick.bind(this)} />
       </div>
     );
   }

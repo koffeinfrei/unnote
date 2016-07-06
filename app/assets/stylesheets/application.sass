@@ -1,7 +1,17 @@
 @import 'bootstrap-settings'
+
+// import the modules separately, as we need to import the variables
+// before the bootstrap variables, and the rest of the material design
+// after the main bootstrap block
+@import 'bootstrap-material-design/sass/variables'
+
 @import 'bootstrap-sass/assets/stylesheets/bootstrap-sprockets'
 @import 'bootstrap-sass/assets/stylesheets/bootstrap'
-@import 'bootstrap-material-design/sass/bootstrap-material-design'
+
+@import 'bootstrap-material-design/sass/mixins'
+@import 'bootstrap-material-design/sass/shadows'
+@import 'bootstrap-material-design/sass/core'
+
 @import 'trumbowyg/dist/ui/sass/trumbowyg'
 @import 'navbar'
 @import 'buttons'

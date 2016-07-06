@@ -5,9 +5,6 @@
     // in material design sass)
     height: calc(100vh - 60px - #{$navbar-margin-bottom})
 
-.navbar-notes,
-.notes-list,
-.list-group-item
   @media (max-width: $screen-sm-min)
     @include make-row
 
@@ -18,10 +15,13 @@
 
 .save-state
   position: absolute
-  top: 13px
-  width: 100%
+  top: 15px
+  left: 40%
+  width: 20%
   text-align: center
-  z-index: 1
+
+  @media (min-width: $screen-sm-min)
+    top: 18px
 
 .list-group
   .note-navigation-item
@@ -78,6 +78,10 @@
   margin-right: 0
 
 .search-bar
+  @media (max-width: $screen-sm-min)
+    margin-left: 0
+    margin-right: 0
+
   border-bottom: 0
   border-top: 0
   box-shadow: none
