@@ -3,8 +3,8 @@ class Note < ActiveRecord::Base
   pg_search_scope(
     :search_by_title_and_content,
     against: {
-      title: 'A',
-      content: 'B'
+      tsv_title: 'A',
+      tsv_content: 'B'
     },
     using: { tsearch: { prefix: true } }
   )
