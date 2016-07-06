@@ -50,7 +50,7 @@ class AbstractFlash extends React.Component {
   }
 
   static getEventName() {
-    return 'flash.' + this.prototype.getName();
+    return 'mykonote.flash.' + this.prototype.getName();
   }
 
   static show(message) {
