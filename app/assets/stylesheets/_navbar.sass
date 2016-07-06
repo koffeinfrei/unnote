@@ -8,10 +8,18 @@
   @media (max-width: $screen-sm-min)
     @include make-row
 
-.navbar-logo, .navbar-brand .navbar-logo
+.navbar-logo,
+.navbar-brand .navbar-logo,
+.navbar-spinner
   height: 100%
   display: inline-block
+
+.navbar-spinner
+  width: 40px
   margin-right: 15px
+
+  .spinner
+    height: 100%
 
 .save-state
   position: absolute

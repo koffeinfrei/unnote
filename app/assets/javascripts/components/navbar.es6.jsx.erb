@@ -1,11 +1,36 @@
 class Navbar extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { showSpinner: false };
+  }
+
   render() {
     return (
       <div className="row">
         <div className="col-md-4">
           <div className="navbar-header">
             <a className="navbar-brand">
-              <img src="<%= asset_path 'logo-donkeywhite.png' %>" className="navbar-logo" />
+              <div className="navbar-spinner">
+                <svg
+                  className={this.getSpinnerCssClass()}
+                  viewBox="0 0 66 66"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <circle
+                    className="path"
+                    fill="none"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                    cx="33"
+                    cy="33"
+                    r="30"></circle>
+                </svg>
+
+                <img
+                  src="<%= asset_path 'logo-donkeywhite.png' %>"
+                  className={this.getLogoCssClass()} />
+              </div>
+
               <span>Mykonote</span>
             </a>
             <button
@@ -35,5 +60,35 @@ class Navbar extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    // listen on global event so we can toggle the spinner from unrelated
+    // components
+    $(document).on('mykonote.spinner', (e, data) => {
+      this.setState({ showSpinner: data });
+    });
+  }
+
+  componentWillUnmount() {
+    $(document).off('mykonote.spinner');
+  }
+
+  getSpinnerCssClass() {
+    let cssClass = 'spinner';
+    if (!this.state.showSpinner) {
+      cssClass += ' hidden';
+    }
+
+    return cssClass;
+  }
+
+  getLogoCssClass() {
+    let cssClass = 'navbar-logo';
+    if (this.state.showSpinner) {
+      cssClass += ' hidden';
+    }
+
+    return cssClass;
   }
 }

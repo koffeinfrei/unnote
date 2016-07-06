@@ -7,7 +7,7 @@ class NoteList extends React.Component {
       currentPage: 1,
       hasMorePages: false,
       isSynced: false,
-      searchQuery: ''
+      searchQuery: undefined
     };
   }
 
@@ -117,6 +117,7 @@ class NoteList extends React.Component {
 
     if (this.state.searchQuery !== nextProps.searchQuery) {
       this.listNeedsUpdate = true;
+      this.setSearchProgress(true);
     }
 
     this.setState( {
@@ -180,6 +181,9 @@ class NoteList extends React.Component {
 
         AlertFlash.show('Watch out, the list is not up to date.');
         console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
+      })
+      .always(() => {
+        this.setSearchProgress(false);
       });
   }
 
@@ -212,5 +216,9 @@ class NoteList extends React.Component {
       $('.list-more-next-page').addClass('hidden');
       $('.list-more-spinner').removeClass('hidden');
     }
+  }
+
+  setSearchProgress(isInProgress) {
+    $(document).trigger('mykonote.spinner', isInProgress);
   }
 }
