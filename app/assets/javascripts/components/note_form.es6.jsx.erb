@@ -17,17 +17,16 @@ class NoteForm extends React.Component {
             <input
               type="text"
               className="string optional form-control"
-              id="note_title"
-              name="note[title]"
               value={this.state.title}
               onChange={this.handleTitleChange.bind(this)}
               placeholder="Title"
+              ref={(c) => this.$title = $(c)}
             />
           </div>
           <div className="form-group form-group-no-label text optional note_content">
             <div
               dangerouslySetInnerHTML={ { __html: this.state.content }}
-              ref={(c) => this.$noteContent = $(c)}
+              ref={(c) => this.$content = $(c)}
             ></div>
           </div>
         </div>
@@ -47,7 +46,7 @@ class NoteForm extends React.Component {
   }
 
   handleContentChange(e) {
-    this.setState({ content: this.$noteContent.html() }, this.handleChange);
+    this.setState({ content: this.$content.html() }, this.handleChange);
   }
 
   handleChange() {
@@ -61,6 +60,7 @@ class NoteForm extends React.Component {
   }
 
   componentDidMount() {
+    this.focusTitleFieldIfNewNote();
     this.renderEditor();
   }
 
@@ -71,6 +71,8 @@ class NoteForm extends React.Component {
         uid: nextProps.uid,
         title: nextProps.title,
         content: nextProps.content
+      }, () => {
+        this.focusTitleFieldIfNewNote();
       });
     }
   }
@@ -84,7 +86,7 @@ class NoteForm extends React.Component {
   renderEditor() {
     $.trumbowyg.svgPath = '<%= asset_path('trumbowyg/dist/ui/icons.svg') %>';
 
-    this.$noteContent
+    this.$content
       .trumbowyg({
         btns: [
           ['formatting'],
@@ -98,5 +100,11 @@ class NoteForm extends React.Component {
       })
       .on('tbwchange', this.handleContentChange.bind(this))
       .on('tbwpaste', this.handleContentChange.bind(this));
+  }
+
+  focusTitleFieldIfNewNote() {
+    if (!this.state.title && !this.state.content) {
+      this.$title.focus();
+    }
   }
 }
