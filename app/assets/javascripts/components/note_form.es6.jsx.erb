@@ -7,6 +7,8 @@ class NoteForm extends React.Component {
       title: this.props.title,
       content: this.props.content
     };
+
+    this.shouldRerender = true;
   }
 
   render() {
@@ -42,10 +44,12 @@ class NoteForm extends React.Component {
   }
 
   handleTitleChange(e) {
+    this.shouldRerender = true;
     this.setState({ title: e.target.value }, this.handleChange);
   }
 
   handleContentChange(e) {
+    this.shouldRerender = false;
     this.setState({ content: this.$content.html() }, this.handleChange);
   }
 
@@ -67,6 +71,7 @@ class NoteForm extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.uid !== this.state.uid) {
       // a different note is shown.
+      this.shouldRerender = true;
       this.setState({
         uid: nextProps.uid,
         title: nextProps.title,
@@ -78,9 +83,9 @@ class NoteForm extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // don't rerender if the RTE content change. the cursor jumps to the
+    // don't rerender if the RTE content changes. the cursor jumps to the
     // beginning of the content if we re-initialize the RTE content.
-    return nextProps.title !== this.state.title || nextProps.uid !== this.state.uid;
+    return this.shouldRerender;
   }
 
   renderEditor() {
