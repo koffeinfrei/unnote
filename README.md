@@ -20,18 +20,24 @@ What Mykonote offers:
 
 To get the application started the following steps are required.
 
-* standard rails setup routine
-
-  ```bash
-  $ bundle
-  $ rake db:setup
-  ```
-
 * 3rd party javascripts and stylesheets are managed using bower
   ([bower-rails](https://github.com/rharriso/bower-rails)). You need to have
   npm and bower installed for this to work.
 
-  `$ rake bower:install`
+* standard rails setup routine
+
+  ```bash
+  $ bin/setup
+  ```
+
+You can now start the application and give it a try at
+[localhost:3000](http://localhost:3000).
+There's a demo user `user@example.com` with password `asdfasdf`.
+
+  ```bash
+  $ bin/rails server
+  ```
+
 
 ## License
 
