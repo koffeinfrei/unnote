@@ -10,6 +10,8 @@ class EvernoteImporter
     doc = File.open(@enex_file) { |f| Nokogiri::XML(f) }
 
     doc.xpath('//note').each do |note|
+      content_parts = []
+
       title = note.css('title').text
 
       created_at = note.css('created').text
@@ -21,19 +23,29 @@ class EvernoteImporter
       updated_at = DateTime.parse(updated_at)
 
       content = Nokogiri::HTML(note.css('content').to_s).xpath('//en-note').children
+      content_parts << content.to_s
 
       resources = note.css('resource')
 
       content.css('en-media').each_with_index do |media, i|
         resource = resources[i]
+        next unless resource
         mime = resource.css('mime').text
         image_data = resource.css('data').text.gsub("\n", '')
         image = %{<img src="data:#{mime};base64,#{image_data}" />}
         media.replace(image)
       end
 
+      note_attributes = note.css('note-attributes')
+      if note_attributes
+        source_url = note_attributes.css('source-url')
+        if source_url
+          content_parts << %{<p>Source url: <a href="#{source_url.text}">#{source_url.text}</a></p>}
+        end
+      end
+
       note = Seed.seed Note, { title: title, user: @user }, {
-        content: content.to_s,
+        content: content_parts.join,
         created_at: created_at,
         updated_at: updated_at,
         uid: SecureRandom.uuid
