@@ -30,7 +30,8 @@ To get the application started the following steps are required.
   $ bin/setup
   ```
 
-You can now start the application and give it a try at http://localhost:3000.
+You can now start the application and give it a try at
+[localhost:3000](http://localhost:3000).
 There's a demo user `user@example.com` with password `asdfasdf`.
 
   ```bash
