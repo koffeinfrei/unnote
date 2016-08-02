@@ -188,7 +188,7 @@ class NoteList extends React.Component {
   }
 
   getPreviewImageUrl(note) {
-    var match = note.content.match(/<img?.* src=['"]([^'"]+)['"]?.*>/);
+    var match = note.content.match(/<img.*? src=['"]([^'"]+)['"].*?>/);
     if (match) {
       return match[1];
     }
