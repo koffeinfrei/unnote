@@ -121,8 +121,7 @@ class NoteEdit extends React.Component {
   }
 
   getNewNoteAttributes() {
-    // TODO: generate default values in Note class
-    return { note: new Note(Uuid.generateV4(), '', '') }
+    return { note: new Note() }
   }
 
   setNewNote() {

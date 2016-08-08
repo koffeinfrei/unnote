@@ -1,9 +1,9 @@
 class Note {
   constructor(uid, title, content, updatedAt) {
-    this._uid = uid;
-    this._title = title;
-    this._content = content;
-    this._updatedAt = updatedAt;
+    this._uid = uid || Uuid.generateV4();
+    this._title = title || '';
+    this._content = content || '';
+    this._updatedAt = updatedAt || new Date();
   }
 
   get uid() { return this._uid }
