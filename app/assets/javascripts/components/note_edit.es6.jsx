@@ -5,9 +5,7 @@ class NoteEdit extends React.Component {
     if (props.uid) {
       this.state = {
         isInitialEdit: true,
-        uid: props.uid,
-        title: props.title,
-        content: props.content
+        note: Note.fromAttributes(props)
       };
     }
     else {
@@ -32,7 +30,7 @@ class NoteEdit extends React.Component {
           <div className="col-md-4">
             <NoteList
               url={this.props.url}
-              activeNoteUid={this.state.uid}
+              activeNoteUid={this.state.note.uid}
               isSynced={this.state.isSynced}
               isInitialEdit={this.state.isInitialEdit}
               searchQuery={this.state.searchQuery}
@@ -41,9 +39,7 @@ class NoteEdit extends React.Component {
           </div>
           <div className="col-md-8">
             <NoteForm
-              uid={this.state.uid}
-              title={this.state.title}
-              content={this.state.content}
+              note={this.state.note}
               handleChange={this.handleEditChange.bind(this)} />
           </div>
           <AddNoteButton handleNewNoteClick={this.handleNewNoteClick.bind(this)} />
@@ -55,7 +51,7 @@ class NoteEdit extends React.Component {
   handleNoteClick(note, e) {
     e.preventDefault();
 
-    this.setState({ uid: note.uid, title: note.title, content: note.content });
+    this.setState({ note: note });
     history.pushState({}, '', '/notes/' + note.uid + '/edit');
   }
 
@@ -125,7 +121,8 @@ class NoteEdit extends React.Component {
   }
 
   getNewNoteAttributes() {
-    return { title: '', content: '', uid: Uuid.generateV4() }
+    // TODO: generate default values in Note class
+    return { note: new Note(Uuid.generateV4(), '', '') }
   }
 
   setNewNote() {

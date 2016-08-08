@@ -32,7 +32,7 @@ class NoteList extends React.Component {
                 {note.title}
               </h4>
               <div className="list-group-item-text">
-                {moment(note.updated_at).fromNow()}
+                {moment(note.updatedAt).fromNow()}
               </div>
             </div>
           </div>
@@ -164,8 +164,12 @@ class NoteList extends React.Component {
       .done((data) => {
         this.toggleListMore(true);
 
+        const notes = data.notes.map(function(note) {
+          return Note.fromAttributes(note);
+        });
+
         this.setState({
-          notes: data.notes,
+          notes: notes,
           currentPage: data.current_page,
           hasMorePages: data.has_more_pages
         });

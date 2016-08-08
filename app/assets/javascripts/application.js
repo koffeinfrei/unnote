@@ -8,6 +8,7 @@
 //= require react_ujs
 //
 //= require auto_save
+//= require note
 //= require components
 //= require viewport_mode
 //= require jquery-throttle-debounce/jquery.ba-throttle-debounce

@@ -3,9 +3,7 @@ class NoteForm extends React.Component {
     super(props, context);
 
     this.state = {
-      uid: this.props.uid,
-      title: this.props.title,
-      content: this.props.content
+      note: this.props.note
     };
 
     this.shouldRerender = true;
@@ -19,7 +17,7 @@ class NoteForm extends React.Component {
             <input
               type="text"
               className="string optional form-control"
-              value={this.state.title}
+              value={this.state.note.title}
               onChange={this.handleTitleChange.bind(this)}
               placeholder="Title"
               ref={(c) => this.$title = $(c)}
@@ -27,7 +25,7 @@ class NoteForm extends React.Component {
           </div>
           <div className="form-group form-group-no-label text optional note_content">
             <div
-              dangerouslySetInnerHTML={ { __html: this.state.content }}
+              dangerouslySetInnerHTML={ { __html: this.state.note.content }}
               ref={(c) => this.$content = $(c)}
             ></div>
           </div>
@@ -45,22 +43,18 @@ class NoteForm extends React.Component {
 
   handleTitleChange(e) {
     this.shouldRerender = true;
-    this.setState({ title: e.target.value }, this.handleChange);
+    this.state.note.title = e.target.value;
+    this.setState({ note: this.state.note }, this.handleChange);
   }
 
   handleContentChange(e) {
     this.shouldRerender = false;
-    this.setState({ content: this.$content.html() }, this.handleChange);
+    this.state.note.content = this.$content.html();
+    this.setState({ note: this.state.note }, this.handleChange);
   }
 
   handleChange() {
-    this.props.handleChange(
-      {
-        uid: this.state.uid,
-        title: this.state.title,
-        content: this.state.content
-      }
-    );
+    this.props.handleChange(this.state.note);
   }
 
   componentDidMount() {
@@ -69,13 +63,11 @@ class NoteForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.uid !== this.state.uid) {
+    if (nextProps.note.uid !== this.state.note.uid) {
       // a different note is shown.
       this.shouldRerender = true;
       this.setState({
-        uid: nextProps.uid,
-        title: nextProps.title,
-        content: nextProps.content
+        note: nextProps.note
       }, () => {
         this.focusTitleFieldIfNewNote();
       });
@@ -108,7 +100,7 @@ class NoteForm extends React.Component {
   }
 
   focusTitleFieldIfNewNote() {
-    if (!this.state.title && !this.state.content) {
+    if (this.state.note.isNew()) {
       this.$title.focus();
     }
   }

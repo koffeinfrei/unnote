@@ -18,13 +18,7 @@ class AutoSave {
 
     localStorage.setItem(
       'note-' + note.uid,
-      JSON.stringify(
-        {
-          uid: note.uid,
-          title: note.title,
-          content: note.content
-        }
-      )
+      note.toJson()
     );
   }
 
