@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.6.0'
 
 set :application, 'mykonote'
 set :repo_url, 'git@github.com:panter/mykonote.git'
