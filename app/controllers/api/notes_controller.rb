@@ -30,6 +30,8 @@ class Api::NotesController < AuthenticatedController
       authorize @note
     end
 
+    handle_conflict
+
     if @note.update_attributes(note_params)
       render json: {}, status: :ok
     else
@@ -57,5 +59,15 @@ class Api::NotesController < AuthenticatedController
 
   def current_page
     (params[:page].presence || 1).to_i
+  end
+
+  def handle_conflict
+    if @note.updated_at.to_datetime > DateTime.parse(params[:note][:updated_at])
+      duplicated_note = @note.dup
+      duplicated_note.update_attributes!(
+        title: "#{duplicated_note.title} (conflict #{DateTime.now.strftime('%F %R')})",
+        uid: SecureRandom.uuid
+      )
+    end
   end
 end

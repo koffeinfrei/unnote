@@ -3,7 +3,7 @@ class Note {
     this._uid = uid || Uuid.generateV4();
     this._title = title || '';
     this._content = content || '';
-    this._updatedAt = updatedAt || new Date();
+    this._updatedAt = updatedAt;
   }
 
   get uid() { return this._uid }
@@ -27,7 +27,8 @@ class Note {
       {
         uid: this.uid,
         title: this.title,
-        content: this.content
+        content: this.content,
+        updated_at: this.updatedAt
       }
     );
   }

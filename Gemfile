@@ -38,6 +38,10 @@ group :development do
   gem 'binding_of_caller' # Needed by better_errors to enable html console
 end
 
+group :test do
+  gem 'timecop'
+end
+
 group :production do
   gem 'therubyracer'
 end
