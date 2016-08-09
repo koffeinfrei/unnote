@@ -2,10 +2,10 @@ class NoteEdit extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    if (props.uid) {
+    if (props.note) {
       this.state = {
         isInitialEdit: true,
-        note: Note.fromAttributes(props)
+        note: Note.fromAttributes(props.note)
       };
     }
     else {
