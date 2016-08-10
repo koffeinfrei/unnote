@@ -6,6 +6,7 @@
     "trumbowyg": "~2.1.0",
     "momentjs": "~2.13.0",
     "bootbox": "~4.4.0",
-    "jquery-throttle-debounce": "latest"
+    "jquery-throttle-debounce": "latest",
+    "sinon": "http://sinonjs.org/releases/sinon-1.17.5.js"
   }
 }

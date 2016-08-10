@@ -21,3 +21,6 @@ Rails.application.config.assets.precompile += bower_precompile_paths
 
 # Workaround for react server side rendering
 Rails.application.config.assets.precompile += %w(server_rendering.js)
+
+# Test js
+Rails.application.config.assets.precompile += %w( application_test.js )

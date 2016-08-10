@@ -28,9 +28,9 @@ class Api::NotesController < AuthenticatedController
       @note.user = current_user
     else
       authorize @note
-    end
 
-    handle_conflict
+      handle_conflict
+    end
 
     if @note.update_attributes(note_params)
       render json: {}, status: :ok
@@ -54,7 +54,9 @@ class Api::NotesController < AuthenticatedController
   private
 
   def note_params
-    params.require(:note).permit([:uid, :title, :content])
+    params.require(:note).permit(
+      [:uid, :title, :content, :created_at, :updated_at]
+    )
   end
 
   def current_page
