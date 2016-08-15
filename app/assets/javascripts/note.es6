@@ -38,8 +38,8 @@ class Note {
         uid: this.uid,
         title: this.title,
         content: this.content,
-        created_at: this.createdAt,
-        updated_at: this.updatedAt
+        created_at: this.createdAt.toISOString(),
+        updated_at: this.updatedAt.toISOString()
       }
     );
   }
@@ -49,8 +49,8 @@ class Note {
       attributes.uid,
       attributes.title,
       attributes.content,
-      attributes.created_at,
-      attributes.updated_at
+      new Date(attributes.created_at),
+      new Date(attributes.updated_at)
     );
   }
 }
