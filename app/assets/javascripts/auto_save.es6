@@ -30,8 +30,8 @@ class AutoSave {
     var keys = this.getLocalStorageKeys();
 
     for (var key of keys) {
-      const note_raw = localStorage.getItem(key);
-      const note = JSON.parse(note_raw);
+      const noteRaw = localStorage.getItem(key);
+      const note = JSON.parse(noteRaw);
       const url = '/api/notes/' + note.uid;
 
       $.ajax({
@@ -40,7 +40,7 @@ class AutoSave {
         dataType: 'json',
         data: { note: note }
       })
-      .done(() => this.ajaxDone(key, note_raw))
+      .done(() => this.ajaxDone(key, noteRaw))
       .fail((xhr, status, error) => this.ajaxFail(xhr, status, error, url));
     }
   }
@@ -78,9 +78,9 @@ class AutoSave {
     return keys;
   }
 
-  ajaxDone(key, note_raw) {
+  ajaxDone(key, noteRaw) {
     // if the content is still the same -> clear from localStorage
-    if (note_raw === localStorage.getItem(key)) {
+    if (noteRaw === localStorage.getItem(key)) {
       localStorage.removeItem(key);
     }
 
