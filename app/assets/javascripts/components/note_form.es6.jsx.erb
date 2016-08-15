@@ -70,6 +70,17 @@ class NoteForm extends React.Component {
         note: nextProps.note
       }, () => {
         this.focusTitleFieldIfNewNote();
+
+        // FIXME: not sure why this is needed. for the two cases everything is
+        // ok:
+        // 1. an existing note is shown
+        // 2. a new note is shown
+        // only when a new note after creating a new note is created, the
+        // content stays at the previous content value. setting it here
+        // explicitely fixes this.
+        if (this.state.note.isNew()) {
+          this.$content.html(this.state.note.content);
+        }
       });
     }
   }
