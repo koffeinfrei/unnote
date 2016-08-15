@@ -22,6 +22,9 @@ class Note {
     this._content = content;
   }
 
+  get createdAt() { return this._createdAt }
+  set createdAt(updatedAt) { this._createdAt = createdAt }
+
   get updatedAt() { return this._updatedAt }
   set updatedAt(updatedAt) { this._updatedAt = updatedAt }
 
