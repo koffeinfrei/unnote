@@ -11,9 +11,9 @@ class NoteForm extends React.Component {
 
   render() {
     return (
-      <form className="simple_form form-horizontal" onSubmit={this.handleFormSubmit}>
+      <form className="form-horizontal" onSubmit={this.handleFormSubmit}>
         <div className="form-inputs">
-          <div className="form-group form-group-no-label string optional note_title">
+          <div className="form-group form-group-no-label string optional">
             <input
               type="text"
               className="string optional form-control"
@@ -23,7 +23,7 @@ class NoteForm extends React.Component {
               ref={(c) => this.$title = $(c)}
             />
           </div>
-          <div className="form-group form-group-no-label text optional note_content">
+          <div className="form-group form-group-no-label text optional">
             <div
               dangerouslySetInnerHTML={ { __html: this.state.note.content }}
               ref={(c) => this.$content = $(c)}
