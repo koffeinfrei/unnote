@@ -74,7 +74,7 @@ class NoteEdit extends React.Component {
       .done(() => {
         localStorage.removeItem('note-' + note.uid);
 
-        if (this.state.uid === note.uid) {
+        if (this.state.note.uid === note.uid) {
           this.setNewNote();
         }
       })
