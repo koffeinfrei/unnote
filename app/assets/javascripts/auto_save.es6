@@ -40,12 +40,14 @@ class AutoSave {
         dataType: 'json',
         data: { note: note }
       })
-      .done(() => this.ajaxDone(key, noteRaw))
+      // `serverNote` is just a partial note, the response doesn't contain all
+      // attributes
+      .done((serverNote) => this.ajaxDone(key, noteRaw, Note.fromAttributes(serverNote)))
       .fail((xhr, status, error) => this.ajaxFail(xhr, status, error, url));
     }
   }
 
-  setSyncStatus(isSynced) {
+  setSyncStatus(isSynced, serverNote) {
     if (isSynced === undefined) {
       isSynced = this.getLocalStorageKeys().length === 0;
     }
@@ -60,7 +62,7 @@ class AutoSave {
           "(Your data won't be lost, but it will only remain locally in your browser)";
       };
     }
-    this.onServerSyncCallback({ isSynced: isSynced });
+    this.onServerSyncCallback({ isSynced: isSynced, note: serverNote });
   }
 
   getLocalStorageKeys() {
@@ -78,13 +80,13 @@ class AutoSave {
     return keys;
   }
 
-  ajaxDone(key, noteRaw) {
+  ajaxDone(key, noteRaw, serverNote) {
     // if the content is still the same -> clear from localStorage
     if (noteRaw === localStorage.getItem(key)) {
       localStorage.removeItem(key);
     }
 
-    this.setSyncStatus();
+    this.setSyncStatus(undefined, serverNote);
   }
 
   ajaxFail(xhr, status, error, url) {

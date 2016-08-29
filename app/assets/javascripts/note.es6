@@ -5,10 +5,10 @@ class Note {
     this._content = content || '';
     this._createdAt = createdAt || new Date();
     this._updatedAt = updatedAt || this._createdAt;
+    this._serverUpdatedAt = this._updatedAt;
   }
 
   get uid() { return this._uid }
-  set uid(uid) { this._uid = uid }
 
   get title() { return this._title }
   set title(title) {
@@ -23,10 +23,10 @@ class Note {
   }
 
   get createdAt() { return this._createdAt }
-  set createdAt(updatedAt) { this._createdAt = createdAt }
-
   get updatedAt() { return this._updatedAt }
-  set updatedAt(updatedAt) { this._updatedAt = updatedAt }
+
+  get serverUpdatedAt() { return this._serverUpdatedAt }
+  set serverUpdatedAt(serverUpdatedAt) { this._serverUpdatedAt = serverUpdatedAt }
 
   isNew() {
     return !this.title && !this.content;
@@ -39,7 +39,8 @@ class Note {
         title: this.title,
         content: this.content,
         created_at: this.createdAt.toISOString(),
-        updated_at: this.updatedAt.toISOString()
+        updated_at: this.updatedAt.toISOString(),
+        server_updated_at: this.serverUpdatedAt.toISOString()
       }
     );
   }

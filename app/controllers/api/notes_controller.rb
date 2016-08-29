@@ -33,7 +33,7 @@ class Api::NotesController < AuthenticatedController
     end
 
     if @note.update_attributes(note_params)
-      render json: {}, status: :ok
+      render json: { uid: @note.uid, updated_at: @note.updated_at }, status: :ok
     else
       render json: @note.errors, status: :unprocessable_entity
     end
@@ -64,7 +64,7 @@ class Api::NotesController < AuthenticatedController
   end
 
   def handle_conflict
-    if @note.updated_at.to_datetime > DateTime.parse(params[:note][:updated_at])
+    if @note.updated_at.to_datetime > DateTime.parse(params[:note][:server_updated_at])
       duplicated_note = @note.dup
       duplicated_note.update_attributes!(
         title: "#{duplicated_note.title} (conflict #{DateTime.now.strftime('%F %R')})",

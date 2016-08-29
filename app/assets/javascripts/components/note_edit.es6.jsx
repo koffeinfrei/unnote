@@ -103,7 +103,15 @@ class NoteEdit extends React.Component {
   }
 
   handleServerSync(data) {
-    this.setState(data);
+    let state = { isSynced: data.isSynced };
+    // when a note has been synced we need to set the serverUpdatedAt timestamp
+    // for the conflict detection to work
+    // (only do this if the current note is the synced note)
+    if (data.note && this.state.note.uid === data.note.uid) {
+      state.note = this.state.note;
+      state.note.serverUpdatedAt = data.note.serverUpdatedAt;
+    }
+    this.setState(state);
   }
 
   handleSearchEnter(e) {
