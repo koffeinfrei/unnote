@@ -48,6 +48,13 @@ class NoteForm extends React.Component {
   }
 
   handleContentChange(e) {
+    const content = this.$content.html()
+
+    // RTE also triggers a change event when a meta key is pressed
+    if (content === this.state.note.content){
+      return;
+    }
+
     this.shouldRerender = false;
     this.state.note.content = this.$content.html();
     this.setState({ note: this.state.note }, this.handleChange);
