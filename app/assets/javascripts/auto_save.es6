@@ -82,8 +82,22 @@ class AutoSave {
 
   ajaxDone(key, noteRaw, serverNote) {
     // if the content is still the same -> clear from localStorage
-    if (noteRaw === localStorage.getItem(key)) {
+    const localStorageNoteRaw = localStorage.getItem(key)
+    if (noteRaw === localStorageNoteRaw) {
       localStorage.removeItem(key);
+    }
+    else {
+      // update the server updated at in the localstorage item as well.  the
+      // content may have been updated in the meantime from the same source. if
+      // we don't do this we will get a conflict, which is not what we want in
+      // this case.
+      const note = Note.fromAttributes(JSON.parse(localStorageNoteRaw))
+      note.serverUpdatedAt = serverNote.serverUpdatedAt;
+
+      localStorage.setItem(
+        'note-' + note.uid,
+        note.toJson()
+      );
     }
 
     this.setSyncStatus(undefined, serverNote);
