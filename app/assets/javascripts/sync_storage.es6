@@ -1,4 +1,8 @@
 class SyncStorage {
+  static get KEY_PREFIX() {
+    return 'note-';
+  }
+
   static set(note) {
     localStorage.setItem(
       SyncStorage._getKey(note),
@@ -36,7 +40,7 @@ class SyncStorage {
     for (let i = 0; i < length; ++i) {
       const key = localStorage.key(i);
 
-      if (key.startsWith('note-')) {
+      if (key.startsWith(SyncStorage.KEY_PREFIX)) {
         keys.push(key);
       }
     }
@@ -45,6 +49,6 @@ class SyncStorage {
   }
 
   static _getKey(note) {
-    return 'note-' + note.uid;
+    return SyncStorage.KEY_PREFIX + note.uid;
   }
 }
