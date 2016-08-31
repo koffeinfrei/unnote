@@ -8,6 +8,7 @@
 //= require react_ujs
 //
 //= require uuid
+//= require sync_storage
 //= require auto_save
 //= require note
 //= require components
