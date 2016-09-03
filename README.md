@@ -1,5 +1,7 @@
 # Mykonote
 
+![main screen](screenshot.jpg)
+
 The note taking app that doesn't suck. Made under the Mykonian sun.
 
 The goal of this projet is to provide a solid note taking app with just the
