@@ -1,4 +1,13 @@
 class LoginForm extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    // use an event so we can overwrite this in the mobile application
+    $(document).on('mykonote.afterLogin', (e, data) => {
+      location.href = data.data.location;
+    });
+  }
+
   render() {
     return (
       <form className="simple_form new_user" onSubmit={this.handleFormSubmit}>
@@ -63,8 +72,8 @@ class LoginForm extends React.Component {
       dataType: 'json',
       data: data
     })
-    .done((data, status, xhr) => {
-      location.href = data.location;
+    .done((data) => {
+      $(document).trigger('mykonote.afterLogin', { data: data });
     })
     .fail(() => {
       AlertFlash.show('Your login was totally not successful. ' +
