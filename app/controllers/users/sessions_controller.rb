@@ -9,4 +9,12 @@ class Users::SessionsController < Devise::SessionsController
       )
     end
   end
+
+  def is_authenticated
+    if user_signed_in?
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :unauthorized
+    end
+  end
 end
