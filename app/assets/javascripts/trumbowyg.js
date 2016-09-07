@@ -525,14 +525,11 @@ jQuery.trumbowyg = {
 
 
             var ctrl = false,
-                composition = false,
                 debounceButtonPaneStatus;
 
             t.$ed
                 .on('dblclick', 'img', t.o.imgDblClickHandler)
                 .on('keydown', function (e) {
-                    composition = (e.which === 229);
-
                     if (e.ctrlKey) {
                         ctrl = true;
                         var k = t.keys[String.fromCharCode(e.which).toUpperCase()];
@@ -551,7 +548,7 @@ jQuery.trumbowyg = {
 
                     if (e.ctrlKey && (e.which === 89 || e.which === 90)) {
                         t.$c.trigger('tbwchange');
-                    } else if (!ctrl && e.which !== 17 && !composition) {
+                    } else if (!ctrl && e.which !== 17) {
                         t.semanticCode(false, e.which === 13);
                         t.$c.trigger('tbwchange');
                     }
