@@ -22,7 +22,7 @@ class LoginForm extends React.Component {
               type="email"
               id="user_email"
               name="user[email]"
-              autofocus="autofocus"
+              autoFocus="autofocus"
               className="string email optional form-control" />
           </div>
 
