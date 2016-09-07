@@ -48,13 +48,20 @@ class Navbar extends React.Component {
               <i className="material-icons">search</i>
             </button>
           </div>
-          <div className="navbar-form navbar-right search-bar collapse in-sm">
+          <div
+            className="navbar-form navbar-right search-bar collapse in-sm"
+            ref={(c) => {
+              $(c).off('shown.bs.collapse').on('shown.bs.collapse', () => {
+                this.$searchInput.focus();
+              });
+            }}>
             <div className="form-group">
               <input
                 type="text"
                 className="string optional form-control"
                 placeholder="Search"
-                onChange={this.props.handleSearchEnter} />
+                onChange={this.props.handleSearchEnter}
+                ref={(c) => this.$searchInput = $(c)} />
             </div>
           </div>
         </div>
