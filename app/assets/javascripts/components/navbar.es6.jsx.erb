@@ -34,27 +34,23 @@ class Navbar extends React.Component {
               <span className="navbar-brand-title">Mykonote</span>
             </a>
             <button
-              data-target=".notes-list"
-              data-toggle="collapse"
-              className="navbar-toggle navbar-hamburger-button" type="button">
+              className="navbar-toggle navbar-hamburger-button"
+              type="button"
+              onClick={this.handleHamburgerButtonClick}>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
             <button
-              data-target=".search-bar"
-              data-toggle="collapse"
-              className="navbar-toggle navbar-search-button" type="button">
+              className="navbar-toggle navbar-search-button" type="button"
+              onClick={this.handleSearchButtonClick.bind(this)}
+              ref={this.setupSearchButtonRef.bind(this)}>
               <i className="material-icons">search</i>
             </button>
           </div>
           <div
             className="navbar-form navbar-right search-bar collapse in-sm"
-            ref={(c) => {
-              $(c).off('shown.bs.collapse').on('shown.bs.collapse', () => {
-                this.$searchInput.focus();
-              });
-            }}>
+            ref={this.setupSearchBoxRef.bind(this)}>
             <div className="form-group">
               <input
                 type="text"
@@ -97,5 +93,75 @@ class Navbar extends React.Component {
     }
 
     return cssClass;
+  }
+
+  handleSearchButtonClick(e) {
+    if (!ViewportMode.isMobileMode()) {
+      return;
+    }
+
+    const $button = $(e.target);
+    if ($button.hasClass('is-expanded')) {
+      $button.removeClass('is-expanded');
+      EventHive.publish('search.hide');
+    }
+    else {
+      $button.addClass('is-expanded');
+      EventHive.publish('search.show');
+    }
+  }
+
+  handleHamburgerButtonClick(e) {
+    if (!ViewportMode.isMobileMode()) {
+      return;
+    }
+
+    const $hamburger = $(e.target);
+    if ($hamburger.hasClass('is-expanded')) {
+      $hamburger.removeClass('is-expanded');
+      EventHive.publish('hamburger.hide');
+    }
+    else {
+      $hamburger.addClass('is-expanded');
+      EventHive.publish('hamburger.show');
+    }
+  }
+
+  setupSearchButtonRef(c) {
+    if (!ViewportMode.isMobileMode()) {
+      return;
+    }
+
+    const $searchButton = $(c);
+
+    EventHive.subscribe('search.hide', function() {
+      $searchButton.removeClass('is-expanded');
+    });
+  }
+
+  setupSearchBoxRef(c) {
+    if (!ViewportMode.isMobileMode()) {
+      return;
+    }
+
+    const $searchBox = $(c);
+    $searchBox.collapse({ toggle: false });
+
+    EventHive.subscribe('search.show', function() {
+      $searchBox.collapse('show');
+    });
+    EventHive.subscribe('search.hide', function() {
+      $searchBox.collapse('hide');
+    });
+
+    EventHive.subscribe('note.open', () => {
+      if (this.$searchInput.val() === '') {
+        EventHive.publish('search.hide');
+      }
+    });
+
+    $searchBox.off('shown.bs.collapse').on('shown.bs.collapse', () => {
+      this.$searchInput.focus();
+    });
   }
 }

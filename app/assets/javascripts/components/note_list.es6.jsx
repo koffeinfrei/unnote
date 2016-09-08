@@ -71,7 +71,7 @@ class NoteList extends React.Component {
     );
 
     return (
-      <div className={this.getListCssClass()}>
+      <div className={this.getListCssClass()} ref={this.setupListRef.bind(this)}>
         {commentNodes}
         {nextPageLink}
         {listSpinner}
@@ -135,6 +135,7 @@ class NoteList extends React.Component {
       hamburgerMenu.click();
     }
 
+    EventHive.publish('note.open');
     this.props.handleNoteClick(note, e);
   }
 
@@ -224,5 +225,29 @@ class NoteList extends React.Component {
 
   setSearchProgress(isInProgress) {
     $(document).trigger('mykonote.spinner', isInProgress);
+  }
+
+  setupListRef(c) {
+    if (!ViewportMode.isMobileMode()) {
+      return;
+    }
+
+    const $list = $(c);
+    $list.collapse({ toggle: false });
+
+    EventHive.subscribe('hamburger.show', function() {
+      $list.collapse('show');
+    });
+    EventHive.subscribe('hamburger.hide', function() {
+      $list.collapse('hide');
+    });
+
+    EventHive.subscribe('search.entered', function() {
+      $list.collapse('show');
+    });
+
+    EventHive.subscribe('note.open', function() {
+      $list.collapse('hide');
+    });
   }
 }

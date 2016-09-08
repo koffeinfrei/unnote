@@ -121,6 +121,7 @@ class NoteEdit extends React.Component {
 
   handleSearchEnterDebounced(e) {
     this.setState({ searchQuery: e.target.value });
+    EventHive.publish('search.entered');
   }
 
   componentDidMount() {
