@@ -11,6 +11,7 @@
 //= require sync_storage
 //= require auto_save
 //= require note
+//= require event_hive
 //= require components
 //= require viewport_mode
 //= require jquery-throttle-debounce/jquery.ba-throttle-debounce
