@@ -44,13 +44,13 @@ class Navbar extends React.Component {
             <button
               className="navbar-toggle navbar-search-button" type="button"
               onClick={this.handleSearchButtonClick.bind(this)}
-              ref={this.setupSearchButtonRef.bind(this)}>
+              ref={(c) => this.$searchButton = $(c)}>
               <i className="material-icons">search</i>
             </button>
           </div>
           <div
             className="navbar-form navbar-right search-bar collapse in-sm"
-            ref={this.setupSearchBoxRef.bind(this)}>
+            ref={(c) => this.$searchBox = $(c)}>
             <div className="form-group">
               <input
                 type="text"
@@ -71,10 +71,39 @@ class Navbar extends React.Component {
     $(document).on('mykonote.spinner', (e, data) => {
       this.setState({ showSpinner: data });
     });
+
+    // handle hamburger and search toggling
+    if (ViewportMode.isMobileMode()) {
+      EventHive.subscribe('search.hide', () => {
+        this.$searchButton.removeClass('is-expanded');
+      });
+
+      this.$searchBox.collapse({ toggle: false });
+
+      EventHive.subscribe('search.show', () => {
+        this.$searchBox.collapse('show');
+      });
+      EventHive.subscribe('search.hide', () => {
+        this.$searchBox.collapse('hide');
+      });
+
+      EventHive.subscribe('note.open', () => {
+        if (this.$searchInput.val() === '') {
+          EventHive.publish('search.hide');
+        }
+      });
+
+      // event when search box is fully toggled (see bootstrap collapse)
+      this.$searchBox.on('shown.bs.collapse', () => {
+        this.$searchInput.focus();
+      });
+    }
   }
 
   componentWillUnmount() {
     $(document).off('mykonote.spinner');
+
+    this.$searchBox.off('shown.bs.collapse');
   }
 
   getSpinnerCssClass() {
@@ -95,18 +124,17 @@ class Navbar extends React.Component {
     return cssClass;
   }
 
-  handleSearchButtonClick(e) {
+  handleSearchButtonClick() {
     if (!ViewportMode.isMobileMode()) {
       return;
     }
 
-    const $button = $(e.target);
-    if ($button.hasClass('is-expanded')) {
-      $button.removeClass('is-expanded');
+    if (this.$searchButton.hasClass('is-expanded')) {
+      this.$searchButton.removeClass('is-expanded');
       EventHive.publish('search.hide');
     }
     else {
-      $button.addClass('is-expanded');
+      this.$searchButton.addClass('is-expanded');
       EventHive.publish('search.show');
     }
   }
@@ -125,43 +153,5 @@ class Navbar extends React.Component {
       $hamburger.addClass('is-expanded');
       EventHive.publish('hamburger.show');
     }
-  }
-
-  setupSearchButtonRef(c) {
-    if (!ViewportMode.isMobileMode()) {
-      return;
-    }
-
-    const $searchButton = $(c);
-
-    EventHive.subscribe('search.hide', function() {
-      $searchButton.removeClass('is-expanded');
-    });
-  }
-
-  setupSearchBoxRef(c) {
-    if (!ViewportMode.isMobileMode()) {
-      return;
-    }
-
-    const $searchBox = $(c);
-    $searchBox.collapse({ toggle: false });
-
-    EventHive.subscribe('search.show', function() {
-      $searchBox.collapse('show');
-    });
-    EventHive.subscribe('search.hide', function() {
-      $searchBox.collapse('hide');
-    });
-
-    EventHive.subscribe('note.open', () => {
-      if (this.$searchInput.val() === '') {
-        EventHive.publish('search.hide');
-      }
-    });
-
-    $searchBox.off('shown.bs.collapse').on('shown.bs.collapse', () => {
-      this.$searchInput.focus();
-    });
   }
 }
