@@ -244,6 +244,6 @@ class NoteList extends React.Component {
   }
 
   setSearchProgress(isInProgress) {
-    $(document).trigger('mykonote.spinner', isInProgress);
+    EventHive.publish('spinner.toggle', { show: isInProgress });
   }
 }

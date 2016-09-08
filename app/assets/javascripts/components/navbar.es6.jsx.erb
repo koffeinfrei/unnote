@@ -68,8 +68,8 @@ class Navbar extends React.Component {
   componentDidMount() {
     // listen on global event so we can toggle the spinner from unrelated
     // components
-    $(document).on('mykonote.spinner', (e, data) => {
-      this.setState({ showSpinner: data });
+    EventHive.subscribe('spinner.toggle', (data) => {
+      this.setState({ showSpinner: data.show });
     });
 
     // handle hamburger and search toggling
@@ -101,8 +101,6 @@ class Navbar extends React.Component {
   }
 
   componentWillUnmount() {
-    $(document).off('mykonote.spinner');
-
     this.$searchBox.off('shown.bs.collapse');
   }
 
