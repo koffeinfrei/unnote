@@ -127,14 +127,21 @@ class NoteEdit extends React.Component {
   componentDidMount() {
     this.autoSave = new AutoSave(this.handleServerSync.bind(this));
     this.autoSave.startPolling();
+
+    EventHive.subscribe('note.receive_new', (data) => {
+      this.setNewNote(() => {
+        EventHive.publish('hamburger.hide');
+        EventHive.publish('note.update', data);
+      });
+    });
   }
 
   getNewNoteAttributes() {
     return { note: new Note() }
   }
 
-  setNewNote() {
-    this.setState(this.getNewNoteAttributes());
+  setNewNote(afterSetState) {
+    this.setState(this.getNewNoteAttributes(), afterSetState);
     history.pushState({}, '', '/notes');
   }
 }

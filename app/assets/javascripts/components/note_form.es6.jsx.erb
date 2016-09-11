@@ -41,13 +41,13 @@ class NoteForm extends React.Component {
     return false;
   }
 
-  handleTitleChange(e) {
+  handleTitleChange() {
     this.shouldRerender = true;
-    this.state.note.title = e.target.value;
+    this.state.note.title = this.$title.val();
     this.setState({ note: this.state.note }, this.handleChange);
   }
 
-  handleContentChange(e) {
+  handleContentChange() {
     const content = this.$content.html()
 
     // RTE also triggers a change event when a meta key is pressed
@@ -67,6 +67,16 @@ class NoteForm extends React.Component {
   componentDidMount() {
     this.focusTitleFieldIfNewNote();
     this.renderEditor();
+
+    // when updating the note from outside (e.g. from the mobile app), in which
+    // case a sync to the server should be triggered. if we just use the react
+    // eventing the rte won't detect the changes.
+    EventHive.subscribe('note.update', (data) => {
+      this.$title.val(data.title);
+      this.handleTitleChange();
+      this.$content.html(data.content);
+      this.handleContentChange();
+    });
   }
 
   componentWillReceiveProps(nextProps) {
