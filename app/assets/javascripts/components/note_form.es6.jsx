@@ -73,6 +73,10 @@ class NoteForm extends React.Component {
   // gets called initially and when a note is switched
   componentDidUpdate() {
     this.editor.off('text-change');
+    // reset the content before inserting the actual content.
+    // presumably because of change tracking (delta stuff) in quill the
+    // insertion of big content hangs the browser for several seconds.
+    this.editor.setText('');
     this.$content.html(this.state.note.content);
     // wait on updates before attaching the `text-change` event
     this.editor.update();
