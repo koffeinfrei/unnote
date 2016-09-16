@@ -78,6 +78,7 @@ class NoteForm extends React.Component {
     // insertion of big content hangs the browser for several seconds.
     this.editor.setText('');
     this.$content.html(this.state.note.content);
+    this.editor.history.clear();
     // wait on updates before attaching the `text-change` event
     this.editor.update();
     this.editor.on('text-change', this.handleContentChange.bind(this));
@@ -113,7 +114,7 @@ class NoteForm extends React.Component {
           ['link', 'image'],
           ['clean']
         ],
-      },
+      }
     });
 
     this.$content = this.$contentContainer.find('.ql-editor');
