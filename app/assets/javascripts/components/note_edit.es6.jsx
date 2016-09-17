@@ -134,6 +134,10 @@ class NoteEdit extends React.Component {
         EventHive.publish('note.update', data);
       });
     });
+
+    EventHive.subscribe('note.new', (data) => {
+      this.setNewNote();
+    });
   }
 
   getNewNoteAttributes() {

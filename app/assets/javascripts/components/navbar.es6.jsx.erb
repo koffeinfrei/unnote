@@ -72,6 +72,10 @@ class Navbar extends React.Component {
       this.setState({ showSpinner: data.show });
     });
 
+    EventHive.subscribe('search.focus', () => {
+      this.$searchInput.focus();
+    });
+
     // handle hamburger and search toggling
     if (ViewportMode.isMobileMode()) {
       EventHive.subscribe('search.hide', () => {

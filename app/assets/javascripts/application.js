@@ -7,6 +7,13 @@
 //= require react
 //= require react_ujs
 //
+//= require jquery-throttle-debounce/jquery.ba-throttle-debounce
+//= require highlightjs/highlight.pack.js
+//= require quill/quill
+//= require momentjs/moment
+//= require bootbox/bootbox
+//= require mousetrap/mousetrap
+//
 //= require uuid
 //= require sync_storage
 //= require auto_save
@@ -14,13 +21,8 @@
 //= require event_hive
 //= require components
 //= require viewport_mode
-//
-//= require jquery-throttle-debounce/jquery.ba-throttle-debounce
-//= require highlightjs/highlight.pack.js
-//= require quill/quill
-//= require momentjs/moment
-//= require bootbox/bootbox
+//= require keyboard
 
-$(function () {
+$(function() {
   $.material.init();
 });
