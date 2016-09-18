@@ -110,10 +110,16 @@ class NoteForm extends React.Component {
           ['bold', 'italic', 'strike'],
           [{ 'color': [] }, { 'background': [] }],
           ['blockquote', 'code-block'],
-          [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+          [
+            { 'list': 'ordered' }, { 'list': 'bullet' }, 'task-list',
+            { 'indent': '-1' }, { 'indent': '+1' }
+          ],
           ['link', 'image'],
           ['clean']
         ],
+        'task-list': {
+          onClick: this.handleContentChange.bind(this)
+        }
       }
     });
 

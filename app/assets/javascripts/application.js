@@ -22,6 +22,7 @@
 //= require components
 //= require viewport_mode
 //= require keyboard
+//= require quill/task_list
 
 $(function() {
   $.material.init();
