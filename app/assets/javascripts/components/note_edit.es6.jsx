@@ -128,7 +128,7 @@ class NoteEdit extends React.Component {
     this.autoSave = new AutoSave(this.handleServerSync.bind(this));
     this.autoSave.startPolling();
 
-    EventHive.subscribe('note.receive_new', (data) => {
+    EventHive.subscribe('note.create', (data) => {
       this.setNewNote(() => {
         EventHive.publish('hamburger.hide');
         EventHive.publish('note.update', data);
