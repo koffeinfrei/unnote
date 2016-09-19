@@ -12,6 +12,13 @@ class TaskListItem extends ListItem {
       super.format(name, value);
     }
   }
+
+  // when inserting a new list item, remove the 'checked' css class
+  clone() {
+    const clone = super.clone();
+    clone.domNode.classList.remove('checked');
+    return clone;
+  }
 }
 
 TaskListItem.blotName = 'task-list-item';
