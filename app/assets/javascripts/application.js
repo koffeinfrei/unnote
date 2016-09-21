@@ -10,6 +10,7 @@
 //= require jquery-throttle-debounce/jquery.ba-throttle-debounce
 //= require highlightjs/highlight.pack.js
 //= require quill/quill
+//= require quill-task-list/task_list
 //= require momentjs/moment
 //= require bootbox/bootbox
 //= require mousetrap/mousetrap
