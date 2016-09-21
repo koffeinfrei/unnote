@@ -117,9 +117,7 @@ class NoteForm extends React.Component {
           ['link', 'image'],
           ['clean']
         ],
-        'task-list': {
-          onClick: this.handleContentChange.bind(this)
-        }
+        'task-list': true
       }
     });
 

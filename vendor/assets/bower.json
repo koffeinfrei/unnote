@@ -9,6 +9,7 @@
     "mousetrap": "~1.6.0",
     "sinon": "http://sinonjs.org/releases/sinon-1.17.5.js",
     "quill": "https://github.com/quilljs/quill/releases/download/v1.0.3/quill.tar.gz",
-    "highlightjs": "~9.6.0"
+    "highlightjs": "~9.6.0",
+    "quill-task-list": "~0.2.0"
   }
 }
