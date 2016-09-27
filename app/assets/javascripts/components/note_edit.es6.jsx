@@ -52,7 +52,7 @@ class NoteEdit extends React.Component {
     e.preventDefault();
 
     this.setState({ note: note });
-    history.pushState({}, '', '/notes/' + note.uid + '/edit');
+    PushState.setEdit(note);
   }
 
   handleDeleteNoteClick(note, e) {
@@ -99,6 +99,11 @@ class NoteEdit extends React.Component {
   }
 
   handleEditChange(note) {
+    // set note url when a new note is saved (aka. created)
+    if (location.pathname === '/' || location.pathname === '/notes') {
+      PushState.setEdit(note);
+    }
+
     this.autoSave.setChange(note);
   }
 
@@ -146,6 +151,6 @@ class NoteEdit extends React.Component {
 
   setNewNote(afterSetState) {
     this.setState(this.getNewNoteAttributes(), afterSetState);
-    history.pushState({}, '', '/notes');
+    PushState.setNew();
   }
 }

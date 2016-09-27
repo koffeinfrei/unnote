@@ -23,6 +23,7 @@
 //= require components
 //= require viewport_mode
 //= require keyboard
+//= require push_state
 
 $(function() {
   $.material.init();
