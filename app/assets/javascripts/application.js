@@ -24,6 +24,7 @@
 //= require viewport_mode
 //= require keyboard
 //= require push_state
+//= require sticky_editor_toolbar
 
 $(function() {
   $.material.init();

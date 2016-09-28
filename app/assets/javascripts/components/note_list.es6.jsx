@@ -105,6 +105,10 @@ class NoteList extends React.Component {
     // handle hamburger and search toggling
     if (ViewportMode.isMobileMode()) {
       this.$list.collapse({ toggle: false });
+      // when the hiding animation is done
+      this.$list.on('hidden.bs.collapse', () => {
+        EventHive.publish('hamburger.hide_end');
+      });
 
       EventHive.subscribe('hamburger.show', () => {
         this.$list.collapse('show');

@@ -83,6 +83,10 @@ class Navbar extends React.Component {
       });
 
       this.$searchBox.collapse({ toggle: false });
+      // when the hiding animation is done
+      this.$searchBox.on('hidden.bs.collapse', () => {
+        EventHive.publish('search.hide_end');
+      });
 
       EventHive.subscribe('search.show', () => {
         this.$searchBox.collapse('show');
