@@ -1,13 +1,19 @@
 .notes-list
-  @media (min-width: $screen-lg-min)
-    overflow-y: auto
-    // $navbar-margin-bottom: body top padding
-    // 20px: list bottom margin (static value for `.list-group` definition
-    // 1px: correction to avoid scrollbar
-    height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 20px - 1px)
+  overflow-y: auto
+  // $navbar-margin-bottom: body top padding
+  // 20px: list bottom margin (static value for `.list-group` definition
+  // 1px: correction to avoid scrollbar
+  height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 20px - 1px)
 
   @media (max-width: $screen-sm-min)
-    @include make-row
+    position: absolute
+    width: 100%
+    margin-left: 0
+    margin-right: 0
+    top: 0
+    left: 0
+    background-color: $body-bg
+    z-index: 1
 
 .navbar-logo,
 .navbar-brand .navbar-logo,
