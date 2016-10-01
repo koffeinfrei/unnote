@@ -6,6 +6,7 @@ namespace :mobile do
       `RAILS_ENV=local_production bundle exec rake assets:clobber assets:precompile`
     end
 
+    desc 'Copies the application.{css,js} files to the mobile application'
     namespace :copy do
       desc 'Copies the application.js file to the mobile application'
       # This task assumes that the mobile application is checked out as
@@ -14,8 +15,8 @@ namespace :mobile do
         puts 'Copying the latest application.js to the mobile app'
 
         `cat $(ls -tr public/assets/application-*.js | tail -1) | \
-       sed -r 's#"/assets/logo-donkeywhite-.+\.png"#"img/logo.png"#' > \
-       ../mykonote-app/www/js/application.js`
+         sed -r 's#"/assets/logo-donkeywhite-.+\.png"#"img/logo.png"#' > \
+         ../mykonote-app/www/js/application.js`
       end
 
       desc 'Copies the application.css file to the mobile application'
@@ -25,7 +26,7 @@ namespace :mobile do
         puts 'Copying the latest application.css to the mobile app'
 
         `cp $(ls -tr public/assets/application-*.css | tail -1) \
-       ../mykonote-app/www/css/application.css`
+         ../mykonote-app/www/css/application.css`
       end
     end
 
