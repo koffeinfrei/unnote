@@ -20,7 +20,7 @@ class NoteEdit extends React.Component {
       <div>
         <div className="row">
           <div className="col-md-12">
-            <div className="navbar navbar-info navbar-notes">
+            <div className="navbar navbar-fixed-top navbar-info navbar-notes">
               <Navbar handleSearchEnter={this.handleSearchEnter.bind(this)} />
               <SaveStateLabel isSynced={this.state.isSynced} />
             </div>

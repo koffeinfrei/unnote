@@ -11,7 +11,10 @@ class NoteForm extends React.Component {
 
   render() {
     return (
-      <form className="form-horizontal" onSubmit={this.handleFormSubmit}>
+      <form
+        className="form-horizontal"
+        ref={(c) => this.$formContainer = $(c)}
+        onSubmit={this.handleFormSubmit}>
         <div className="form-inputs">
           <div className="form-group form-group-no-label string optional">
             <input
@@ -68,6 +71,15 @@ class NoteForm extends React.Component {
       this.handleTitleChange();
       this.editor.pasteHTML(data.content);
     });
+
+    if (ViewportMode.isMobileMode()) {
+      EventHive.subscribe('hamburger.show', () => {
+        this.$formContainer.addClass('hidden');
+      });
+      EventHive.subscribe('hamburger.hide', () => {
+        this.$formContainer.removeClass('hidden');
+      });
+    }
   }
 
   // gets called initially and when a note is switched

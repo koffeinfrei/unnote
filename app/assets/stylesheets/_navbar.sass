@@ -1,12 +1,22 @@
 .notes-list
-  @media (min-width: $screen-sm-min)
-    overflow-y: auto
-    // 60px is from .navbar .navbar-brand (which is a static value
-    // in material design sass)
-    height: calc(100vh - 60px - #{$navbar-margin-bottom})
+  overflow-y: auto
+  // $navbar-margin-bottom: body top padding
+  // 20px: list bottom margin (static value for `.list-group` definition
+  // 1px: correction to avoid scrollbar
+  height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 1px)
+
+  @media (min-width: $screen-lg-min)
+    height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 20px - 1px)
 
   @media (max-width: $screen-sm-min)
-    @include make-row
+    position: absolute
+    width: 100%
+    margin-left: 0
+    margin-right: 0
+    top: 0
+    left: 0
+    background-color: $body-bg
+    z-index: 1
 
 .navbar-logo,
 .navbar-brand .navbar-logo,
@@ -93,8 +103,8 @@
 
 .search-bar
   @media (max-width: $screen-sm-min)
-    margin-left: 0
-    margin-right: 0
+    margin: 0 !important
+    padding-top: 0
 
   border-bottom: 0
   border-top: 0
