@@ -35,12 +35,12 @@ class StickyEditorToolbar {
 
   setSticky() {
     this.$toolbar.addClass('ql-toolbar-fixed');
-    this.$editor.addClass('ql-container-fixed');
+    this.$editor.css('margin-top', this.$toolbar.outerHeight());
   }
 
   setUnsticky() {
     this.$toolbar.removeClass('ql-toolbar-fixed');
-    this.$editor.removeClass('ql-container-fixed');
+    this.$editor.css('margin-top', 0);
   }
 }
 
