@@ -15,9 +15,9 @@ class SaveStateLabel extends React.Component {
         {
           this.state.isSynced
             ?
-            <div className="label label-success">Synced</div>
+            <div className="label label-success">Saved</div>
             :
-            <div className="label label-warning">Not synced</div>
+            <div className="label label-warning">Saving</div>
         }
       </div>
     );
