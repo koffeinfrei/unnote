@@ -3,7 +3,10 @@
   // $navbar-margin-bottom: body top padding
   // 20px: list bottom margin (static value for `.list-group` definition
   // 1px: correction to avoid scrollbar
-  height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 20px - 1px)
+  height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 1px)
+
+  @media (min-width: $screen-lg-min)
+    height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 20px - 1px)
 
   @media (max-width: $screen-sm-min)
     position: absolute
