@@ -1,5 +1,5 @@
 {
-  "name": "dsl-generated dependencies",
+  "name": "dsl-generated-dependencies",
   "dependencies": {
     "bootstrap-material-design": "~0.5.10",
     "bootstrap-sass": "~3.3.7",
@@ -7,8 +7,8 @@
     "bootbox": "~4.4.0",
     "jquery-throttle-debounce": "latest",
     "mousetrap": "~1.6.0",
-    "sinon": "http://sinonjs.org/releases/sinon-1.17.5.js",
-    "quill": "https://github.com/quilljs/quill/releases/download/v1.0.3/quill.tar.gz",
+    "sinon": "http://sinonjs.org/releases/sinon-1.17.6.js",
+    "quill": "https://github.com/quilljs/quill/releases/download/v1.0.6/quill.tar.gz",
     "highlightjs": "~9.6.0",
     "quill-task-list": "~0.2.0"
   }
