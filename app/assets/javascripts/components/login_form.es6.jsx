@@ -44,6 +44,7 @@ class LoginForm extends React.Component {
                   type="checkbox"
                   id="user_remember_me"
                   name="user[remember_me]"
+                  value="1"
                   className="boolean optional" />Remember me</label>
             </div>
           </div>
