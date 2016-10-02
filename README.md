@@ -1,4 +1,4 @@
-# Mykonote
+# Mykonote [/ˈmɪkəˌnəʊt/]
 
 ![main screen](screenshot.jpg)
 
@@ -6,17 +6,25 @@ The note taking app that doesn't suck. Made under the Mykonian sun.
 
 The goal of this projet is to provide a solid note taking app with just the
 core functionality. There won't be any fancy unnecessary features such as a
-chat.
+chat. It basically meets the one requirement: Taking and managing private notes.
 
 What Mykonote offers:
 
-* a solid richtext editor which works properly without ruining the formatting
-* mobile support
-* offline support, so you don't lose data when the connection is bad or even
-  missing
-* a simple and fast user experience
-* an always available search
-* a donkey logo
+* A [solid richtext editor](http://quilljs.com/) which works properly without
+  ruining the formatting
+* [Task lists](https://github.com/koffeinfrei/quill-task-list) (aka. todo
+  lists)
+* Mobile support
+* [A mobile app](https://github.com/panter/mykonote-app)
+* Offline support, so you don't lose data when the connection is bad or even
+  missing. The next time the internet is up again your edits will be synced to
+  the server.
+* A simple and fast user experience
+* An always available and easy to use search
+* A donkey logo
+* [Free and open source software](https://www.gnu.org/philosophy/free-sw.html).
+  There is no [vendor lock-in](https://en.wikipedia.org/wiki/Vendor_lock-in)
+  and there will never be any weird business going on with your data.
 
 ## Development setup
 
