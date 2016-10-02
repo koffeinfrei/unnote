@@ -6,7 +6,7 @@ class NotesController < AuthenticatedController
   end
 
   def edit
-    @note = Note.find_by_uid(params[:id])
+    @note = Note.find_by!(uid: params[:id])
 
     authorize @note
 
