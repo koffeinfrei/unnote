@@ -15,7 +15,7 @@ class AbstractFlash extends React.Component {
         <div className="col-md-4 col-md-offset-4">
           <div className={this.getCssClass()}>
             <button className="close" type="button" onClick={this.handleClose.bind(this)}>×</button>
-            {this.state.message}
+            <div dangerouslySetInnerHTML={{ __html: this.state.message }} />
           </div>
         </div>
       </div>

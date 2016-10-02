@@ -83,7 +83,25 @@ class AutoSave {
     if (xhr.readyState === 0) {
       return;
     }
-    AlertFlash.show('Something went sideways: ' + error.toString());
-    console.error('url: ', url, 'xhr: ', xhr, 'status: ', status, 'err: ', error.toString());
+
+    if (xhr.status === 401) {
+      AlertFlash.show(
+        // we could actually link to the current page with `href=""`, but by
+        // doing this the title input field contains the wrong value once we
+        // are redirected back after login (the value is loaded from the
+        // server, and the save request call doesn't update the title field).
+        // the cheap solution for now is to redirect to the root page, so the
+        // user has to click on the note, which will properly update the
+        // fields.
+        // TODO: use the current page link and fix the update of the title
+        // field
+        'Your session has expired. You need to <a href="/" class="alert-link">sign in</a> again.<br>' +
+        "Your changes won't be lost, once you're signed in they will be saved to the server."
+      );
+    }
+    else {
+      AlertFlash.show('Something went sideways: ' + error.toString());
+      console.error('url: ', url, 'xhr: ', xhr, 'status: ', status, 'err: ', error.toString());
+    }
   }
 }
