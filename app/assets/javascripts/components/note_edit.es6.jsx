@@ -93,8 +93,7 @@ class NoteEdit extends React.Component {
     });
   }
 
-  handleNewNoteClick(e) {
-    e.preventDefault();
+  handleNewNoteClick() {
     this.setNewNote();
   }
 

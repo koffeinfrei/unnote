@@ -4,10 +4,20 @@ class AddNoteButton extends React.Component {
       <a
         href="#"
         className="btn btn-info btn-fab btn-new-note"
-        onClick={this.props.handleNewNoteClick}
+        onClick={this.handleNewNoteClick.bind(this)}
       >
         <i className="material-icons">add</i>
       </a>
     );
+  }
+
+  handleNewNoteClick(e) {
+    e.preventDefault();
+
+    if (ViewportMode.isMobileMode()) {
+      EventHive.publish('hamburger.hide');
+    }
+
+    this.props.handleNewNoteClick();
   }
 }
