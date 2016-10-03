@@ -79,6 +79,10 @@ class NoteForm extends React.Component {
       EventHive.subscribe('hamburger.hide', () => {
         this.$formContainer.removeClass('hidden');
       });
+
+      EventHive.subscribe('search.entered', () => {
+        this.$formContainer.addClass('hidden');
+      });
     }
   }
 
