@@ -5,17 +5,18 @@ class Base64StringIO < StringIO
 
   attr_accessor :file_format, :file_name
 
-  def initialize(encoded_file, file_name)
+  # @param [String] encoded_file e.g. "data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=="
+  def initialize(encoded_file)
     description, encoded_bytes = encoded_file.split(',')
 
     raise ArgumentError unless encoded_bytes
     raise ArgumentError if encoded_bytes == '(null)'
 
-    @file_name = file_name
-    @file_format = get_file_format description
-    bytes = Base64.decode64(encoded_bytes)
+    @file_name = Digest::SHA256.hexdigest(encoded_file)
+    @file_format = get_file_format(description)
+    bytes = Base64.strict_decode64(encoded_bytes)
 
-    super bytes
+    super(bytes)
   end
 
   def original_filename

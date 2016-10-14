@@ -6,7 +6,7 @@ RSpec.describe Note do
       let(:note) do
         Note.create!(
           uid: SecureRandom.uuid,
-          content: 'content1 <img src="data:image/png;base64,iVBORw0KGgo" />'
+          content: 'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
         )
       end
 
@@ -19,15 +19,15 @@ RSpec.describe Note do
 
       it 'replaces the base64 part with the file hash' do
         expect(note.text_content).to eq(
-          'content1 <img src="f6b53b9032376ac7ecb4b999093cb965963f37b6511587dd10ca52c295fe33e2" />'
+          'content1 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338" />'
         )
       end
 
       it 'adds one image and removes one' do
         note.update_attributes!(
           content:
-          'content1 <img src="data:image/png;base64,iVBORw0KGgo" />' \
-          'content2 <img src="data:image/png;base64,NSUhEUgAAA0" />'
+          'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
+          'content2 <img src="data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
         )
 
         first_file = note.images[0].file
@@ -39,7 +39,7 @@ RSpec.describe Note do
 
         note.update_attributes!(
           content:
-          'content2 <img src="data:image/png;base64,NSUhEUgAAA0" />'
+          'content2 <img src="data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
         )
 
         expect(note.images.count).to eq 1
