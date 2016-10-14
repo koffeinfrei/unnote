@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: 68c7317a7530abb3c1e7b365fad88cabe4ffd14e
+  specs:
+    carrierwave (1.0.0.beta)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -293,6 +302,7 @@ DEPENDENCIES
   binding_of_caller
   bower-rails
   capybara
+  carrierwave!
   database_cleaner
   devise
   jquery-rails

@@ -16,7 +16,7 @@ namespace :db do
 
       CREATE TRIGGER update_content_tsvector BEFORE INSERT OR UPDATE
       ON notes FOR EACH ROW EXECUTE PROCEDURE
-      tsvector_update_trigger(tsv_content, 'pg_catalog.simple', content);
+      tsvector_update_trigger(tsv_content, 'pg_catalog.simple', text_content);
     SQL
 
     ActiveRecord::Base.connection.execute(sql)
