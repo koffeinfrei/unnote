@@ -1,3 +1,4 @@
+# initially taken from
 # https://github.com/lebedev-yury/carrierwave-base64/blob/master/lib/carrierwave/base64/base64_string_io.rb
 class Base64StringIO < StringIO
   class ArgumentError < StandardError; end
@@ -8,11 +9,11 @@ class Base64StringIO < StringIO
     description, encoded_bytes = encoded_file.split(',')
 
     raise ArgumentError unless encoded_bytes
-    raise ArgumentError if encoded_bytes.eql?('(null)')
+    raise ArgumentError if encoded_bytes == '(null)'
 
     @file_name = file_name
     @file_format = get_file_format description
-    bytes = ::Base64.decode64 encoded_bytes
+    bytes = Base64.decode64(encoded_bytes)
 
     super bytes
   end
