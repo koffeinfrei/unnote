@@ -99,7 +99,7 @@ class NoteEdit extends React.Component {
 
   handleEditChange(note) {
     // set note url when a new note is saved (aka. created)
-    if (location.pathname === '/' || location.pathname === '/notes') {
+    if (['/', '/notes', '/notes/'].includes(location.pathname)) {
       PushState.setEdit(note);
     }
 
