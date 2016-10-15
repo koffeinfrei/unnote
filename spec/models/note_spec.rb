@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Note do
-  describe '#content' do
+  describe '#content=' do
     context 'content contains 1 image' do
       let(:note) do
         Note.create!(
@@ -46,6 +46,35 @@ RSpec.describe Note do
         expect(first_file).not_to exist
         expect(second_file).to exist
       end
+    end
+
+    it 'saves equal images as one file' do
+      note = Note.create!(
+        uid: SecureRandom.uuid,
+        content:
+        'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
+        'content2 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
+      )
+
+      expect(note.images.count).to eq 1
+      expect(note.images[0].file).to exist
+    end
+  end
+
+  describe '#content' do
+    it 'retrieves equal images from one file' do
+      note = Note.create!(
+        uid: SecureRandom.uuid,
+        content:
+        'content1 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338" />' \
+        'content2 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338" />',
+        images: [Base64StringIO.new("data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=")]
+      )
+
+      expect(note.content).to eq(
+        'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
+        'content2 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
+      )
     end
   end
 end

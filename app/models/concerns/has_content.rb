@@ -18,7 +18,7 @@ module HasContent
 
     images.map do |image|
       base64_file = Base64File.new(image.file)
-      content.sub!(
+      content.gsub!(
         /(<img.*? src=['"])(#{base64_file.filename_without_extension})(['"].*?>)/,
         "\\1#{base64_file.data_url}\\3"
       )
@@ -34,7 +34,7 @@ module HasContent
       .scan(/<img.*? src=['"](data:image\/[^;]+;base64,[^'"]+)['"].*?>/)
       .flatten
 
-    matches.map do |match|
+    matches.uniq.map do |match|
       Base64StringIO.new(match).tap do |file|
         content.sub!(match, file.file_name)
       end
