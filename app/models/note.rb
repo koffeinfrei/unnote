@@ -14,6 +14,8 @@ class Note < ActiveRecord::Base
     }
   )
 
+  has_paper_trail skip: [:tsv_title, :tsv_content]
+
   belongs_to :user
 
   scope :default_ordered, -> { order(updated_at: :desc) }
