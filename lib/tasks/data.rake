@@ -5,8 +5,7 @@ namespace :data do
       ActiveRecord::Base.record_timestamps = false
       begin
         Note.find_each do |note|
-          content = NoteContentCleaner.new(note).run
-          note.update_attributes!(text_content: content)
+          NoteContentCleaner.new(note).run!
         end
       ensure
         ActiveRecord::Base.record_timestamps = true

@@ -3,9 +3,9 @@ class NoteContentCleaner
     @note = note
   end
 
-  def run
+  def run!
     file = Tempfile.new('mykonote_cleanup')
-    file.write(@note.text_content)
+    file.write(@note.content)
     file.close
 
     content = Phantomjs.run(
@@ -13,8 +13,8 @@ class NoteContentCleaner
       file.path
     ).strip
 
-    file.unlink
+    @note.update_attributes!(content: content)
 
-    content
+    file.unlink
   end
 end

@@ -8,7 +8,9 @@ RSpec.describe NoteContentCleaner do
         uid: SecureRandom.uuid
       )
 
-      expect(NoteContentCleaner.new(note).run).to eq '<p>content1</p><p>content2</p>'
+      NoteContentCleaner.new(note).run!
+
+      expect(note.reload.content).to eq '<p>content1</p><p>content2</p>'
     end
   end
 end
