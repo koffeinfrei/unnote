@@ -1,10 +1,14 @@
 class Note < ActiveRecord::Base
+  include HasContent
   include PgSearch
+
+  belongs_to :user
+
   pg_search_scope(
     :search_by_title_and_content,
     against: {
       title: 'A',
-      content: 'B'
+      text_content: 'B'
     },
     using: {
       tsearch: {
@@ -16,11 +20,15 @@ class Note < ActiveRecord::Base
 
   has_paper_trail skip: [:tsv_title, :tsv_content]
 
-  belongs_to :user
+  mount_uploaders :images, ImageUploader
 
   scope :default_ordered, -> { order(updated_at: :desc) }
 
   def to_param
     uid
+  end
+
+  def as_json(options={})
+    super(only: [:uid, :title, :created_at, :updated_at]).merge(content: content)
   end
 end

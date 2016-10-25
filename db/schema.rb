@@ -18,13 +18,14 @@ ActiveRecord::Schema.define(version: 20161016194939) do
 
   create_table "notes", force: :cascade do |t|
     t.string   "title"
-    t.text     "content"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.uuid     "uid",         null: false
+    t.text     "text_content"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.uuid     "uid",                       null: false
     t.integer  "user_id"
     t.tsvector "tsv_title"
     t.tsvector "tsv_content"
+    t.string   "images",       default: [],              array: true
   end
 
   add_index "notes", ["tsv_content"], name: "index_notes_on_tsv_content", using: :gin
