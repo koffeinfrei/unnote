@@ -160,6 +160,7 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
+    phantomjs (2.1.1.0)
     pkg-config (1.1.7)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -312,6 +313,7 @@ DEPENDENCIES
   paper_trail
   pg
   pg_search
+  phantomjs
   pry-byebug
   pry-rails
   pundit
