@@ -21,7 +21,10 @@ class NoteEdit extends React.Component {
         <div className="row">
           <div className="col-md-12">
             <div className="navbar navbar-fixed-top navbar-info navbar-notes">
-              <Navbar handleSearchEnter={this.handleSearchEnter.bind(this)} />
+              <Navbar
+                handleSearchEnter={this.handleSearchEnter.bind(this)}
+                handleSearchCleared={this.handleSearchCleared.bind(this)} />
+
               <SaveStateLabel isSynced={this.state.isSynced} />
             </div>
           </div>
@@ -125,6 +128,11 @@ class NoteEdit extends React.Component {
 
   handleSearchEnterDebounced(e) {
     this.setState({ searchQuery: e.target.value });
+    EventHive.publish('search.entered');
+  }
+
+  handleSearchCleared() {
+    this.setState({ searchQuery: '' });
     EventHive.publish('search.entered');
   }
 
