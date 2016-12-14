@@ -6,7 +6,6 @@ namespace :mobile do
       `RAILS_ENV=local_production bundle exec rake assets:clobber assets:precompile`
     end
 
-    desc 'Copies the application.{css,js} files to the mobile application'
     namespace :copy do
       desc 'Copies the application.js file to the mobile application'
       # This task assumes that the mobile application is checked out as
@@ -30,6 +29,7 @@ namespace :mobile do
       end
     end
 
+    desc 'Copies the application.{css,js} files to the mobile application'
     task copy: [:'mobile:assets:copy:js', :'mobile:assets:copy:css']
   end
 end
