@@ -5,7 +5,7 @@ gem 'rails', '~> 4.2.5'
 # gems sorted alphabetically
 
 gem 'bower-rails'
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave'
 gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
