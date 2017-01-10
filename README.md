@@ -26,6 +26,7 @@ What Mykonote offers:
   There is no [vendor lock-in](https://en.wikipedia.org/wiki/Vendor_lock-in)
   and there will never be any weird business going on with your data.
 
+
 ## Development setup
 
 To get the application started the following steps are required.
@@ -47,6 +48,21 @@ There's a demo user `user@example.com` with password `asdfasdf`.
   ```bash
   $ bin/rails server
   ```
+
+
+## Updating bower assets
+
+We like to keep versions consistently locked to the same version on all
+machines (development and production). This is why we define fixed versions in
+[Bowerfile](Bowerfile) and install that exact version. The downside of this is
+a manual update process.
+
+1. Execute `bower info <ASSET NAME>` for each asset defined in
+   [Bowerfile](Bowerfile)
+1. Select the latest applicable version and update the version number in
+   [Bowerfile](Bowerfile)
+1. Execute `rake bower:install` to install the assets and update the
+   [bower.json](vendor/assets/bower.json)
 
 
 ## License
