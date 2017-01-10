@@ -7,6 +7,7 @@ class NoteEdit extends React.Component {
         isInitialEdit: true,
         note: Note.fromAttributes(props.note)
       };
+      PushState.setBrowserTitle(props.note);
     }
     else {
       this.state = this.getNewNoteAttributes();
@@ -107,6 +108,7 @@ class NoteEdit extends React.Component {
     }
 
     this.autoSave.setChange(note);
+    PushState.setBrowserTitle(note);
   }
 
   handleServerSync(data) {
