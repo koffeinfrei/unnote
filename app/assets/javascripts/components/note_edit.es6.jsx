@@ -108,7 +108,6 @@ class NoteEdit extends React.Component {
     }
 
     this.autoSave.setChange(note);
-    PushState.setBrowserTitle(note);
   }
 
   handleServerSync(data) {
@@ -121,6 +120,10 @@ class NoteEdit extends React.Component {
       state.note.serverUpdatedAt = data.note.serverUpdatedAt;
     }
     this.setState(state);
+
+    if (data.isSynced) {
+      PushState.setBrowserTitle(this.state.note);
+    }
   }
 
   handleSearchEnter(e) {
