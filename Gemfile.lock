@@ -332,10 +332,8 @@ DEPENDENCIES
   spring-commands-rspec
   sprockets
   sprockets-es6
-  therubyracer
   timecop
   uglifier
-  unicorn
 
 BUNDLED WITH
    1.12.5

@@ -23,7 +23,6 @@ gem 'slim-rails'
 gem 'sprockets'
 gem 'sprockets-es6'
 gem 'uglifier'
-gem 'unicorn'
 
 group :development, :test do
   gem 'capybara'
@@ -43,8 +42,4 @@ end
 
 group :test do
   gem 'timecop'
-end
-
-group :production do
-  gem 'therubyracer'
 end
