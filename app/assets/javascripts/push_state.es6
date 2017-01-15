@@ -10,7 +10,7 @@ class PushState {
   }
 
   static setBrowserTitle(note) {
-    if (note) {
+    if (note && note.title) {
       document.title = `${note.title} | Mykonote`;
     }
     else {
