@@ -77,4 +77,36 @@ RSpec.describe Note do
       )
     end
   end
+
+  describe '#dup' do
+    it 'duplicates the images' do
+      note = Note.create!(
+        uid: SecureRandom.uuid,
+        content:
+        'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
+        'content2 <img src="data:image/png;base64,/9j/5AAQSkZJRgABAQEASABKdhH//2Q=" />',
+      )
+
+      dup_note = note.dup
+      dup_note.save!
+
+      expect(dup_note.images.count).to eq 2
+      expect(dup_note.images.first.file).to exist
+      expect(dup_note.images.last.file).to exist
+
+      note.remove_images!
+      dup_note.remove_images!
+    end
+
+    it 'generates a new uuid' do
+      note = Note.create!(
+        uid: SecureRandom.uuid
+      )
+
+      dup_note = note.dup
+      dup_note.save!
+
+      expect(dup_note.uid).not_to eq note.uid
+    end
+  end
 end

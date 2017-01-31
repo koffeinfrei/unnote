@@ -31,4 +31,14 @@ class Note < ActiveRecord::Base
   def as_json(options={})
     super(only: [:uid, :title, :created_at, :updated_at]).merge(content: content)
   end
+
+  def dup
+    super.tap do |dup_note|
+      dup_note.uid = SecureRandom.uuid
+
+      dup_note.images = images.map do |image|
+        File.open(image.file.file)
+      end
+    end
+  end
 end

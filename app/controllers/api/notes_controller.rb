@@ -67,8 +67,7 @@ class Api::NotesController < AuthenticatedController
     if @note.updated_at.to_datetime > DateTime.parse(params[:note][:server_updated_at])
       duplicated_note = @note.dup
       duplicated_note.update_attributes!(
-        title: "#{duplicated_note.title} (conflict #{DateTime.now.strftime('%F %R')})",
-        uid: SecureRandom.uuid
+        title: "#{duplicated_note.title} (conflict #{DateTime.now.strftime('%F %R')})"
       )
     end
   end
