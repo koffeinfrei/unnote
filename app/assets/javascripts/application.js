@@ -4,6 +4,8 @@
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require bootstrap-material-design
 //
+//= require babel-polyfill/browser-polyfill
+//
 //= require react
 //= require react_ujs
 //
