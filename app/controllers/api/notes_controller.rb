@@ -33,7 +33,11 @@ class Api::NotesController < AuthenticatedController
     end
 
     if @note.update_attributes(note_params)
-      render json: { uid: @note.uid, updated_at: @note.updated_at }, status: :ok
+      render json: {
+        uid: @note.uid,
+        created_at: @note.created_at,
+        updated_at: @note.updated_at
+      }, status: :ok
     else
       render json: @note.errors, status: :unprocessable_entity
     end
