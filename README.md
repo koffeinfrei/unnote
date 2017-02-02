@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/panter/mykonote.svg?branch=master)](https://travis-ci.org/panter/mykonote)
+
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
 ![main screen](screenshot.jpg)
