@@ -45,4 +45,6 @@ Rails.application.configure do
   if ENV['TRUSTED_IP'].present?
     BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if defined?(BetterErrors)
   end
+
+  config.react.variant = :development
 end

@@ -85,4 +85,6 @@ Rails.application.configure do
   config.react.server_renderer_options = {
     files: %w(server_rendering.js)
   }
+
+  config.react.variant = :production
 end
