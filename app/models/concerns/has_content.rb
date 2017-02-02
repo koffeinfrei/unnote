@@ -14,7 +14,9 @@ module HasContent
   end
 
   def content
-    content = self.text_content.dup
+    return unless text_content
+
+    content = text_content.dup
 
     images.map do |image|
       base64_file = Base64File.new(image.file)
