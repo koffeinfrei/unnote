@@ -32,6 +32,21 @@ module Mykonote
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # Require `belongs_to` associations by default
+    config.active_record.belongs_to_required_by_default = true
+
+    # Enable per-form CSRF tokens
+    Rails.application.config.action_controller.per_form_csrf_tokens = true
+
+    # Enable origin-checking CSRF mitigation
+    Rails.application.config.action_controller.forgery_protection_origin_check = true
+
+    # Do not halt callback chains when a callback returns false.
+    ActiveSupport.halt_callback_chains_on_return_false = false
+
+    # Make Ruby 2.4 preserve the timezone of the receiver when calling `to_time`.
+    ActiveSupport.to_time_preserves_timezone = true
+
     config.middleware.use Rack::Deflater
   end
 end
