@@ -18,11 +18,21 @@
     background-color: $body-bg
     z-index: 1
 
+.navbar-brand
+  padding: 10px 10px 10px 0
+  // 16px is from bootstrap-material-design/sass/_lists.scss#10
+  @media (min-width: $screen-sm-min)
+    margin-left: $grid-gutter-width / 2 + 16px
+
 .navbar-logo,
 .navbar-brand .navbar-logo,
 .navbar-spinner
   height: 100%
   display: inline-block
+
+.navbar-brand .navbar-logo,
+  svg
+    height: 100%
 
 .navbar-spinner
   width: 40px
@@ -30,12 +40,6 @@
 
   .spinner
     height: 100%
-
-.navbar-brand-title
-  display: none
-
-  @media (min-width: $screen-sm-min)
-    display: inline
 
 .save-state
   position: absolute

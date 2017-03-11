@@ -25,13 +25,10 @@ class Navbar extends React.Component {
                     cy="33"
                     r="30"></circle>
                 </svg>
-
-                <img
-                  src="<%= asset_path 'logo-donkeywhite.png' %>"
-                  className={this.getLogoCssClass()} />
+                <div className={this.getLogoCssClass()}>
+                  <%= ApplicationHelper.inline_svg 'logo.svg' %>
+                </div>
               </div>
-
-              <span className="navbar-brand-title">Mykonote</span>
             </a>
             <button
               className="navbar-toggle navbar-hamburger-button"
