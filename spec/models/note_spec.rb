@@ -6,6 +6,7 @@ RSpec.describe Note do
       let(:note) do
         Note.create!(
           uid: SecureRandom.uuid,
+          user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
           content: 'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
         )
       end
@@ -51,6 +52,7 @@ RSpec.describe Note do
     it 'saves equal images as one file' do
       note = Note.create!(
         uid: SecureRandom.uuid,
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
         content:
         'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
         'content2 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
@@ -65,6 +67,7 @@ RSpec.describe Note do
     it 'retrieves equal images from one file' do
       note = Note.create!(
         uid: SecureRandom.uuid,
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
         content:
         'content1 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338" />' \
         'content2 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338" />',
@@ -82,6 +85,7 @@ RSpec.describe Note do
     it 'duplicates the images' do
       note = Note.create!(
         uid: SecureRandom.uuid,
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
         content:
         'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
         'content2 <img src="data:image/png;base64,/9j/5AAQSkZJRgABAQEASABKdhH//2Q=" />',
@@ -100,7 +104,8 @@ RSpec.describe Note do
 
     it 'generates a new uuid' do
       note = Note.create!(
-        uid: SecureRandom.uuid
+        uid: SecureRandom.uuid,
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf')
       )
 
       dup_note = note.dup
