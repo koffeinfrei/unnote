@@ -13,8 +13,7 @@ namespace :mobile do
       task js: :precompile do
         puts 'Copying the latest application.js to the mobile app'
 
-        `cat $(ls -tr public/assets/application-*.js | tail -1) | \
-         sed -r 's#"/assets/logo-donkeywhite-.+\.png"#"img/logo.png"#' > \
+        `cat $(ls -tr public/assets/application-*.js | tail -1) > \
          ../mykonote-app/www/js/application.js`
       end
 
