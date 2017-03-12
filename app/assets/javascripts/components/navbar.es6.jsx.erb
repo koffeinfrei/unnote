@@ -73,6 +73,7 @@ class Navbar extends React.Component {
 
     EventHive.subscribe('search.focus', () => {
       this.$searchInput.focus();
+      this.$searchInput.select();
     });
 
     // handle hamburger and search toggling
