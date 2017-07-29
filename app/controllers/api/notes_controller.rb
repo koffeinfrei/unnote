@@ -68,7 +68,13 @@ class Api::NotesController < AuthenticatedController
   end
 
   def handle_conflict
-    if @note.updated_at.to_datetime > DateTime.parse(params[:note][:server_updated_at])
+    # only consider milliseconds for the server date, as it may be more
+    # specific (i.e. contain more fractional seconds) than the date we get from
+    # the client. javascript only supports milliseconds.
+    server_date = DateTime.iso8601(@note.updated_at.iso8601(3))
+    client_date = DateTime.parse(params[:note][:server_updated_at])
+
+    if server_date > client_date
       duplicated_note = @note.dup
       duplicated_note.update_attributes!(
         title: "#{duplicated_note.title} (conflict #{DateTime.now.strftime('%F %R')})"
