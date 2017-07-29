@@ -6,9 +6,10 @@
 
 The note taking app that doesn't suck. Made under the Mykonian sun.
 
-The goal of this projet is to provide a solid note taking app with just the
+The goal of this project is to provide a solid note taking app with just the
 core functionality. There won't be any fancy unnecessary features such as a
-chat. It basically meets the one requirement: Taking and managing private notes.
+chat. It basically meets the one requirement: Taking and managing private
+notes.
 
 What Mykonote offers:
 
