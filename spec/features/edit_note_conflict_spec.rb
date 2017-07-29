@@ -32,7 +32,7 @@ RSpec.feature 'Edit note with conflict', :js do
         expect(page).to have_content 'my note (conflict 2016-08-01 15:33)'
 
         # the note has the updated content
-        expect(note.reload.content).to eq '<p>note content - update 2</p>'
+        expect(note.reload.content).to eq '<p>note content - update 2</p><p><br></p>'
 
         # the conflict copy has the old content
         expect(Note.last).to have_attributes(
