@@ -2,7 +2,10 @@
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
-![main screen](screenshot.jpg)
+![desktop](screenshot_desktop.png)
+
+![mobile note](screenshot_mobile_1.png)
+![mobile list](screenshot_mobile_2.png)
 
 The note taking app that doesn't suck. Made under the Mykonian sun.
 
