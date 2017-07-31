@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/panter/mykonote.svg?branch=master)](https://travis-ci.org/panter/mykonote)
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/panter/mykonote)
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
