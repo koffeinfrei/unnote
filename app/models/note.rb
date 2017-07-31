@@ -28,7 +28,7 @@ class Note < ApplicationRecord
     uid
   end
 
-  def as_json(options={})
+  def as_json(_options = {})
     super(only: [:uid, :title, :created_at, :updated_at]).merge(content: content)
   end
 
