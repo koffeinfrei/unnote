@@ -22,6 +22,7 @@ gem 'slim-rails'
 gem 'sprockets'
 gem 'sprockets-es6'
 gem 'uglifier'
+gem 'webpacker', '~> 2.0'
 
 group :development, :test do
   gem 'capybara'
