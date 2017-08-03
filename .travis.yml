@@ -5,9 +5,6 @@ cache: bundler
 services:
   - postgresql
 
-node_js:
-  - '0.6'
-
 addons:
   postgresql: '9.4'
 
