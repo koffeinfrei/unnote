@@ -1,3 +1,5 @@
+import AbstractFlash from 'components/abstract_flash';
+
 class AlertFlash extends AbstractFlash {
   getName() {
     return 'alert';
@@ -7,3 +9,5 @@ class AlertFlash extends AbstractFlash {
     return 'alert-warning';
   }
 }
+
+export default AlertFlash;

@@ -1,3 +1,5 @@
+import React from 'react';
+
 class SaveStateLabel extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -24,3 +26,4 @@ class SaveStateLabel extends React.Component {
   }
 }
 
+export default SaveStateLabel;

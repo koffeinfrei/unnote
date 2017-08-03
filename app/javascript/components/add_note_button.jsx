@@ -1,3 +1,5 @@
+import React from 'react';
+
 class AddNoteButton extends React.Component {
   render () {
     return (
@@ -21,3 +23,5 @@ class AddNoteButton extends React.Component {
     this.props.handleNewNoteClick();
   }
 }
+
+export default AddNoteButton;

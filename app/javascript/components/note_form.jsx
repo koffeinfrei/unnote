@@ -1,3 +1,5 @@
+import React from 'react';
+
 class NoteForm extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -146,3 +148,5 @@ class NoteForm extends React.Component {
     }
   }
 }
+
+export default NoteForm;

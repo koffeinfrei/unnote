@@ -1,3 +1,5 @@
+import React from 'react';
+
 class NoteList extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -250,3 +252,5 @@ class NoteList extends React.Component {
     EventHive.publish('spinner.toggle', { show: isInProgress });
   }
 }
+
+export default NoteList;

@@ -6,9 +6,6 @@
 //
 //= require babel-polyfill/browser-polyfill
 //
-//= require react
-//= require react_ujs
-//
 //= require jquery-throttle-debounce/jquery.ba-throttle-debounce
 //= require highlightjs/highlight.pack.js
 //= require quill/quill
@@ -22,7 +19,6 @@
 //= require auto_save
 //= require note
 //= require event_hive
-//= require components
 //= require viewport_mode
 //= require keyboard
 //= require push_state

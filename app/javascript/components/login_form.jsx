@@ -1,3 +1,6 @@
+import React from 'react';
+import AlertFlash from 'components/alert_flash';
+
 class LoginForm extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -82,3 +85,5 @@ class LoginForm extends React.Component {
     });
   }
 }
+
+export default LoginForm;

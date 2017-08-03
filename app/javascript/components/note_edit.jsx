@@ -1,3 +1,12 @@
+import React from 'react';
+
+import AddNoteButton from 'components/add_note_button';
+import AlertFlash from 'components/alert_flash';
+import Navbar from 'components/navbar';
+import NoteForm from 'components/note_form';
+import NoteList from 'components/note_list';
+import SaveStateLabel from 'components/save_state_label';
+
 class NoteEdit extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -166,3 +175,5 @@ class NoteEdit extends React.Component {
     PushState.setNew();
   }
 }
+
+export default NoteEdit;
