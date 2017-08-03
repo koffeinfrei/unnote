@@ -88,10 +88,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # React
-  config.react.server_renderer_options = {
-    files: %w(server_rendering.js)
-  }
-
   config.react.variant = :production
 end
