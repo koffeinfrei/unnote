@@ -106,11 +106,28 @@ GEM
       railties (>= 3.2, < 5.2)
     erubis (2.7.0)
     execjs (2.7.0)
+    exifr (1.3.3)
     ffi (1.9.18)
+    fspath (3.1.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     highline (1.7.8)
     i18n (0.8.6)
+    image_optim (0.26.0)
+      exifr (~> 1.2, >= 1.2.2)
+      fspath (~> 3.0)
+      image_size (~> 1.5)
+      in_threads (~> 1.3)
+      progress (~> 3.0, >= 3.0.1)
+    image_optim_pack (0.5.0.20171101)
+      fspath (>= 2.1, < 4)
+      image_optim (~> 0.19)
+    image_optim_rails (0.4.1)
+      image_optim (~> 0.24)
+      rails
+      sprockets
+    image_size (1.5.0)
+    in_threads (1.5.0)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -169,6 +186,7 @@ GEM
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
+    progress (3.4.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -321,6 +339,8 @@ DEPENDENCIES
   carrierwave
   database_cleaner
   devise
+  image_optim_pack
+  image_optim_rails
   jquery-rails
   kaminari
   nokogiri
@@ -348,4 +368,4 @@ DEPENDENCIES
   uglifier
 
 BUNDLED WITH
-   1.15.3
+   1.16.0
