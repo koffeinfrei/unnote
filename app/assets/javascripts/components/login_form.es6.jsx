@@ -77,7 +77,7 @@ class LoginForm extends React.Component {
       $(document).trigger('mykonote.afterLogin', { data: data });
     })
     .fail(() => {
-      AlertFlash.show('Your login was totally not successful. ' +
+      AlertFlash.show('Sorry that did not work. ' +
                       'Did you enter a wrong username or a wrong password?')
     });
   }
