@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.2.0'
 
 # gems sorted alphabetically
 
+gem 'bootsnap', require: false
 gem 'bower-rails'
 gem 'carrierwave'
 gem 'devise'
-gem 'image_optim_rails'
 gem 'image_optim_pack'
+gem 'image_optim_rails'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'nokogiri'
