@@ -1,3 +1,6 @@
+import Mousetrap from 'mousetrap'
+import EventHive from './EventHive';
+
 // always fire shortcuts inside input fields
 Mousetrap.prototype.stopCallback = function() { return false }
 

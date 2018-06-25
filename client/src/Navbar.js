@@ -1,4 +1,10 @@
-class Navbar extends React.Component {
+import React, { Component } from 'react';
+import $ from 'jquery';
+import EventHive from './EventHive';
+import ViewportMode from './ViewportMode';
+import logo from './images/logo.svg';
+
+class Navbar extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -26,7 +32,7 @@ class Navbar extends React.Component {
                     r="30"></circle>
                 </svg>
                 <div className={this.getLogoCssClass()}>
-                  <%= ApplicationHelper.inline_svg 'logo.svg' %>
+                  <img src={logo} alt="logo" />
                 </div>
               </div>
             </a>
@@ -167,3 +173,5 @@ class Navbar extends React.Component {
     this.props.handleSearchCleared();
   }
 }
+
+export default Navbar;

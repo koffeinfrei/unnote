@@ -1,3 +1,5 @@
+import Uuid from './Uuid';
+
 class Note {
   constructor(uid, title, content, createdAt, updatedAt) {
     this._uid = uid || Uuid.generateV4();
@@ -55,3 +57,5 @@ class Note {
     );
   }
 }
+
+export default Note;

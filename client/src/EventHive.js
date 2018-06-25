@@ -36,3 +36,5 @@ class EventHive {
     });
   }
 }
+
+export default EventHive;

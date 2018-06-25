@@ -1,3 +1,5 @@
+import AbstractFlash from './AbstractFlash';
+
 class AlertFlash extends AbstractFlash {
   getName() {
     return 'alert';
@@ -7,3 +9,5 @@ class AlertFlash extends AbstractFlash {
     return 'alert-warning';
   }
 }
+
+export default AlertFlash;

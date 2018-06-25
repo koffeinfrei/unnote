@@ -25,3 +25,5 @@ class ViewportMode {
     return mode === 'xs' || mode === 'sm';
   }
 }
+
+export default ViewportMode;

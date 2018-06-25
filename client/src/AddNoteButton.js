@@ -1,4 +1,8 @@
-class AddNoteButton extends React.Component {
+import React, { Component } from 'react';
+import ViewportMode from './ViewportMode';
+import EventHive from './EventHive';
+
+class AddNoteButton extends Component {
   render () {
     return (
       <a
@@ -21,3 +25,5 @@ class AddNoteButton extends React.Component {
     this.props.handleNewNoteClick();
   }
 }
+
+export default AddNoteButton;

@@ -1,4 +1,12 @@
-class NoteList extends React.Component {
+import React, { Component } from 'react';
+import moment from 'moment';
+import $ from 'jquery';
+import ViewportMode from './ViewportMode';
+import EventHive from './EventHive';
+import Note from './Note';
+import AlertFlash from './AlertFlash';
+
+class NoteList extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -179,7 +187,7 @@ class NoteList extends React.Component {
     }
 
     this.updateListRequest = $.ajax({
-      url: this.props.url,
+      url: '/api/notes',
       dataType: 'json',
       data: { search: this.state.searchQuery, page: this.state.currentPage }
     });
@@ -250,3 +258,5 @@ class NoteList extends React.Component {
     EventHive.publish('spinner.toggle', { show: isInProgress });
   }
 }
+
+export default NoteList;

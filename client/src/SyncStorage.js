@@ -52,3 +52,5 @@ class SyncStorage {
     return SyncStorage.KEY_PREFIX + note.uid;
   }
 }
+
+export default SyncStorage;

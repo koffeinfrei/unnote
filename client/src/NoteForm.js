@@ -1,4 +1,13 @@
-class NoteForm extends React.Component {
+import './highlight.js';
+import React, { Component } from 'react';
+import Quill from 'quill';
+import 'quill-task-list/task_list_node';
+import './NoteForm.css';
+import $ from 'jquery';
+import EventHive from './EventHive';
+import ViewportMode from './ViewportMode';
+
+class NoteForm extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -11,28 +20,30 @@ class NoteForm extends React.Component {
 
   render() {
     return (
-      <form
-        className="form-horizontal"
-        ref={(c) => this.$formContainer = $(c)}
-        onSubmit={this.handleFormSubmit}>
-        <div className="form-inputs">
-          <div className="form-group form-group-no-label string optional">
-            <input
-              type="text"
-              className="string optional form-control"
-              value={this.state.note.title}
-              onChange={this.handleTitleChange.bind(this)}
-              placeholder="Title"
-              ref={(c) => this.$title = $(c)}
-            />
+      <div>
+        <form
+          className="form-horizontal"
+          ref={(c) => this.$formContainer = $(c)}
+          onSubmit={this.handleFormSubmit}>
+          <div className="form-inputs">
+            <div className="form-group form-group-no-label string optional">
+              <input
+                type="text"
+                className="string optional form-control"
+                value={this.state.note.title}
+                onChange={this.handleTitleChange.bind(this)}
+                placeholder="Title"
+                ref={(c) => this.$title = $(c)}
+              />
+            </div>
+            <div className="form-group form-group-no-label text optional">
+              <div
+                ref={(c) => this.$contentContainer = $(c)}
+              ></div>
+            </div>
           </div>
-          <div className="form-group form-group-no-label text optional">
-            <div
-              ref={(c) => this.$contentContainer = $(c)}
-            ></div>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     );
   }
 
@@ -146,3 +157,5 @@ class NoteForm extends React.Component {
     }
   }
 }
+
+export default NoteForm;

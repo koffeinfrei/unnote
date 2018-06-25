@@ -6,3 +6,5 @@ class Uuid  {
     });
   }
 }
+
+export default Uuid;

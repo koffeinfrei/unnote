@@ -1,4 +1,7 @@
-class AbstractFlash extends React.Component {
+import React, { Component } from 'react';
+import $ from 'jquery';
+
+class AbstractFlash extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -56,4 +59,10 @@ class AbstractFlash extends React.Component {
   static show(message) {
     $(document).trigger(this.getEventName(), { message: message });
   }
+
+  static clear() {
+    $(document).trigger(this.getEventName(), { message: null });
+  }
 }
+
+export default AbstractFlash;

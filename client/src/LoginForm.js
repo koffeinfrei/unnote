@@ -1,16 +1,15 @@
-class LoginForm extends React.Component {
+import React, { Component } from 'react';
+import $ from 'jquery';
+import AlertFlash from './AlertFlash';
+
+class LoginForm extends Component {
   constructor(props, context) {
     super(props, context);
-
-    // use an event so we can overwrite this in the mobile application
-    $(document).on('mykonote.afterLogin', (e, data) => {
-      location.href = data.data.location;
-    });
   }
 
   render() {
     return (
-      <form className="simple_form new_user" onSubmit={this.handleFormSubmit}>
+      <form className="simple_form new_user" onSubmit={this.handleFormSubmit.bind(this)}>
         <input type="hidden" value="✓" name="utf8" />
 
         <div className="form-inputs">
@@ -74,11 +73,14 @@ class LoginForm extends React.Component {
       data: data
     })
     .done((data) => {
-      $(document).trigger('mykonote.afterLogin', { data: data });
+      AlertFlash.clear();
+      this.props.onLoginSuccess();
     })
     .fail(() => {
-      AlertFlash.show('Sorry that did not work. ' +
+      AlertFlash.show('Sorry, that did not work. ' +
                       'Did you enter a wrong username or a wrong password?')
     });
   }
 }
+
+export default LoginForm;

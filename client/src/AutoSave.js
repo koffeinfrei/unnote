@@ -1,3 +1,8 @@
+import $ from 'jquery';
+import SyncStorage from './SyncStorage';
+import Note from './Note';
+import AlertFlash from './AlertFlash';
+
 class AutoSave {
   constructor(onServerSync) {
     this.onServerSyncCallback = onServerSync;
@@ -20,7 +25,7 @@ class AutoSave {
   }
 
   syncToServer() {
-    if (jQuery.active) {
+    if ($.active) {
       return;
     }
 
@@ -105,3 +110,5 @@ class AutoSave {
     }
   }
 }
+
+export default AutoSave;

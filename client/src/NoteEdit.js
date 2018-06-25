@@ -1,4 +1,20 @@
-class NoteEdit extends React.Component {
+import React, { Component } from 'react';
+import $ from 'jquery';
+import debounce from 'throttle-debounce/debounce';
+import bootbox from 'bootbox';
+import './keyboard';
+import NoteList from './NoteList';
+import NoteForm from './NoteForm';
+import Note from './Note';
+import PushState from  './PushState';
+import Navbar from './Navbar';
+import SaveStateLabel from './SaveStateLabel';
+import AddNoteButton from './AddNoteButton';
+import AlertFlash from './AlertFlash';
+import EventHive from './EventHive';
+import AutoSave from './AutoSave';
+
+class NoteEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -13,7 +29,7 @@ class NoteEdit extends React.Component {
       this.state = this.getNewNoteAttributes();
     }
 
-    this.handleSearchEnterDebounced = $.debounce(500, this.handleSearchEnterDebounced);
+    this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
   }
 
   render() {
@@ -33,7 +49,6 @@ class NoteEdit extends React.Component {
         <div className="row">
           <div className="col-md-4">
             <NoteList
-              url={this.props.url}
               activeNoteUid={this.state.note.uid}
               isSynced={this.state.isSynced}
               isInitialEdit={this.state.isInitialEdit}
@@ -103,7 +118,7 @@ class NoteEdit extends React.Component {
 
   handleEditChange(note) {
     // set note url when a new note is saved (aka. created)
-    if (['/', '/notes', '/notes/'].includes(location.pathname)) {
+    if (['/', '/notes', '/notes/'].includes(window.location.pathname)) {
       PushState.setEdit(note);
     }
 
@@ -166,3 +181,5 @@ class NoteEdit extends React.Component {
     PushState.setNew();
   }
 }
+
+export default NoteEdit;
