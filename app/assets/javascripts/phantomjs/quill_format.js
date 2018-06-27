@@ -11,7 +11,7 @@
 
 var system = require('system');
 var fs = require('fs');
-var Quill = require('../../../../vendor/assets/bower_components/quill/quill.js');
+var Quill = require('../../../../client/node_modules/quill/dist/quill.js');
 
 // create a div to initialize quill
 var container = document.createElement('div');
