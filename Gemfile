@@ -8,6 +8,7 @@ gem 'bootsnap', require: false
 gem 'bower-rails'
 gem 'carrierwave'
 gem 'devise'
+gem 'foreman'
 gem 'image_optim_pack'
 gem 'image_optim_rails'
 gem 'jquery-rails'
