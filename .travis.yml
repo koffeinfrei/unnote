@@ -10,6 +10,7 @@ node_js:
 
 addons:
   postgresql: '9.4'
+  firefox: latest-beta
 
 before_script:
   - npm install bower
