@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import './global-jquery'; // bootstrap-material-design needs global jQuery
 import 'bootstrap-material-design/dist/js/material';
@@ -19,20 +20,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <Flash />
-        { this.isLoggedIn() ?
-          <NoteEdit />
-          :
-          <div className="row">
-            <div className="col-md-6 col-md-offset-3">
-              <div className="well">
-                <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} />
+      <BrowserRouter>
+        <div className="container-fluid">
+          <Flash />
+          { this.isLoggedIn() ?
+            <Switch>
+              <Route path='/notes/:id' component={ NoteEdit } />
+              <Route path='/notes' component={ NoteEdit } />
+              <Redirect from='/' to='/notes' />
+            </Switch>
+            :
+            <div className="row">
+              <div className="col-md-6 col-md-offset-3">
+                <div className="well">
+                  <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} />
+                </div>
               </div>
             </div>
-          </div>
-        }
-      </div>
+          }
+        </div>
+      </BrowserRouter>
     );
   }
 

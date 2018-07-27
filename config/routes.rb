@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :notes, only: [:index, :show, :edit]
 
   namespace :api do
-    resources :notes, only: [:index, :update, :destroy]
+    resources :notes, only: [:index, :show, :update, :destroy]
   end
 
   root 'notes#index'

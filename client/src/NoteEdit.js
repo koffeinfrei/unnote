@@ -18,12 +18,35 @@ class NoteEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    const { match } = this.props;
+
     if (props.note) {
       this.state = {
         isInitialEdit: true,
         note: Note.fromAttributes(props.note)
       };
       PushState.setBrowserTitle(props.note);
+    }
+    else if (match.params.id) {
+      // set new note as state, otherwise the state will be undefined
+      this.state = Object.assign(this.getNewNoteAttributes(), { isInitialEdit: true });
+
+      $.ajax({
+        url: `/api/notes/${match.params.id}`,
+        dataType: 'json',
+      })
+      .done((data) => {
+        this.setState({
+          isInitialEdit: true,
+          note: Note.fromAttributes(data.note)
+        });
+      })
+      .fail((xhr, status, error) => {
+        AlertFlash.show(
+          'While trying to load the note the internet broke down (or something ' +
+          'else failed, maybe the note could not be found)'
+        );
+      })
     }
     else {
       this.state = this.getNewNoteAttributes();
