@@ -18,7 +18,7 @@ gem 'panter-rails-deploy'
 gem 'paper_trail'
 gem 'pg'
 gem 'pg_search'
-gem 'phantomjs'
+gem 'phantomjs', require: false
 gem 'pundit'
 gem 'react-rails', '~> 1.10'
 gem 'sass-rails'

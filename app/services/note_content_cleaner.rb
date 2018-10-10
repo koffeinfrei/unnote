@@ -1,3 +1,5 @@
+require 'phantomjs'
+
 class NoteContentCleaner
   def initialize(note)
     @note = note
