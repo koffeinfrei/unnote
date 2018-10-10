@@ -89,6 +89,9 @@ GEM
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       xpath (~> 3.0)
+    capybara-screenshot (1.0.21)
+      capybara (>= 1.0, < 4)
+      launchy
     carrierwave (1.2.2)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -159,6 +162,8 @@ GEM
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
     kgio (2.11.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     libv8 (3.16.14.19)
     loofah (2.2.2)
       crass (~> 1.0.2)
@@ -353,6 +358,7 @@ DEPENDENCIES
   bootsnap
   bower-rails
   capybara
+  capybara-screenshot
   carrierwave
   database_cleaner
   devise
@@ -386,4 +392,4 @@ DEPENDENCIES
   uglifier
 
 BUNDLED WITH
-   1.16.2
+   1.16.5

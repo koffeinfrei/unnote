@@ -6,6 +6,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'pundit/rspec'
 require 'paper_trail/frameworks/rspec'
+require 'capybara-screenshot/rspec'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -52,3 +53,8 @@ end
 Capybara.javascript_driver = :firefox_headless
 
 Capybara.server = :webrick
+
+# From https://github.com/mattheworiordan/capybara-screenshot/issues/84#issuecomment-41219326
+Capybara::Screenshot.register_driver(:firefox_headless) do |driver, path|
+  driver.browser.save_screenshot(path)
+end
