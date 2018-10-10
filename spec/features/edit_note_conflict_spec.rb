@@ -16,7 +16,7 @@ RSpec.feature 'Edit note with conflict', :js do
         )
 
         # load the note...
-        visit edit_note_path(note)
+        visit "/#/notes/#{note.uid}/edit"
 
         # ...in the meantime there's an edit
         note.update_attributes! content: '<p>note content - update 1</p>'

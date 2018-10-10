@@ -11,7 +11,7 @@ RSpec.feature 'Notes list', :js do
       Note.create! title: 'my_note', user: user, uid: SecureRandom.uuid
       Note.create! title: 'other_note', user: other_user, uid: SecureRandom.uuid
 
-      visit notes_path
+      visit '/#/notes'
 
       expect(page).to have_content 'my_note'
       expect(page).not_to have_content 'other_note'
@@ -20,9 +20,9 @@ RSpec.feature 'Notes list', :js do
 
   context 'as anonymous user' do
     scenario 'I need to login' do
-      visit root_path
+      visit '/'
 
-      expect(page).to have_content 'You need to sign in or sign up before continuing.'
+      expect(page).to have_button 'Log in'
     end
   end
 end
