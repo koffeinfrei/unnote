@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import './global-jquery'; // bootstrap-material-design needs global jQuery
 import 'bootstrap-material-design/dist/js/material';
@@ -20,7 +20,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="container-fluid">
           <Flash />
           { this.isLoggedIn() ?
@@ -39,7 +39,7 @@ class App extends Component {
             </div>
           }
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 

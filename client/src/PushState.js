@@ -1,11 +1,11 @@
 class PushState {
   static setNew() {
-    window.history.pushState({}, '', '/notes');
+    window.history.pushState({}, '', '/#/notes');
     this.setBrowserTitle();
   }
 
   static setEdit(note) {
-    window.history.pushState({}, '', `/notes/${note.uid}/edit`);
+    window.history.pushState({}, '', `/#/notes/${note.uid}`);
     this.setBrowserTitle(note);
   }
 
