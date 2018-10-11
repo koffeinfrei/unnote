@@ -18,6 +18,25 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
 
+  build_files = nil
+  config.before :suite do
+    puts '--> Building the client app and deploying it to the public directory...'
+
+    `cd client && npm run build`
+
+    build_files = Dir['client/build/*']
+
+    build_files.each do |file|
+      FileUtils.cp_r(file, 'public')
+    end
+  end
+  config.after :suite do
+    build_files.each do |file|
+      file = file.sub(%r{^client/build/}, 'public/')
+      FileUtils.rm_r(file)
+    end
+  end
+
   config.before :suite do
     DatabaseCleaner.clean_with :deletion
   end
