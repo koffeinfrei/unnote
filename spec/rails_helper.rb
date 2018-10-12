@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'pundit/rspec'
 require 'paper_trail/frameworks/rspec'
 require 'capybara-screenshot/rspec'
+require 'deploy_client'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -18,23 +19,14 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
 
-  build_files = nil
+  deploy_client = DeployClient.new
   config.before :suite do
     puts '--> Building the client app and deploying it to the public directory...'
 
-    `cd client && npm run build`
-
-    build_files = Dir['client/build/*']
-
-    build_files.each do |file|
-      FileUtils.cp_r(file, 'public')
-    end
+    deploy_client.run
   end
   config.after :suite do
-    build_files.each do |file|
-      file = file.sub(%r{^client/build/}, 'public/')
-      FileUtils.rm_r(file)
-    end
+    deploy_client.cleanup_public
   end
 
   config.before :suite do
