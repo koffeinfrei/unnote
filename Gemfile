@@ -5,7 +5,6 @@ gem 'rails', '~> 5.2.0'
 # gems sorted alphabetically
 
 gem 'bootsnap', require: false
-gem 'bower-rails'
 gem 'carrierwave'
 gem 'devise'
 gem 'foreman'

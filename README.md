@@ -38,38 +38,25 @@ What Mykonote offers:
 
 To get the application started the following steps are required.
 
-* 3rd party javascripts and stylesheets are managed using bower
-  ([bower-rails](https://github.com/rharriso/bower-rails)). You need to have
-  npm and bower installed for this to work.
-
 * standard rails setup routine
 
   ```bash
   $ bin/setup
   ```
 
-You can now start the application and give it a try at
-[localhost:3000](http://localhost:3000).
-There's a demo user `user@example.com` with password `asdfasdf`.
+* node setup for the client application
 
   ```bash
-  $ bin/rails server
+  cd client && npm install
   ```
 
+You can now start the application and give it a try at
+[localhost:3000](http://localhost:3000).
+There's a demo user `user@example.com` with the password `asdfasdf`.
 
-## Updating bower assets
-
-We like to keep versions consistently locked to the same version on all
-machines (development and production). This is why we define fixed versions in
-[Bowerfile](Bowerfile) and install that exact version. The downside of this is
-a manual update process.
-
-1. Execute `bower info <ASSET NAME>` for each asset defined in
-   [Bowerfile](Bowerfile)
-1. Select the latest applicable version and update the version number in
-   [Bowerfile](Bowerfile)
-1. Execute `rake bower:install` to install the assets and update the
-   [bower.json](vendor/assets/bower.json)
+  ```bash
+  $ rake start
+  ```
 
 
 ## License
