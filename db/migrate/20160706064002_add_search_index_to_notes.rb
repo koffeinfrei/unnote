@@ -1,4 +1,4 @@
-class AddSearchIndexToNotes < ActiveRecord::Migration
+class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
   def up
     add_column :notes, :tsv_title, :tsvector
     add_column :notes, :tsv_content, :tsvector
