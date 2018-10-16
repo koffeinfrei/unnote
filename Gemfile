@@ -8,9 +8,6 @@ gem 'bootsnap', require: false
 gem 'carrierwave'
 gem 'devise'
 gem 'foreman'
-gem 'image_optim_pack'
-gem 'image_optim_rails'
-gem 'jquery-rails'
 gem 'kaminari'
 gem 'nokogiri'
 gem 'panter-rails-deploy'
@@ -19,13 +16,6 @@ gem 'pg'
 gem 'pg_search'
 gem 'phantomjs', require: false
 gem 'pundit'
-gem 'react-rails', '~> 1.10'
-gem 'sass-rails'
-gem 'simple_form'
-gem 'slim-rails'
-gem 'sprockets'
-gem 'sprockets-es6'
-gem 'uglifier'
 
 group :development, :test do
   gem 'capybara'
