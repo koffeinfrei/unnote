@@ -36,18 +36,11 @@ What Mykonote offers:
 
 ## Development setup
 
-To get the application started the following steps are required.
-
-* standard rails setup routine
+To get the application started the standard rails setup routine can be
+executed.
 
   ```bash
   $ bin/setup
-  ```
-
-* node setup for the client application
-
-  ```bash
-  cd client && npm install
   ```
 
 You can now start the application and give it a try at
