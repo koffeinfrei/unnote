@@ -10,4 +10,11 @@ namespace :client do
 
     DeployClient.new.run
   end
+
+  desc 'Removes the deployed client files from the public directory'
+  task clean: :environment do
+    require 'deploy_client'
+
+    DeployClient.new.clean
+  end
 end

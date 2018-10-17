@@ -26,7 +26,7 @@ RSpec.configure do |config|
     deploy_client.run
   end
   config.after :suite do
-    deploy_client.cleanup_public
+    deploy_client.clean
   end
 
   config.before :suite do

@@ -4,6 +4,13 @@ class DeployClient
     deploy_public
   end
 
+  def clean
+    build
+    cleanup_public
+  end
+
+  private
+
   def build
     `cd client && npm run build`
 
