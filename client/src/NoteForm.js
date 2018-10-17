@@ -56,14 +56,16 @@ class NoteForm extends Component {
 
   handleTitleChange() {
     this.shouldRerender = true;
-    this.state.note.title = this.$title.val();
-    this.setState({ note: this.state.note }, this.handleChange);
+    const note = this.state.note;
+    note.title = this.$title.val();
+    this.setState({ note: note }, this.handleChange);
   }
 
   handleContentChange() {
     this.shouldRerender = false;
-    this.state.note.content = this.$content.html();
-    this.setState({ note: this.state.note }, this.handleChange);
+    const note = this.state.note;
+    note.content = this.$content.html();
+    this.setState({ note: note }, this.handleChange);
   }
 
   handleChange() {

@@ -3,10 +3,6 @@ import $ from 'jquery';
 import AlertFlash from './AlertFlash';
 
 class LoginForm extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     return (
       <form className="simple_form new_user" onSubmit={this.handleFormSubmit.bind(this)}>
