@@ -23,13 +23,15 @@ class App extends Component {
       <HashRouter>
         <div className="container-fluid">
           <Flash />
-          { this.isLoggedIn() ?
+          { this.isLoggedIn() === true ?
             <Switch>
               <Route path='/notes/:id' component={ NoteEdit } />
               <Route path='/notes' component={ NoteEdit } />
               <Redirect from='/' to='/notes' />
             </Switch>
-            :
+            : null
+          }
+          { this.isLoggedIn() === false ?
             <div className="row">
               <div className="col-md-6 col-md-offset-3">
                 <div className="well">
@@ -37,6 +39,7 @@ class App extends Component {
                 </div>
               </div>
             </div>
+            : null
           }
         </div>
       </HashRouter>
