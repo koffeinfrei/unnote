@@ -1,18 +1,17 @@
 class DeployClient
   def run
-    build
-    deploy_public
+    build && deploy_public
   end
 
   def clean
-    build
-    cleanup_public
+    build && cleanup_public
   end
 
   private
 
   def build
-    `cd client && npm run build`
+    success = system('cd client && npm run build')
+    return false unless success
 
     @build_files = Dir['client/build/*']
   end
