@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+import humanDate from 'human-date';
 import $ from 'jquery';
 import ViewportMode from './ViewportMode';
 import EventHive from './EventHive';
@@ -40,7 +40,7 @@ class NoteList extends Component {
                 {note.title}
               </h4>
               <div className="list-group-item-text">
-                {moment(note.updatedAt).fromNow()}
+                {humanDate.relativeTime(note.updatedAt)}
               </div>
             </div>
           </div>
