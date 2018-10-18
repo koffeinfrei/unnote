@@ -18,6 +18,8 @@ class NoteEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.pushState = new PushState(this.props.history);
+
     const { match } = this.props;
 
     if (props.note) {
@@ -25,7 +27,7 @@ class NoteEdit extends Component {
         isInitialEdit: true,
         note: Note.fromAttributes(props.note)
       };
-      PushState.setBrowserTitle(props.note);
+      this.pushState.setBrowserTitle(props.note);
     }
     else if (match.params.id) {
       // set new note as state, otherwise the state will be undefined
@@ -94,7 +96,7 @@ class NoteEdit extends Component {
     e.preventDefault();
 
     this.setState({ note: note });
-    PushState.setEdit(note);
+    this.pushState.setEdit(note);
   }
 
   handleDeleteNoteClick(note, e) {
@@ -142,7 +144,7 @@ class NoteEdit extends Component {
   handleEditChange(note) {
     // set note url when a new note is saved (aka. created)
     if (['/', '/notes', '/notes/'].includes(window.location.pathname)) {
-      PushState.setEdit(note);
+      this.pushState.setEdit(note);
     }
 
     this.autoSave.setChange(note);
@@ -160,7 +162,7 @@ class NoteEdit extends Component {
     this.setState(state);
 
     if (data.isSynced) {
-      PushState.setBrowserTitle(this.state.note);
+      this.pushState.setBrowserTitle(this.state.note);
     }
   }
 
@@ -201,7 +203,7 @@ class NoteEdit extends Component {
 
   setNewNote(afterSetState) {
     this.setState(this.getNewNoteAttributes(), afterSetState);
-    PushState.setNew();
+    this.pushState.setNew();
   }
 }
 

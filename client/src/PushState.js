@@ -1,15 +1,19 @@
 class PushState {
-  static setNew() {
-    window.history.pushState({}, '', '/#/notes');
+  constructor(history) {
+    this.history = history;
+  }
+
+  setNew() {
+    this.history.push('/notes');
     this.setBrowserTitle();
   }
 
-  static setEdit(note) {
-    window.history.pushState({}, '', `/#/notes/${note.uid}`);
+  setEdit(note) {
+    this.history.push(`/notes/${note.uid}`);
     this.setBrowserTitle(note);
   }
 
-  static setBrowserTitle(note) {
+  setBrowserTitle(note) {
     if (note && note.title) {
       document.title = `${note.title} | Mykonote`;
     }
