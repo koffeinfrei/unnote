@@ -2,6 +2,7 @@ import './highlight.js';
 import React, { Component } from 'react';
 import Quill from 'quill';
 import 'quill-task-list/task_list_node';
+import 'quill/dist/quill.snow.css';
 import './NoteForm.css';
 import $ from 'jquery';
 import EventHive from './EventHive';
