@@ -23,24 +23,8 @@ class App extends Component {
       <HashRouter>
         <div className="container-fluid">
           <Flash />
-          { this.isLoggedIn() === true ?
-            <Switch>
-              <Route path='/notes/:id' component={ NoteEdit } />
-              <Route path='/notes' component={ NoteEdit } />
-              <Redirect from='/' to='/notes' />
-            </Switch>
-            : null
-          }
-          { this.isLoggedIn() === false ?
-            <div className="row">
-              <div className="col-md-6 col-md-offset-3">
-                <div className="well">
-                  <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} />
-                </div>
-              </div>
-            </div>
-            : null
-          }
+          { this.renderLoggedIn() }
+          { this.renderLoggedOut() }
         </div>
       </HashRouter>
     );
@@ -68,6 +52,32 @@ class App extends Component {
     .fail(() => {
       this.setState({ isLoggedIn: false });
     });
+  }
+
+  renderLoggedIn() {
+    if (this.isLoggedIn() === true) {
+      return (
+        <Switch>
+          <Route path='/notes/:id' component={ NoteEdit } />
+          <Route path='/notes' component={ NoteEdit } />
+          <Redirect from='/' to='/notes' />
+        </Switch>
+      );
+    }
+  }
+
+  renderLoggedOut() {
+    if (this.isLoggedIn() === false) {
+      return (
+        <div className="row">
+          <div className="col-md-6 col-md-offset-3">
+            <div className="well">
+              <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} />
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
