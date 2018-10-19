@@ -31,7 +31,10 @@ class NoteEdit extends Component {
     }
     else if (match.params.id) {
       // set new note as state, otherwise the state will be undefined
-      this.state = Object.assign(this.getNewNoteAttributes(), { isInitialEdit: true });
+      this.state = {
+        ...this.getNewNoteAttributes(),
+        isInitialEdit: true
+      };
 
       $.ajax({
         url: `/api/notes/${match.params.id}`,
