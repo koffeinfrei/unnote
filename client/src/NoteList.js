@@ -236,7 +236,7 @@ class NoteList extends Component {
   getNoteAvatar(note) {
     var previewImageUrl = this.getPreviewImageUrl(note);
     if (previewImageUrl) {
-      return <img src={previewImageUrl} className="circle" />;
+      return <img src={previewImageUrl} className="circle" alt="note thumbnail" />;
     }
     else {
       return <i className="material-icons">subject</i>;
