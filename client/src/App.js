@@ -14,8 +14,10 @@ class App extends Component {
     super(props)
 
     this.state = {
-      isLoggedIn: undefined
-    }
+      isLoggedIn: null
+    };
+
+    this.setIsLoggedIn();
   }
 
   render() {
@@ -38,9 +40,7 @@ class App extends Component {
     this.setState({ isLoggedIn: true });
   }
 
-  isLoggedIn() {
-    if (this.state.isLoggedIn !== undefined) { return this.state.isLoggedIn; }
-
+  setIsLoggedIn() {
     $.ajax({
       url: '/users/is_authenticated',
       method: 'GET',
@@ -55,7 +55,7 @@ class App extends Component {
   }
 
   renderLoggedIn() {
-    if (this.isLoggedIn() === true) {
+    if (this.state.isLoggedIn === true) {
       return (
         <Switch>
           <Route path='/notes/:id' component={ NoteEdit } />
@@ -67,7 +67,7 @@ class App extends Component {
   }
 
   renderLoggedOut() {
-    if (this.isLoggedIn() === false) {
+    if (this.state.isLoggedIn === false) {
       return (
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
