@@ -53,9 +53,9 @@ class NoteList extends Component {
     if (this.state.hasMorePages) {
       nextPageLink = (
         <div className="list-more list-more-next-page">
-          <a href="#" onClick={this.handleNextPageClick.bind(this)}>
+          <button onClick={this.handleNextPageClick.bind(this)} className="btn btn-info btn-link btn-sm">
             <i className="material-icons list-more-icon">expand_more</i>
-          </a>
+          </button>
         </div>
       );
     }

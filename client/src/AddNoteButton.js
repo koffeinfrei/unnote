@@ -5,13 +5,12 @@ import EventHive from './EventHive';
 class AddNoteButton extends Component {
   render () {
     return (
-      <a
-        href="#"
+      <button
         className="btn btn-info btn-fab btn-new-note"
         onClick={this.handleNewNoteClick.bind(this)}
       >
         <i className="material-icons">add</i>
-      </a>
+      </button>
     );
   }
 
