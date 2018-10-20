@@ -5,12 +5,14 @@ class PushState {
 
   setNew() {
     this.history.push('/notes');
-    this.setBrowserTitle();
   }
 
   setEdit(note) {
-    this.history.push(`/notes/${note.uid}`);
-    this.setBrowserTitle(note);
+    const url = `/notes/${note.uid}`;
+
+    if (this.history.location.pathname !== url) {
+      this.history.push(url);
+    }
   }
 
   setBrowserTitle(note) {

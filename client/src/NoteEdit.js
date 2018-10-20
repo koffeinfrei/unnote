@@ -41,10 +41,11 @@ class NoteEdit extends Component {
         dataType: 'json',
       })
       .done((data) => {
+        const note = Note.fromAttributes(data.note);
         this.setState({
           isInitialEdit: true,
-          note: Note.fromAttributes(data.note)
-        });
+          note: note
+        }, () => this.pushState.setBrowserTitle(note));
       })
       .fail((xhr, status, error) => {
         AlertFlash.show(
@@ -100,6 +101,7 @@ class NoteEdit extends Component {
 
     this.setState({ note: note });
     this.pushState.setEdit(note);
+    this.pushState.setBrowserTitle(note);
   }
 
   handleDeleteNoteClick(note, e) {
@@ -145,10 +147,7 @@ class NoteEdit extends Component {
   }
 
   handleEditChange(note) {
-    // set note url when a new note is saved (aka. created)
-    if (['/', '/notes', '/notes/'].includes(window.location.pathname)) {
-      this.pushState.setEdit(note);
-    }
+    this.pushState.setEdit(note);
 
     this.autoSave.setChange(note);
   }
@@ -207,6 +206,7 @@ class NoteEdit extends Component {
   setNewNote(afterSetState) {
     this.setState(this.getNewNoteAttributes(), afterSetState);
     this.pushState.setNew();
+    this.pushState.setBrowserTitle();
   }
 }
 
