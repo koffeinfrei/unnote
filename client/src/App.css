@@ -8595,6 +8595,9 @@ Then, run this script to get the list@mixin (function(){
     .form-horizontal .form-group {
       margin-left: -15px; } }
 
+.form-control:focus {
+  box-shadow: none; }
+
 .spinner {
   animation: rotator 1.4s linear infinite; }
 

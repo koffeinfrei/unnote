@@ -15,23 +15,25 @@ class Navbar extends Component {
     return (
       <div className="row">
         <div className="col-md-4">
-          <div className="navbar-header navbar-brand">
-            <div className="navbar-spinner">
-              <svg
-                className={this.getSpinnerCssClass()}
-                viewBox="0 0 66 66"
-                xmlns="http://www.w3.org/2000/svg">
-                <circle
-                  className="path"
-                  fill="none"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                  cx="33"
-                  cy="33"
-                  r="30"></circle>
-              </svg>
-              <div className={this.getLogoCssClass()}>
-                <img src={logo} alt="logo" />
+          <div className="navbar-header">
+            <div className="navbar-brand">
+              <div className="navbar-spinner">
+                <svg
+                  className={this.getSpinnerCssClass()}
+                  viewBox="0 0 66 66"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <circle
+                    className="path"
+                    fill="none"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                    cx="33"
+                    cy="33"
+                    r="30"></circle>
+                </svg>
+                <div className={this.getLogoCssClass()}>
+                  <img src={logo} alt="logo" />
+                </div>
               </div>
             </div>
             <button
