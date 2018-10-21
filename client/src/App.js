@@ -4,6 +4,7 @@ import $ from 'jquery';
 import './global-jquery'; // bootstrap-material-design needs global jQuery
 import 'bootstrap-material-design/dist/js/material';
 import 'bootstrap-sass/assets/javascripts/bootstrap/modal';
+import 'bootstrap-sass/assets/javascripts/bootstrap/collapse';
 import Flash from './Flash';
 import LoginForm from './LoginForm';
 import NoteEdit from './NoteEdit';
