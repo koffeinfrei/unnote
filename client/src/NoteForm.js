@@ -4,7 +4,6 @@ import Quill from 'quill';
 import 'quill-task-list/task_list_node';
 import 'quill/dist/quill.snow.css';
 import './NoteForm.css';
-import $ from 'jquery';
 import EventHive from './EventHive';
 import ViewportMode from './ViewportMode';
 
@@ -24,7 +23,7 @@ class NoteForm extends Component {
       <div>
         <form
           className="form-horizontal"
-          ref={(c) => this.$formContainer = $(c)}
+          ref={(c) => this.formContainerElement = c}
           onSubmit={this.handleFormSubmit}>
           <div className="form-inputs">
             <div className="form-group form-group-no-label string optional">
@@ -34,12 +33,12 @@ class NoteForm extends Component {
                 value={this.state.note.title}
                 onChange={this.handleTitleChange.bind(this)}
                 placeholder="Title"
-                ref={(c) => this.$title = $(c)}
+                ref={(c) => this.titleElement = c}
               />
             </div>
             <div className="form-group form-group-no-label text optional">
               <div
-                ref={(c) => this.$contentContainer = $(c)}
+                ref={(c) => this.contentContainerElement = c}
               ></div>
             </div>
           </div>
@@ -58,14 +57,14 @@ class NoteForm extends Component {
   handleTitleChange() {
     this.shouldRerender = true;
     const note = this.state.note;
-    note.title = this.$title.val();
+    note.title = this.titleElement.value;
     this.setState({ note: note }, this.handleChange);
   }
 
   handleContentChange() {
     this.shouldRerender = false;
     const note = this.state.note;
-    note.content = this.$content.html();
+    note.content = this.contentElement.innerHTML;
     this.setState({ note: note }, this.handleChange);
   }
 
@@ -81,21 +80,21 @@ class NoteForm extends Component {
     // case a sync to the server should be triggered. if we just use the react
     // eventing the rte won't detect the changes.
     EventHive.subscribe('note.update', (data) => {
-      this.$title.val(data.title);
+      this.titleElement.value = data.title;
       this.handleTitleChange();
       this.editor.pasteHTML(data.content);
     });
 
     if (ViewportMode.isMobileMode()) {
       EventHive.subscribe('hamburger.show', () => {
-        this.$formContainer.addClass('hidden');
+        this.formContainerElement.classList.add('hidden');
       });
       EventHive.subscribe('hamburger.hide', () => {
-        this.$formContainer.removeClass('hidden');
+        this.formContainerElement.classList.remove('hidden');
       });
 
       EventHive.subscribe('search.entered', () => {
-        this.$formContainer.addClass('hidden');
+        this.formContainerElement.classList.add('hidden');
       });
     }
   }
@@ -107,7 +106,7 @@ class NoteForm extends Component {
     // presumably because of change tracking (delta stuff) in quill the
     // insertion of big content hangs the browser for several seconds.
     this.editor.setText('');
-    this.$content.html(this.state.note.content);
+    this.contentElement.innerHTML = this.state.note.content;
     this.editor.history.clear();
     // wait on updates before attaching the `text-change` event
     this.editor.update();
@@ -131,7 +130,7 @@ class NoteForm extends Component {
   }
 
   renderEditor() {
-    this.editor = new Quill(this.$contentContainer.get(0), {
+    this.editor = new Quill(this.contentContainerElement, {
       theme: 'snow',
       modules: {
         'syntax': true,
@@ -151,12 +150,12 @@ class NoteForm extends Component {
       }
     });
 
-    this.$content = this.$contentContainer.find('.ql-editor');
+    this.contentElement = this.contentContainerElement.querySelector('.ql-editor');
   }
 
   focusTitleFieldIfNewNote() {
     if (this.state.note.isNew()) {
-      this.$title.focus();
+      this.titleElement.focus();
     }
   }
 }
