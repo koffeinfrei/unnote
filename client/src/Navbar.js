@@ -16,54 +16,35 @@ class Navbar extends Component {
       <div className="row">
         <div className="col-md-4">
           <div className="navbar-header">
-            <div className="navbar-brand">
-              <div className="navbar-spinner">
-                <svg
-                  className={this.getSpinnerCssClass()}
-                  viewBox="0 0 66 66"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <circle
-                    className="path"
-                    fill="none"
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                    cx="33"
-                    cy="33"
-                    r="30"></circle>
-                </svg>
-                <div className={this.getLogoCssClass()}>
-                  <img src={logo} alt="logo" />
-                </div>
-              </div>
-            </div>
-            <button
-              className="navbar-toggle navbar-hamburger-button"
-              type="button"
-              onClick={this.handleHamburgerButtonClick}>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <button
-              className="navbar-toggle navbar-search-button" type="button"
-              onClick={this.handleSearchButtonClick.bind(this)}
-              ref={(c) => this.$searchButton = $(c)}>
-              <i className="material-icons">search</i>
-            </button>
+            {this.renderLogo()}
+            {this.renderMobileHamburgerMenu()}
+            {this.renderMobileSearchButton()}
           </div>
-          <div
-            className="navbar-form navbar-right search-bar collapse in-sm"
-            ref={(c) => this.$searchBox = $(c)}>
-            <input
-              type="text"
-              className="string optional form-control search-input"
-              placeholder="Search"
-              onChange={this.props.handleSearchEnter}
-              ref={(c) => this.$searchInput = $(c)} />
-            <button
-              type="button"
-              className="close clear-search"
-              onClick={this.handleSearchCleared.bind(this)}>×</button>
+          {this.renderSearchBox()}
+        </div>
+      </div>
+    );
+  }
+
+  renderLogo() {
+    return (
+      <div className="navbar-brand">
+        <div className="navbar-spinner">
+          <svg
+            className={this.getSpinnerCssClass()}
+            viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle
+              className="path"
+              fill="none"
+              strokeWidth="6"
+              strokeLinecap="round"
+              cx="33"
+              cy="33"
+              r="30"></circle>
+          </svg>
+          <div className={this.getLogoCssClass()}>
+            <img src={logo} alt="logo" />
           </div>
         </div>
       </div>
@@ -71,51 +52,56 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    // listen on global event so we can toggle the spinner from unrelated
-    // components
-    EventHive.subscribe('spinner.toggle', (data) => {
-      this.setState({ showSpinner: data.show });
-    });
-
-    EventHive.subscribe('search.focus', () => {
-      this.$searchInput.focus();
-      this.$searchInput.select();
-    });
-
-    // handle hamburger and search toggling
-    if (ViewportMode.isMobileMode()) {
-      EventHive.subscribe('search.hide', () => {
-        this.$searchButton.removeClass('is-expanded');
-      });
-
-      this.$searchBox.collapse({ toggle: false });
-      // when the hiding animation is done
-      this.$searchBox.on('hidden.bs.collapse', () => {
-        EventHive.publish('search.hide_end');
-      });
-
-      EventHive.subscribe('search.show', () => {
-        this.$searchBox.collapse('show');
-      });
-      EventHive.subscribe('search.hide', () => {
-        this.$searchBox.collapse('hide');
-      });
-
-      EventHive.subscribe('note.open', () => {
-        if (this.$searchInput.val() === '') {
-          EventHive.publish('search.hide');
-        }
-      });
-
-      // event when search box is fully toggled (see bootstrap collapse)
-      this.$searchBox.on('shown.bs.collapse', () => {
-        this.$searchInput.focus();
-      });
-    }
+    this.subscribeSpinner();
+    this.subscribeSearch();
+    this.subscribeMobileSearch();
   }
 
   componentWillUnmount() {
     this.$searchBox.off('shown.bs.collapse');
+  }
+
+  renderSearchBox() {
+    return (
+      <div
+        className="navbar-form navbar-right search-bar collapse in-sm"
+        ref={(c) => this.$searchBox = $(c)}>
+        <input
+          type="text"
+          className="string optional form-control search-input"
+          placeholder="Search"
+          onChange={this.props.handleSearchEnter}
+          ref={(c) => this.$searchInput = $(c)} />
+        <button
+          type="button"
+          className="close clear-search"
+          onClick={this.handleSearchCleared.bind(this)}>×</button>
+      </div>
+    );
+  }
+
+  renderMobileHamburgerMenu() {
+    return (
+      <button
+        className="navbar-toggle navbar-hamburger-button"
+        type="button"
+        onClick={this.handleHamburgerButtonClick}>
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+      </button>
+    );
+  }
+
+  renderMobileSearchButton() {
+    return (
+      <button
+        className="navbar-toggle navbar-search-button" type="button"
+        onClick={this.handleSearchButtonClick.bind(this)}
+        ref={(c) => this.$searchButton = $(c)}>
+        <i className="material-icons">search</i>
+      </button>
+    );
   }
 
   getSpinnerCssClass() {
@@ -171,6 +157,54 @@ class Navbar extends Component {
     this.$searchInput.val('');
     $(e.target).blur();
     this.props.handleSearchCleared();
+  }
+
+  subscribeSpinner() {
+    // listen on global event so we can toggle the spinner from unrelated
+    // components
+    EventHive.subscribe('spinner.toggle', (data) => {
+      this.setState({ showSpinner: data.show });
+    });
+  }
+
+  subscribeSearch() {
+    EventHive.subscribe('search.focus', () => {
+      this.$searchInput.focus();
+      this.$searchInput.select();
+    });
+  }
+
+  subscribeMobileSearch() {
+    // handle hamburger and search toggling
+    if (ViewportMode.isMobileMode()) {
+      EventHive.subscribe('search.hide', () => {
+        this.$searchButton.removeClass('is-expanded');
+      });
+
+      this.$searchBox.collapse({ toggle: false });
+      // when the hiding animation is done
+      this.$searchBox.on('hidden.bs.collapse', () => {
+        EventHive.publish('search.hide_end');
+      });
+
+      EventHive.subscribe('search.show', () => {
+        this.$searchBox.collapse('show');
+      });
+      EventHive.subscribe('search.hide', () => {
+        this.$searchBox.collapse('hide');
+      });
+
+      EventHive.subscribe('note.open', () => {
+        if (this.$searchInput.val() === '') {
+          EventHive.publish('search.hide');
+        }
+      });
+
+      // event when search box is fully toggled (see bootstrap collapse)
+      this.$searchBox.on('shown.bs.collapse', () => {
+        this.$searchInput.focus();
+      });
+    }
   }
 }
 

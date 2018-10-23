@@ -26,23 +26,35 @@ class NoteForm extends Component {
           ref={(c) => this.formContainerElement = c}
           onSubmit={this.handleFormSubmit}>
           <div className="form-inputs">
-            <div className="form-group form-group-no-label string optional">
-              <input
-                type="text"
-                className="string optional form-control"
-                value={this.state.note.title}
-                onChange={this.handleTitleChange.bind(this)}
-                placeholder="Title"
-                ref={(c) => this.titleElement = c}
-              />
-            </div>
-            <div className="form-group form-group-no-label text optional">
-              <div
-                ref={(c) => this.contentContainerElement = c}
-              ></div>
-            </div>
+            {this.renderTitle()}
+            {this.renderContent()}
           </div>
         </form>
+      </div>
+    );
+  }
+
+  renderTitle() {
+    return (
+      <div className="form-group form-group-no-label string optional">
+        <input
+          type="text"
+          className="string optional form-control"
+          value={this.state.note.title}
+          onChange={this.handleTitleChange.bind(this)}
+          placeholder="Title"
+          ref={(c) => this.titleElement = c}
+        />
+      </div>
+    );
+  }
+
+  renderContent() {
+    return (
+      <div className="form-group form-group-no-label text optional">
+        <div
+          ref={(c) => this.contentContainerElement = c}
+        ></div>
       </div>
     );
   }

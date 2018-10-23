@@ -20,47 +20,62 @@ class NoteList extends Component {
   }
 
   render() {
-    var commentNodes = this.state.notes.map((note) => {
-      return (
-        <div key={note.uid}>
-          <div
-            className={this.getListItemCssClass(note)}
-            onClick={this.handleNoteClick.bind(this, note)}>
+    return (
+      <div className={this.getListCssClass()} ref={(c) => this.$list = $(c)}>
+        {this.renderList()}
+        {this.renderNextPageLink()}
+        {this.renderListSpinner()}
+      </div>
+    );
+  }
 
-            <div className="row-picture">
-              {this.getNoteAvatar(note)}
+  renderList() {
+    return this.state.notes.map((note) => this.renderListItem(note));
+  }
+
+  renderListItem(note) {
+    return (
+      <div key={note.uid}>
+        <div
+          className={this.getListItemCssClass(note)}
+          onClick={this.handleNoteClick.bind(this, note)}>
+
+          <div className="row-picture">
+            {this.getNoteAvatar(note)}
+          </div>
+          <div className="row-content">
+            <div
+              className="action-secondary"
+              onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
+              <i className="material-icons">delete</i>
             </div>
-            <div className="row-content">
-              <div
-                className="action-secondary"
-                onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
-                <i className="material-icons">delete</i>
-              </div>
-              <h4 className="list-group-item-heading">
-                {note.title}
-              </h4>
-              <div className="list-group-item-text">
-                {humanDate.relativeTime(note.updatedAt)}
-              </div>
+            <h4 className="list-group-item-heading">
+              {note.title}
+            </h4>
+            <div className="list-group-item-text">
+              {humanDate.relativeTime(note.updatedAt)}
             </div>
           </div>
-          <div className="list-group-separator"></div>
         </div>
-      );
-    });
+        <div className="list-group-separator"></div>
+      </div>
+    );
+  }
 
-    var nextPageLink = null;
-    if (this.state.hasMorePages) {
-      nextPageLink = (
-        <div className="list-more list-more-next-page">
-          <button onClick={this.handleNextPageClick.bind(this)} className="btn btn-info btn-link btn-sm">
-            <i className="material-icons list-more-icon">expand_more</i>
-          </button>
-        </div>
-      );
-    }
+  renderNextPageLink() {
+    if (!this.state.hasMorePages) { return; }
 
-    var listSpinner = (
+    return (
+      <div className="list-more list-more-next-page">
+        <button onClick={this.handleNextPageClick.bind(this)} className="btn btn-info btn-link btn-sm">
+          <i className="material-icons list-more-icon">expand_more</i>
+        </button>
+      </div>
+    );
+  }
+
+  renderListSpinner() {
+    return (
       <div className="list-more list-more-spinner hidden">
         <svg
           className="spinner"
@@ -75,14 +90,6 @@ class NoteList extends Component {
             cy="33"
             r="30"></circle>
         </svg>
-      </div>
-    );
-
-    return (
-      <div className={this.getListCssClass()} ref={(c) => this.$list = $(c)}>
-        {commentNodes}
-        {nextPageLink}
-        {listSpinner}
       </div>
     );
   }
@@ -192,6 +199,10 @@ class NoteList extends Component {
       data: { search: this.state.searchQuery, page: this.state.currentPage }
     });
 
+    this.executeUpdateListRequest();
+  }
+
+  executeUpdateListRequest() {
     this.updateListRequest
       .done((data) => {
         this.toggleListMore(true);
