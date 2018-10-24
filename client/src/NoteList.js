@@ -5,6 +5,7 @@ import ViewportMode from './ViewportMode';
 import EventHive from './EventHive';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
+import Spinner from './Spinner';
 
 class NoteList extends Component {
   constructor(props, context) {
@@ -77,19 +78,7 @@ class NoteList extends Component {
   renderListSpinner() {
     return (
       <div className="list-more list-more-spinner hidden">
-        <svg
-          className="spinner"
-          viewBox="0 0 66 66"
-          xmlns="http://www.w3.org/2000/svg">
-          <circle
-            className="path"
-            fill="none"
-            strokeWidth="6"
-            strokeLinecap="round"
-            cx="33"
-            cy="33"
-            r="30"></circle>
-        </svg>
+        <Spinner />
       </div>
     );
   }

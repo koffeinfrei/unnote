@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import EventHive from './EventHive';
 import ViewportMode from './ViewportMode';
+import Spinner from './Spinner';
 import logo from './images/logo.svg';
 
 class Navbar extends Component {
@@ -30,22 +31,13 @@ class Navbar extends Component {
     return (
       <div className="navbar-brand">
         <div className="navbar-spinner">
-          <svg
-            className={this.getSpinnerCssClass()}
-            viewBox="0 0 66 66"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle
-              className="path"
-              fill="none"
-              strokeWidth="6"
-              strokeLinecap="round"
-              cx="33"
-              cy="33"
-              r="30"></circle>
-          </svg>
-          <div className={this.getLogoCssClass()}>
-            <img src={logo} alt="logo" />
-          </div>
+          {this.state.showSpinner ? (
+            <Spinner />
+          ) : (
+            <div className="navbar-logo">
+              <img src={logo} alt="logo" />
+            </div>
+          )}
         </div>
       </div>
     );
