@@ -43,6 +43,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 end
 
+Capybara.server = :webrick
+
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(
     app,
