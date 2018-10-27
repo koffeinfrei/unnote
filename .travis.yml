@@ -5,6 +5,9 @@ cache: bundler
 services:
   - postgresql
 
+rvm:
+  - '2.5'
+
 node_js:
   - '0.6'
 
