@@ -10,6 +10,8 @@ import Flash from './Flash';
 import LoginForm from './LoginForm';
 import NoteEdit from './NoteEdit';
 import './App.css';
+import './fonts/roboto.css';
+import './fonts/material-icons.css';
 
 class App extends Component {
   constructor(props) {
