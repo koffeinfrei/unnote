@@ -10,7 +10,7 @@ namespace :client do
   task build_and_deploy: :environment do
     require 'deploy_client'
 
-    unless DeployClient.new.run
+    unless DeployClient.new.deploy_public
       abort 'Could not build and deploy the client app'
     end
   end
@@ -19,7 +19,7 @@ namespace :client do
   task clean: :environment do
     require 'deploy_client'
 
-    unless DeployClient.new.clean
+    unless DeployClient.new.cleanup_public
       abort 'Could not clean the client app from the public directory'
     end
   end

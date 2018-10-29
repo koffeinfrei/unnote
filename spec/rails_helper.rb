@@ -23,10 +23,10 @@ RSpec.configure do |config|
   config.before :suite do
     puts '--> Building the client app and deploying it to the public directory...'
 
-    deploy_client.run
+    deploy_client.deploy_public
   end
   config.after :suite do
-    deploy_client.clean
+    deploy_client.cleanup_public
   end
 
   config.before :suite do
