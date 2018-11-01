@@ -9,6 +9,7 @@ import 'bootstrap-sass/assets/javascripts/bootstrap/collapse';
 import Flash from './Flash';
 import LoginForm from './LoginForm';
 import NoteEdit from './NoteEdit';
+import EventHive from './EventHive';
 import './App.css';
 import './fonts/roboto.css';
 import './fonts/material-icons.css';
@@ -23,6 +24,8 @@ class App extends Component {
 
     this.setApiHost();
     this.setIsLoggedIn();
+
+    this.exposeGlobals();
   }
 
   render() {
@@ -93,6 +96,11 @@ class App extends Component {
         </div>
       );
     }
+  }
+
+  // expose certain globals that are needed by the mobile app
+  exposeGlobals() {
+    window.EventHive = EventHive;
   }
 }
 
