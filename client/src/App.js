@@ -9,7 +9,6 @@ import 'bootstrap-sass/assets/javascripts/bootstrap/collapse';
 import Flash from './Flash';
 import LoginForm from './LoginForm';
 import NoteEdit from './NoteEdit';
-import EventHive from './EventHive';
 import './App.css';
 import './fonts/roboto.css';
 import './fonts/material-icons.css';
@@ -22,10 +21,7 @@ class App extends Component {
       isLoggedIn: null
     };
 
-    this.setApiHost();
     this.setIsLoggedIn();
-
-    this.exposeGlobals();
   }
 
   render() {
@@ -62,16 +58,6 @@ class App extends Component {
     });
   }
 
-  // ability to set a different host for the API calls. this is needed for the
-  // mobile app.
-  setApiHost() {
-    if (!window.API_HOST) { return; }
-
-    $.ajaxPrefilter(function(options) {
-      options.url = window.API_HOST + options.url;
-    });
-  }
-
   renderLoggedIn() {
     if (this.state.isLoggedIn === true) {
       return (
@@ -96,11 +82,6 @@ class App extends Component {
         </div>
       );
     }
-  }
-
-  // expose certain globals that are needed by the mobile app
-  exposeGlobals() {
-    window.EventHive = EventHive;
   }
 }
 
