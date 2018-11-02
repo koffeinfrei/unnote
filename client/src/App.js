@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import './global-jquery'; // bootstrap-material-design needs global jQuery
+import 'arrive/src/arrive';
 import 'bootstrap-material-design/dist/js/material';
 import 'bootstrap-sass/assets/javascripts/bootstrap/modal';
 import 'bootstrap-sass/assets/javascripts/bootstrap/transition';
