@@ -16,7 +16,9 @@ RSpec.feature 'Edit note with conflict', :js do
         )
 
         # load the note...
-        visit edit_note_path(note)
+        visit "/#/notes/#{note.uid}/edit"
+        expect(page).to have_content 'my note'
+        expect(page).to have_content 'note content'
 
         # ...in the meantime there's an edit
         note.update_attributes! content: '<p>note content - update 1</p>'
@@ -32,7 +34,7 @@ RSpec.feature 'Edit note with conflict', :js do
         expect(page).to have_content 'my note (conflict 2016-08-01 15:33)'
 
         # the note has the updated content
-        expect(note.reload.content).to eq '<p>note content - update 2</p><p><br></p>'
+        expect(note.reload.content).to eq '<p>note content - update 2</p>'
 
         # the conflict copy has the old content
         expect(Note.last).to have_attributes(

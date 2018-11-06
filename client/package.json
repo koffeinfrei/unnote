@@ -1,0 +1,43 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3001/",
+  "homepage": "./",
+  "dependencies": {
+    "arrive": "^2.4.1",
+    "bootbox": "^4.4.0",
+    "bootstrap-material-design": "^0.5.10",
+    "bootstrap-sass": "^3.3.7",
+    "highlight.js": "^9.13.1",
+    "human-date": "^1.4.0",
+    "jquery": "^3.3.1",
+    "mousetrap": "^1.6.2",
+    "node-sass-chokidar": "^1.3.4",
+    "npm-run-all": "^4.1.3",
+    "quill": "^1.3.6",
+    "quill-task-list": "github:koffeinfrei/quill-task-list",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.1",
+    "throttle-debounce": "^1.1.0"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules --include-path ./node_modules/bootstrap-sass/assets/stylesheets/ src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules --include-path ./node_modules/bootstrap-sass/assets/stylesheets/ src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {},
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

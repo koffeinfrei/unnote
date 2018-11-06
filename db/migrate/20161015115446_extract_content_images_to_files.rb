@@ -1,4 +1,4 @@
-class ExtractContentImagesToFiles < ActiveRecord::Migration
+class ExtractContentImagesToFiles < ActiveRecord::Migration[4.2]
   def change
     # don't update updated_at
     ActiveRecord::Base.record_timestamps = false

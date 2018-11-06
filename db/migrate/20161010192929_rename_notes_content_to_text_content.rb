@@ -1,4 +1,4 @@
-class RenameNotesContentToTextContent < ActiveRecord::Migration
+class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
   def up
     rename_column :notes, :content, :text_content
 

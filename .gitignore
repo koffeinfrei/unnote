@@ -12,7 +12,7 @@
 !/log/.keep
 /tmp
 
-/vendor/assets/bower_components
+/client/node_modules/
 /public/assets/
 
 /tags

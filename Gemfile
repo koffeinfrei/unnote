@@ -1,35 +1,27 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.2.0'
 
 # gems sorted alphabetically
 
-gem 'bower-rails'
+gem 'bootsnap', require: false
 gem 'carrierwave'
 gem 'devise'
-gem 'image_optim_rails'
-gem 'image_optim_pack'
-gem 'jquery-rails'
+gem 'foreman'
 gem 'kaminari'
 gem 'nokogiri'
 gem 'panter-rails-deploy'
 gem 'paper_trail'
 gem 'pg'
 gem 'pg_search'
+gem 'phantomjs', require: false
 gem 'pundit'
-gem 'react-rails', '~> 1.10'
-gem 'sass-rails'
-gem 'simple_form'
-gem 'slim-rails'
-gem 'sprockets'
-gem 'sprockets-es6'
-gem 'uglifier'
 
 group :development, :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'database_cleaner'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
-  gem 'poltergeist'
+  gem 'geckodriver-helper'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'

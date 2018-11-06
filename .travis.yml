@@ -5,13 +5,11 @@ cache: bundler
 services:
   - postgresql
 
-node_js:
-  - '0.6'
-
 addons:
   postgresql: '9.4'
+  firefox: latest-beta
 
 before_script:
-  - npm install bower
-  - bundle exec rake bower:install
+  - bundle exec rake client:npm_install
+  - bundle exec rake client:build_and_deploy
   - psql -c 'create database mykonote_test;' -U postgres

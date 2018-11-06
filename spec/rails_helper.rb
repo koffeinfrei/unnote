@@ -4,9 +4,10 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-require 'capybara/poltergeist'
 require 'pundit/rspec'
 require 'paper_trail/frameworks/rspec'
+require 'capybara-screenshot/rspec'
+require 'deploy_client'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -17,6 +18,16 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
+
+  deploy_client = DeployClient.new
+  config.before :suite do
+    puts '--> Building the client app and deploying it to the public directory...'
+
+    deploy_client.deploy_public
+  end
+  config.after :suite do
+    deploy_client.cleanup_public
+  end
 
   config.before :suite do
     DatabaseCleaner.clean_with :deletion
@@ -43,12 +54,18 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 end
 
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(
-    app,
-    phantomjs: Phantomjs.path,
-    window_size:  [1300, nil]
-  )
+Capybara.register_driver :firefox_headless do |app|
+  options = ::Selenium::WebDriver::Firefox::Options.new
+  options.args << '--headless'
+
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
 end
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :firefox_headless
+
+Capybara.server = :webrick
+
+# From https://github.com/mattheworiordan/capybara-screenshot/issues/84#issuecomment-41219326
+Capybara::Screenshot.register_driver(:firefox_headless) do |driver, path|
+  driver.browser.save_screenshot(path)
+end

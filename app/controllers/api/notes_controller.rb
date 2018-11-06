@@ -20,6 +20,16 @@ class Api::NotesController < AuthenticatedController
     }
   end
 
+  def show
+    @note = Note.find_by!(uid: params[:id])
+
+    authorize @note
+
+    render json: {
+      note: @note
+    }
+  end
+
   def update
     @note = Note.find_or_initialize_by(uid: params[:id])
 
