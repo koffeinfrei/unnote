@@ -21,7 +21,6 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'database_cleaner'
-  gem 'geckodriver-helper'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
