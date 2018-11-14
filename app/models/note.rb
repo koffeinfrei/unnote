@@ -24,6 +24,9 @@ class Note < ApplicationRecord
 
   scope :default_ordered, -> { order(updated_at: :desc) }
 
+  scope :archived, -> { where.not(archived_at: nil) }
+  scope :unarchived, -> { where(archived_at: nil) }
+
   def to_param
     uid
   end
@@ -40,5 +43,9 @@ class Note < ApplicationRecord
         File.open(image.file.file)
       end
     end
+  end
+
+  def archive!
+    update!(archived_at: Time.zone.now)
   end
 end
