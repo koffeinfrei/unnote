@@ -9,6 +9,14 @@ addons:
   postgresql: '9.4'
   firefox: latest-beta
 
+before_install:
+  - export GECKO_URL=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep browser_download_url | cut -d '"' -f 4 | grep linux64)
+  - echo $GECKO_URL
+  - wget --no-verbose -O /tmp/geckodriver-latest.tar.gz $GECKO_URL
+  - mkdir geckodriver
+  - tar -xzf /tmp/geckodriver-latest.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
+
 before_script:
   - bundle exec rake client:npm_install
   - bundle exec rake client:build_and_deploy
