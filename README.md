@@ -51,6 +51,14 @@ There's a demo user `user@example.com` with the password `asdfasdf`.
   $ rake start
   ```
 
+### Testing
+
+For the capybara e2e tests headless firefox / geckodriver is used.
+
+- [Download latest firefox beta](https://www.mozilla.org/en-US/firefox/channel/desktop/)
+- [Download latest geckodriver](https://github.com/mozilla/geckodriver/releases/latest)
+- Put both binaries in your `$PATH`
+
 
 ## License
 
