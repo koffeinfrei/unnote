@@ -47,16 +47,8 @@ class NoteList extends Component {
             {this.getNoteAvatar(note)}
           </div>
           <div className="row-content">
-            <div
-              className="action-secondary action-secondary-before"
-              onClick={this.props.handleArchiveNoteClick.bind(this, note)}>
-              <i className="material-icons">archive</i>
-            </div>
-            <div
-              className="action-secondary"
-              onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
-              <i className="material-icons">delete</i>
-            </div>
+            {this.renderListItemButton('action-secondary action-secondary-before', this.props.handleArchiveNoteClick.bind(this, note), 'archive')}
+            {this.renderListItemButton('action-secondary', this.props.handleDeleteNoteClick.bind(this, note), 'delete')}
             <h4 className="list-group-item-heading">
               {note.title}
             </h4>
@@ -66,6 +58,16 @@ class NoteList extends Component {
           </div>
         </div>
         <div className="list-group-separator"></div>
+      </div>
+    );
+  }
+
+  renderListItemButton(className, onClick, icon) {
+    return (
+      <div
+        className={className}
+        onClick={onClick}>
+        <i className="material-icons">{icon}</i>
       </div>
     );
   }
