@@ -7,6 +7,8 @@ import Note from './Note';
 import AlertFlash from './AlertFlash';
 import Spinner from './Spinner';
 
+import './NoteList.css';
+
 class NoteList extends Component {
   constructor(props, context) {
     super(props, context);
