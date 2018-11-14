@@ -48,6 +48,11 @@ class NoteList extends Component {
           </div>
           <div className="row-content">
             <div
+              className="action-secondary action-secondary-before"
+              onClick={this.props.handleArchiveNoteClick.bind(this, note)}>
+              <i className="material-icons">archive</i>
+            </div>
+            <div
               className="action-secondary"
               onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
               <i className="material-icons">delete</i>

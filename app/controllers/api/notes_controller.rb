@@ -69,7 +69,7 @@ class Api::NotesController < AuthenticatedController
 
   def note_params
     params.require(:note).permit(
-      [:uid, :title, :content, :created_at, :updated_at]
+      [:uid, :title, :content, :created_at, :updated_at, :archived_at]
     )
   end
 

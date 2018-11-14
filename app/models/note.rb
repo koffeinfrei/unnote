@@ -32,7 +32,7 @@ class Note < ApplicationRecord
   end
 
   def as_json(_options = {})
-    super(only: [:uid, :title, :created_at, :updated_at]).merge(content: content)
+    super(only: [:uid, :title, :created_at, :updated_at, :archived_at]).merge(content: content)
   end
 
   def dup

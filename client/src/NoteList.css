@@ -103,6 +103,10 @@ Then, run this script to get the list@mixin (function(){
     min-height: 0; }
     .list-group .list-group-item.note-navigation-item .row-content .action-secondary:hover i {
       color: #f44336; }
+    .list-group .list-group-item.note-navigation-item .row-content .action-secondary.action-secondary-before {
+      right: 48px; }
+      .list-group .list-group-item.note-navigation-item .row-content .action-secondary.action-secondary-before:hover i {
+        color: #ff5722; }
 
 .list-more {
   display: block;
