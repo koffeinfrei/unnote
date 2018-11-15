@@ -86,7 +86,8 @@ class NoteEdit extends Component {
             isInitialEdit={this.state.isInitialEdit}
             searchQuery={this.state.searchQuery}
             handleNoteClick={this.handleNoteClick.bind(this)}
-            handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)} />
+            handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)}
+            handleArchiveNoteClick={this.handleArchiveNoteClick.bind(this)} />
         </div>
         <div className="col-md-8">
           <NoteForm
@@ -152,6 +153,19 @@ class NoteEdit extends Component {
       this.setState({ isSynced: false });
 
       this.deleteNote(note);
+    });
+  }
+
+  handleArchiveNoteClick(note, e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    bootbox.confirm('Are you sure you want to archive this note?', (result) => {
+      if (!result) { return; }
+
+      note.setArchived();
+      this.handleEditChange(note)
+      this.setNewNote();
     });
   }
 

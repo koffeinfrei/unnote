@@ -1,0 +1,71 @@
+@import 'bootstrap-settings.sass'
+@import 'bootstrap-material-design/sass/variables'
+
+.notes-list
+  overflow-y: auto
+  // $navbar-margin-bottom: body top padding
+  // 20px: list bottom margin (static value for `.list-group` definition
+  // 1px: correction to avoid scrollbar
+  height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 1px)
+
+  @media (min-width: $screen-lg-min)
+    height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 20px - 1px)
+
+  @media (max-width: $screen-sm-min)
+    position: absolute
+    width: 100%
+    margin-left: 0
+    margin-right: 0
+    top: 0
+    left: 0
+    background-color: $body-bg
+    z-index: 1
+
+.list-group
+  .list-group-item.note-navigation-item
+    cursor: pointer
+
+    &.active
+      &:hover, &:focus
+        background: transparent
+        outline: 0
+
+      .list-group-item-heading, .list-group-item-text
+        color: $list-group-active-color
+        font-weight: 400
+
+    .list-group-item-heading
+      font-size: $font-size-large
+
+    .row-picture, .row-action-primary
+      vertical-align: top
+
+      i
+        background: $list-item-bg
+
+    .row-content
+      min-height: 0
+
+      .action-secondary
+        &:hover
+          i
+            color: $brand-danger
+
+        &.action-secondary-before
+          right: 3 * 16px;
+
+          &:hover
+            i
+              color: $brand-warning
+
+.list-more
+  display: block
+  text-align: center
+  height: 35px
+
+.list-more-icon
+  font-size: $font-size-h1
+
+.list-more-spinner
+  svg
+    height: 35px

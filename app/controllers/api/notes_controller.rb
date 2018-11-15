@@ -3,10 +3,10 @@ class Api::NotesController < AuthenticatedController
   after_action :verify_policy_scoped, only: :index
 
   def index
+    @notes = Note.unarchived
+
     if params[:search].present?
-      @notes = Note.search_by_title_and_content(params[:search])
-    else
-      @notes = Note.all
+      @notes = @notes.search_by_title_and_content(params[:search])
     end
 
     @notes = policy_scope(@notes.default_ordered)
@@ -69,7 +69,7 @@ class Api::NotesController < AuthenticatedController
 
   def note_params
     params.require(:note).permit(
-      [:uid, :title, :content, :created_at, :updated_at]
+      [:uid, :title, :content, :created_at, :updated_at, :archived_at]
     )
   end
 

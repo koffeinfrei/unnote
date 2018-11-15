@@ -1,0 +1,120 @@
+/*
+
+To get this list of colors inject jQuery at http://www.google.com/design/spec/style/color.html#color-color-palette
+
+Then, run this script to get the list@mixin (function(){
+  var colors = {}, main = {};
+  $(".color-group")@mixin each(function(){
+    var color = $(this).find(".name").text().trim().toLowerCase().replace(" ", "-");
+    colors[color] = {};
+
+    $(this)@mixin find(".color").not(".main-color").each(function(){
+      var shade = $(this).find(".shade").text().trim(),
+          hex   = $(this).find(".hex").text().trim();
+
+      colors[color][shade] = hex;
+    });
+    main[color] = color + "-" + $(this).find(".main-color .shade").text().trim();
+
+  });
+  var LESS = "";
+  $@mixin each(colors, function(name, shades){
+    LESS += "\n\n";
+    $@mixin each(shades, function(shade, hex){
+      LESS += "$" + name + "-" + shade + ": " + hex + ";\n" !default;
+    });
+    if (main[name]) {
+      LESS += "$" + name + ": " + main[name] + ";\n" !default;
+    }
+  });
+  console.log(LESS);
+})();
+
+
+*/
+/*
+
+To get this list of colors inject jQuery at http://www.google.com/design/spec/style/color.html#color-color-palette
+
+Then, run this script to get the list@mixin (function(){
+  var colors = {}, main = {};
+  $(".color-group")@mixin each(function(){
+    var color = $(this).find(".name").text().trim().toLowerCase().replace(" ", "-");
+    colors[color] = {};
+
+    $(this)@mixin find(".color").not(".main-color").each(function(){
+      var shade = $(this).find(".shade").text().trim(),
+          hex   = $(this).find(".hex").text().trim();
+
+      colors[color][shade] = hex;
+    });
+    main[color] = color + "-" + $(this).find(".main-color .shade").text().trim();
+
+  });
+  var LESS = "";
+  $@mixin each(colors, function(name, shades){
+    LESS += "\n\n";
+    $@mixin each(shades, function(shade, hex){
+      LESS += "$" + name + "-" + shade + ": " + hex + ";\n" !default;
+    });
+    if (main[name]) {
+      LESS += "$" + name + ": " + main[name] + ";\n" !default;
+    }
+  });
+  console.log(LESS);
+})();
+
+
+*/
+/* ANIMATION */
+/* SHADOWS */
+.notes-list {
+  overflow-y: auto;
+  height: calc(100vh - 50px - 20px - 1px); }
+  @media (min-width: 1200px) {
+    .notes-list {
+      height: calc(100vh - 50px - 20px - 20px - 1px); } }
+  @media (max-width: 768px) {
+    .notes-list {
+      position: absolute;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      top: 0;
+      left: 0;
+      background-color: #ffffff;
+      z-index: 1; } }
+
+.list-group .list-group-item.note-navigation-item {
+  cursor: pointer; }
+  .list-group .list-group-item.note-navigation-item.active:hover, .list-group .list-group-item.note-navigation-item.active:focus {
+    background: transparent;
+    outline: 0; }
+  .list-group .list-group-item.note-navigation-item.active .list-group-item-heading, .list-group .list-group-item.note-navigation-item.active .list-group-item-text {
+    color: #008bce;
+    font-weight: 400; }
+  .list-group .list-group-item.note-navigation-item .list-group-item-heading {
+    font-size: 18px; }
+  .list-group .list-group-item.note-navigation-item .row-picture, .list-group .list-group-item.note-navigation-item .row-action-primary {
+    vertical-align: top; }
+    .list-group .list-group-item.note-navigation-item .row-picture i, .list-group .list-group-item.note-navigation-item .row-action-primary i {
+      background: rgba(0, 139, 206, 0.1); }
+  .list-group .list-group-item.note-navigation-item .row-content {
+    min-height: 0; }
+    .list-group .list-group-item.note-navigation-item .row-content .action-secondary:hover i {
+      color: #f44336; }
+    .list-group .list-group-item.note-navigation-item .row-content .action-secondary.action-secondary-before {
+      right: 48px; }
+      .list-group .list-group-item.note-navigation-item .row-content .action-secondary.action-secondary-before:hover i {
+        color: #ff5722; }
+
+.list-more {
+  display: block;
+  text-align: center;
+  height: 35px; }
+
+.list-more-icon {
+  font-size: 36px; }
+
+.list-more-spinner svg {
+  height: 35px; }

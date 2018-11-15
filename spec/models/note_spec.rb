@@ -114,4 +114,61 @@ RSpec.describe Note do
       expect(dup_note.uid).not_to eq note.uid
     end
   end
+
+  describe '#archive!' do
+    it 'sets the archived_at timestamp' do
+      now = Time.local(2016, 8, 1, 15, 33)
+
+      Timecop.freeze(now) do
+        note = Note.create!(
+          uid: SecureRandom.uuid,
+          user: User.create!(email: 'user@example.com', password: 'asdfasdf')
+        )
+
+        note.archive!
+
+        expect(note.archived_at).to eq now
+      end
+    end
+  end
+
+  describe '.archived' do
+    it 'returns only the archived note' do
+      user = User.create!(
+        email: 'user@example.com', password: 'asdfasdf'
+      )
+      archived = Note.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        archived_at: Time.local(2016, 8, 1, 15, 33)
+      )
+
+      Note.create!(
+        uid: SecureRandom.uuid,
+        user: user
+      )
+
+      expect(Note.archived).to eq [archived]
+    end
+  end
+
+  describe '.unarchived' do
+    it 'returns only the unarchived note' do
+      user = User.create!(
+        email: 'user@example.com', password: 'asdfasdf'
+      )
+      Note.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        archived_at: Time.local(2016, 8, 1, 15, 33)
+      )
+
+      unarchived = Note.create!(
+        uid: SecureRandom.uuid,
+        user: user
+      )
+
+      expect(Note.unarchived).to eq [unarchived]
+    end
+  end
 end
