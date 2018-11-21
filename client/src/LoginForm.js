@@ -1,80 +1,24 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import AlertFlash from './AlertFlash';
+import { TextInput, SubmitButton, Checkbox, Utf8 } from './Form';
 
 class LoginForm extends Component {
   render() {
     return (
-      <form className="simple_form new_user" onSubmit={this.handleFormSubmit.bind(this)}>
-        <input type="hidden" value="✓" name="utf8" />
+      <form onSubmit={this.handleFormSubmit.bind(this)}>
+        <Utf8 />
 
         <div className="form-inputs">
-          {this.renderEmail()}
-          {this.renderPassword()}
-          {this.renderRememberMe()}
+          <TextInput type="email" model="user" attribute="email" label="Email" />
+          <TextInput type="password" model="user" attribute="password" label="Password" />
+          <Checkbox model="user" attribute="remember_me" label="Remember me" />
         </div>
 
         <div className="form-actions">
-          {this.renderSubmit()}
+          <SubmitButton label="Log in" />
         </div>
       </form>
-    );
-  }
-
-  renderEmail() {
-    return (
-      <div className="form-group email optional user_email is-empty">
-        <label
-          htmlFor="user_email"
-          className="email optional control-label">Email</label>
-        <input
-          type="email"
-          id="user_email"
-          name="user[email]"
-          autoFocus="autofocus"
-          className="string email optional form-control" />
-      </div>
-    );
-  }
-
-  renderPassword() {
-    return (
-      <div className="form-group password optional user_password is-empty">
-        <label
-          htmlFor="user_password"
-          className="password optional control-label">Password</label>
-        <input
-          type="password"
-          id="user_password"
-          name="user[password]"
-          className="password optional form-control" />
-      </div>
-    );
-  }
-
-  renderRememberMe() {
-    return (
-      <div className="form-group boolean optional user_remember_me">
-        <div className="checkbox">
-          <label htmlFor="user_remember_me" className="boolean optional">
-            <input
-              type="checkbox"
-              id="user_remember_me"
-              name="user[remember_me]"
-              value="1"
-              className="boolean optional" />Remember me</label>
-        </div>
-      </div>
-    );
-  }
-
-  renderSubmit() {
-    return (
-      <input
-        type="submit"
-        className="btn btn-raised btn-primary btn-info"
-        value="Log in"
-        name="commit" />
     );
   }
 
