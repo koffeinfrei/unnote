@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import AlertFlash from './AlertFlash';
-import { TextInput, SubmitButton, Checkbox, Utf8 } from './Form';
+import NoticeFlash from './NoticeFlash';
+import { TextInput, SubmitButton, Utf8 } from './Form';
 import UserLinks from './UserLinks';
 
-class LoginForm extends Component {
+class RegistrationForm extends Component {
   render() {
     return (
       <div className="row">
@@ -16,11 +17,11 @@ class LoginForm extends Component {
               <div className="form-inputs">
                 <TextInput type="email" model="user" attribute="email" label="Email" />
                 <TextInput type="password" model="user" attribute="password" label="Password" />
-                <Checkbox model="user" attribute="remember_me" label="Remember me" />
+                <TextInput type="password" model="user" attribute="password_confirmation" label="Confirm password" />
               </div>
 
               <div className="form-actions">
-                <SubmitButton label="Log in" />
+                <SubmitButton label="Register" />
               </div>
             </form>
 
@@ -34,7 +35,7 @@ class LoginForm extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
 
-    const url = '/users/sign_in';
+    const url = '/users';
     const data = $(e.target).serialize();
 
     $.ajax({
@@ -45,13 +46,16 @@ class LoginForm extends Component {
     })
     .done((data) => {
       AlertFlash.clear();
+      NoticeFlash.show('Great! Glad you made it!')
       this.props.onLoginSuccess();
+      this.props.history.push('/notes')
     })
-    .fail(() => {
-      AlertFlash.show('Sorry, that did not work. ' +
-                      'Did you enter a wrong username or a wrong password?')
+    .fail(({ responseJSON }) => {
+      const errors = responseJSON.errors.join('<br>');
+
+      AlertFlash.show('Sorry, that did not work. You need to fix your inputs:<br>' + errors)
     });
   }
 }
 
-export default LoginForm;
+export default RegistrationForm;
