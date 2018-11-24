@@ -49,7 +49,7 @@ class Api::NotesController < AuthenticatedController
         updated_at: @note.updated_at
       }, status: :ok
     else
-      render json: @note.errors, status: :unprocessable_entity
+      render json: { errors: @note.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

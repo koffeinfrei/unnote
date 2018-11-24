@@ -171,4 +171,43 @@ RSpec.describe Note do
       expect(Note.unarchived).to eq [unarchived]
     end
   end
+
+  describe 'validation: does_not_exceed_free_count_limit' do
+    context 'pro subscription' do
+      let(:user) { User.create! email: 'user@example.com', password: 'asdfasdf', subscription: :pro }
+
+      it 'allows unlimited notes' do
+        stub_const('Note::FREE_COUNT_LIMIT', 1)
+        Note.create! title: 'my_note', user: user, uid: SecureRandom.uuid
+
+        note = Note.create title: 'my_note', user: user, uid: SecureRandom.uuid
+
+        expect(note).to be_persisted
+      end
+
+      it 'does not invoke the callback' do
+        note = Note.new title: 'my_note', user: user, uid: SecureRandom.uuid
+
+        expect(note).not_to receive(:does_not_exceed_free_count_limit)
+
+        note.save!
+      end
+    end
+
+    context 'free subscription' do
+      let(:user) { User.create! email: 'user@example.com', password: 'asdfasdf', subscription: :free }
+
+      it 'fails validation when limit is exceeded' do
+        stub_const('Note::FREE_COUNT_LIMIT', 1)
+        Note.create! title: 'my_note', user: user, uid: SecureRandom.uuid
+
+        note = Note.create title: 'my_note', user: user, uid: SecureRandom.uuid
+
+        expect(note).not_to be_persisted
+        expect(note.errors[:base]).to eq [
+          'You have reached your note limit of 1 notes. Please delete some notes or upgrade your subscription.'
+        ]
+      end
+    end
+  end
 end
