@@ -61,7 +61,7 @@ class Api::NotesController < AuthenticatedController
     if @note.destroy
       render json: {}, status: :ok
     else
-      render json: @note.errors, status: :unprocessable_entity
+      render json: { errors: @note.errors }, status: :unprocessable_entity
     end
   end
 
