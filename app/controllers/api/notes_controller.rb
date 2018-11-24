@@ -3,15 +3,15 @@ class Api::NotesController < AuthenticatedController
   after_action :verify_policy_scoped, only: :index
 
   def index
-    @notes = Note.unarchived
+    @notes = policy_scope(Note.unarchived)
 
     if params[:search].present?
       @notes = @notes.search_by_title_and_content(params[:search])
     end
 
-    @notes = policy_scope(@notes.default_ordered)
-
-    @notes = @notes.limit(current_page * Kaminari.config.default_per_page)
+    @notes = @notes
+      .default_ordered
+      .limit(current_page * Kaminari.config.default_per_page)
 
     render json: {
       notes: @notes,
