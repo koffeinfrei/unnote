@@ -12,6 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_minimum_password_length
         return render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
       end
+
+      GetStartedNoteCreator.new(resource).run
     end
   end
 end
