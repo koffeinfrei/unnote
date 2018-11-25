@@ -46,7 +46,11 @@ class RegistrationForm extends Component {
     })
     .done((data) => {
       AlertFlash.clear();
-      NoticeFlash.show('Great! Glad you made it!')
+      NoticeFlash.show(
+        'Great! Glad you made it!<br>' +
+          'You have been subscribed to the <strong>free plan</strong> which ' +
+          '<strong>limits</strong> you to have <strong>100 notes</strong>.'
+      )
       this.props.onLoginSuccess();
       this.props.history.push('/notes')
     })
