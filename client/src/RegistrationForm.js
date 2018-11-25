@@ -10,6 +10,8 @@ class RegistrationForm extends Component {
     return (
       <div className="row">
         <div className="col-md-6 col-md-offset-3">
+          { this.renderIntro() }
+
           <div className="well">
             <form onSubmit={this.handleFormSubmit.bind(this)}>
               <Utf8 />
@@ -28,6 +30,22 @@ class RegistrationForm extends Component {
             <UserLinks />
           </div>
         </div>
+      </div>
+    );
+  }
+
+  renderIntro() {
+    return (
+      <div className="jumbotron">
+        <p>
+          You can register for a <strong>free account</strong> which <strong>limits</strong> you to <strong>100 notes</strong>.
+          <br/>
+          This free hosting service is sponsored by <a href="https://www.panter.ch">Panter AG</a>.
+        </p>
+        <p>
+          Alternatively you may <a href="https://github.com/panter/mykonote">get the source code from
+          GitHub</a> and install it on a server on your own.
+        </p>
       </div>
     );
   }
