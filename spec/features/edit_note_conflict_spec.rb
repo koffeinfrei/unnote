@@ -17,6 +17,7 @@ RSpec.feature 'Edit note with conflict', :js do
 
         # load the note...
         visit "/#/notes/#{note.uid}/edit"
+        wait_for_finished_loading
         expect(page).to have_content 'my note'
         expect(page).to have_content 'note content'
 

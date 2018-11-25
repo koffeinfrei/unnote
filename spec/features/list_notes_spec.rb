@@ -13,6 +13,7 @@ RSpec.feature 'Notes list', :js do
       Note.create! title: 'other_note', user: other_user, uid: SecureRandom.uuid
 
       visit '/#/notes'
+      wait_for_finished_loading
 
       expect(page).to have_content 'my_note'
       expect(page).not_to have_content 'other_note'
