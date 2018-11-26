@@ -14,7 +14,6 @@ namespace :mobile do
         '<div id="root"></div>' \
         '<script src="cordova.js"></script>' \
         '<script src="js/index.js"></script>' \
-        '<script src="js/share_to.js"></script>' \
         '<script src="js/sane_file_reader.js"></script>' \
         '<script src="js/share_to.js"></script>'
 
