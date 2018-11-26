@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Register a new user', :js do
   scenario 'A new user is registered with a free subscription and a get started note' do
-    visit '/#'
+    visit_and_wait '/#'
 
     click_on 'Register'
 
@@ -23,6 +23,8 @@ RSpec.feature 'Register a new user', :js do
     within '.alert' do
       expect(page).to have_content 'Great! Glad you made it!'
     end
+
+    wait_for_finished_loading
 
     within '.notes-list' do
       expect(page).to have_content 'Get started'

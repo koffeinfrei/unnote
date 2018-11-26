@@ -8,7 +8,7 @@ RSpec.feature 'Free subscription limt', :js do
 
     login_as user
 
-    visit "/#/notes"
+    visit_and_wait "/#/notes"
 
     fill_in 'Title', with: 'title'
 
