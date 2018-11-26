@@ -12,9 +12,7 @@ RSpec.feature 'Free subscription limt', :js do
 
     fill_in 'Title', with: 'title'
 
-    # worst case is we have to wait 1 full autosave polling cycle
-    # (polling cycle is 5 seconds)
-    using_wait_time 6 do
+    after_save_cycle do
       within '.alert' do
         expect(page).to have_content(
           'You have reached your note limit of 1 notes. Please delete some notes or upgrade your subscription'

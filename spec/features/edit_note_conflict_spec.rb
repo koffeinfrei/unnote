@@ -25,9 +25,7 @@ RSpec.feature 'Edit note with conflict', :js do
 
         find('.ql-editor').set('note content - update 2')
 
-        # worst case is we have to wait 1 full autosave polling cycle
-        # (polling cycle is 5 seconds)
-        using_wait_time 6 do
+        after_save_cycle do
           expect(page).to have_content 'Saved'
         end
 
