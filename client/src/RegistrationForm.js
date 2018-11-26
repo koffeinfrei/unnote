@@ -4,6 +4,7 @@ import AlertFlash from './AlertFlash';
 import NoticeFlash from './NoticeFlash';
 import { TextInput, SubmitButton, Utf8 } from './Form';
 import UserLinks from './UserLinks';
+import { scrollToTop } from './scroll';
 
 class RegistrationForm extends Component {
   render() {
@@ -76,7 +77,8 @@ class RegistrationForm extends Component {
       const errors = responseJSON.errors.join('<br>');
 
       AlertFlash.show('Sorry, that did not work. You need to fix your inputs:<br>' + errors)
-    });
+    })
+    .always(scrollToTop);
   }
 }
 

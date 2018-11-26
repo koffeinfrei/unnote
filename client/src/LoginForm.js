@@ -3,6 +3,7 @@ import $ from 'jquery';
 import AlertFlash from './AlertFlash';
 import { TextInput, SubmitButton, Checkbox, Utf8 } from './Form';
 import UserLinks from './UserLinks';
+import { scrollToTop } from './scroll';
 
 class LoginForm extends Component {
   render() {
@@ -50,7 +51,8 @@ class LoginForm extends Component {
     .fail(() => {
       AlertFlash.show('Sorry, that did not work. ' +
                       'Did you enter a wrong username or a wrong password?')
-    });
+    })
+    .always(scrollToTop);
   }
 }
 
