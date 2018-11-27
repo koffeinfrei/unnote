@@ -8,5 +8,5 @@ class User < ApplicationRecord
 
   before_create { self.subscription ||= :free }
 
-  validates :password_confirmation, presence: true
+  validates :password_confirmation, presence: true, on: :create
 end
