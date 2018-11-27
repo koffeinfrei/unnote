@@ -104,6 +104,9 @@ class AutoSave {
         "Your changes won't be lost, once you're signed in they will be saved to the server."
       );
     }
+    else if (xhr.status === 422) {
+      AlertFlash.show(xhr.responseJSON.errors.join('<br>'));
+    }
     else {
       AlertFlash.show('Something went sideways: ' + error.toString());
       console.error('url: ', url, 'xhr: ', xhr, 'status: ', status, 'err: ', error.toString());

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import './global-jquery'; // bootstrap-material-design needs global jQuery
 import 'arrive/src/arrive';
@@ -10,6 +10,7 @@ import 'bootstrap-sass/assets/javascripts/bootstrap/collapse';
 import Flash from './Flash';
 import LoginForm from './LoginForm';
 import NoteEdit from './NoteEdit';
+import RegistrationForm from './RegistrationForm';
 import './App.css';
 import './fonts/roboto.css';
 import './fonts/material-icons.css';
@@ -27,13 +28,13 @@ class App extends Component {
 
   render() {
     return (
-      <HashRouter>
+      <Router>
         <div className="container-fluid">
           <Flash />
           { this.renderLoggedIn() }
           { this.renderLoggedOut() }
         </div>
-      </HashRouter>
+      </Router>
     );
   }
 
@@ -74,13 +75,17 @@ class App extends Component {
   renderLoggedOut() {
     if (this.state.isLoggedIn === false) {
       return (
-        <div className="row">
-          <div className="col-md-6 col-md-offset-3">
-            <div className="well">
-              <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} />
-            </div>
-          </div>
-        </div>
+        <Switch>
+          <Route path='/register' render={props => (
+            <RegistrationForm onLoginSuccess={this.onLoginSuccess.bind(this)} {...props} />
+          )}/>
+
+          <Route path='/login' render={props => (
+            <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} />
+          )}/>
+
+          <Redirect to='/login' />
+        </Switch>
       );
     }
   }

@@ -8571,6 +8571,10 @@ Then, run this script to get the list@mixin (function(){
   right: 16px;
   z-index: 9; }
 
+.btn.btn-no-padding {
+  padding-left: 0;
+  padding-right: 0; }
+
 @media (max-width: 768px) {
   .form-group-no-label {
     margin-top: 0; } }

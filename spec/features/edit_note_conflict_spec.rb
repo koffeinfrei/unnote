@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Edit note with conflict', :js do
   context 'as logged in user' do
-    let(:user) { User.create! email: 'user1@example.com', password: 'asdfasdf' }
+    let(:user) { User.create! email: 'user1@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf' }
 
     before { login_as user }
 
@@ -16,7 +16,7 @@ RSpec.feature 'Edit note with conflict', :js do
         )
 
         # load the note...
-        visit "/#/notes/#{note.uid}/edit"
+        visit_and_wait "/#/notes/#{note.uid}/edit"
         expect(page).to have_content 'my note'
         expect(page).to have_content 'note content'
 
@@ -25,9 +25,7 @@ RSpec.feature 'Edit note with conflict', :js do
 
         find('.ql-editor').set('note content - update 2')
 
-        # worst case is we have to wait 1 full autosave polling cycle
-        # (polling cycle is 5 seconds)
-        using_wait_time 6 do
+        after_save_cycle do
           expect(page).to have_content 'Saved'
         end
 

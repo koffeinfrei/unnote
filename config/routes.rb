@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
   devise_scope :user do
     get 'users/is_authenticated', to: 'users/sessions#is_authenticated'
