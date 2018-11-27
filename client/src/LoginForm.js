@@ -13,11 +13,9 @@ class LoginForm extends Component {
           <Utf8 />
 
           <div className="form-inputs">
-            <TextInput type="email" model="user" attribute="email" label="Email"
-              onChange={this.setValue.bind(this)} />
+            {this.renderTextInput("email", "email", "Email")}
 
-            <TextInput type="password" model="user" attribute="password" label="Password"
-              onChange={this.setValue.bind(this)} />
+            {this.renderTextInput("password", "password", "Password")}
 
             <Checkbox model="user" attribute="remember_me" label="Remember me"
               onChange={this.setValue.bind(this)} />
@@ -28,6 +26,17 @@ class LoginForm extends Component {
           </div>
         </form>
       </UserForm>
+    );
+  }
+
+  renderTextInput(type, attribute, label) {
+    return (
+      <TextInput
+        type={type}
+        model="user"
+        attribute={attribute}
+        label={label}
+        onChange={this.setValue.bind(this)} />
     );
   }
 

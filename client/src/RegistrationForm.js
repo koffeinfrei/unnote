@@ -14,14 +14,11 @@ class RegistrationForm extends Component {
           <Utf8 />
 
           <div className="form-inputs">
-            <TextInput type="email" model="user" attribute="email" label="Email"
-              onChange={this.setValue.bind(this)} />
+            {this.renderTextInput("email", "email", "Email")}
 
-            <TextInput type="password" model="user" attribute="password" label="Password"
-              onChange={this.setValue.bind(this)} />
+            {this.renderTextInput("password", "password", "Password")}
 
-            <TextInput type="password" model="user" attribute="password_confirmation" label="Confirm password"
-              onChange={this.setValue.bind(this)} />
+            {this.renderTextInput("password", "password_confirmation", "Confirm password")}
           </div>
 
           <div className="form-actions">
@@ -45,6 +42,17 @@ class RegistrationForm extends Component {
           GitHub</a> and install it on a server on your own.
         </p>
       </div>
+    );
+  }
+
+  renderTextInput(type, attribute, label) {
+    return (
+      <TextInput
+        type={type}
+        model="user"
+        attribute={attribute}
+        label={label}
+        onChange={this.setValue.bind(this)} />
     );
   }
 
