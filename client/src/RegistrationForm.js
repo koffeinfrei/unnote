@@ -3,46 +3,38 @@ import $ from 'jquery';
 import AlertFlash from './AlertFlash';
 import NoticeFlash from './NoticeFlash';
 import { TextInput, SubmitButton, Utf8 } from './Form';
-import UserLinks from './UserLinks';
 import { scrollToTop } from './scroll';
+import UserForm from './UserForm';
 
 class RegistrationForm extends Component {
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6 col-md-offset-3">
-          { this.renderIntro() }
+      <UserForm intro={this.renderIntro()}>
+        <form onSubmit={this.handleFormSubmit.bind(this)}>
+          <Utf8 />
 
-          <div className="well">
-            <form onSubmit={this.handleFormSubmit.bind(this)}>
-              <Utf8 />
+          <div className="form-inputs">
+            <TextInput type="email" model="user" attribute="email" label="Email"
+              onChange={this.setValue.bind(this)} />
 
-              <div className="form-inputs">
-                <TextInput type="email" model="user" attribute="email" label="Email"
-                  onChange={this.setValue.bind(this)} />
+            <TextInput type="password" model="user" attribute="password" label="Password"
+              onChange={this.setValue.bind(this)} />
 
-                <TextInput type="password" model="user" attribute="password" label="Password"
-                  onChange={this.setValue.bind(this)} />
-
-                <TextInput type="password" model="user" attribute="password_confirmation" label="Confirm password"
-                  onChange={this.setValue.bind(this)} />
-              </div>
-
-              <div className="form-actions">
-                <SubmitButton label="Register" />
-              </div>
-            </form>
-
-            <UserLinks />
+            <TextInput type="password" model="user" attribute="password_confirmation" label="Confirm password"
+              onChange={this.setValue.bind(this)} />
           </div>
-        </div>
-      </div>
+
+          <div className="form-actions">
+            <SubmitButton label="Register" />
+          </div>
+        </form>
+      </UserForm>
     );
   }
 
   renderIntro() {
     return (
-      <div className="jumbotron">
+      <div>
         <p>
           You can register for a <strong>free account</strong> which <strong>limits</strong> you to <strong>100 notes</strong>.
           <br/>

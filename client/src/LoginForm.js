@@ -2,38 +2,32 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import AlertFlash from './AlertFlash';
 import { TextInput, SubmitButton, Checkbox, Utf8 } from './Form';
-import UserLinks from './UserLinks';
 import { scrollToTop } from './scroll';
+import UserForm from './UserForm';
 
 class LoginForm extends Component {
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6 col-md-offset-3">
-          <div className="well">
-            <form onSubmit={this.handleFormSubmit.bind(this)}>
-              <Utf8 />
+      <UserForm>
+        <form onSubmit={this.handleFormSubmit.bind(this)}>
+          <Utf8 />
 
-              <div className="form-inputs">
-                <TextInput type="email" model="user" attribute="email" label="Email"
-                  onChange={this.setValue.bind(this)} />
+          <div className="form-inputs">
+            <TextInput type="email" model="user" attribute="email" label="Email"
+              onChange={this.setValue.bind(this)} />
 
-                <TextInput type="password" model="user" attribute="password" label="Password"
-                  onChange={this.setValue.bind(this)} />
+            <TextInput type="password" model="user" attribute="password" label="Password"
+              onChange={this.setValue.bind(this)} />
 
-                <Checkbox model="user" attribute="remember_me" label="Remember me"
-                  onChange={this.setValue.bind(this)} />
-              </div>
-
-              <div className="form-actions">
-                <SubmitButton label="Log in" />
-              </div>
-            </form>
-
-            <UserLinks />
+            <Checkbox model="user" attribute="remember_me" label="Remember me"
+              onChange={this.setValue.bind(this)} />
           </div>
-        </div>
-      </div>
+
+          <div className="form-actions">
+            <SubmitButton label="Log in" />
+          </div>
+        </form>
+      </UserForm>
     );
   }
 
