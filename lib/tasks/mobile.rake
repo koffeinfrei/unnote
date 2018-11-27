@@ -16,13 +16,6 @@ namespace :mobile do
         '<script src="js/index.js"></script>' \
         '<script src="js/sane_file_reader.js"></script>' \
         '<script src="js/share_to.js"></script>'
-
-      ],
-      [
-        '</head>',
-
-        '<link rel="stylesheet" type="text/css" href="css/index.css">' \
-        '</head>'
       ]
     ].each do |from, to|
       from, to = [from, to].map { |x| x.gsub('/', '\/') }
