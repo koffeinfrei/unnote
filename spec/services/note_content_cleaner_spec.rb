@@ -6,7 +6,7 @@ RSpec.describe NoteContentCleaner do
       note = Note.create!(
         content: 'content1<br>content2',
         uid: SecureRandom.uuid,
-        user: User.create!(email: 'user@example.com', password: 'asdfasdf')
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
       )
 
       NoteContentCleaner.new(note).run!

@@ -48,8 +48,8 @@ RSpec.describe NotePolicy do
   end
 
   permissions ".scope" do
-    let(:user) { User.create! email: 'user1@example.com', password: 'asdfasdf' }
-    let(:other_user) { User.create! email: 'user2@example.com', password: 'asdfasdf' }
+    let(:user) { User.create! email: 'user1@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf' }
+    let(:other_user) { User.create! email: 'user2@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf' }
 
     it 'scopes to own notes' do
       note = Note.create! user: user, uid: SecureRandom.uuid

@@ -7,4 +7,6 @@ class User < ApplicationRecord
   enum subscription: { free: 0, pro: 1 }
 
   before_create { self.subscription ||= :free }
+
+  validates :password_confirmation, presence: true
 end

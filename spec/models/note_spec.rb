@@ -6,7 +6,7 @@ RSpec.describe Note do
       let(:note) do
         Note.create!(
           uid: SecureRandom.uuid,
-          user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
+          user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
           content: 'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
         )
       end
@@ -52,7 +52,7 @@ RSpec.describe Note do
     it 'saves equal images as one file' do
       note = Note.create!(
         uid: SecureRandom.uuid,
-        user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
         content:
         'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
         'content2 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
@@ -67,7 +67,7 @@ RSpec.describe Note do
     it 'retrieves equal images from one file' do
       note = Note.create!(
         uid: SecureRandom.uuid,
-        user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
         content:
         'content1 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338" />' \
         'content2 <img src="360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338" />',
@@ -85,7 +85,7 @@ RSpec.describe Note do
     it 'duplicates the images' do
       note = Note.create!(
         uid: SecureRandom.uuid,
-        user: User.create!(email: 'user@example.com', password: 'asdfasdf'),
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
         content:
         'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
         'content2 <img src="data:image/png;base64,/9j/5AAQSkZJRgABAQEASABKdhH//2Q=" />',
@@ -105,7 +105,7 @@ RSpec.describe Note do
     it 'generates a new uuid' do
       note = Note.create!(
         uid: SecureRandom.uuid,
-        user: User.create!(email: 'user@example.com', password: 'asdfasdf')
+        user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
       )
 
       dup_note = note.dup
@@ -122,7 +122,7 @@ RSpec.describe Note do
       Timecop.freeze(now) do
         note = Note.create!(
           uid: SecureRandom.uuid,
-          user: User.create!(email: 'user@example.com', password: 'asdfasdf')
+          user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
         )
 
         note.archive!
@@ -135,7 +135,7 @@ RSpec.describe Note do
   describe '.archived' do
     it 'returns only the archived note' do
       user = User.create!(
-        email: 'user@example.com', password: 'asdfasdf'
+        email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'
       )
       archived = Note.create!(
         uid: SecureRandom.uuid,
@@ -155,7 +155,7 @@ RSpec.describe Note do
   describe '.unarchived' do
     it 'returns only the unarchived note' do
       user = User.create!(
-        email: 'user@example.com', password: 'asdfasdf'
+        email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'
       )
       Note.create!(
         uid: SecureRandom.uuid,
@@ -174,7 +174,7 @@ RSpec.describe Note do
 
   describe 'validation: does_not_exceed_free_count_limit' do
     context 'pro subscription' do
-      let(:user) { User.create! email: 'user@example.com', password: 'asdfasdf', subscription: :pro }
+      let(:user) { User.create! email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf', subscription: :pro }
 
       it 'allows unlimited notes' do
         stub_const('Note::FREE_COUNT_LIMIT', 1)
@@ -195,7 +195,7 @@ RSpec.describe Note do
     end
 
     context 'free subscription' do
-      let(:user) { User.create! email: 'user@example.com', password: 'asdfasdf', subscription: :free }
+      let(:user) { User.create! email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf', subscription: :free }
 
       it 'fails validation when limit is exceeded' do
         stub_const('Note::FREE_COUNT_LIMIT', 1)
