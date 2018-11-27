@@ -18,9 +18,14 @@ class RegistrationForm extends Component {
               <Utf8 />
 
               <div className="form-inputs">
-                <TextInput type="email" model="user" attribute="email" label="Email" />
-                <TextInput type="password" model="user" attribute="password" label="Password" />
-                <TextInput type="password" model="user" attribute="password_confirmation" label="Confirm password" />
+                <TextInput type="email" model="user" attribute="email" label="Email"
+                  onChange={this.setValue.bind(this)} />
+
+                <TextInput type="password" model="user" attribute="password" label="Password"
+                  onChange={this.setValue.bind(this)} />
+
+                <TextInput type="password" model="user" attribute="password_confirmation" label="Confirm password"
+                  onChange={this.setValue.bind(this)} />
               </div>
 
               <div className="form-actions">
@@ -51,17 +56,18 @@ class RegistrationForm extends Component {
     );
   }
 
+  setValue(name, value) {
+    this.setState({ [name]: value });
+  }
+
   handleFormSubmit(e) {
     e.preventDefault();
 
-    const url = '/users';
-    const data = $(e.target).serialize();
-
     $.ajax({
-      url: url,
+      url: '/users',
       method: 'POST',
       dataType: 'json',
-      data: data
+      data: this.state
     })
     .done((data) => {
       AlertFlash.clear();

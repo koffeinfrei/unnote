@@ -11,7 +11,8 @@ export function TextInput(props) {
         type={props.type}
         id={idValue(props)}
         name={nameValue(props)}
-        className="string form-control" />
+        className="string form-control"
+        onChange={(e) => props.onChange(nameValue(props), e.target.value)} />
     </div>
   );
 }
@@ -24,7 +25,8 @@ export function Checkbox(props) {
           <input
             type="checkbox"
             id={idValue(props)}
-            name={nameValue(props)} />
+            name={nameValue(props)}
+            onChange={(e) => props.onChange(nameValue(props), e.target.checked)} />
 
           {props.label}
         </label>

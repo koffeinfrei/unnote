@@ -15,9 +15,14 @@ class LoginForm extends Component {
               <Utf8 />
 
               <div className="form-inputs">
-                <TextInput type="email" model="user" attribute="email" label="Email" />
-                <TextInput type="password" model="user" attribute="password" label="Password" />
-                <Checkbox model="user" attribute="remember_me" label="Remember me" />
+                <TextInput type="email" model="user" attribute="email" label="Email"
+                  onChange={this.setValue.bind(this)} />
+
+                <TextInput type="password" model="user" attribute="password" label="Password"
+                  onChange={this.setValue.bind(this)} />
+
+                <Checkbox model="user" attribute="remember_me" label="Remember me"
+                  onChange={this.setValue.bind(this)} />
               </div>
 
               <div className="form-actions">
@@ -32,17 +37,18 @@ class LoginForm extends Component {
     );
   }
 
+  setValue(name, value) {
+    this.setState({ [name]: value });
+  }
+
   handleFormSubmit(e) {
     e.preventDefault();
 
-    const url = '/users/sign_in';
-    const data = $(e.target).serialize();
-
     $.ajax({
-      url: url,
+      url: '/users/sign_in',
       method: 'POST',
       dataType: 'json',
-      data: data
+      data: this.state
     })
     .done((data) => {
       AlertFlash.clear();
