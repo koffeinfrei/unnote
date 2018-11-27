@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import AlertFlash from './AlertFlash';
-import { TextInput, SubmitButton, Checkbox, Utf8 } from './Form';
+import { TextInput, SubmitButton, Checkbox, Utf8, nameValue } from './Form';
 import { scrollToTop } from './scroll';
 import UserForm from './UserForm';
 
 class LoginForm extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      [nameValue({ model: 'user', attribute: 'remember_me' })]: props.alwaysRememberMe
+    };
+  }
+
   render() {
     return (
       <UserForm>
@@ -17,8 +25,12 @@ class LoginForm extends Component {
 
             {this.renderTextInput("password", "password", "Password")}
 
-            <Checkbox model="user" attribute="remember_me" label="Remember me"
-              onChange={this.setValue.bind(this)} />
+            {this.props.alwaysRememberMe ? (
+              null
+            ) : (
+              <Checkbox model="user" attribute="remember_me" label="Remember me"
+                onChange={this.setValue.bind(this)} />
+            )}
           </div>
 
           <div className="form-actions">

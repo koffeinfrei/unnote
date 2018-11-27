@@ -81,7 +81,7 @@ class App extends Component {
           )}/>
 
           <Route path='/login' render={props => (
-            <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} />
+            <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} alwaysRememberMe={window.ALWAYS_REMEMBER_ME} />
           )}/>
 
           <Redirect to='/login' />
