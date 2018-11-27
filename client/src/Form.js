@@ -54,6 +54,6 @@ function idValue(props) {
   return `${props.model}_${props.attribute}`;
 }
 
-function nameValue(props) {
+export function nameValue(props) {
   return `${props.model}[${props.attribute}]`;
 }
