@@ -17,7 +17,8 @@ RSpec.describe 'Free subscription limt', :js do
     after_save_cycle do
       within '.alert' do
         expect(page).to have_content(
-          'You have reached your note limit of 1 notes. Please delete some notes or upgrade your subscription'
+          'You have reached your note limit of 1 notes. ' \
+          'Please delete some notes or upgrade your subscription'
         )
       end
     end

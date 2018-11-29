@@ -3,7 +3,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
 require 'spec_helper'
 require 'rspec/rails'
 require 'pundit/rspec'
@@ -23,7 +25,8 @@ RSpec.configure do |config|
 
   deploy_client = DeployClient.new
   config.before :suite do
-    puts '--> Building the client app and deploying it to the public directory...'
+    puts '--> Building the client app and deploying it ' \
+         'to the public directory...'
 
     deploy_client.deploy_public
   end
