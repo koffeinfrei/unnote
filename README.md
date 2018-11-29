@@ -77,6 +77,15 @@ For the capybara e2e tests headless firefox / geckodriver is used.
 - Put both binaries in your `$PATH`
 
 
+## Links
+
+- [Homepage www.mykonote.com](https://www.mykonote.com)
+- [Web app at app.mykonote.com](https://app.mykonote.com)
+- [Mobile app on Google
+  Play](https://play.google.com/store/apps/details?id=com.mykonote)
+- [Mobile app source code](https://github.com/panter/mykonote-app)
+
+
 ## License
 
     Copyright 2016 Panter AG <info@panter.ch>
