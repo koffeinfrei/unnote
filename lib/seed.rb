@@ -15,7 +15,7 @@ module Seed
   module_function :seed
 
   def seed_file(name)
-    File.new(Rails.root.join('db/seeds').join(name))
+    File.new(Rails.root.join('db', 'seeds').join(name))
   end
   module_function :seed_file
 end

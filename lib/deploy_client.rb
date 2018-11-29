@@ -51,7 +51,7 @@ class DeployClient
   end
 
   def build_files_from_manifest(directory)
-    manifest_file = File.join(directory, 'asset-manifest.json');
+    manifest_file = File.join(directory, 'asset-manifest.json')
 
     return [] unless File.exist?(manifest_file)
 
