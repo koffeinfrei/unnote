@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
+  # rubocop:disable Metrics/MethodLength
   def up
     add_column :notes, :tsv_title, :tsvector
     add_column :notes, :tsv_content, :tsvector
@@ -47,4 +48,5 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
     remove_column :notes, :tsv_title
     remove_column :notes, :tsv_content
   end
+  # rubocop:enable Metrics/MethodLength
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
+  # rubocop:disable Metrics/MethodLength
   def up
     rename_column :notes, :content, :text_content
 
@@ -44,4 +45,5 @@ class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
       update('UPDATE notes SET title = title')
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end
