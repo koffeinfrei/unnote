@@ -2,7 +2,7 @@
 
 namespace :import do
   desc 'Import from an evernote .enex file'
-  task :evernote, [:enex_file, :user_email] => [:environment] do |_task, args|
+  task :evernote, %i[enex_file user_email] => [:environment] do |_task, args|
     require Rails.root.join('lib/evernote_importer')
 
     enex_file = args[:enex_file]

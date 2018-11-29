@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :notes, only: [:index, :show, :update, :destroy]
+    resources :notes, only: %i[index show update destroy]
   end
 end

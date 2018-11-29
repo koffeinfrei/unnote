@@ -17,12 +17,12 @@ class Note < ApplicationRecord
     using: {
       tsearch: {
         prefix: true,
-        tsvector_column: [:tsv_title, :tsv_content]
+        tsvector_column: %i[tsv_title tsv_content]
       }
     }
   )
 
-  has_paper_trail skip: [:tsv_title, :tsv_content]
+  has_paper_trail skip: %i[tsv_title tsv_content]
 
   mount_uploaders :images, ImageUploader
 

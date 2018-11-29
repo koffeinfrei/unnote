@@ -30,9 +30,10 @@ class EvernoteImporter
       content.css('en-media').each_with_index do |media, i|
         resource = resources[i]
         next unless resource
+
         mime = resource.css('mime').text
         image_data = resource.css('data').text.gsub("\n", '')
-        image = %{<img src="data:#{mime};base64,#{image_data}" />}
+        image = %(<img src="data:#{mime};base64,#{image_data}" />)
         media.replace(image)
       end
 
@@ -40,7 +41,7 @@ class EvernoteImporter
       if note_attributes
         source_url = note_attributes.css('source-url')
         if source_url
-          content_parts << %{<p>Source url: <a href="#{source_url.text}">#{source_url.text}</a></p>}
+          content_parts << %(<p>Source url: <a href="#{source_url.text}">#{source_url.text}</a></p>)
         end
       end
 
