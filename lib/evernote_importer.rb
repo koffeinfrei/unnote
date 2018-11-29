@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable all
 require Rails.root.join('lib/seed')
 
 class EvernoteImporter
