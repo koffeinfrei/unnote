@@ -41,8 +41,18 @@ class Note < ApplicationRecord
     uid
   end
 
-  def as_json(_options = {})
-    super(only: [:uid, :title, :created_at, :updated_at, :archived_at]).merge(content: content)
+  def as_json(options = {})
+    only = options.fetch(
+      :only,
+      %i[uid title created_at updated_at archived_at content]
+    ).map(&:to_s)
+    options = { only: only }.merge(options)
+
+    # use the actual content (see `HasContent`)
+    json = super(options).merge('content' => content)
+
+    # we need to slice again for `content` to be considered as well
+    json.slice(*only)
   end
 
   def dup

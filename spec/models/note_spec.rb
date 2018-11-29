@@ -83,6 +83,76 @@ RSpec.describe Note do
     end
   end
 
+  describe '#as_json' do
+    context 'when no options provided' do
+      it 'returns the whitelisted attributes' do
+        note = described_class.new(
+          uid: '78428484-e602-4e27-8fea-0c4e79f74c5b',
+          title: 'note 1',
+          content: 'content 1',
+          created_at: Time.zone.local(2016, 8, 1, 15, 33),
+          updated_at: Time.zone.local(2016, 8, 1, 15, 33),
+          archived_at: nil
+        )
+
+        expect(note.as_json).to eq(
+          {
+            uid: '78428484-e602-4e27-8fea-0c4e79f74c5b',
+            title: 'note 1',
+            content: 'content 1',
+            created_at: Time.zone.local(2016, 8, 1, 15, 33),
+            updated_at: Time.zone.local(2016, 8, 1, 15, 33),
+            archived_at: nil
+          }.stringify_keys
+        )
+      end
+    end
+
+    context 'when :only option provided' do
+      let(:note) do
+        described_class.new(
+          uid: '78428484-e602-4e27-8fea-0c4e79f74c5b',
+          title: 'note 1',
+          content: 'content 1',
+          created_at: Time.zone.local(2016, 8, 1, 15, 33),
+          updated_at: Time.zone.local(2016, 8, 1, 15, 33),
+          archived_at: nil
+        )
+      end
+
+      it 'returns only the requested uid and content attributes' do
+        json = note.as_json(only: %i[uid content])
+
+        expect(json).to eq(
+          {
+            uid: '78428484-e602-4e27-8fea-0c4e79f74c5b',
+            content: 'content 1'
+          }.stringify_keys
+        )
+      end
+
+      it 'returns only the requested uid attribute' do
+        json = note.as_json(only: [:uid])
+
+        expect(json).to eq(
+          {
+            uid: '78428484-e602-4e27-8fea-0c4e79f74c5b'
+          }.stringify_keys
+        )
+      end
+
+      it 'returns only the requested content attribute' do
+        json = note.as_json(only: [:content])
+
+        expect(json).to eq(
+          {
+            content: 'content 1'
+          }.stringify_keys
+        )
+      end
+    end
+  end
+
   describe '#dup' do
     it 'duplicates the images' do
       note = Note.create!(
