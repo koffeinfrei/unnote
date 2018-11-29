@@ -62,12 +62,12 @@ class Note < ApplicationRecord
   private
 
   def does_not_exceed_free_count_limit
-    if user.notes.count >= FREE_COUNT_LIMIT
-      errors.add(
-        :base,
-        "You have reached your note limit of #{FREE_COUNT_LIMIT} notes. " \
-        "Please delete some notes or upgrade your subscription."
-      )
-    end
+    return if user.notes.count < FREE_COUNT_LIMIT
+
+    errors.add(
+      :base,
+      "You have reached your note limit of #{FREE_COUNT_LIMIT} notes. " \
+      'Please delete some notes or upgrade your subscription.'
+    )
   end
 end

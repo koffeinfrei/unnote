@@ -18,9 +18,7 @@ class EvernoteImporter
 
       created_at = note.css('created').text
       updated_at = note.css('updated').text
-      if updated_at.blank?
-        updated_at = created_at
-      end
+      updated_at = created_at if updated_at.blank?
       created_at = DateTime.parse(created_at)
       updated_at = DateTime.parse(updated_at)
 
