@@ -21,6 +21,13 @@ Layout/MultilineOperationIndentation:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Metrics/BlockLength:
+  ExcludedMethods:
+    - refine
+    - context
+    - RSpec.describe
+    - describe
+
 RSpec/RepeatedExample:
   Exclude:
     - 'spec/policies/**/*'
@@ -38,13 +45,12 @@ RSpec/ContextWording:
     - with
     - without
 
-Metrics/BlockLength:
-  ExcludedMethods:
-    - refine
-    - context
-    - RSpec.describe
-    - describe
-
 # describing a feature spec without `type: :feature` doesn't work
 RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
   Enabled: false
