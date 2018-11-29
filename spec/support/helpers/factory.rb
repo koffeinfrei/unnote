@@ -10,6 +10,14 @@ module Factory
 
     User.create!(attributes)
   end
+
+  def create_note(attributes = {})
+    attributes = {
+      uid: SecureRandom.uuid
+    }.merge(attributes)
+
+    Note.create!(attributes)
+  end
 end
 
 RSpec.configuration.include Factory
