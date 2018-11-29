@@ -40,7 +40,7 @@ What Mykonote offers:
   lists)
 * Mobile support
 * [A mobile app](https://github.com/panter/mykonote-app)
-* Offline support, so you don't lose data when the connection is bad or even
+* Pseudo offline support, so you don't lose data when the connection is bad or even
   missing. The next time the internet is up again your edits will be synced to
   the server.
 * A simple and fast user experience
