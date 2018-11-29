@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Edit note with conflict', :js do
+RSpec.describe 'Edit note with conflict', :js do
   context 'as logged in user' do
     let(:user) { User.create! email: 'user1@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf' }
 
     before { login_as user }
 
-    scenario 'A copy of the note is created' do
+    it 'A copy of the note is created' do
       Timecop.travel(Time.local(2016, 8, 1, 15, 33)) do
         note = Note.create!(
           title: 'my note',

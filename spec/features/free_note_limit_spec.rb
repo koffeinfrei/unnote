@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Free subscription limt', :js do
-  scenario 'Does not allow to create a new note when the limit is exceeded' do
+RSpec.describe 'Free subscription limt', :js do
+  it 'Does not allow to create a new note when the limit is exceeded' do
     user = User.create! email: 'user1@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf', subscription: :free
     Note.create! title: 'my_note', user: user, uid: SecureRandom.uuid
     stub_const('Note::FREE_COUNT_LIMIT', 1)

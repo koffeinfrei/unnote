@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Base64File do
-  let(:file) { double(:file, original_filename: 'rainbow.jpg') }
+  subject(:base64_file) { described_class.new(file) }
 
-  subject { Base64File.new(file) }
+  let(:file) { instance_double(CarrierWave::SanitizedFile, original_filename: 'rainbow.jpg') }
 
   describe '#filename_without_extension' do
     it 'returns the filename without the extension' do

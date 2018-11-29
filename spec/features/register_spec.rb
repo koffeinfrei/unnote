@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Register a new user', :js do
-  scenario 'A new user is registered with a free subscription and a get started note' do
+RSpec.describe 'Register a new user', :js do
+  it 'A new user is registered with a free subscription and a get started note' do
     visit_and_wait '/#'
 
     click_on 'Register'
