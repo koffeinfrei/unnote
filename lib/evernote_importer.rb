@@ -32,7 +32,7 @@ class EvernoteImporter
         next unless resource
 
         mime = resource.css('mime').text
-        image_data = resource.css('data').text.gsub("\n", '')
+        image_data = resource.css('data').text.delete("\n")
         image = %(<img src="data:#{mime};base64,#{image_data}" />)
         media.replace(image)
       end
