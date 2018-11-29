@@ -27,7 +27,7 @@ RSpec.describe Note do
       end
 
       it 'adds one image and removes one' do
-        note.update_attributes!(
+        note.update!(
           content:
           'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />' \
           'content2 <img src="data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q=" />'

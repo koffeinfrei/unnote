@@ -23,7 +23,7 @@ RSpec.feature 'Edit note with conflict', :js do
         expect(page).to have_content 'note content'
 
         # ...in the meantime there's an edit
-        note.update_attributes! content: '<p>note content - update 1</p>'
+        note.update! content: '<p>note content - update 1</p>'
 
         find('.ql-editor').set('note content - update 2')
 

@@ -6,7 +6,7 @@ class ExtractContentImagesToFiles < ActiveRecord::Migration[4.2]
     ActiveRecord::Base.record_timestamps = false
     begin
       Note.find_each do |note|
-        note.update_attributes!(content: note.content)
+        note.update!(content: note.content)
       end
     ensure
       ActiveRecord::Base.record_timestamps = true
