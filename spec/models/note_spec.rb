@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe Note do
   describe '#content=' do
-    context 'content contains 1 image' do
+    context 'when content contains 1 image' do
       let(:note) do
-        Note.create!(
+        described_class.create!(
           uid: SecureRandom.uuid,
           user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
           content: 'content1 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=" />'
@@ -52,7 +52,7 @@ RSpec.describe Note do
     end
 
     it 'saves equal images as one file' do
-      note = Note.create!(
+      note = described_class.create!(
         uid: SecureRandom.uuid,
         user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
         content:
@@ -67,7 +67,7 @@ RSpec.describe Note do
 
   describe '#content' do
     it 'retrieves equal images from one file' do
-      note = Note.create!(
+      note = described_class.create!(
         uid: SecureRandom.uuid,
         user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
         content:
@@ -155,7 +155,7 @@ RSpec.describe Note do
 
   describe '#dup' do
     it 'duplicates the images' do
-      note = Note.create!(
+      note = described_class.create!(
         uid: SecureRandom.uuid,
         user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf'),
         content:
@@ -175,7 +175,7 @@ RSpec.describe Note do
     end
 
     it 'generates a new uuid' do
-      note = Note.create!(
+      note = described_class.create!(
         uid: SecureRandom.uuid,
         user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
       )
@@ -192,7 +192,7 @@ RSpec.describe Note do
       now = Time.local(2016, 8, 1, 15, 33)
 
       Timecop.freeze(now) do
-        note = Note.create!(
+        note = described_class.create!(
           uid: SecureRandom.uuid,
           user: User.create!(email: 'user@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
         )
