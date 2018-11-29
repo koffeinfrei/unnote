@@ -7,8 +7,8 @@ module Seed
     if record.update(update_with)
       record
     else
-      raise "Couldn't save #{record.class} " +
-        "(#{record.errors.full_messages.join(', ')}) with provided data: " +
+      raise "Couldn't save #{record.class} " \
+        "(#{record.errors.full_messages.join(', ')}) with provided data: " \
         "#{find_or_create_by.inspect}, #{update_with.inspect}"
     end
   end
