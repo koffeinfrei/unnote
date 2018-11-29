@@ -9,7 +9,7 @@ RSpec.describe 'Edit note with conflict', :js do
     before { login_as user }
 
     it 'A copy of the note is created' do
-      Timecop.travel(Time.local(2016, 8, 1, 15, 33)) do
+      Timecop.travel(Time.zone.local(2016, 8, 1, 15, 33)) do
         note = Note.create!(
           title: 'my note',
           user: user,
