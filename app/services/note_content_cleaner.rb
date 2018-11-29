@@ -12,13 +12,20 @@ class NoteContentCleaner
     file.write(@note.content)
     file.close
 
-    content = Phantomjs.run(
-      Rails.root.join('app/assets/javascripts/phantomjs/quill_format.js').to_s,
-      file.path
-    ).strip
-
-    @note.update_attributes!(content: content)
+    @note.update!(content: content(file))
 
     file.unlink
+  end
+
+  private
+
+  def content(file)
+    Phantomjs.run(script_path, file.path).strip
+  end
+
+  def script_path
+    Rails.root.join(
+      'app', 'assets', 'javascripts', 'phantomjs', 'quill_format.js'
+    ).to_s
   end
 end
