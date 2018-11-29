@@ -8,7 +8,10 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
     add_index :notes, :tsv_title, using: 'gin'
     add_index :notes, :tsv_content, using: 'gin'
 
-    say_with_time 'Adding trigger functions on notes for updating tsv_title and tsv_content columns' do
+    message = 'Adding trigger functions on notes for updating tsv_title ' \
+      'and tsv_content columns'
+
+    say_with_time message do
       sql = <<-SQL
         CREATE TRIGGER update_title_tsvector BEFORE INSERT OR UPDATE
         ON notes FOR EACH ROW EXECUTE PROCEDURE
@@ -28,7 +31,10 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
   end
 
   def down
-    say_with_time 'Removing trigger functions on notes for updating tsv_title and tsv_content columns' do
+    message = 'Removing trigger functions on notes for updating tsv_title ' \
+      'and tsv_content columns'
+
+    say_with_time message do
       execute <<-SQL
         DROP TRIGGER update_title_tsvector ON notes;
         DROP TRIGGER update_content_tsvector ON notes;

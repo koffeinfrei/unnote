@@ -10,8 +10,9 @@ namespace :import do
 
     if enex_file.nil? || user_email.nil?
       abort(
-        "You need to provide an enex file location and the user email address.\n" \
-        "E.g. `rake import:evernote[Evernote.enex,user@example.com]`"
+        'You need to provide an enex file location and the user email ' \
+        "address.\n" \
+        'E.g. `rake import:evernote[Evernote.enex,user@example.com]`'
       )
     end
 

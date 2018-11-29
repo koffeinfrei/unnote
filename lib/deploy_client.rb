@@ -41,7 +41,9 @@ class DeployClient
   def cleanup(directory)
     files =
       build_files_from_manifest(directory) +
-      build_files_from_build.map { |file| file.sub(%r{^client/build/}, "#{directory}/") }
+      build_files_from_build.map do |file|
+        file.sub(%r{^client/build/}, "#{directory}/")
+      end
 
     files.each do |file|
       FileUtils.rm_r(file) if File.exist?(file)

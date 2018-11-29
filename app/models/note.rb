@@ -31,7 +31,11 @@ class Note < ApplicationRecord
   scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
 
-  validate :does_not_exceed_free_count_limit, on: :create, if: -> (note) { note.user.free? }
+  validate(
+    :does_not_exceed_free_count_limit,
+    on: :create,
+    if: ->(note) { note.user.free? }
+  )
 
   def to_param
     uid

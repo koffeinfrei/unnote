@@ -2,7 +2,8 @@
 
 namespace :data do
   namespace :format do
-    desc 'Formats the html content of all notes such that it is quill compatible'
+    desc 'Formats the html content of all notes such that it is quill ' \
+      'compatible'
     task all: :environment do
       ActiveRecord::Base.record_timestamps = false
       begin

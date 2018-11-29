@@ -7,7 +7,8 @@ class Base64StringIO < StringIO
 
   attr_accessor :file_format, :file_name
 
-  # @param [String] encoded_file e.g. "data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=="
+  # @param [String] encoded_file e.g.
+  #   "data:image/jpg;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q=="
   def initialize(encoded_file)
     description, encoded_bytes = encoded_file.split(',')
 

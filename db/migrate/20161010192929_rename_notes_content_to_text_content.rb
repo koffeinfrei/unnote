@@ -4,7 +4,10 @@ class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
   def up
     rename_column :notes, :content, :text_content
 
-    say_with_time 'Adding trigger functions on notes for updating tsv_title and tsv_content columns' do
+    message = 'Adding trigger functions on notes for updating tsv_title and ' \
+      'tsv_content columns'
+
+    say_with_time message do
       sql = <<-SQL
         DROP TRIGGER update_content_tsvector ON notes;
         CREATE TRIGGER update_content_tsvector BEFORE INSERT OR UPDATE
@@ -23,7 +26,10 @@ class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
   def down
     rename_column :notes, :text_content, :content
 
-    say_with_time 'Adding trigger functions on notes for updating tsv_title and tsv_content columns' do
+    message = 'Adding trigger functions on notes for updating tsv_title and ' \
+      'tsv_content columns'
+
+    say_with_time message do
       sql = <<-SQL
         DROP TRIGGER update_content_tsvector ON notes;
         CREATE TRIGGER update_content_tsvector BEFORE INSERT OR UPDATE
