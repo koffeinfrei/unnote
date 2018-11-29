@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    get 'users/is_authenticated', to: 'users/sessions#is_authenticated'
+    get 'users/is_authenticated', to: 'users/sessions#authenticated?'
   end
 
   namespace :api do
