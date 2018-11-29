@@ -3,6 +3,10 @@
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
+You may register for a free account at
+[mykonote.com](https://app.mykonote.com), which is limited to 100 notes.
+
+
 ![desktop](screenshot_desktop.png)
 
 ![mobile note](screenshot_mobile_1.png)
