@@ -303,14 +303,4 @@ RSpec.describe Note do
       end
     end
   end
-
-  def create_user(attributes = {})
-    attributes = {
-      email: 'user@example.com',
-      password: 'asdfasdf',
-      password_confirmation: 'asdfasdf'
-    }.merge(attributes)
-
-    User.create!(attributes)
-  end
 end

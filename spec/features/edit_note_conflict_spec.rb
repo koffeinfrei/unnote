@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Edit note with conflict', :js do
   context 'as logged in user' do
-    let(:user) { User.create! email: 'user1@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf' }
+    let(:user) { create_user }
 
     before { login_as user }
 
