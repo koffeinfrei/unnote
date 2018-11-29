@@ -4,7 +4,7 @@ module HasContent
   extend ActiveSupport::Concern
 
   def content=(content)
-    new_image_files = extract_image_files_from_content(content)
+    content, new_image_files = extract_image_files_from_content(content)
 
     remove_obsolete_files!(new_image_files)
     add_new_files!(new_image_files)
@@ -22,10 +22,7 @@ module HasContent
 
     images.map do |image|
       base64_file = Base64File.new(image.file)
-      content.gsub!(
-        /(<img.*? src=['"])(#{base64_file.filename_without_extension})(['"].*?>)/,
-        "\\1#{base64_file.data_url}\\3"
-      )
+      content = replace_placeholder_by_data(content, base64_file)
     end
 
     content
