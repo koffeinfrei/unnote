@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Note < ApplicationRecord
   FREE_COUNT_LIMIT = 100
 

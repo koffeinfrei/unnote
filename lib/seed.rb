@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Seed
   def seed(model, find_or_create_by, update_with = {})
     record = model.where(find_or_create_by).first_or_initialize

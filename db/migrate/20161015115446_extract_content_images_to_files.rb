@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExtractContentImagesToFiles < ActiveRecord::Migration[4.2]
   def change
     # don't update updated_at

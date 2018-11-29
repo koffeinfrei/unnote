@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # initially taken from
 # https://github.com/lebedev-yury/carrierwave-base64/blob/master/lib/carrierwave/base64/base64_string_io.rb
 class Base64StringIO < StringIO

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class DeployClient
-  BUILD_DIRECTORY = 'client/build'.freeze
-  PUBLIC_DIRECTORY = 'public'.freeze
-  MOBILE_DIRECTORY = '../mykonote-app/www/'.freeze
+  BUILD_DIRECTORY = 'client/build'
+  PUBLIC_DIRECTORY = 'public'
+  MOBILE_DIRECTORY = '../mykonote-app/www/'
 
   def deploy_public
     cleanup(PUBLIC_DIRECTORY)

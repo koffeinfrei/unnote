@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :client do
   desc 'Install npm packages'
   task npm_install: :environment do

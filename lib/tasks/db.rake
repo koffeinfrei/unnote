@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :db do
   # Define a helper to create or update seed records
   task seed: :seed_helper

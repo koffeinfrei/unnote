@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
   def up
     rename_column :notes, :content, :text_content

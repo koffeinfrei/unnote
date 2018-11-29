@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 user = seed User, { email: 'user@example.com' }, {
   password: 'asdfasdf'
 }

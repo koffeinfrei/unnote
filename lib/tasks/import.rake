@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :import do
   desc 'Import from an evernote .enex file'
   task :evernote, [:enex_file, :user_email] => [:environment] do |_task, args|

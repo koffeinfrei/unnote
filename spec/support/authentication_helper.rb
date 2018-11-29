@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Exposes common login and logout methods for
 # all the different spec types to use.
 module AuthenticationHelper

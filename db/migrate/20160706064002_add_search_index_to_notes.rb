@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
   def up
     add_column :notes, :tsv_title, :tsvector

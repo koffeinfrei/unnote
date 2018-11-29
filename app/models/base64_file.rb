@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Base64File
   def initialize(file)
     @file = file
