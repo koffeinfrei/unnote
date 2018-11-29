@@ -3,6 +3,23 @@
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
+*You can register for a free account at
+[mykonote.com](https://app.mykonote.com/#/register) or within the Android
+[mobile app](https://github.com/panter/mykonote-app), which is available on
+[Google Play](https://play.google.com/store/apps/details?id=com.mykonote).*
+<br>
+*The free account is limited to 100 notes.*
+
+<a
+  href='https://play.google.com/store/apps/details?id=com.mykonote&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+  <img
+    alt='Get it on Google Play'
+    src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
+    height="60px" />
+</a>
+
+---
+
 ![desktop](screenshot_desktop.png)
 
 ![mobile note](screenshot_mobile_1.png)
@@ -23,7 +40,7 @@ What Mykonote offers:
   lists)
 * Mobile support
 * [A mobile app](https://github.com/panter/mykonote-app)
-* Offline support, so you don't lose data when the connection is bad or even
+* Pseudo offline support, so you don't lose data when the connection is bad or even
   missing. The next time the internet is up again your edits will be synced to
   the server.
 * A simple and fast user experience
@@ -58,6 +75,15 @@ For the capybara e2e tests headless firefox / geckodriver is used.
 - [Download latest firefox beta](https://www.mozilla.org/en-US/firefox/channel/desktop/)
 - [Download latest geckodriver](https://github.com/mozilla/geckodriver/releases/latest)
 - Put both binaries in your `$PATH`
+
+
+## Links
+
+- [Homepage www.mykonote.com](https://www.mykonote.com)
+- [Web app at app.mykonote.com](https://app.mykonote.com)
+- [Mobile app on Google
+  Play](https://play.google.com/store/apps/details?id=com.mykonote)
+- [Mobile app source code](https://github.com/panter/mykonote-app)
 
 
 ## License
