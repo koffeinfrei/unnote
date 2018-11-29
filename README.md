@@ -3,9 +3,22 @@
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
-You may register for a free account at
-[mykonote.com](https://app.mykonote.com), which is limited to 100 notes.
+*You can register for a free account at
+[mykonote.com](https://app.mykonote.com/#/register) or within the Android
+[mobile app](https://github.com/panter/mykonote-app), which is available on
+[Google Play](https://play.google.com/store/apps/details?id=com.mykonote).*
+<br>
+*The free account is limited to 100 notes.*
 
+<a
+  href='https://play.google.com/store/apps/details?id=com.mykonote&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+  <img
+    alt='Get it on Google Play'
+    src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
+    height="60px" />
+</a>
+
+---
 
 ![desktop](screenshot_desktop.png)
 
