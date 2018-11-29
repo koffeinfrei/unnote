@@ -19,7 +19,7 @@ class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
     end
 
     say_with_time 'Triggering generating indexes' do
-      update("UPDATE notes SET title = title")
+      update('UPDATE notes SET title = title')
     end
   end
 
@@ -41,7 +41,7 @@ class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
     end
 
     say_with_time 'Triggering generating indexes' do
-      update("UPDATE notes SET title = title")
+      update('UPDATE notes SET title = title')
     end
   end
 end
