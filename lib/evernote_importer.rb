@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # rubocop:disable all
-require Rails.root.join('lib/seed')
 
 class EvernoteImporter
   def initialize(enex_file, user_email)
@@ -46,14 +45,14 @@ class EvernoteImporter
         end
       end
 
-      note = Seed.seed Note, { title: title, user: @user }, {
+      note = Note.create!(
+        title: title,
+        user: @user,
         content: content_parts.join,
         created_at: created_at,
         updated_at: updated_at,
         uid: SecureRandom.uuid
-      }
-
-      note.save!
+      )
 
       p note
     end
