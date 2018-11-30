@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class DeployClient
-  BUILD_DIRECTORY = 'client/build'.freeze
-  PUBLIC_DIRECTORY = 'public'.freeze
-  MOBILE_DIRECTORY = '../mykonote-app/www/'.freeze
+  BUILD_DIRECTORY = 'client/build'
+  PUBLIC_DIRECTORY = 'public'
+  MOBILE_DIRECTORY = '../mykonote-app/www/'
 
   def deploy_public
     cleanup(PUBLIC_DIRECTORY)
@@ -39,7 +41,9 @@ class DeployClient
   def cleanup(directory)
     files =
       build_files_from_manifest(directory) +
-      build_files_from_build.map { |file| file.sub(%r{^client/build/}, "#{directory}/") }
+      build_files_from_build.map do |file|
+        file.sub(%r{^client/build/}, "#{directory}/")
+      end
 
     files.each do |file|
       FileUtils.rm_r(file) if File.exist?(file)
@@ -47,7 +51,7 @@ class DeployClient
   end
 
   def build_files_from_manifest(directory)
-    manifest_file = File.join(directory, 'asset-manifest.json');
+    manifest_file = File.join(directory, 'asset-manifest.json')
 
     return [] unless File.exist?(manifest_file)
 

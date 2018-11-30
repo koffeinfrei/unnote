@@ -21,3 +21,12 @@ before_script:
   - bundle exec rake client:npm_install
   - bundle exec rake client:build_and_deploy
   - psql -c 'create database mykonote_test;' -U postgres
+
+jobs:
+  include:
+    - stage: test
+      name: Rubocop
+      script: bundle exec rubocop -D
+    - stage: test
+      name: RSpec
+      script: bundle exec rspec spec

@@ -1,13 +1,17 @@
-class Users::SessionsController < Devise::SessionsController
-  skip_before_action :verify_authenticity_token
+# frozen_string_literal: true
 
-  respond_to :json
+module Users
+  class SessionsController < Devise::SessionsController
+    skip_before_action :verify_authenticity_token
 
-  def is_authenticated
-    if user_signed_in?
-      render json: {}, status: :ok
-    else
-      render json: {}, status: :unauthorized
+    respond_to :json
+
+    def authenticated?
+      if user_signed_in?
+        render json: {}, status: :ok
+      else
+        render json: {}, status: :unauthorized
+      end
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Note < ApplicationRecord
   FREE_COUNT_LIMIT = 100
 
@@ -15,12 +17,12 @@ class Note < ApplicationRecord
     using: {
       tsearch: {
         prefix: true,
-        tsvector_column: [:tsv_title, :tsv_content]
+        tsvector_column: %i[tsv_title tsv_content]
       }
     }
   )
 
-  has_paper_trail skip: [:tsv_title, :tsv_content]
+  has_paper_trail skip: %i[tsv_title tsv_content]
 
   mount_uploaders :images, ImageUploader
 
@@ -29,14 +31,28 @@ class Note < ApplicationRecord
   scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
 
-  validate :does_not_exceed_free_count_limit, on: :create, if: -> (note) { note.user.free? }
+  validate(
+    :does_not_exceed_free_count_limit,
+    on: :create,
+    if: ->(note) { note.user.free? }
+  )
 
   def to_param
     uid
   end
 
-  def as_json(_options = {})
-    super(only: [:uid, :title, :created_at, :updated_at, :archived_at]).merge(content: content)
+  def as_json(options = {})
+    only = options.fetch(
+      :only,
+      %i[uid title created_at updated_at archived_at content]
+    ).map(&:to_s)
+    options = { only: only }.merge(options)
+
+    # use the actual content (see `HasContent`)
+    json = super(options).merge('content' => content)
+
+    # we need to slice again for `content` to be considered as well
+    json.slice(*only)
   end
 
   def dup
@@ -56,12 +72,12 @@ class Note < ApplicationRecord
   private
 
   def does_not_exceed_free_count_limit
-    if user.notes.count >= FREE_COUNT_LIMIT
-      errors.add(
-        :base,
-        "You have reached your note limit of #{FREE_COUNT_LIMIT} notes. " \
-        "Please delete some notes or upgrade your subscription."
-      )
-    end
+    return if user.notes.count < FREE_COUNT_LIMIT
+
+    errors.add(
+      :base,
+      "You have reached your note limit of #{FREE_COUNT_LIMIT} notes. " \
+      'Please delete some notes or upgrade your subscription.'
+    )
   end
 end

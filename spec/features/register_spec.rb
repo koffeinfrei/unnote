@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature 'Register a new user', :js do
-  scenario 'A new user is registered with a free subscription and a get started note' do
+RSpec.describe 'Register a new user', :js do
+  it 'A new user is registered with a free subscription ' \
+     'and a get started note' do
     visit_and_wait '/#'
 
     click_on 'Register'
@@ -13,7 +16,9 @@ RSpec.feature 'Register a new user', :js do
     click_on 'Register'
 
     within '.alert' do
-      expect(page).to have_content "Password confirmation doesn't match Password"
+      expect(page).to have_content(
+        "Password confirmation doesn't match Password"
+      )
     end
 
     fill_in 'Confirm password', with: 'asdfasdf'

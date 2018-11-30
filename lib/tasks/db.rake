@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :db do
   # Define a helper to create or update seed records
   task seed: :seed_helper
@@ -8,7 +10,9 @@ namespace :db do
   end
 
   Rake::Task['db:schema:load'].enhance do
-    puts 'Adding trigger functions on notes for updating tsv_title and tsv_content columns'
+    puts 'Adding trigger functions on notes for updating tsv_title and' \
+      'tsv_content columns'
+
     sql = <<-SQL
       CREATE TRIGGER update_title_tsvector BEFORE INSERT OR UPDATE
       ON notes FOR EACH ROW EXECUTE PROCEDURE

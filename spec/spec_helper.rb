@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
 # will add to the boot time of your test suite on EVERY test run, even for an
@@ -32,6 +34,7 @@ RSpec.configure do |config|
     # a real object. This is generally recommended, and will default to
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
+    mocks.verify_doubled_constant_names = true
   end
 
   # These two settings work together to allow you to limit a spec run
@@ -44,7 +47,7 @@ RSpec.configure do |config|
   # Allows RSpec to persist some state between runs in order to support
   # the `--only-failures` and `--next-failure` CLI options. We recommend
   # you configure your source control system to ignore this file.
-  config.example_status_persistence_file_path = "tmp/rspec-examples.txt"
+  config.example_status_persistence_file_path = 'tmp/rspec-examples.txt'
 
   # Limits the available syntax to the non-monkey patched syntax that is
   # recommended. For more details, see:

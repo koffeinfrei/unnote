@@ -1,10 +1,15 @@
+# frozen_string_literal: true
+
 class Base64File
   def initialize(file)
     @file = file
   end
 
   def filename_without_extension
-    File.basename(@file.original_filename, File.extname(@file.original_filename))
+    File.basename(
+      @file.original_filename,
+      File.extname(@file.original_filename)
+    )
   end
 
   def data_url

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # use the same config as production
 load Rails.root.join(File.dirname(__FILE__), 'production.rb')
 

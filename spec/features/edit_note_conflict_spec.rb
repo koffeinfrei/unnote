@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature 'Edit note with conflict', :js do
+RSpec.describe 'Edit note with conflict', :js do
   context 'as logged in user' do
-    let(:user) { User.create! email: 'user1@example.com', password: 'asdfasdf', password_confirmation: 'asdfasdf' }
+    let(:user) { create_user }
 
     before { login_as user }
 
-    scenario 'A copy of the note is created' do
-      Timecop.travel(Time.local(2016, 8, 1, 15, 33)) do
+    it 'A copy of the note is created' do
+      Timecop.travel(Time.zone.local(2016, 8, 1, 15, 33)) do
         note = Note.create!(
           title: 'my note',
           user: user,
@@ -21,7 +23,7 @@ RSpec.feature 'Edit note with conflict', :js do
         expect(page).to have_content 'note content'
 
         # ...in the meantime there's an edit
-        note.update_attributes! content: '<p>note content - update 1</p>'
+        note.update! content: '<p>note content - update 1</p>'
 
         find('.ql-editor').set('note content - update 2')
 

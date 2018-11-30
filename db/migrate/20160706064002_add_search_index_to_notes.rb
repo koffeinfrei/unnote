@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
+  # rubocop:disable Metrics/MethodLength
   def up
     add_column :notes, :tsv_title, :tsvector
     add_column :notes, :tsv_content, :tsvector
@@ -6,7 +9,10 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
     add_index :notes, :tsv_title, using: 'gin'
     add_index :notes, :tsv_content, using: 'gin'
 
-    say_with_time 'Adding trigger functions on notes for updating tsv_title and tsv_content columns' do
+    message = 'Adding trigger functions on notes for updating tsv_title ' \
+      'and tsv_content columns'
+
+    say_with_time message do
       sql = <<-SQL
         CREATE TRIGGER update_title_tsvector BEFORE INSERT OR UPDATE
         ON notes FOR EACH ROW EXECUTE PROCEDURE
@@ -21,12 +27,15 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
     end
 
     say_with_time 'Triggering generating indexes' do
-      update("UPDATE notes SET title = title")
+      update('UPDATE notes SET title = title')
     end
   end
 
   def down
-    say_with_time 'Removing trigger functions on notes for updating tsv_title and tsv_content columns' do
+    message = 'Removing trigger functions on notes for updating tsv_title ' \
+      'and tsv_content columns'
+
+    say_with_time message do
       execute <<-SQL
         DROP TRIGGER update_title_tsvector ON notes;
         DROP TRIGGER update_content_tsvector ON notes;
@@ -39,4 +48,5 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
     remove_column :notes, :tsv_title
     remove_column :notes, :tsv_content
   end
+  # rubocop:enable Metrics/MethodLength
 end

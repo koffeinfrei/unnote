@@ -1,0 +1,56 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'node_modules/**/*'
+    - 'client/node_modules/**/*'
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - '.git/**/*'
+    - 'db/schema.rb'
+
+Rails:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - refine
+    - context
+    - RSpec.describe
+    - describe
+
+RSpec/RepeatedExample:
+  Exclude:
+    - 'spec/policies/**/*'
+
+RSpec/RepeatedDescription:
+  Exclude:
+    - 'spec/policies/**/*'
+
+RSpec/ContextWording:
+  Exclude:
+    - 'spec/policies/**/*'
+  Prefixes:
+    - as
+    - when
+    - with
+    - without
+
+# describing a feature spec without `type: :feature` doesn't work
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false

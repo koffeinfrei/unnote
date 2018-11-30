@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:disable all
 require Rails.root.join('lib/seed')
 
 class EvernoteImporter
@@ -16,9 +19,7 @@ class EvernoteImporter
 
       created_at = note.css('created').text
       updated_at = note.css('updated').text
-      if updated_at.blank?
-        updated_at = created_at
-      end
+      updated_at = created_at if updated_at.blank?
       created_at = DateTime.parse(created_at)
       updated_at = DateTime.parse(updated_at)
 
@@ -30,9 +31,10 @@ class EvernoteImporter
       content.css('en-media').each_with_index do |media, i|
         resource = resources[i]
         next unless resource
+
         mime = resource.css('mime').text
-        image_data = resource.css('data').text.gsub("\n", '')
-        image = %{<img src="data:#{mime};base64,#{image_data}" />}
+        image_data = resource.css('data').text.delete("\n")
+        image = %(<img src="data:#{mime};base64,#{image_data}" />)
         media.replace(image)
       end
 
@@ -40,7 +42,7 @@ class EvernoteImporter
       if note_attributes
         source_url = note_attributes.css('source-url')
         if source_url
-          content_parts << %{<p>Source url: <a href="#{source_url.text}">#{source_url.text}</a></p>}
+          content_parts << %(<p>Source url: <a href="#{source_url.text}">#{source_url.text}</a></p>)
         end
       end
 

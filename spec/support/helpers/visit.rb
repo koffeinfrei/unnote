@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module VisitHelper
   def visit_and_wait(path)
     visit path

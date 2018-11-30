@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/deploy_client'
 
 namespace :mobile do
