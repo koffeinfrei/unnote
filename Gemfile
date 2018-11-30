@@ -36,6 +36,7 @@ group :development do
   gem 'binding_of_caller' # Needed by better_errors to enable html console
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
+  gem 'seed_box'
 end
 
 group :test do
