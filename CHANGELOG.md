@@ -1,3 +1,10 @@
+## 0.5.0 (UNRELEASED)
+
+### Changed
+
+- keep aspect ratio for thumbnails
+
+
 ## 0.4.1 (2018-11-26)
 
 ### Fixed
@@ -5,11 +12,13 @@
 - Hide "remember me" checkbox on mobile
 - Set remember me cookie on mobile
 
+
 ## 0.4.0 (2018-11-26)
 
 ### Added
 
 - Open user registration with a free subscription, limited to 100 notes
+
 
 ## 0.3.0 (2018-11-15)
 

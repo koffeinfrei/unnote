@@ -28,5 +28,8 @@ jobs:
       name: Rubocop
       script: bundle exec rubocop -D
     - stage: test
+      name: ESLint
+      script: node client/node_modules/eslint/bin/eslint.js --config client/node_modules/eslint-config-react-app/index.js client/src/
+    - stage: test
       name: RSpec
       script: bundle exec rspec spec
