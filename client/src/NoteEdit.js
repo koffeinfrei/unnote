@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import debounce from 'throttle-debounce/debounce';
-import bootbox from 'bootbox';
 import './keyboard';
 import NoteList from './NoteList';
 import NoteForm from './NoteForm';
@@ -147,12 +146,14 @@ class NoteEdit extends Component {
     e.preventDefault();
     e.stopPropagation();
 
-    bootbox.confirm('Are you sure? <br> The note will be permanently deleted.', (result) => {
-      if (!result) { return; }
+    import('bootbox').then(bootbox => {
+      bootbox.confirm('Are you sure? <br> The note will be permanently deleted.', (result) => {
+        if (!result) { return; }
 
-      this.setState({ isSynced: false });
+        this.setState({ isSynced: false });
 
-      this.deleteNote(note);
+        this.deleteNote(note);
+      });
     });
   }
 
@@ -160,12 +161,14 @@ class NoteEdit extends Component {
     e.preventDefault();
     e.stopPropagation();
 
-    bootbox.confirm('Are you sure you want to archive this note?', (result) => {
-      if (!result) { return; }
+    import('bootbox').then(bootbox => {
+      bootbox.confirm('Are you sure you want to archive this note?', (result) => {
+        if (!result) { return; }
 
-      note.setArchived();
-      this.handleEditChange(note)
-      this.setNewNote();
+        note.setArchived();
+        this.handleEditChange(note)
+        this.setNewNote();
+      });
     });
   }
 
