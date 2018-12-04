@@ -1,0 +1,14 @@
+{
+  "name": "mykonote",
+  "dependencies": {},
+  "devDependencies": {
+    "lerna-changelog": "^0.8.2"
+  },
+  "scripts": {
+    "changelog": "GITHUB_AUTH=$(cat .lerna-changelog-github-token) node_modules/.bin/lerna-changelog"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panter/mykonote.git"
+  }
+}

@@ -77,6 +77,20 @@ For the capybara e2e tests headless firefox / geckodriver is used.
 - [Download latest geckodriver](https://github.com/mozilla/geckodriver/releases/latest)
 - Put both binaries in your `$PATH`
 
+### Changelog
+
+For generating the changelog
+[lerna-changelog](https://github.com/lerna/lerna-changelog) is used.
+
+To set this up locally you'll need to create the file
+`.lerna-changelog-github-token` containing a GitHub access token (with just the
+`public_repo` scope).
+
+To create the new changelog entries just issue the following command:
+
+  ```bash
+  $ npm run changelog
+  ```
 
 ## Links
 

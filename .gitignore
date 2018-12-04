@@ -12,9 +12,12 @@
 !/log/.keep
 /tmp
 
+/node_modules
 /client/node_modules/
 /public/assets/
 
 /tags
 
 /system
+
+/.lerna-changelog-github-token
