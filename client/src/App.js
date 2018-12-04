@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import './global-jquery'; // bootstrap-material-design needs global jQuery
@@ -8,12 +8,13 @@ import 'bootstrap-sass/assets/javascripts/bootstrap/modal';
 import 'bootstrap-sass/assets/javascripts/bootstrap/transition';
 import 'bootstrap-sass/assets/javascripts/bootstrap/collapse';
 import Flash from './Flash';
-import LoginForm from './LoginForm';
 import NoteEdit from './NoteEdit';
-import RegistrationForm from './RegistrationForm';
 import './App.css';
 import './fonts/roboto.css';
 import './fonts/material-icons.css';
+
+const LoginForm = React.lazy(() => import('./LoginForm'));
+const RegistrationForm = React.lazy(() => import('./RegistrationForm'));
 
 class App extends Component {
   constructor(props) {
@@ -77,11 +78,15 @@ class App extends Component {
       return (
         <Switch>
           <Route path='/register' render={props => (
-            <RegistrationForm onLoginSuccess={this.onLoginSuccess.bind(this)} {...props} />
+            <Suspense fallback={<div></div>}>
+              <RegistrationForm onLoginSuccess={this.onLoginSuccess.bind(this)} {...props} />
+            </Suspense>
           )}/>
 
           <Route path='/login' render={props => (
-            <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} alwaysRememberMe={window.ALWAYS_REMEMBER_ME} />
+            <Suspense fallback={<div></div>}>
+              <LoginForm onLoginSuccess={this.onLoginSuccess.bind(this)} alwaysRememberMe={window.ALWAYS_REMEMBER_ME} />
+            </Suspense>
           )}/>
 
           <Redirect to='/login' />
