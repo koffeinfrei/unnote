@@ -154,7 +154,6 @@ class NoteList extends Component {
 
     if (this.state.searchQuery !== nextProps.searchQuery) {
       this.listNeedsUpdate = true;
-      this.setSearchProgress(true);
     }
 
     this.setState( {
@@ -226,9 +225,6 @@ class NoteList extends Component {
 
         AlertFlash.show('Watch out, the list is not up to date.');
         console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
-      })
-      .always(() => {
-        this.setSearchProgress(false);
       });
   }
 
@@ -267,10 +263,6 @@ class NoteList extends Component {
       $('.list-more-next-page').addClass('hidden');
       $('.list-more-spinner').removeClass('hidden');
     }
-  }
-
-  setSearchProgress(isInProgress) {
-    EventHive.publish('spinner.toggle', { show: isInProgress });
   }
 }
 
