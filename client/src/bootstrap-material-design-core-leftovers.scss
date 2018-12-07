@@ -1,0 +1,72 @@
+// These are the manually copied static remains of
+// client/node_modules/bootstrap-material-design/sass/_core.scss. As we don't
+// want to import the whole core from material-design, we import the modules
+// specifically. Unfortunately the core.scss contains static css which we need
+// to manually include as well.
+@import 'bootstrap-material-design/sass/variables';
+
+body {
+  background-color: $body-bg;
+  &.inverse {
+    background: #333333;
+    &, .form-control {
+      color: $mdb-text-color-light;
+    }
+    .modal,
+    .panel-default,
+    .card {
+      &,
+      .form-control {
+        background-color: initial;
+        color: initial;
+      }
+    }
+
+  }
+}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+}
+
+h5, h6{
+  font-weight: 400;
+}
+
+a, a:hover, a:focus {
+  color: $link-color;
+
+  & .material-icons {
+    vertical-align: middle;
+  }
+}
+
+legend {
+  border-bottom: 0;
+}
+
+.dropdown-menu {
+  border: 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  .divider {
+    background-color: rgba(0, 0, 0, .12);
+  }
+  li {
+    overflow: hidden;
+    position: relative;
+    a:hover {
+      background-color: transparent;
+      color: $brand-primary;
+    }
+  }
+}
+
+// Prevent highlight on mobile
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: 0;
+  }
+}
