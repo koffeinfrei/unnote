@@ -1,8 +1,36 @@
-## 0.5.0 (UNRELEASED)
+## 0.5.0 (2018-12-10)
 
-### Changed
+#### :rocket: Enhancement
+* [#30](https://github.com/panter/mykonote/pull/30) Show global spinner on ajax
+  requests ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#27](https://github.com/panter/mykonote/pull/27) Register the (subjectively)
+  most used languages for syntax highlighting
+  ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#16](https://github.com/panter/mykonote/pull/16) Keep aspect ratio for
+  thumbnails ([@koffeinfrei](https://github.com/koffeinfrei))
 
-- keep aspect ratio for thumbnails
+#### :memo: Documentation
+* [#13](https://github.com/panter/mykonote/pull/13) Add free registration info
+  to readme ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#12](https://github.com/panter/mykonote/pull/12) Update gems and npm
+  packages ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#31](https://github.com/panter/mykonote/pull/31) Treeshake
+  bootstrap-material-design styles
+  ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#29](https://github.com/panter/mykonote/pull/29) Lazy load login /
+  registration components and bootbox
+  ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#28](https://github.com/panter/mykonote/pull/28) Add lerna changelog
+  ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#15](https://github.com/panter/mykonote/pull/15) Use seed\_box gem
+  ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#14](https://github.com/panter/mykonote/pull/14) Add rubocop
+  ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
 
 
 ## 0.4.1 (2018-11-26)
