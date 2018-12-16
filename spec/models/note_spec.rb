@@ -3,95 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Note do
-  let(:image1_placeholder) do
-    '360593ff547c864bd9d16bbed6eb8860d9fad9a407aa74e066039db23b525338'
-  end
-
   let(:image1_data) do
     'data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q='
   end
 
   let(:image2_data) do
     'data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q='
-  end
-
-  describe '#content=' do
-    context 'when content contains 1 image' do
-      let(:note) do
-        described_class.create!(
-          uid: SecureRandom.uuid,
-          user: create_user,
-          content: %(content1 <img src="#{image1_data}" />)
-        )
-      end
-
-      after { note.remove_images! }
-
-      it 'saves an image as a file' do
-        expect(note.images.count).to eq 1
-        expect(note.images.first.file).to exist
-      end
-
-      it 'replaces the base64 part with the file hash' do
-        expect(note.text_content).to eq(
-          %(content1 <img src="#{image1_placeholder}" />)
-        )
-      end
-
-      it 'adds one image and removes one' do
-        note.update!(
-          content:
-            %(content1 <img src="#{image1_data}" />) +
-            %(content2 <img src="#{image2_data}" />)
-        )
-
-        first_file = note.images[0].file
-        second_file = note.images[1].file
-
-        expect(note.images.count).to eq 2
-        expect(first_file).to exist
-        expect(second_file).to exist
-
-        note.update!(
-          content: %(content2 <img src="#{image2_data}" />)
-        )
-
-        expect(note.images.count).to eq 1
-        expect(first_file).not_to exist
-        expect(second_file).to exist
-      end
-    end
-
-    it 'saves equal images as one file' do
-      note = described_class.create!(
-        uid: SecureRandom.uuid,
-        user: create_user,
-        content:
-          %(content1 <img src="#{image1_data}" />) +
-          %(content2 <img src="#{image1_data}" />)
-      )
-
-      expect(note.images.count).to eq 1
-      expect(note.images[0].file).to exist
-    end
-  end
-
-  describe '#content' do
-    it 'retrieves equal images from one file' do
-      note = described_class.create!(
-        uid: SecureRandom.uuid,
-        user: create_user,
-        content:
-          %(content1 <img src="#{image1_placeholder}" />) +
-          %(content2 <img src="#{image1_placeholder}" />),
-        images: [Base64StringIO.new(image1_data)]
-      )
-
-      expect(note.content).to eq(
-        %(content1 <img src="#{image1_data}" />) +
-        %(content2 <img src="#{image1_data}" />)
-      )
-    end
   end
 
   describe '#as_json' do
