@@ -33,7 +33,20 @@ class NoteList extends Component {
   }
 
   renderList() {
+    if (this.state.searchQuery && this.state.notes.length === 0) {
+      return this.renderEmptyListItem();
+    }
     return this.state.notes.map((note) => this.renderListItem(note));
+  }
+
+  renderEmptyListItem() {
+    return (
+      <div className="list-group-item note-navigation-item not-clickable list-nothing">
+        <div className="list-group-item-heading">
+          There's nothing…
+        </div>
+      </div>
+    );
   }
 
   renderListItem(note) {

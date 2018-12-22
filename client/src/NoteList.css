@@ -87,6 +87,8 @@ Then, run this script to get the list@mixin (function(){
 
 .list-group .list-group-item.note-navigation-item {
   cursor: pointer; }
+  .list-group .list-group-item.note-navigation-item.not-clickable {
+    cursor: default; }
   .list-group .list-group-item.note-navigation-item.active:hover, .list-group .list-group-item.note-navigation-item.active:focus {
     background: transparent;
     outline: 0; }
@@ -108,10 +110,10 @@ Then, run this script to get the list@mixin (function(){
       .list-group .list-group-item.note-navigation-item .row-content .action-secondary.action-secondary-before:hover i {
         color: #ff5722; }
 
-.list-more {
+.list-more,
+.list-nothing {
   display: block;
-  text-align: center;
-  height: 35px; }
+  text-align: center; }
 
 .list-more-icon {
   font-size: 36px; }

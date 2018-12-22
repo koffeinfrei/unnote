@@ -25,6 +25,9 @@
   .list-group-item.note-navigation-item
     cursor: pointer
 
+    &.not-clickable
+      cursor: default
+
     &.active
       &:hover, &:focus
         background: transparent
@@ -58,10 +61,10 @@
             i
               color: $brand-warning
 
-.list-more
+.list-more,
+.list-nothing
   display: block
   text-align: center
-  height: 35px
 
 .list-more-icon
   font-size: $font-size-h1
