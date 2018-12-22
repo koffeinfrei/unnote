@@ -3,7 +3,7 @@
 class Note < ApplicationRecord
   FREE_COUNT_LIMIT = 100
 
-  include HasContent
+  include CarrierWave::Base64ImageContent
   include PgSearch
 
   belongs_to :user
@@ -25,6 +25,8 @@ class Note < ApplicationRecord
   has_paper_trail skip: %i[tsv_title tsv_content]
 
   mount_uploaders :images, ImageUploader
+
+  base64_image_content content: :text_content, images: :images
 
   scope :default_ordered, -> { order(updated_at: :desc) }
 
