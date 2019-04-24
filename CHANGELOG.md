@@ -1,3 +1,16 @@
+## 0.6.0 (2019-04-26)
+
+#### :rocket: Enhancement
+* [#41](https://github.com/panter/mykonote/pull/41) Show text when search result is empty ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#87](https://github.com/panter/mykonote/pull/87) Update gems and npm packages ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#37](https://github.com/panter/mykonote/pull/37) Use carrierwave-base64_image_content gem ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.5.0 (2018-12-10)
 
 #### :rocket: Enhancement
