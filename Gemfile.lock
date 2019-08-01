@@ -172,8 +172,8 @@ GEM
       highline
       mini_racer
       unicorn-rails
-    paper_trail (10.3.0)
-      activerecord (>= 4.2, < 6.1)
+    paper_trail (10.3.1)
+      activerecord (>= 4.2)
       request_store (~> 1.1)
     parallel (1.17.0)
     parser (2.6.2.1)
