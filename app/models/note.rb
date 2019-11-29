@@ -4,7 +4,7 @@ class Note < ApplicationRecord
   FREE_COUNT_LIMIT = 100
 
   include CarrierWave::Base64ImageContent
-  include PgSearch
+  include PgSearch::Model
 
   belongs_to :user
 
