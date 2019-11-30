@@ -1,3 +1,12 @@
+## 0.7.0 (2019-11-30)
+
+#### :house: Internal
+* [#201](https://github.com/panter/mykonote/pull/201) Update gems, node and npm packages ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.6.0 (2019-04-26)
 
 #### :rocket: Enhancement
