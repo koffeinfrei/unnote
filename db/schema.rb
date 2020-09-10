@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2018_11_23_202530) do
     t.text "text_content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "uid", null: false
+    t.uuid "uid", default: "00000000-0000-0000-0000-000000000000", null: false
     t.integer "user_id"
     t.tsvector "tsv_title"
     t.tsvector "tsv_content"

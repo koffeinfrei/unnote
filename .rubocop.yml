@@ -1,6 +1,12 @@
-require: rubocop-rspec
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
 
 AllCops:
+  NewCops: disable
   Exclude:
     - 'node_modules/**/*'
     - 'client/node_modules/**/*'
@@ -8,11 +14,18 @@ AllCops:
     - 'bin/**/*'
     - '.git/**/*'
     - 'db/schema.rb'
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  TargetRubyVersion: 2.6
 
 Rails:
   Enabled: true
-
-Style/Documentation:
+Rails/FilePath:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/RefuteMethods:
   Enabled: false
 
 Layout/MultilineOperationIndentation:
@@ -21,12 +34,34 @@ Layout/MultilineOperationIndentation:
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Layout/LineLength:
+  Max: 100
+  # To make it possible to copy or click on URIs in the code, we allow lines
+  # containing a URI to be longer than Max.
+  AllowHeredoc: true
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+  # The IgnoreCopDirectives option causes the LineLength rule to ignore cop
+  # directives like '# rubocop: enable ...' when calculating a line's length.
+  IgnoreCopDirectives: false
+  # The IgnoredPatterns option is a list of !ruby/regexp and/or string
+  # elements. Strings will be converted to Regexp objects. A line that matches
+  # any regular expression listed in this option will be ignored by LineLength.
+  IgnoredPatterns: []
+
 Metrics/BlockLength:
   ExcludedMethods:
     - refine
     - context
     - RSpec.describe
     - describe
+
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
 
 RSpec/RepeatedExample:
   Exclude:
@@ -54,3 +89,43 @@ RSpec/ExampleLength:
 
 RSpec/MultipleExpectations:
   Enabled: false
+
+Style/Alias:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FormatString:
+  EnforcedStyle: percent
+Style/FormatStringToken:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/GuardClause:
+  MinBodyLength: 5
+Style/IfUnlessModifier:
+  Enabled: false
+Style/LineEndConcatenation:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/RegexpLiteral:
+  AllowInnerSlashes: true
+  EnforcedStyle: slashes
+# Style/SymbolArray:
+#   EnforcedStyle: 
+Style/WordArray:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/SlicingWithRange:
+  Enabled: true

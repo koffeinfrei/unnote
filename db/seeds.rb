@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/LineLength
+# rubocop:disable Layout/LineLength
 # rubocop:disable Style/BracesAroundHashParameters
 
 user = seed User, { email: 'user@example.com' }, {
@@ -42,4 +42,4 @@ seed Note, { title: 'React' }, {
 }
 
 # rubocop:enable Style/BracesAroundHashParameters
-# rubocop:enable Metrics/LineLength
+# rubocop:enable Layout/LineLength
