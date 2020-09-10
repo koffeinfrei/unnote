@@ -4,7 +4,8 @@
 # rubocop:disable Style/BracesAroundHashParameters
 
 user = seed User, { email: 'user@example.com' }, {
-  password: 'asdfasdf'
+  password: 'asdfasdf',
+  password_confirmation: 'asdfasdf'
 }
 
 seed Note, { title: 'Boring meeting TODOs' }, {
