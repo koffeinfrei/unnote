@@ -12,6 +12,7 @@ require 'pundit/rspec'
 require 'paper_trail/frameworks/rspec'
 require 'capybara-screenshot/rspec'
 require 'deploy_client'
+require 'webdrivers/geckodriver'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
