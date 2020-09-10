@@ -19,6 +19,7 @@ gem 'pg'
 gem 'pg_search'
 gem 'phantomjs', require: false
 gem 'pundit'
+gem 'webpacker'
 
 group :development, :test do
   gem 'capybara'
