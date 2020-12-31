@@ -25,7 +25,7 @@ class NoteContentCleaner
 
   def script_path
     Rails.root.join(
-      'app', 'assets', 'javascripts', 'phantomjs', 'quill_format.js'
+      'app/assets/javascripts/phantomjs/quill_format.js'
     ).to_s
   end
 end
