@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import debounce from 'throttle-debounce/debounce';
+import { debounce } from 'throttle-debounce';
 import './keyboard';
 import NoteList from './NoteList';
 import NoteForm from './NoteForm';
