@@ -5,7 +5,7 @@ namespace :db do
     puts 'Adding trigger functions on notes for updating tsv_title and' \
       'tsv_content columns'
 
-    sql = <<-SQL
+    sql = <<-SQL.squish
       CREATE TRIGGER update_title_tsvector BEFORE INSERT OR UPDATE
       ON notes FOR EACH ROW EXECUTE PROCEDURE
       tsvector_update_trigger(tsv_title, 'pg_catalog.simple', title);

@@ -1,4 +1,6 @@
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -8,9 +10,7 @@ AllCops:
     - 'bin/**/*'
     - '.git/**/*'
     - 'db/schema.rb'
-
-Rails:
-  Enabled: true
+  NewCops: enable
 
 Style/Documentation:
   Enabled: false
@@ -22,7 +22,7 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 Metrics/BlockLength:
-  ExcludedMethods:
+  IgnoredMethods:
     - refine
     - context
     - RSpec.describe

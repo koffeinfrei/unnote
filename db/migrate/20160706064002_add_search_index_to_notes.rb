@@ -13,7 +13,7 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
       'and tsv_content columns'
 
     say_with_time message do
-      sql = <<-SQL
+      sql = <<-SQL.squish
         CREATE TRIGGER update_title_tsvector BEFORE INSERT OR UPDATE
         ON notes FOR EACH ROW EXECUTE PROCEDURE
         tsvector_update_trigger(tsv_title, 'pg_catalog.simple', title);
@@ -36,7 +36,7 @@ class AddSearchIndexToNotes < ActiveRecord::Migration[4.2]
       'and tsv_content columns'
 
     say_with_time message do
-      execute <<-SQL
+      execute <<-SQL.squish
         DROP TRIGGER update_title_tsvector ON notes;
         DROP TRIGGER update_content_tsvector ON notes;
       SQL

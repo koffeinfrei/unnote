@@ -9,7 +9,7 @@ class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
       'tsv_content columns'
 
     say_with_time message do
-      sql = <<-SQL
+      sql = <<-SQL.squish
         DROP TRIGGER update_content_tsvector ON notes;
         CREATE TRIGGER update_content_tsvector BEFORE INSERT OR UPDATE
         ON notes FOR EACH ROW EXECUTE PROCEDURE
@@ -31,7 +31,7 @@ class RenameNotesContentToTextContent < ActiveRecord::Migration[4.2]
       'tsv_content columns'
 
     say_with_time message do
-      sql = <<-SQL
+      sql = <<-SQL.squish
         DROP TRIGGER update_content_tsvector ON notes;
         CREATE TRIGGER update_content_tsvector BEFORE INSERT OR UPDATE
         ON notes FOR EACH ROW EXECUTE PROCEDURE
