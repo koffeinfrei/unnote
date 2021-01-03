@@ -12,6 +12,7 @@ import AddNoteButton from './AddNoteButton';
 import AlertFlash from './AlertFlash';
 import EventHive from './EventHive';
 import AutoSave from './AutoSave';
+import SyncStorage from './SyncStorage';
 
 class NoteEdit extends Component {
   constructor(props, context) {
@@ -230,7 +231,7 @@ class NoteEdit extends Component {
       dataType: 'json',
     })
     .done(() => {
-      localStorage.removeItem('note-' + note.uid);
+      SyncStorage.remove(note);
 
       if (this.state.note.uid === note.uid) {
         this.setNewNote();
