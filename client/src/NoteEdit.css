@@ -1,0 +1,19 @@
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em;
+  text-align: center; }
+  @media (min-width: 900px) {
+    .meta {
+      padding: 1.2em 0.6em; } }
+
+.flex > .no-padding-bottom {
+  padding-bottom: 0 !important; }
+  @media (min-width: 900px) {
+    .flex > .no-padding-bottom {
+      padding-bottom: 0.6em; } }
+
+.spacer {
+  width: 1.2em;
+  height: 1.2em; }

@@ -1,37 +1,47 @@
-@import 'bootstrap-settings.sass'
+@import './variables'
+@import 'picnic/src/picnic'
 
-// import the modules separately, as we need to import the variables
-// before the bootstrap variables, and the rest of the material design
-// after the main bootstrap block
-@import 'bootstrap-material-design/sass/variables'
+body
+  font-family: 'Roboto'
+  background: #f9f9f9
 
-@import 'bootstrap-sass/assets/stylesheets/bootstrap-sprockets'
-@import 'bootstrap-sass/assets/stylesheets/bootstrap'
+main
+  max-width: map-get($devices, 'xl')
+  margin: auto $picnic-separation / 2
 
-@import 'bootstrap-material-design/sass/mixins'
-@import 'bootstrap-material-design/sass/shadows'
+  @include media('lg')
+    margin: auto
 
-// import the single modules from
-// client/node_modules/bootstrap-material-design/sass/_core.scss
-@import 'bootstrap-material-design-core-leftovers.scss'
+.vertically-aligned
+  position: relative
+  top: 50%
+  transform: translateY(-50%)
 
-@import 'bootstrap-material-design/sass/form'
-@import 'bootstrap-material-design/sass/welljumbo'
-@import 'bootstrap-material-design/sass/buttons'
-@import 'bootstrap-material-design/sass/checkboxes'
-@import 'bootstrap-material-design/sass/inputs'
-@import 'bootstrap-material-design/sass/lists'
-@import 'bootstrap-material-design/sass/navbar'
-@import 'bootstrap-material-design/sass/alerts'
-@import 'bootstrap-material-design/sass/typography'
-@import 'bootstrap-material-design/sass/popups'
-@import 'bootstrap-material-design/sass/dialogs'
+.icon
+    padding: 0
+    margin: 0
+    background: transparent
+    opacity: 0.5
+    width: 1.2em
+    height: 1.2em
 
-// custom styles
-@import 'stylesheets/base'
-@import 'stylesheets/responsive'
-@import 'stylesheets/navbar'
-@import 'stylesheets/buttons'
-@import 'stylesheets/form'
-@import 'stylesheets/spinner'
-@import 'stylesheets/sticky_editor_toolbar'
+    &:hover
+      opacity: 1
+
+    &.big
+      width: 1.5em
+      height: 1.5em
+
+    img
+      width: 100%
+      height: 100%
+
+.hidden-sm
+  display: none
+
+  @include media('lg')
+    display: initial
+
+.hidden-lg
+  @include media('lg')
+    display: none

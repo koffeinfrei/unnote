@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ViewportMode from './ViewportMode';
 import EventHive from './EventHive';
 
 class AddNoteButton extends Component {
@@ -16,10 +15,6 @@ class AddNoteButton extends Component {
 
   handleNewNoteClick(e) {
     e.preventDefault();
-
-    if (ViewportMode.isMobileMode()) {
-      EventHive.publish('hamburger.hide');
-    }
 
     this.props.handleNewNoteClick();
   }

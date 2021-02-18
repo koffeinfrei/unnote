@@ -5,7 +5,6 @@ import 'quill-task-list/task_list_node';
 import 'quill/dist/quill.snow.css';
 import './NoteForm.css';
 import EventHive from './EventHive';
-import ViewportMode from './ViewportMode';
 
 class NoteForm extends Component {
   constructor(props, context) {
@@ -20,7 +19,7 @@ class NoteForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className={this.props.showForm ? undefined : 'hidden-sm'}>
         <form
           className="form-horizontal"
           ref={(c) => this.formContainerElement = c}
@@ -96,19 +95,6 @@ class NoteForm extends Component {
       this.handleTitleChange();
       this.editor.pasteHTML(data.content);
     });
-
-    if (ViewportMode.isMobileMode()) {
-      EventHive.subscribe('hamburger.show', () => {
-        this.formContainerElement.classList.add('hidden');
-      });
-      EventHive.subscribe('hamburger.hide', () => {
-        this.formContainerElement.classList.remove('hidden');
-      });
-
-      EventHive.subscribe('search.entered', () => {
-        this.formContainerElement.classList.add('hidden');
-      });
-    }
   }
 
   // gets called initially and when a note is switched

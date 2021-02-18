@@ -1,9 +1,18 @@
-// overwrites for the snow quill theme
-@import 'bootstrap-material-design/sass/variables'
+@import './variables'
 
-.ql-container
+// overwrites for the snow quill theme
+// TODO: extract variable from App.sass
+$font-family-base: 'Roboto'
+$font-size-base: '12px'
+
+.ql-container.ql-snow
   font-family: $font-family-base
   font-size: $font-size-base
+  border: $picnic-border !important
+  border-radius: $picnic-radius
+  background: $picnic-white
+  min-height: 25vh
 
 .ql-toolbar.ql-snow
   font-family: $font-family-base
+  border: none

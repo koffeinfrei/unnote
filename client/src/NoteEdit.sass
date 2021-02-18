@@ -1,0 +1,21 @@
+@import './variables'
+
+.meta
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: $picnic-separation
+  @include media('lg')
+    padding: $picnic-separation * 2 $picnic-separation
+  text-align: center
+
+.flex > .no-padding-bottom
+  padding-bottom: 0 !important
+
+  @include media('lg')
+    padding-bottom: $picnic-separation
+
+// TODO variables as button.icon
+.spacer
+  width: 1.2em
+  height: 1.2em

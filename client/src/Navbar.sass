@@ -1,0 +1,25 @@
+@import './variables'
+
+nav
+  text-align: center !important
+  background: $picnic-primary !important
+
+.search
+  position: relative
+  display: inline-block
+  width: 65%
+  max-width: 400px
+
+  .search-input
+    padding-right: $picnic-separation * 3
+    border: none
+
+  .search-clear
+    position: absolute
+    right: 0
+    margin: 0
+    background: transparent
+    color: $picnic-black
+
+    &:hover
+      background: transparent

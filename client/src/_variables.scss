@@ -1,0 +1,24 @@
+$picnic-nav-position: sticky;
+$picnic-nav-height: 4em;
+$picnic-primary: #008bce;
+// $gray: #d9d9d9
+$picnic-dull: #d9d9d9;
+
+@import 'picnic/src/themes/default/theme';
+
+$devices: (
+  // Small devices (landscape phones, 576px and up)
+  // 'sm': 576px,
+  // Medium devices (tablets, 768px and up)
+  // 'md': 768px,
+  // Large devices (desktops, 992px and up)
+  'lg': 900px,
+  // Extra large devices (large desktops, 1200px and up)
+  'xl': 1200px,
+);
+
+@mixin media($device) {
+  @media (min-width: map-get($devices, $device)) {
+    @content;
+  }
+}

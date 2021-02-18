@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import humanDate from 'human-date';
 import $ from 'jquery';
-import ViewportMode from './ViewportMode';
-import EventHive from './EventHive';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
 import Spinner from './Spinner';
+
+import defaultNotePicture from './icons/material/short_text-24px.svg';
+import archiveIcon from './icons/material/archive-24px.svg';
+import deleteIcon from './icons/material/delete-24px.svg';
+import moreIcon from './icons/material/expand_more-24px.svg';
 
 import './NoteList.css';
 
@@ -18,13 +21,14 @@ class NoteList extends Component {
       currentPage: 1,
       hasMorePages: false,
       isSynced: false,
+      showMoreLink: false,
       searchQuery: undefined
     };
   }
 
   render() {
     return (
-      <div className={this.getListCssClass()} ref={(c) => this.$list = $(c)}>
+      <div className={this.getListCssClass()}>
         {this.renderList()}
         {this.renderNextPageLink()}
         {this.renderListSpinner()}
@@ -51,105 +55,76 @@ class NoteList extends Component {
 
   renderListItem(note) {
     return (
-      <div key={note.uid}>
-        <div
-          className={this.getListItemCssClass(note)}
-          onClick={this.handleNoteClick.bind(this, note)}>
+      <div
+        className={this.getListItemCssClass(note)}
+        key={note.uid}
+        onClick={this.handleNoteClick.bind(this, note)}>
 
-          <div className="row-picture">
-            {this.getNoteAvatar(note)}
-          </div>
-          <div className="row-content">
-            {this.renderListItemButton('action-secondary action-secondary-before', this.props.handleArchiveNoteClick.bind(this, note), 'archive')}
-            {this.renderListItemButton('action-secondary', this.props.handleDeleteNoteClick.bind(this, note), 'delete')}
-            <h4 className="list-group-item-heading">
-              {note.title}
-            </h4>
-            <div className="list-group-item-text">
-              {humanDate.relativeTime(note.updatedAt)}
-            </div>
+        {this.renderNotePicture(note)}
+        <div className="list-item-content">
+          <h4 className="list-item-heading">
+            {note.title}
+          </h4>
+          <div className="list-item-meta tooltip-top" data-tooltip={humanDate.prettyPrint(note.updatedAt, { showTime: true })}>
+            {humanDate.relativeTime(note.updatedAt)}
           </div>
         </div>
-        <div className="list-group-separator"></div>
+        <div className="list-item-actions">
+          {this.renderListItemButton('archive', archiveIcon, this.props.handleArchiveNoteClick.bind(this, note))}
+          {this.renderListItemButton('delete', deleteIcon, this.props.handleDeleteNoteClick.bind(this, note))}
+        </div>
       </div>
     );
   }
 
-  renderListItemButton(className, onClick, icon) {
+  renderListItemButton(action, icon, onClick, className) {
+    const classNames = ['icon', className].filter(x => x).join(' ')
+
     return (
-      <div
-        className={className}
-        onClick={onClick}>
-        <i className="material-icons">{icon}</i>
-      </div>
+      <button className={classNames} onClick={onClick}>
+        <img src={icon} alt={action} />
+      </button>
     );
   }
 
   renderNextPageLink() {
     if (!this.state.hasMorePages) { return; }
+    if (!this.state.showMoreLink) { return; }
 
     return (
-      <div className="list-more list-more-next-page">
-        <button onClick={this.handleNextPageClick.bind(this)} className="btn btn-info btn-link btn-sm">
-          <i className="material-icons list-more-icon">expand_more</i>
-        </button>
+      <div>
+        {this.renderListItemButton('more', moreIcon, this.handleNextPageClick.bind(this), 'big list-more')}
       </div>
     );
   }
 
   renderListSpinner() {
+    if (this.state.showMoreLink) { return; }
+
     return (
-      <div className="list-more list-more-spinner hidden">
+      <div className="icon big list-more">
         <Spinner />
       </div>
     );
   }
 
   getListItemCssClass(note) {
-    let cssClass = 'list-group-item note-navigation-item';
-    if (note.uid === this.props.activeNoteUid) {
+    let cssClass = 'card list-item';
+    if (this.isActiveNote(note)) {
       cssClass += ' active';
     }
 
     return cssClass;
   }
 
-  getListCssClass() {
-    // in-sm: show always for non-mobile view
-    let cssClass = 'list-group notes-list collapse in-sm';
-    // show on mobile when not accessing a direct edit url
-    if (!this.props.isInitialEdit) {
-      cssClass += ' in';
-    }
-
-    return cssClass;
+  isActiveNote(note) {
+    return note.uid === this.props.activeNoteUid;
   }
 
-  componentDidMount() {
-    this.toggleListMore(false);
-
-    // handle hamburger and search toggling
-    if (ViewportMode.isMobileMode()) {
-      this.$list.collapse({ toggle: false });
-      // when the hiding animation is done
-      this.$list.on('hidden.bs.collapse', () => {
-        EventHive.publish('hamburger.hide_end');
-      });
-
-      EventHive.subscribe('hamburger.show', () => {
-        this.$list.collapse('show');
-      });
-      EventHive.subscribe('hamburger.hide', () => {
-        this.$list.collapse('hide');
-      });
-
-      EventHive.subscribe('search.entered', () => {
-        this.$list.collapse('show');
-      });
-
-      EventHive.subscribe('note.open', () => {
-        this.$list.collapse('hide');
-      });
+  getListCssClass() {
+    const isActiveNote = this.state.notes.some(note => this.isActiveNote(note));
+    if (isActiveNote && !this.props.showList) {
+      return 'hidden-sm';
     }
   }
 
@@ -176,14 +151,6 @@ class NoteList extends Component {
   }
 
   handleNoteClick(note, e) {
-    $('.note-navigation-item').removeClass('active');
-    $(e.currentTarget).addClass('active');
-
-    if (ViewportMode.isMobileMode()) {
-      EventHive.publish('hamburger.hide');
-    }
-
-    EventHive.publish('note.open');
     this.props.handleNoteClick(note, e);
   }
 
@@ -191,7 +158,7 @@ class NoteList extends Component {
     e.preventDefault();
     $(e.currentTarget).blur();
 
-    this.toggleListMore(false);
+    this.setState({ showMoreLink: false });
 
     this.setState({ currentPage: this.state.currentPage + 1 }, () => {
       this.updateList();
@@ -215,7 +182,7 @@ class NoteList extends Component {
   executeUpdateListRequest() {
     this.updateListRequest
       .done((data) => {
-        this.toggleListMore(true);
+        this.setState({ showMoreLink: true });
 
         const notes = data.notes.map(function(note) {
           return Note.fromAttributes(note);
@@ -234,7 +201,7 @@ class NoteList extends Component {
           return;
         }
 
-        this.toggleListMore(true);
+        this.setState({ showMoreLink: true });
 
         AlertFlash.show('Watch out, the list is not up to date.');
         console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
@@ -251,31 +218,16 @@ class NoteList extends Component {
     }
   }
 
-  getNoteAvatar(note) {
-    var previewImageUrl = this.getPreviewImageUrl(note);
-    if (previewImageUrl) {
-      const style = {
-        backgroundImage: `url(${previewImageUrl})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-      };
+  renderNotePicture(note) {
+    const url = this.getPreviewImageUrl(note) || defaultNotePicture;
 
-      return <i style={style} className="circle" alt="note thumbnail"></i>;
-    }
-    else {
-      return <i className="material-icons">subject</i>;
-    }
-  }
+    const style = {
+      backgroundImage: `url(${url})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover'
+    };
 
-  toggleListMore(linkIsVisible) {
-    if (linkIsVisible) {
-      $('.list-more-next-page').removeClass('hidden');
-      $('.list-more-spinner').addClass('hidden');
-    }
-    else {
-      $('.list-more-next-page').addClass('hidden');
-      $('.list-more-spinner').removeClass('hidden');
-    }
+    return <div style={style} className="list-item-picture"></div>;
   }
 }
 
