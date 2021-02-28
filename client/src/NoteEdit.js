@@ -119,8 +119,7 @@ class NoteEdit extends Component {
   }
 
   handleShowListClicked() {
-    this.setState({ showList: true });
-    this.setNewNote();
+    this.setNewNote(() => this.setState({ showList: true }));
   }
 
   /* eslint-disable react/no-direct-mutation-state */

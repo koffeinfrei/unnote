@@ -122,8 +122,7 @@ class NoteList extends Component {
   }
 
   getListCssClass() {
-    const isActiveNote = this.state.notes.some(note => this.isActiveNote(note));
-    if (isActiveNote && !this.props.showList) {
+    if (!this.props.showList) {
       return 'hidden-sm';
     }
   }
