@@ -21,3 +21,6 @@ npm-debug.log*
 
 # tokens
 /.lerna-changelog-github-token
+
+# build files
+/client/src/*.css
