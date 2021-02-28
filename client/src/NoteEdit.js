@@ -7,7 +7,6 @@ import NoteForm from './NoteForm';
 import Note from './Note';
 import PushState from  './PushState';
 import Navbar from './Navbar';
-import AddNoteButton from './AddNoteButton';
 import AlertFlash from './AlertFlash';
 import EventHive from './EventHive';
 import AutoSave from './AutoSave';
@@ -85,13 +84,17 @@ class NoteEdit extends Component {
     return (
       <main>
         <div className="meta">
-          <div className="spacer"></div>
+          <button onClick={this.handleNewNoteClick.bind(this)} className="small">New</button>
+
           <SaveStateLabel isSynced={this.state.isSynced} />
+
           {this.state.showList ? (
             <div className="spacer"></div>
           ) : (
             <div className="spacer">
-              <button onClick={this.handleShowListClicked.bind(this)} className="icon big hidden-lg"><img src={closeIcon} alt="Close note" /></button>
+              <button onClick={this.handleShowListClicked.bind(this)} className="icon big hidden-lg">
+                <img src={closeIcon} alt="Close note" />
+              </button>
             </div>
           )}
         </div>
@@ -112,7 +115,6 @@ class NoteEdit extends Component {
               handleChange={this.handleEditChange.bind(this)}
               showForm={!this.state.showList} />
           </div>
-          <AddNoteButton handleNewNoteClick={this.handleNewNoteClick.bind(this)} />
         </div>
       </main>
     );
@@ -196,7 +198,10 @@ class NoteEdit extends Component {
     this.setState({ showArchiveDialog: true, handleArchiveDialogConfirmed: handler.bind(this) });
   }
 
-  handleNewNoteClick() {
+  handleNewNoteClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     this.setNewNote();
   }
 
@@ -240,7 +245,7 @@ class NoteEdit extends Component {
   }
 
   setNewNote(afterSetState) {
-    this.setState(this.getNewNoteAttributes(), afterSetState);
+    this.setState({ ...this.getNewNoteAttributes(), showList: false }, afterSetState);
     this.pushState.setNew();
     this.pushState.setBrowserTitle();
   }
