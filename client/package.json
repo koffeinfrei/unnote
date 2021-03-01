@@ -5,7 +5,6 @@
   "proxy": "http://localhost:3001/",
   "homepage": "./",
   "dependencies": {
-    "arrive": "^2.4.1",
     "highlight.js": "^10.5.0",
     "human-date": "^1.4.0",
     "jquery": "^3.5.1",

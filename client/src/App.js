@@ -1,8 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
-// TODO needed?
-import 'arrive/src/arrive';
 import Flash from './Flash';
 import NoteEdit from './NoteEdit';
 import './App.css';
