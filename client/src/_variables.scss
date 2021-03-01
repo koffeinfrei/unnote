@@ -6,6 +6,13 @@ $picnic-dull: #d9d9d9;
 
 @import 'picnic/src/themes/default/theme';
 
+$font-family: 'Roboto';
+$font-size-sm: .75em;
+$light-gray: #f9f9f9;
+
+$icon-size-md: 1.2em;
+$icon-size-lg: 1.5em;
+
 $devices: (
   // Large devices (desktops, 992px and up)
   'lg': 900px,

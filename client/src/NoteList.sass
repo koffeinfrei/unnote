@@ -1,5 +1,7 @@
 @import './variables'
 
+$picture-size: 2.5em
+
 .card.list-item
   display: flex
   align-items: center
@@ -10,12 +12,12 @@
     color: $picnic-primary
 
   .list-item-picture
-    width: 2.5em
-    height: 2.5em
+    width: $picture-size
+    height: $picture-size
     border: $picnic-border
     border-radius: 50%
     margin-right: $picnic-separation * 2
-    flex: 0 0 2.5em
+    flex: 0 0 $picture-size
     opacity: 0.5
 
   .list-item-heading
@@ -25,8 +27,8 @@
     flex: 1 auto auto
 
   .list-item-meta
-    font-size: .8em
-    color: $gray
+    font-size: $font-size-sm
+    color: $picnic-dull
     margin-bottom: $picnic-separation
 
   .list-item-actions

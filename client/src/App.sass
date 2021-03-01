@@ -2,8 +2,8 @@
 @import 'picnic/src/picnic'
 
 body
-  font-family: 'Roboto'
-  background: #f9f9f9
+  font-family: $font-family
+  background: $light-gray
 
 main
   max-width: map-get($devices, 'xl')
@@ -22,22 +22,22 @@ main
     margin: 0
     background: transparent
     opacity: 0.5
-    width: 1.2em
-    height: 1.2em
+    width: $icon-size-md
+    height: $icon-size-md
 
     &:hover
       opacity: 1
 
     &.big
-      width: 1.5em
-      height: 1.5em
+      width: $icon-size-lg
+      height: $icon-size-lg
 
     img
       width: 100%
       height: 100%
 
 button.small
-  font-size: .75em
+  font-size: $font-size-sm
 
 .hidden-sm
   display: none
