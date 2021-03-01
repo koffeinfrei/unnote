@@ -99,7 +99,7 @@ class NoteEdit extends Component {
           )}
         </div>
         <div className="flex one two-900">
-          <div className="full third-900 fourth-1200 no-padding-bottom">
+          <div className="full third-900 fourth-1200">
             <NoteList
               activeNoteUid={this.state.note.uid}
               isSynced={this.state.isSynced}
