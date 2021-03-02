@@ -3,10 +3,16 @@
 .ql-container.ql-snow
   font-family: $font-family
   font-size: .8em
-  border: $picnic-border !important
-  border-radius: $picnic-radius
+  border: none
   background: $picnic-white
-  min-height: 25vh
+
+  .ql-editor
+    min-height: 25vh
+    border: $picnic-border
+    border-radius: $picnic-radius
+
+    &:focus
+      border-color: $picnic-primary
 
 .ql-toolbar.ql-snow
   font-family: $font-family
