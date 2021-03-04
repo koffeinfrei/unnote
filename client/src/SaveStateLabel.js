@@ -16,9 +16,9 @@ class SaveStateLabel extends Component {
     return (
       this.state.isSynced
         ?
-        <div className="label success save-state">Saved</div>
+        <div className="save-state saved">Saved</div>
         :
-        <div className="label warning save-state">Saving</div>
+        <div className="save-state saving">Saving</div>
     );
   }
 }
