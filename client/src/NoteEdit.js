@@ -15,7 +15,8 @@ import Dialog from './Dialog';
 import SaveStateLabel from './SaveStateLabel';
 import './NoteEdit.css';
 
-import closeIcon from './icons/material/close-24px.svg';
+import showListIcon from './icons/material/arrow_back-24px.svg';
+import newIcon from './icons/material/add-24px.svg';
 
 class NoteEdit extends Component {
   constructor(props, context) {
@@ -84,19 +85,21 @@ class NoteEdit extends Component {
     return (
       <main>
         <div className="meta">
-          <button onClick={this.handleNewNoteClick.bind(this)} className="small">New</button>
-
-          <SaveStateLabel isSynced={this.state.isSynced} />
-
           {this.state.showList ? (
             <div className="spacer"></div>
           ) : (
             <div className="spacer">
               <button onClick={this.handleShowListClicked.bind(this)} className="icon big hidden-lg">
-                <img src={closeIcon} alt="Close note" />
+                <img src={showListIcon} alt="Close note" />
               </button>
             </div>
           )}
+
+          <SaveStateLabel isSynced={this.state.isSynced} />
+
+          <button onClick={this.handleNewNoteClick.bind(this)} className="icon big">
+            <img src={newIcon} alt="New note" />
+          </button>
         </div>
         <div className="flex one two-900">
           <div className="full third-900 fourth-1200">
