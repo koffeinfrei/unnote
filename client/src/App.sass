@@ -12,6 +12,10 @@ main
   @include media('xl')
     margin: auto
 
+input
+  &:focus
+    border: $picnic-border // no border highlight on focus
+
 .vertically-aligned
   position: relative
   top: 50%
