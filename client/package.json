@@ -6,7 +6,7 @@
   "homepage": "./",
   "dependencies": {
     "arrive": "^2.4.1",
-    "bootbox": "^4.4.0",
+    "bootbox": "^5.2.0",
     "bootstrap-material-design": "^0.5.10",
     "bootstrap-sass": "^3.4.1",
     "highlight.js": "^10.5.0",
