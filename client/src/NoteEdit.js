@@ -82,18 +82,17 @@ class NoteEdit extends Component {
   }
 
   renderContent() {
+    let showListButtonClassName = 'icon big invisible-lg';
+    if (this.state.showList) {
+      showListButtonClassName += ' invisible';
+    }
+
     return (
       <main>
         <div className="meta">
-          {this.state.showList ? (
-            <div className="spacer"></div>
-          ) : (
-            <div className="spacer">
-              <button onClick={this.handleShowListClicked.bind(this)} className="icon big hidden-lg">
-                <img src={showListIcon} alt="Close note" />
-              </button>
-            </div>
-          )}
+          <button onClick={this.handleShowListClicked.bind(this)} className={showListButtonClassName}>
+            <img src={showListIcon} alt="Close note" />
+          </button>
 
           <SaveStateLabel isSynced={this.state.isSynced} />
 
