@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # config valid only for current version of Capistrano
-lock '3.11.2'
+lock '3.14.1'
 
 set :application, 'mykonote'
 set :repo_url, 'git@github.com:panter/mykonote.git'
