@@ -14,19 +14,23 @@ class AbstractFlash extends Component {
     }
 
     return (
-      <div className="row">
-        <div className="col-md-4 col-md-offset-4">
+      <div className="flex center">
+        <div className="hidden-sm"></div>
+
+        <div className='full third-1000'>
           <div className={this.getCssClass()}>
-            <button className="close" type="button" onClick={this.handleClose.bind(this)}>×</button>
-            <div dangerouslySetInnerHTML={{ __html: this.state.message }} />
+            <footer dangerouslySetInnerHTML={{ __html: this.state.message }} />
+            <button className="close icon" type="button" onClick={this.handleClose.bind(this)}>×</button>
           </div>
         </div>
+
+        <div className="hidden-sm"></div>
       </div>
     );
   }
 
   getCssClass() {
-    var cssClasses = ['alert', 'alert-dismissible', this.getAdditionalCssClass()];
+    var cssClasses = ['card', this.getAdditionalCssClass()];
 
     return cssClasses.join(' ');
   }
