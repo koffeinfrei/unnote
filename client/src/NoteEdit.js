@@ -237,9 +237,8 @@ class NoteEdit extends Component {
   }
 
   handleSearchEnterDebounced(e) {
-    // 1. set new note to deselect the active list item
-    // 2. show the list in case a note was shown
-    this.setNewNote(() => this.setState({ searchQuery: e.target.value, showList: true }));
+    // show the list in case a note was shown
+    this.setState({ searchQuery: e.target.value, showList: true });
   }
 
   handleSearchCleared() {
