@@ -3,22 +3,26 @@ import UserLinks from './UserLinks';
 
 export default function UserForm(props) {
   return (
-    <div className="row">
-      <div className="col-md-6 col-md-offset-3">
+    <div className="flex center">
+      <div className="hidden-sm"></div>
+
+      <div className="full third-1000">
         {props.intro ? (
-          <div className="jumbotron">
-            {props.intro}
+          <div className="card">
+            <footer>
+              {props.intro}
+            </footer>
           </div>
         ) : (
           null
         )}
 
-        <div className="well">
-          {props.children}
+        {props.children}
 
-          <UserLinks />
-        </div>
+        <UserLinks />
       </div>
+
+      <div className="hidden-sm"></div>
     </div>
   );
 }

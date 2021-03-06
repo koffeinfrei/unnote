@@ -17,7 +17,7 @@ class Navbar extends Component {
       <nav>
         {this.renderLogo()}
 
-        {this.renderSearchBox()}
+        {this.props.hideSearch ? null : this.renderSearchBox()}
 
         <input id="bmenug" type="checkbox" className="show" />
         <label htmlFor="bmenug" className="burger pseudo button">&#8801;</label>

@@ -3,6 +3,8 @@ import $ from 'jquery';
 import AlertFlash from './AlertFlash';
 import { TextInput, SubmitButton, Checkbox, Utf8, nameValue } from './Form';
 import { scrollToTop } from './scroll';
+import Navbar from './Navbar';
+import Flash from './Flash';
 import UserForm from './UserForm';
 
 class LoginForm extends Component {
@@ -16,28 +18,32 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <UserForm>
-        <form onSubmit={this.handleFormSubmit.bind(this)}>
-          <Utf8 />
+      <div>
+        <Navbar hideSearch={true} />
+        <main>
+          <Flash />
+          <UserForm>
+            <form onSubmit={this.handleFormSubmit.bind(this)}>
+              <Utf8 />
 
-          <div className="form-inputs">
-            {this.renderTextInput("email", "email", "Email")}
+              <div className="flex one">
+                {this.renderTextInput("email", "email", "Email")}
 
-            {this.renderTextInput("password", "password", "Password")}
+                {this.renderTextInput("password", "password", "Password")}
 
-            {this.props.alwaysRememberMe ? (
-              null
-            ) : (
-              <Checkbox model="user" attribute="remember_me" label="Remember me"
-                onChange={this.setValue.bind(this)} />
-            )}
-          </div>
+                {this.props.alwaysRememberMe ? (
+                  null
+                ) : (
+                  <Checkbox model="user" attribute="remember_me" label="Remember me"
+                    onChange={this.setValue.bind(this)} />
+                )}
+              </div>
 
-          <div className="form-actions">
-            <SubmitButton label="Log in" />
-          </div>
-        </form>
-      </UserForm>
+              <SubmitButton label="Log in" />
+            </form>
+          </UserForm>
+        </main>
+      </div>
     );
   }
 
