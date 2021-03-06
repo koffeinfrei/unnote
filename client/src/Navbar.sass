@@ -5,11 +5,14 @@ nav
   background: $picnic-primary !important
 
 .search
-  position: relative
   display: inline-block
   width: 65%
   max-width: 400px
   font-size: 0.9em
+
+  @include media('lg')
+    position: absolute !important
+    left: calc(50% - (400px / 2))
 
   .search-input
     padding-right: $picnic-separation * 3
