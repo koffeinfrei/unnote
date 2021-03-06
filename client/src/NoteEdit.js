@@ -111,7 +111,7 @@ class NoteEdit extends Component {
               handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)}
               handleArchiveNoteClick={this.handleArchiveNoteClick.bind(this)} />
           </div>
-          <div className="full two-third-900 three-fourth-1200 padding-left">
+          <div className="full two-third-900 three-fourth-1200 padding-left-xl">
             <NoteForm
               note={this.state.note}
               handleChange={this.handleEditChange.bind(this)}
