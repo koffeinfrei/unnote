@@ -2,7 +2,7 @@ import React from 'react';
 
 export function TextInput(props) {
   return (
-    <div className="form-group">
+    <div>
       <label
         htmlFor={idValue(props)}
         className="control-label">{props.label}</label>
@@ -11,7 +11,6 @@ export function TextInput(props) {
         type={props.type}
         id={idValue(props)}
         name={nameValue(props)}
-        className="string form-control"
         onChange={(e) => props.onChange(nameValue(props), e.target.value)} />
     </div>
   );

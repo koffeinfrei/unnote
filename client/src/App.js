@@ -1,7 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
-import Flash from './Flash';
 import NoteEdit from './NoteEdit';
 import './App.css';
 import './fonts/roboto.css';
@@ -24,7 +23,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Flash />
           { this.renderLoggedIn() }
           { this.renderLoggedOut() }
         </div>

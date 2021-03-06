@@ -13,6 +13,7 @@ import AutoSave from './AutoSave';
 import SyncStorage from './SyncStorage';
 import Dialog from './Dialog';
 import SaveStateLabel from './SaveStateLabel';
+import Flash from './Flash';
 import './NoteEdit.css';
 
 import showListIcon from './icons/material/arrow_back-24px.svg';
@@ -89,6 +90,7 @@ class NoteEdit extends Component {
 
     return (
       <main>
+        <Flash />
         <div className="meta">
           <button onClick={this.handleShowListClicked.bind(this)} className={showListButtonClassName}>
             <img src={showListIcon} alt="Close note" />
