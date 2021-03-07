@@ -45,16 +45,18 @@ class NoteEdit extends Component {
       <div>
         {this.renderHeaderBar()}
         {this.renderContent()}
-        <Dialog
-          title='Archive'
-          text='Are you sure you want to archive this note?'
-          show={this.state.showArchiveDialog}
-          handleConfirmed={this.state.handleArchiveDialogConfirmed} />
-        <Dialog
-          title='Delete'
-          text='Are you sure you want to delete this note?'
-          show={this.state.showDeleteDialog}
-          handleConfirmed={this.state.handleDeleteDialogConfirmed} />
+        {this.renderDialog(
+          'Archive',
+          'Are you sure you want to archive this note?',
+          this.state.showArchiveDialog,
+          this.state.handleArchiveDialogConfirmed
+        )}
+        {this.renderDialog(
+          'Delete',
+          'Are you sure you want to delete this note?',
+          this.state.showDeleteDialog,
+          this.state.handleDeleteDialogConfirmed
+        )}
       </div>
     );
   }
@@ -74,6 +76,16 @@ class NoteEdit extends Component {
     });
   }
 
+  renderDialog(title, text, show, handleConfirmed) {
+    return (
+      <Dialog
+        title={title}
+        text={text}
+        show={show}
+        handleConfirmed={handleConfirmed} />
+    );
+  }
+
   renderHeaderBar() {
     return (
       <Navbar
@@ -83,25 +95,10 @@ class NoteEdit extends Component {
   }
 
   renderContent() {
-    let showListButtonClassName = 'icon big invisible-lg';
-    if (this.state.showList) {
-      showListButtonClassName += ' invisible';
-    }
-
     return (
       <main>
         <Flash />
-        <div className="meta">
-          <button onClick={this.handleShowListClicked.bind(this)} className={showListButtonClassName}>
-            <img src={showListIcon} alt="Close note" />
-          </button>
-
-          <SaveStateLabel isSynced={this.state.isSynced} />
-
-          <button onClick={this.handleNewNoteClick.bind(this)} className="icon big">
-            <img src={newIcon} alt="New note" />
-          </button>
-        </div>
+        {this.renderContentMeta()}
         <div className="flex one two-900">
           <div className="full third-900 fourth-1200">
             <NoteList
@@ -121,6 +118,27 @@ class NoteEdit extends Component {
           </div>
         </div>
       </main>
+    );
+  }
+
+  renderContentMeta() {
+    let showListButtonClassName = 'icon big invisible-lg';
+    if (this.state.showList) {
+      showListButtonClassName += ' invisible';
+    }
+
+    return (
+      <div className="meta">
+        <button onClick={this.handleShowListClicked.bind(this)} className={showListButtonClassName}>
+          <img src={showListIcon} alt="Close note" />
+        </button>
+
+        <SaveStateLabel isSynced={this.state.isSynced} />
+
+        <button onClick={this.handleNewNoteClick.bind(this)} className="icon big">
+          <img src={newIcon} alt="New note" />
+        </button>
+      </div>
     );
   }
 
