@@ -28,7 +28,7 @@ RSpec.describe 'Edit note with conflict', :js do
         find('.ql-editor').set('note content - update 2')
 
         after_save_cycle do
-          expect(page).to have_content 'Saved'
+          expect(page).to have_content 'SAVED'
         end
 
         expect(page).to have_content 'my note (conflict 2016-08-01 15:33)'

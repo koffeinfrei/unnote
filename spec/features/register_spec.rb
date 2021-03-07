@@ -15,7 +15,7 @@ RSpec.describe 'Register a new user', :js do
 
     click_on 'Register'
 
-    within '.alert' do
+    within '.card.warning' do
       expect(page).to have_content(
         "Password confirmation doesn't match Password"
       )
@@ -25,13 +25,13 @@ RSpec.describe 'Register a new user', :js do
 
     click_on 'Register'
 
-    within '.alert' do
+    within '.card.success' do
       expect(page).to have_content 'Great! Glad you made it!'
     end
 
     wait_for_finished_loading
 
-    within '.notes-list' do
+    within '.list-item' do
       expect(page).to have_content 'Get started'
     end
 
