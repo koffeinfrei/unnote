@@ -77,13 +77,13 @@ class RegistrationForm extends Component {
     })
     .done((data) => {
       AlertFlash.clear();
+      this.props.onLoginSuccess();
+      this.props.history.push('/notes')
       NoticeFlash.show(
         'Great! Glad you made it!<br>' +
           'You have been subscribed to the <strong>free plan</strong> which ' +
           '<strong>limits</strong> you to have <strong>100 notes</strong>.'
       )
-      this.props.onLoginSuccess();
-      this.props.history.push('/notes')
     })
     .fail(({ responseJSON }) => {
       const errors = responseJSON.errors.join('<br>');
