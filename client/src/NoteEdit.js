@@ -12,12 +12,8 @@ import EventHive from './EventHive';
 import AutoSave from './AutoSave';
 import SyncStorage from './SyncStorage';
 import Dialog from './Dialog';
-import SaveStateLabel from './SaveStateLabel';
+import ActionBar from './ActionBar';
 import Flash from './Flash';
-import './NoteEdit.css';
-
-import showListIcon from './icons/material/arrow_back-24px.svg';
-import newIcon from './icons/material/add-24px.svg';
 
 class NoteEdit extends Component {
   constructor(props, context) {
@@ -98,7 +94,11 @@ class NoteEdit extends Component {
     return (
       <main>
         <Flash />
-        {this.renderContentMeta()}
+        <ActionBar
+          showList={this.state.showList}
+          isSynced={this.state.isSynced}
+          handleShowListClicked={this.handleShowListClicked.bind(this)}
+          handleNewNoteClicked={this.handleNewNoteClicked.bind(this)} />
         <div className="flex one two-900">
           <div className="full third-900 fourth-1200">
             <NoteList
@@ -119,31 +119,6 @@ class NoteEdit extends Component {
         </div>
       </main>
     );
-  }
-
-  renderContentMeta() {
-    let showListButtonClassName = 'icon big invisible-lg';
-    if (this.state.showList) {
-      showListButtonClassName += ' invisible';
-    }
-
-    return (
-      <div className="meta">
-        <button onClick={this.handleShowListClicked.bind(this)} className={showListButtonClassName}>
-          <img src={showListIcon} alt="Close note" />
-        </button>
-
-        <SaveStateLabel isSynced={this.state.isSynced} />
-
-        <button onClick={this.handleNewNoteClick.bind(this)} className="icon big">
-          <img src={newIcon} alt="New note" />
-        </button>
-      </div>
-    );
-  }
-
-  handleShowListClicked() {
-    this.setNewNote(() => this.setState({ showList: true }));
   }
 
   /* eslint-disable react/no-direct-mutation-state */
@@ -220,11 +195,15 @@ class NoteEdit extends Component {
     this.setState({ showArchiveDialog: true, handleArchiveDialogConfirmed: handler.bind(this) });
   }
 
-  handleNewNoteClick(e) {
+  handleNewNoteClicked(e) {
     e.preventDefault();
     e.stopPropagation();
 
     this.setNewNote();
+  }
+
+  handleShowListClicked() {
+    this.setNewNote(() => this.setState({ showList: true }));
   }
 
   handleEditChange(note) {
