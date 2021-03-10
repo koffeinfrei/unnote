@@ -3,6 +3,10 @@ import $ from 'jquery';
 import EventHive from './EventHive';
 import Spinner from './Spinner';
 import logo from './images/logo.svg';
+import Logout from './Logout';
+
+import closeIcon from './icons/material/close-24px.svg';
+
 import './Navbar.css';
 
 class Navbar extends Component {
@@ -19,10 +23,19 @@ class Navbar extends Component {
 
         {this.props.hideSearch ? null : this.renderSearchBox()}
 
-        <input id="bmenug" type="checkbox" className="show" />
+        <input id="bmenug" type="checkbox" className="show" ref={c => this.showHamburger = c} />
         <label htmlFor="bmenug" className="burger pseudo button">&#8801;</label>
 
-        <div className="menu"></div>
+        <div className="menu">
+          <button
+            type="button"
+            className="icon close-hamburger hidden-lg"
+            onClick={this.handleCloseHamburgerClicked.bind(this)}>
+            <img src={closeIcon} alt="Close menu" />
+          </button>
+
+          <Logout />
+        </div>
       </nav>
     );
   }
@@ -85,6 +98,10 @@ class Navbar extends Component {
     this.$searchInput.val('');
     $(e.target).blur();
     this.props.handleSearchCleared();
+  }
+
+  handleCloseHamburgerClicked() {
+    this.showHamburger.checked = false;
   }
 
   subscribeSpinner() {

@@ -26,31 +26,57 @@ input
   @include media('xl')
     padding-left: $picnic-separation * 2
 
-.icon
-    padding: 0
-    margin: 0
-    background: transparent
-    opacity: 0.5
-    width: $icon-size-md
-    height: $icon-size-md
-    color: $picnic-black
+@mixin icon
+  padding: 0
+  margin: 0
+  background: transparent
+  opacity: 0.5
+  width: $icon-size-md !important
+  height: $icon-size-md !important
+  color: $picnic-black
 
-    &:hover
-      opacity: 1
+  &:hover
+    opacity: 1
+    box-shadow: none !important
 
-    &.big
-      width: $icon-size-lg
-      height: $icon-size-lg
+  &.big
+    width: $icon-size-lg !important
+    height: $icon-size-lg !important
 
+    // having this as a general rule somehow breaks alignment for the non-big
+    // version
     img
-      width: 100%
-      height: 100%
+      vertical-align: middle
+
+  img
+    width: 100%
+    height: 100%
+
+.icon
+  @include icon
+
+.icon-lg
+  img
+    vertical-align: middle
+    margin-right: $picnic-separation
+    // vertical alignment hack
+    margin-top: -0.2em
+
+  @include media('lg')
+    @include icon
+
+    .icon-lg-text
+      display: none
 
 .hidden-sm
   display: none
 
   @include media('lg')
     display: initial
+
+.hidden-lg
+  @include media('lg')
+    display: none
 
 .invisible
   visibility: hidden

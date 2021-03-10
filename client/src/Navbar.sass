@@ -1,8 +1,18 @@
 @import './variables'
 
+// picnic fix to expand buttons in the hamburger menu
+nav .burger ~ .menu > *
+  width: 100%
+
 nav
   text-align: center !important
   background: $picnic-primary !important
+
+.menu
+  padding-top: $picnic-separation * 3
+
+  @include media('lg')
+    padding-top: 0
 
 .search
   display: inline-block
@@ -27,3 +37,9 @@ nav
 
     &:hover
       background: transparent
+
+.close-hamburger
+  position: absolute
+  top: $picnic-separation
+  right: $picnic-separation
+  display: inline
