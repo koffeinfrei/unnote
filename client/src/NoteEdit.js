@@ -41,18 +41,16 @@ class NoteEdit extends Component {
       <div>
         {this.renderHeaderBar()}
         {this.renderContent()}
-        {this.renderDialog(
-          'Archive',
-          'Are you sure you want to archive this note?',
-          this.state.showArchiveDialog,
-          this.state.handleArchiveDialogConfirmed
-        )}
-        {this.renderDialog(
-          'Delete',
-          'Are you sure you want to delete this note?',
-          this.state.showDeleteDialog,
-          this.state.handleDeleteDialogConfirmed
-        )}
+        <Dialog
+          title='Archive'
+          text='Are you sure you want to archive this note?'
+          show={this.state.showArchiveDialog}
+          handleConfirmed={this.state.handleArchiveDialogConfirmed} />
+        <Dialog
+          title='Delete'
+          text='Are you sure you want to delete this note?'
+          show={this.state.showDeleteDialog}
+          handleConfirmed={this.state.handleDeleteDialogConfirmed} />
       </div>
     );
   }
@@ -70,16 +68,6 @@ class NoteEdit extends Component {
     EventHive.subscribe('note.new', (data) => {
       this.setNewNote();
     });
-  }
-
-  renderDialog(title, text, show, handleConfirmed) {
-    return (
-      <Dialog
-        title={title}
-        text={text}
-        show={show}
-        handleConfirmed={handleConfirmed} />
-    );
   }
 
   renderHeaderBar() {
