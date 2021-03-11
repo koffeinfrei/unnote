@@ -19,7 +19,7 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
-        <Navbar hideSearch={true} />
+        <Navbar isLoggedIn={false} />
         <main>
           <Flash />
           <UserForm>

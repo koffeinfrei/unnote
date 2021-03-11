@@ -73,6 +73,7 @@ class NoteEdit extends Component {
   renderHeaderBar() {
     return (
       <Navbar
+        isLoggedIn={true}
         handleSearchEnter={this.handleSearchEnter.bind(this)}
         handleSearchCleared={this.handleSearchCleared.bind(this)} />
     );
