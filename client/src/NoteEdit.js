@@ -183,10 +183,7 @@ class NoteEdit extends Component {
     this.setState({ showArchiveDialog: true, handleArchiveDialogConfirmed: handler.bind(this) });
   }
 
-  handleNewNoteClicked(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
+  handleNewNoteClicked() {
     this.setNewNote();
   }
 
