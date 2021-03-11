@@ -19,24 +19,22 @@ class Navbar extends Component {
   render() {
     return (
       <nav>
-        <div className="nav-container">
-          {this.renderLogo()}
+        {this.renderLogo()}
 
-          {this.props.isLoggedIn ? this.renderSearchBox() : null}
+        {this.props.isLoggedIn ? this.renderSearchBox() : null}
 
-          <input id="bmenug" type="checkbox" className="show" ref={c => this.showHamburger = c} />
-          <label htmlFor="bmenug" className="burger pseudo button">&#8801;</label>
+        <input id="bmenug" type="checkbox" className="show" ref={c => this.showHamburger = c} />
+        <label htmlFor="bmenug" className="burger pseudo button">&#8801;</label>
 
-          <div className="menu">
-            <button
-              type="button"
-              className="icon close-hamburger hidden-lg"
-              onClick={this.handleCloseHamburgerClicked.bind(this)}>
-              <img src={closeIcon} alt="Close menu" />
-            </button>
+        <div className="menu">
+          <button
+            type="button"
+            className="icon close-hamburger hidden-lg"
+            onClick={this.handleCloseHamburgerClicked.bind(this)}>
+            <img src={closeIcon} alt="Close menu" />
+          </button>
 
-            {this.props.isLoggedIn ? <Logout /> : null}
-          </div>
+          {this.props.isLoggedIn ? <Logout /> : null}
         </div>
       </nav>
     );
