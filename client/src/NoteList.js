@@ -6,9 +6,9 @@ import AlertFlash from './AlertFlash';
 import Spinner from './Spinner';
 
 import defaultNotePicture from './icons/material/short_text-24px.svg';
-import archiveIcon from './icons/material/archive-24px.svg';
-import deleteIcon from './icons/material/delete-24px.svg';
-import moreIcon from './icons/material/expand_more-24px.svg';
+import { ReactComponent as ArchiveIcon } from './icons/material/archive-24px.svg';
+import { ReactComponent as DeleteIcon } from './icons/material/delete-24px.svg';
+import { ReactComponent as MoreIcon } from './icons/material/expand_more-24px.svg';
 
 import './NoteList.css';
 
@@ -70,20 +70,14 @@ class NoteList extends Component {
           </div>
         </div>
         <div className="list-item-actions">
-          {this.renderListItemButton('archive', archiveIcon, this.props.handleArchiveNoteClick.bind(this, note))}
-          {this.renderListItemButton('delete', deleteIcon, this.props.handleDeleteNoteClick.bind(this, note))}
+          <button className='icon' onClick={this.props.handleArchiveNoteClick.bind(this, note)}>
+            <ArchiveIcon />
+          </button>
+          <button className='icon' onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
+            <DeleteIcon />
+          </button>
         </div>
       </div>
-    );
-  }
-
-  renderListItemButton(action, icon, onClick, className) {
-    const classNames = ['icon', className].filter(x => x).join(' ')
-
-    return (
-      <button className={classNames} onClick={onClick}>
-        <img src={icon} alt={action} />
-      </button>
     );
   }
 
@@ -92,9 +86,9 @@ class NoteList extends Component {
     if (!this.state.showMoreLink) { return; }
 
     return (
-      <div>
-        {this.renderListItemButton('more', moreIcon, this.handleNextPageClick.bind(this), 'big list-more')}
-      </div>
+      <button className='icon big list-more' onClick={this.handleNextPageClick.bind(this)}>
+        <MoreIcon />
+      </button>
     );
   }
 

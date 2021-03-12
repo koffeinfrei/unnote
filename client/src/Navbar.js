@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 import logo from './images/logo.svg';
 import Logout from './Logout';
 
-import closeIcon from './icons/material/close-24px.svg';
+import { ReactComponent as CloseIcon } from './icons/material/close-24px.svg';
 
 import './Navbar.css';
 
@@ -31,7 +31,7 @@ class Navbar extends Component {
             type="button"
             className="icon close-hamburger hidden-lg"
             onClick={this.handleCloseHamburgerClicked.bind(this)}>
-            <img src={closeIcon} alt="Close menu" />
+            <CloseIcon />
           </button>
 
           {this.props.isLoggedIn ? <Logout /> : null}

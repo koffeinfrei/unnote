@@ -4,13 +4,13 @@ import $ from 'jquery';
 import AlertFlash from './AlertFlash';
 import { scrollToTop } from './scroll';
 
-import logoutIcon from './icons/material/logout-24px.svg';
+import { ReactComponent as LogoutIcon } from './icons/material/logout-24px.svg';
 
 class Logout extends Component {
   render() {
     return (
       <button onClick={this.handleClicked.bind(this)} className="icon-lg big pseudo">
-        <img src={logoutIcon} alt="Logout" />
+        <LogoutIcon />
         <span className="icon-lg-text">Logout</span>
       </button>
     );
