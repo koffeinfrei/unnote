@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import EventHive from './EventHive';
 import Spinner from './Spinner';
-import logo from './images/logo.svg';
 import Logout from './Logout';
 
+import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as CloseIcon } from './icons/material/close-24px.svg';
 
 import './Navbar.css';
@@ -48,7 +48,7 @@ class Navbar extends Component {
             <Spinner />
           </div>
         ) : (
-          <img src={logo} alt="logo" className="logo" />
+          <Logo className="logo" />
         )}
       </a>
     );
