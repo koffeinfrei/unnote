@@ -19,8 +19,10 @@ input
 
 .vertically-aligned
   position: relative
-  top: 50%
-  transform: translateY(-50%)
+  // fix 1px off error by usig 51 instead of 50.
+  // it may just be coincidental and temporary
+  top: 51%
+  transform: translateY(-51%)
 
 .padding-left-xl
   @include media('xl')
