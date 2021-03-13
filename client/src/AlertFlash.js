@@ -6,7 +6,7 @@ class AlertFlash extends AbstractFlash {
   }
 
   getAdditionalCssClass() {
-    return 'alert-warning';
+    return 'warning';
   }
 }
 

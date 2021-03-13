@@ -4,28 +4,34 @@ import AlertFlash from './AlertFlash';
 import NoticeFlash from './NoticeFlash';
 import { TextInput, SubmitButton, Utf8 } from './Form';
 import { scrollToTop } from './scroll';
+import Navbar from './Navbar';
+import Flash from './Flash';
 import UserForm from './UserForm';
 
 class RegistrationForm extends Component {
   render() {
     return (
-      <UserForm intro={this.renderIntro()}>
-        <form onSubmit={this.handleFormSubmit.bind(this)}>
-          <Utf8 />
+      <div>
+        <Navbar isLoggedIn={false} />
+        <main>
+          <Flash />
+          <UserForm intro={this.renderIntro()}>
+            <form onSubmit={this.handleFormSubmit.bind(this)}>
+              <Utf8 />
 
-          <div className="form-inputs">
-            {this.renderTextInput("email", "email", "Email")}
+              <div className="flex one">
+                {this.renderTextInput("email", "email", "Email")}
 
-            {this.renderTextInput("password", "password", "Password")}
+                {this.renderTextInput("password", "password", "Password")}
 
-            {this.renderTextInput("password", "password_confirmation", "Confirm password")}
-          </div>
+                {this.renderTextInput("password", "password_confirmation", "Confirm password")}
+              </div>
 
-          <div className="form-actions">
-            <SubmitButton label="Register" />
-          </div>
-        </form>
-      </UserForm>
+              <SubmitButton label="Register" />
+            </form>
+          </UserForm>
+        </main>
+      </div>
     );
   }
 
@@ -71,13 +77,13 @@ class RegistrationForm extends Component {
     })
     .done((data) => {
       AlertFlash.clear();
+      this.props.onLoginSuccess();
+      this.props.history.push('/notes')
       NoticeFlash.show(
         'Great! Glad you made it!<br>' +
           'You have been subscribed to the <strong>free plan</strong> which ' +
           '<strong>limits</strong> you to have <strong>100 notes</strong>.'
       )
-      this.props.onLoginSuccess();
-      this.props.history.push('/notes')
     })
     .fail(({ responseJSON }) => {
       const errors = responseJSON.errors.join('<br>');

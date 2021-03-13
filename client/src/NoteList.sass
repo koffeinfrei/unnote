@@ -1,74 +1,42 @@
-@import 'bootstrap-settings.sass'
-@import 'bootstrap-material-design/sass/variables'
+@import './stylesheets/variables'
 
-.notes-list
-  overflow-y: auto
-  // $navbar-margin-bottom: body top padding
-  // 20px: list bottom margin (static value for `.list-group` definition
-  // 1px: correction to avoid scrollbar
-  height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 1px)
+$picture-size: 2.5em
 
-  @media (min-width: $screen-lg-min)
-    height: calc(100vh - #{$navbar-height} - #{$navbar-margin-bottom} - 20px - 1px)
+.card.list-item
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0 $picnic-separation
 
-  @media (max-width: $screen-sm-min)
-    position: absolute
+  &.active
+    color: $picnic-primary
+    border-color: $picnic-primary
+    box-shadow: 1px 1px 4px $picnic-dull
+
+  .list-item-picture
+    width: $picture-size
+    height: $picture-size
+    border: $picnic-border
+    border-radius: 50%
+    margin-right: $picnic-separation * 2
+    flex: 0 0 $picture-size
+    opacity: 0.5
+
+  .list-item-heading
+    font-weight: normal
+
+  .list-item-content
+    flex: 1 auto auto
+
+  .list-item-meta
+    font-size: $font-size-sm
+    color: $gray
+    margin-bottom: $picnic-separation
+
+  .list-item-actions
+    display: flex
+
+.list-more
+  &.icon.big
     width: 100%
-    margin-left: 0
-    margin-right: 0
-    top: 0
-    left: 0
-    background-color: $body-bg
-    z-index: 1
-
-.list-group
-  .list-group-item.note-navigation-item
-    cursor: pointer
-
-    &.not-clickable
-      cursor: default
-
-    &.active
-      &:hover, &:focus
-        background: transparent
-        outline: 0
-
-      .list-group-item-heading, .list-group-item-text
-        color: $list-group-active-color
-        font-weight: 400
-
-    .list-group-item-heading
-      font-size: $font-size-large
-
-    .row-picture, .row-action-primary
-      vertical-align: top
-
-      i
-        background: $list-item-bg
-
-    .row-content
-      min-height: 0
-
-      .action-secondary
-        &:hover
-          i
-            color: $brand-danger
-
-        &.action-secondary-before
-          right: 3 * 16px;
-
-          &:hover
-            i
-              color: $brand-warning
-
-.list-more,
-.list-nothing
-  display: block
-  text-align: center
-
-.list-more-icon
-  font-size: $font-size-h1
-
-.list-more-spinner
-  svg
-    height: 35px
+    text-align: center

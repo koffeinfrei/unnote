@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SaveStateLabel.css';
 
 class SaveStateLabel extends Component {
   constructor(props, context) {
@@ -13,15 +14,11 @@ class SaveStateLabel extends Component {
 
   render () {
     return (
-      <div className="save-state">
-        {
-          this.state.isSynced
-            ?
-            <div className="label label-success">Saved</div>
-            :
-            <div className="label label-warning">Saving</div>
-        }
-      </div>
+      this.state.isSynced
+        ?
+        <div className="save-state saved">Saved</div>
+        :
+        <div className="save-state saving">Saving</div>
     );
   }
 }

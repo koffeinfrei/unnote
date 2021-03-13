@@ -1,6 +1,5 @@
 {
   "name": "mykonote",
-  "dependencies": {},
   "devDependencies": {
     "lerna-changelog": "^0.8.2"
   },

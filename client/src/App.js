@@ -1,17 +1,9 @@
 import React, { Component, Suspense } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import $ from 'jquery';
-import './global-jquery'; // bootstrap-material-design needs global jQuery
-import 'arrive/src/arrive';
-import 'bootstrap-material-design/dist/js/material';
-import 'bootstrap-sass/assets/javascripts/bootstrap/modal';
-import 'bootstrap-sass/assets/javascripts/bootstrap/transition';
-import 'bootstrap-sass/assets/javascripts/bootstrap/collapse';
-import Flash from './Flash';
 import NoteEdit from './NoteEdit';
 import './App.css';
 import './fonts/roboto.css';
-import './fonts/material-icons.css';
 
 const LoginForm = React.lazy(() => import('./LoginForm'));
 const RegistrationForm = React.lazy(() => import('./RegistrationForm'));
@@ -30,17 +22,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container-fluid">
-          <Flash />
+        <div>
           { this.renderLoggedIn() }
           { this.renderLoggedOut() }
         </div>
       </Router>
     );
-  }
-
-  componentDidMount() {
-    $.material.init();
   }
 
   onLoginSuccess() {

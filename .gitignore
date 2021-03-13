@@ -19,5 +19,9 @@ npm-debug.log*
 /client/build
 /public/assets/
 
-# tokens
+# tokens / env
+/.env
 /.lerna-changelog-github-token
+
+# build files
+/client/src/*.css
