@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import { debounce } from 'throttle-debounce';
 import './keyboard';
+import { ajax } from './ajax';
 import NoteList from './NoteList';
 import NoteForm from './NoteForm';
 import Note from './Note';
@@ -125,23 +125,20 @@ class NoteEdit extends Component {
       ...this.getNewNoteAttributes()
     };
 
-    $.ajax({
-      url: `/api/notes/${id}`,
-      dataType: 'json',
-    })
-    .done((data) => {
-      const note = Note.fromAttributes(data.note);
-      this.setState({
-        showList: false,
-        note: note
-      }, () => this.pushState.setBrowserTitle(note));
-    })
-    .fail((xhr, status, error) => {
-      AlertFlash.show(
-        'While trying to load the note the internet broke down (or something ' +
-          'else failed, maybe the note could not be found)'
-      );
-    })
+    ajax(`/api/notes/${id}`)
+      .then((data) => {
+        const note = Note.fromAttributes(data.note);
+        this.setState({
+          showList: false,
+          note: note
+        }, () => this.pushState.setBrowserTitle(note));
+      })
+      .catch(({ status, error }) => {
+        AlertFlash.show(
+          'While trying to load the note the internet broke down (or something ' +
+            'else failed, maybe the note could not be found)'
+        );
+      })
   }
   /* eslint-enable react/no-direct-mutation-state */
 
@@ -239,30 +236,25 @@ class NoteEdit extends Component {
   }
 
   deleteNote(note) {
-    $.ajax({
-      url: '/api/notes/' + note.uid,
-      method: 'DELETE',
-      dataType: 'json',
-    })
-    .done(() => {
-      SyncStorage.remove(note);
+    ajax(`/api/notes/${note.uid}`, 'DELETE')
+      .then((data) => {
+        SyncStorage.remove(note);
 
-      if (this.state.note.uid === note.uid) {
-        this.setNewNote();
-      }
-    })
-    .fail(function(xhr, status, error) {
-      var message = 'Oh my, the note could not be deleted.';
-      // 0 == UNSENT -> most probably no internet connection
-      if (xhr.readyState === 0) {
-        message += "<br>Please check your internet connection (Well yes, sorry, deleting in offline mode is not yet suppported)."
-      }
-      AlertFlash.show(message);
-      console.error('note.uid: ', note.uid, 'status: ', status, 'error: ', error.toString());
-    })
-    .always(() => {
-      this.setState({ isSynced: true });
-    });
+        if (this.state.note.uid === note.uid) {
+          this.setNewNote();
+        }
+      })
+      .catch(function({ status, error }) {
+        let message = 'Oh my, the note could not be deleted.';
+        if (!window.navigator.onLine) {
+          message += "<br>Please check your internet connection (Apologies, deleting in offline mode is not yet suppported)."
+        }
+        AlertFlash.show(message);
+        console.error('note.uid: ', note.uid, 'status: ', status, 'error: ', error.toString());
+      })
+      .finally(() => {
+        this.setState({ isSynced: true });
+      });
   }
 }
 

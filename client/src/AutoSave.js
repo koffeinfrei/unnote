@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { ajax, objectWithNestedKeys } from './ajax';
 import SyncStorage from './SyncStorage';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
@@ -32,16 +33,11 @@ class AutoSave {
     SyncStorage.eachNote((note, noteRaw) => {
       const url = '/api/notes/' + note.uid;
 
-      $.ajax({
-        url: url,
-        method: 'PUT',
-        dataType: 'json',
-        data: { note: note }
-      })
-      // `serverNote` is just a partial note, the response doesn't contain all
-      // attributes
-      .done((serverNote) => this.ajaxDone(note, noteRaw, Note.fromAttributes(serverNote)))
-      .fail((xhr, status, error) => this.ajaxFail(xhr, status, error, url));
+      ajax(url, 'PUT', objectWithNestedKeys(note, 'note'))
+        // `serverNote` is just a partial note, the response doesn't contain all
+        // attributes
+        .then((serverNote) => this.ajaxDone(note, noteRaw, Note.fromAttributes(serverNote)))
+        .catch(({ status, error, responseJson }) => this.ajaxFail(status, error, url, responseJson));
     });
   }
 
@@ -83,13 +79,12 @@ class AutoSave {
     this.setSyncStatus(undefined, serverNote);
   }
 
-  ajaxFail(xhr, status, error, url) {
-    // 0 == UNSENT -> most probably no internet connection
-    if (xhr.readyState === 0) {
+  ajaxFail(status, error, url, responseJson) {
+    if (!window.navigator.onLine) {
       return;
     }
 
-    if (xhr.status === 401) {
+    if (status === 401) {
       AlertFlash.show(
         // we could actually link to the current page with `href=""`, but by
         // doing this the title input field contains the wrong value once we
@@ -104,12 +99,12 @@ class AutoSave {
         "Your changes won't be lost, once you're signed in they will be saved to the server."
       );
     }
-    else if (xhr.status === 422) {
-      AlertFlash.show(xhr.responseJSON.errors.join('<br>'));
+    else if (status === 422) {
+      AlertFlash.show(responseJson.errors.join('<br>'));
     }
     else {
       AlertFlash.show('Something went sideways: ' + error.toString());
-      console.error('url: ', url, 'xhr: ', xhr, 'status: ', status, 'err: ', error.toString());
+      console.error('url: ', url, 'status: ', status, 'error: ', error.toString(), 'responseJson: ', responseJson);
     }
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import humanDate from 'human-date';
 import $ from 'jquery';
+import { ajaxWithAbort } from './ajax';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
 import Spinner from './Spinner';
@@ -160,21 +161,20 @@ class NoteList extends Component {
 
   updateList() {
     if (this.updateListRequest) {
-      this.updateListRequest.abort();
+      this.updateListRequest.controller.abort();
     }
 
-    this.updateListRequest = $.ajax({
-      url: '/api/notes',
-      dataType: 'json',
-      data: { search: this.state.searchQuery, page: this.state.currentPage }
+    this.updateListRequest = ajaxWithAbort('/api/notes', 'GET', {
+      search: this.state.searchQuery,
+      page: this.state.currentPage
     });
 
     this.executeUpdateListRequest();
   }
 
   executeUpdateListRequest() {
-    this.updateListRequest
-      .done((data) => {
+    this.updateListRequest.promise
+      .then((data) => {
         this.setState({ showMoreLink: true });
 
         const notes = data.notes.map(function(note) {
@@ -187,17 +187,11 @@ class NoteList extends Component {
           hasMorePages: data.has_more_pages
         });
       })
-      .fail((xhr, status, error) => {
-        // it's not a failure when the request was aborted by a subsequent
-        // request (see call to `abort()` above).
-        if (error === 'abort') {
-          return;
-        }
-
+      .catch(({ status, error }) => {
         this.setState({ showMoreLink: true });
 
         AlertFlash.show('Watch out, the list is not up to date.');
-        console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
+        console.error('url: ', this.props.url, 'status: ', status, 'error: ', error);
       });
   }
 

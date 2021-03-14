@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import { ajax } from './ajax';
 import AlertFlash from './AlertFlash';
 import { TextInput, SubmitButton, Checkbox, Utf8, nameValue } from './Form';
 import { scrollToTop } from './scroll';
@@ -65,21 +65,16 @@ class LoginForm extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
 
-    $.ajax({
-      url: '/users/sign_in',
-      method: 'POST',
-      dataType: 'json',
-      data: this.state
-    })
-    .done((data) => {
-      AlertFlash.clear();
-      this.props.onLoginSuccess();
-    })
-    .fail(() => {
-      AlertFlash.show('Sorry, that did not work. ' +
-                      'Did you enter a wrong username or a wrong password?')
-    })
-    .always(scrollToTop);
+    ajax('/users/sign_in', 'POST', { ...this.state })
+      .then((data) => {
+        AlertFlash.clear();
+        this.props.onLoginSuccess();
+      })
+      .catch(() => {
+        AlertFlash.show('Sorry, that did not work. ' +
+                        'Did you enter a wrong username or a wrong password?')
+      })
+      .finally(scrollToTop);
   }
 }
 

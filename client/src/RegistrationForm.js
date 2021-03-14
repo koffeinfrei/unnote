@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import { ajax } from './ajax';
 import AlertFlash from './AlertFlash';
 import NoticeFlash from './NoticeFlash';
 import { TextInput, SubmitButton, Utf8 } from './Form';
@@ -69,28 +69,23 @@ class RegistrationForm extends Component {
   handleFormSubmit(e) {
     e.preventDefault();
 
-    $.ajax({
-      url: '/users',
-      method: 'POST',
-      dataType: 'json',
-      data: this.state
-    })
-    .done((data) => {
-      AlertFlash.clear();
-      this.props.onLoginSuccess();
-      this.props.history.push('/notes')
-      NoticeFlash.show(
-        'Great! Glad you made it!<br>' +
-          'You have been subscribed to the <strong>free plan</strong> which ' +
-          '<strong>limits</strong> you to have <strong>100 notes</strong>.'
-      )
-    })
-    .fail(({ responseJSON }) => {
-      const errors = responseJSON.errors.join('<br>');
+    ajax('/users', 'POST', { ...this.state })
+      .then((data) => {
+        AlertFlash.clear();
+        this.props.onLoginSuccess();
+        this.props.history.push('/notes')
+        NoticeFlash.show(
+          'Great! Glad you made it!<br>' +
+            'You have been subscribed to the <strong>free plan</strong> which ' +
+            '<strong>limits</strong> you to have <strong>100 notes</strong>.'
+        )
+      })
+      .catch(({ responseJson }) => {
+        const errors = responseJson.errors.join('<br>');
 
-      AlertFlash.show('Sorry, that did not work. You need to fix your inputs:<br>' + errors)
-    })
-    .always(scrollToTop);
+        AlertFlash.show('Sorry, that did not work. You need to fix your inputs:<br>' + errors)
+      })
+      .finally(scrollToTop);
   }
 }
 
