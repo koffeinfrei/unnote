@@ -1,3 +1,16 @@
+## 0.8.0 (2021-03-14)
+
+#### :rocket: Enhancement
+* [#383](https://github.com/panter/mykonote/pull/383) Remove bootstrap / Redesign ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#366](https://github.com/panter/mykonote/pull/366) Update npm packages ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#343](https://github.com/panter/mykonote/pull/343) Update gems and npm packages ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.7.0 (2019-11-30)
 
 #### :house: Internal
