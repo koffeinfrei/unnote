@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import EventHive from './EventHive';
 import Spinner from './Spinner';
@@ -42,7 +43,7 @@ class Navbar extends Component {
 
   renderLogo() {
     return (
-      <a href="/" className="brand">
+      <Link to='/' className="brand">
         {this.state.showSpinner ? (
           <div className="logo">
             <Spinner />
@@ -50,7 +51,7 @@ class Navbar extends Component {
         ) : (
           <Logo className="logo" />
         )}
-      </a>
+      </Link>
     );
   }
 
