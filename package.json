@@ -1,7 +1,7 @@
 {
   "name": "mykonote",
   "devDependencies": {
-    "lerna-changelog": "^0.8.2"
+    "lerna-changelog": "^1.0.1"
   },
   "scripts": {
     "changelog": "GITHUB_AUTH=$(cat .lerna-changelog-github-token) node_modules/.bin/lerna-changelog"
