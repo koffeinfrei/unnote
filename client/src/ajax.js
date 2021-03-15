@@ -18,7 +18,17 @@ export function objectWithNestedKeys(data, nestKey) {
   return newData;
 }
 
+function setApiHost(url) {
+  if (!window.API_HOST) {
+    return url;
+  }
+
+  return `${window.API_HOST}${url}`;
+}
+
 function performAjax(url, method = 'GET', data) {
+  url = setApiHost(url);
+
   // start the spinner after 500ms
   const timeoutId = setTimeout(() => {
     EventHive.publish('spinner.toggle', { show: true })
