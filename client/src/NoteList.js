@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import humanDate from 'human-date';
-import $ from 'jquery';
 import { ajaxWithAbort } from './ajax';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
@@ -150,7 +149,7 @@ class NoteList extends Component {
 
   handleNextPageClick(e) {
     e.preventDefault();
-    $(e.currentTarget).blur();
+    e.currentTarget.blur();
 
     this.setState({ showMoreLink: false });
 
