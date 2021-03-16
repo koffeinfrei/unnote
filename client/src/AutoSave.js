@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { ajax, objectWithNestedKeys } from './ajax';
 import SyncStorage from './SyncStorage';
 import Note from './Note';
@@ -26,19 +25,26 @@ class AutoSave {
   }
 
   syncToServer() {
-    if ($.active) {
-      return;
-    }
+    if (this.syncInProgress) { return; }
+
+    this.syncInProgress = true;
+    const requests = [];
 
     SyncStorage.eachNote((note, noteRaw) => {
       const url = '/api/notes/' + note.uid;
 
-      ajax(url, 'PUT', objectWithNestedKeys(note, 'note'))
+      const request = ajax(url, 'PUT', objectWithNestedKeys(note, 'note'));
+
+      requests.push(request);
+
+      request
         // `serverNote` is just a partial note, the response doesn't contain all
         // attributes
         .then((serverNote) => this.ajaxDone(note, noteRaw, Note.fromAttributes(serverNote)))
         .catch((error, status, responseJson) => this.ajaxFail(status, error, url, responseJson));
     });
+
+    Promise.allSettled(requests).then(() => this.syncInProgress = false);
   }
 
   setSyncStatus(isSynced, serverNote) {
