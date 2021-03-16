@@ -74,11 +74,11 @@ function performAjax(url, method = 'GET', data) {
           response.json().then(json => resolve(json));
         }
         else {
-          response.json().then(json => reject({
-            status: response.status,
-            error: response.statusText,
-            responseJson: json
-          }));
+          response.json().then(json => reject(
+            new Error(response.statusText),
+            response.status,
+            json
+          ));
         }
       })
       .catch((error) => {
@@ -89,7 +89,7 @@ function performAjax(url, method = 'GET', data) {
           // no-op
         }
         else {
-          reject({ status: undefined, error: error });
+          reject(error);
         }
       })
       .finally(() => {

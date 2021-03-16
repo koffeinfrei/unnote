@@ -133,7 +133,7 @@ class NoteEdit extends Component {
           note: note
         }, () => this.pushState.setBrowserTitle(note));
       })
-      .catch(({ status, error }) => {
+      .catch(() => {
         AlertFlash.show(
           'While trying to load the note the internet broke down (or something ' +
             'else failed, maybe the note could not be found)'
@@ -244,7 +244,7 @@ class NoteEdit extends Component {
           this.setNewNote();
         }
       })
-      .catch(function({ status, error }) {
+      .catch((error, status) => {
         let message = 'Oh my, the note could not be deleted.';
         if (!window.navigator.onLine) {
           message += "<br>Please check your internet connection (Apologies, deleting in offline mode is not yet suppported)."

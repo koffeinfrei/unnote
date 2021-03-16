@@ -37,7 +37,7 @@ class AutoSave {
         // `serverNote` is just a partial note, the response doesn't contain all
         // attributes
         .then((serverNote) => this.ajaxDone(note, noteRaw, Note.fromAttributes(serverNote)))
-        .catch(({ status, error, responseJson }) => this.ajaxFail(status, error, url, responseJson));
+        .catch((error, status, responseJson) => this.ajaxFail(status, error, url, responseJson));
     });
   }
 
@@ -79,7 +79,8 @@ class AutoSave {
     this.setSyncStatus(undefined, serverNote);
   }
 
-  ajaxFail(status, error, url, responseJson) {
+  ajaxFail(error, status, url, responseJson) {
+    // being offline is not an error
     if (!window.navigator.onLine) {
       return;
     }
@@ -103,8 +104,8 @@ class AutoSave {
       AlertFlash.show(responseJson.errors.join('<br>'));
     }
     else {
-      AlertFlash.show('Something went sideways: ' + error.toString());
-      console.error('url: ', url, 'status: ', status, 'error: ', error.toString(), 'responseJson: ', responseJson);
+      AlertFlash.show('Something went sideways: ' + error.message);
+      console.error('url: ', url, 'status: ', status, 'error: ', error, 'responseJson: ', responseJson);
     }
   }
 }

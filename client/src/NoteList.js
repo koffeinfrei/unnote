@@ -187,7 +187,7 @@ class NoteList extends Component {
           hasMorePages: data.has_more_pages
         });
       })
-      .catch(({ status, error }) => {
+      .catch((error, status) => {
         this.setState({ showMoreLink: true });
 
         AlertFlash.show('Watch out, the list is not up to date.');
