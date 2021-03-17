@@ -129,7 +129,7 @@ class NoteList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.isSynced && nextProps.isSynced) {
+    if (!this.state.isSynced && nextProps.isSynced && nextProps.listNeedsUpdate !== false) {
       this.listNeedsUpdate = true;
     }
 

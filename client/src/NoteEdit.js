@@ -86,6 +86,7 @@ class NoteEdit extends Component {
         <ActionBar
           showList={this.state.showList}
           isSynced={this.state.isSynced}
+          listNeedsUpdate={this.state.listNeedsUpdate}
           handleShowListClicked={this.handleShowListClicked.bind(this)}
           handleNewNoteClicked={this.handleNewNoteClicked.bind(this)} />
         <div className="flex one two-900">
@@ -196,7 +197,7 @@ class NoteEdit extends Component {
   }
 
   handleServerSync(data) {
-    let state = { isSynced: data.isSynced };
+    let state = { isSynced: data.isSynced, listNeedsUpdate: true };
     // when a note has been synced we need to set the serverUpdatedAt timestamp
     // for the conflict detection to work
     // (only do this if the current note is the synced note)
@@ -243,6 +244,8 @@ class NoteEdit extends Component {
         if (this.state.note.uid === note.uid) {
           this.setNewNote();
         }
+
+        this.setState({ isSynced: true, listNeedsUpdate: true });
       })
       .catch((error, status) => {
         let message = 'Oh my, the note could not be deleted.';
@@ -251,9 +254,10 @@ class NoteEdit extends Component {
         }
         AlertFlash.show(message);
         console.error('note.uid: ', note.uid, 'status: ', status, 'error: ', error.toString());
+
+        this.setState({ isSynced: true, listNeedsUpdate: false });
       })
       .finally(() => {
-        this.setState({ isSynced: true });
       });
   }
 }
