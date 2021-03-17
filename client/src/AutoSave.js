@@ -41,7 +41,7 @@ class AutoSave {
         // `serverNote` is just a partial note, the response doesn't contain all
         // attributes
         .then((serverNote) => this.ajaxDone(note, noteRaw, Note.fromAttributes(serverNote)))
-        .catch((error, status, responseJson) => this.ajaxFail(status, error, url, responseJson));
+        .catch((error) => this.ajaxFail(error, url));
     });
 
     Promise.allSettled(requests).then(() => this.syncInProgress = false);
@@ -85,13 +85,13 @@ class AutoSave {
     this.setSyncStatus(undefined, serverNote);
   }
 
-  ajaxFail(error, status, url, responseJson) {
+  ajaxFail(error, url) {
     // being offline is not an error
     if (!window.navigator.onLine) {
       return;
     }
 
-    if (status === 401) {
+    if (error.status === 401) {
       AlertFlash.show(
         // we could actually link to the current page with `href=""`, but by
         // doing this the title input field contains the wrong value once we
@@ -106,12 +106,15 @@ class AutoSave {
         "Your changes won't be lost, once you're signed in they will be saved to the server."
       );
     }
-    else if (status === 422) {
-      AlertFlash.show(responseJson.errors.join('<br>'));
+    // "Unprocessable entity" is returned when a validation error occurs.
+    // the most common use case is when the number of notes allowed for the
+    // free subscription is exceeded.
+    else if (error.status === 422) {
+      AlertFlash.show(error.responseJson.errors.join('<br>'));
     }
     else {
       AlertFlash.show('Something went sideways: ' + error.message);
-      console.error('url: ', url, 'status: ', status, 'error: ', error, 'responseJson: ', responseJson);
+      console.error('url: ', url, 'error: ', error.toString());
     }
   }
 }

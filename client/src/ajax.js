@@ -105,11 +105,7 @@ function handleThen(response, resolve, reject) {
     response.json().then(json => resolve(json));
   }
   else {
-    response.json().then(json => reject(
-      new Error(response.statusText),
-      response.status,
-      json
-    ));
+    response.json().then(json => reject(new AjaxError(response.statusText, response.status, json)));
   }
 }
 
@@ -122,5 +118,20 @@ function handleCatch(error, reject) {
   }
   else {
     reject(error);
+  }
+}
+
+class AjaxError extends Error {
+  constructor(message, status, responseJson) {
+    super(message);
+    this.name = 'AjaxError';
+    this.status = status;
+    this.responseJson = responseJson;
+  }
+
+  toString() {
+    return `${this.name}: ${this.message}. ` +
+      `Status: ${this.status}.` +
+      `ResponseJson: ${JSON.stringify(this.responseJson)}`;
   }
 }

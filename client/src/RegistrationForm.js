@@ -80,10 +80,10 @@ class RegistrationForm extends Component {
             '<strong>limits</strong> you to have <strong>100 notes</strong>.'
         )
       })
-      .catch((error, status, responseJson) => {
-        const errors = responseJson.errors.join('<br>');
+      .catch((error) => {
+        const errors = error.responseJson.errors.join('<br>');
 
-        AlertFlash.show('Sorry, that did not work. You need to fix your inputs:<br>' + errors)
+        AlertFlash.show('Sorry, that did not work. You need to fix your inputs:<br>' + errors);
       })
       .finally(scrollToTop);
   }

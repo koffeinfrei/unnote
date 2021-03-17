@@ -252,13 +252,13 @@ class NoteEdit extends Component {
 
         this.setState({ isSynced: true, listNeedsUpdate: true });
       })
-      .catch((error, status) => {
+      .catch((error) => {
         let message = 'Oh my, the note could not be deleted.';
         if (!window.navigator.onLine) {
           message += "<br>Please check your internet connection (Apologies, deleting in offline mode is not yet suppported)."
         }
         AlertFlash.show(message);
-        console.error('note.uid: ', note.uid, 'status: ', status, 'error: ', error.toString());
+        console.error('note.uid: ', note.uid, 'error: ', error.toString());
 
         this.setState({ isSynced: true, listNeedsUpdate: false });
       })
