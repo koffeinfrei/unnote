@@ -59,15 +59,20 @@ class NoteEdit extends Component {
     this.autoSave = new AutoSave(this.handleServerSync.bind(this));
     this.autoSave.startPolling();
 
-    EventHive.subscribe('note.create', (data) => {
+    this.noteCreateSubscription = EventHive.subscribe('note.create', (data) => {
       this.setNewNote(() => {
         EventHive.publish('note.update', data);
       });
     });
 
-    EventHive.subscribe('note.new', (data) => {
+    this.noteNewSubscription = EventHive.subscribe('note.new', (data) => {
       this.setNewNote();
     });
+  }
+
+  componentWillUnmount() {
+    this.noteCreateSubscription.remove();
+    this.noteNewSubscription.remove();
   }
 
   renderHeaderBar() {

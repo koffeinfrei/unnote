@@ -59,6 +59,11 @@ class Navbar extends Component {
     this.subscribeSearch();
   }
 
+  componentWillUnmount() {
+    this.unsubscribeSpinner();
+    this.unsubscribeSearch();
+  }
+
   renderSearchBox() {
     return (
       <div className="search vertically-aligned">
@@ -107,15 +112,23 @@ class Navbar extends Component {
   subscribeSpinner() {
     // listen on global event so we can toggle the spinner from unrelated
     // components
-    EventHive.subscribe('spinner.toggle', (data) => {
+    this.spinnerSubscription = EventHive.subscribe('spinner.toggle', (data) => {
       this.setState({ showSpinner: data.show });
     });
   }
 
+  unsubscribeSpinner() {
+    this.spinnerSubscription.remove();
+  }
+
   subscribeSearch() {
-    EventHive.subscribe('search.focus', () => {
+    this.searchSubscription = EventHive.subscribe('search.focus', () => {
       this.searchInput.focus();
     });
+  }
+
+  unsubscribeSearch() {
+    this.searchSubscription.remove();
   }
 }
 

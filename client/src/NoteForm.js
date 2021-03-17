@@ -80,7 +80,7 @@ class NoteForm extends Component {
     // when updating the note from outside (e.g. from the mobile app), in which
     // case a sync to the server should be triggered. if we just use the react
     // eventing the rte won't detect the changes.
-    EventHive.subscribe('note.update', (data) => {
+    this.noteUpdateSubscription = EventHive.subscribe('note.update', (data) => {
       this.titleElement.value = data.title;
       this.handleTitleChange();
       this.editor.pasteHTML(data.content);
@@ -109,6 +109,10 @@ class NoteForm extends Component {
         note: nextProps.note
       }, () => this.focusTitleFieldIfNewNote());
     }
+  }
+
+  componentWillUnmount() {
+    this.noteUpdateSubscription.remove();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
