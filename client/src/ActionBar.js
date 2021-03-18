@@ -21,7 +21,7 @@ export class ActionBar extends Component {
 
         <SaveStateLabel isSynced={this.props.isSynced} />
 
-        <button onClick={this.props.handleNewNoteClicked.bind(this)} className="icon big">
+        <button name="new-note" onClick={this.props.handleNewNoteClicked.bind(this)} className="icon big">
           <NewIcon />
         </button>
       </div>
