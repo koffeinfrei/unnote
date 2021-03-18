@@ -9,7 +9,7 @@ import { ReactComponent as LogoutIcon } from './icons/material/logout-24px.svg';
 class Logout extends Component {
   render() {
     return (
-      <button onClick={this.handleClicked.bind(this)} className="icon-lg big pseudo">
+      <button name="logout" onClick={this.handleClicked.bind(this)} className="icon-lg big pseudo">
         <LogoutIcon />
         <span className="icon-lg-text">Logout</span>
       </button>
