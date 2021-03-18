@@ -70,10 +70,10 @@ class NoteList extends Component {
           </div>
         </div>
         <div className="list-item-actions">
-          <button className='icon' onClick={this.props.handleArchiveNoteClick.bind(this, note)}>
+          <button name="archive-note" className='icon' onClick={this.props.handleArchiveNoteClick.bind(this, note)}>
             <ArchiveIcon />
           </button>
-          <button className='icon' onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
+          <button name="delete-note" className='icon' onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
             <DeleteIcon />
           </button>
         </div>
