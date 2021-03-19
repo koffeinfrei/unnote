@@ -29,10 +29,19 @@ class NoteList extends Component {
   render() {
     return (
       <div className={this.getListCssClass()}>
+        {this.renderSearchTerm()}
         {this.renderList()}
         {this.renderNextPageLink()}
         {this.renderListSpinner()}
       </div>
+    );
+  }
+
+  renderSearchTerm() {
+    if (!this.state.searchQuery) { return; }
+
+    return (
+      <div className="list-search-term">Showing results for "{this.state.searchQuery}"</div>
     );
   }
 
@@ -45,11 +54,7 @@ class NoteList extends Component {
 
   renderEmptyListItem() {
     return (
-      <div className="list-group-item note-navigation-item not-clickable list-nothing">
-        <div className="list-group-item-heading">
-          There's nothing…
-        </div>
-      </div>
+      <div>There's nothing…</div>
     );
   }
 
