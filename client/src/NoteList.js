@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import humanDate from 'human-date';
-import $ from 'jquery';
+import { ajaxWithAbort } from './ajax';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
 import Spinner from './Spinner';
@@ -70,10 +70,10 @@ class NoteList extends Component {
           </div>
         </div>
         <div className="list-item-actions">
-          <button className='icon' onClick={this.props.handleArchiveNoteClick.bind(this, note)}>
+          <button name="archive-note" className='icon' onClick={this.props.handleArchiveNoteClick.bind(this, note)}>
             <ArchiveIcon />
           </button>
-          <button className='icon' onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
+          <button name="delete-note" className='icon' onClick={this.props.handleDeleteNoteClick.bind(this, note)}>
             <DeleteIcon />
           </button>
         </div>
@@ -129,7 +129,7 @@ class NoteList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.isSynced && nextProps.isSynced) {
+    if (!this.state.isSynced && nextProps.isSynced && nextProps.listNeedsUpdate !== false) {
       this.listNeedsUpdate = true;
     }
 
@@ -149,7 +149,7 @@ class NoteList extends Component {
 
   handleNextPageClick(e) {
     e.preventDefault();
-    $(e.currentTarget).blur();
+    e.currentTarget.blur();
 
     this.setState({ showMoreLink: false });
 
@@ -160,21 +160,20 @@ class NoteList extends Component {
 
   updateList() {
     if (this.updateListRequest) {
-      this.updateListRequest.abort();
+      this.updateListRequest.controller.abort();
     }
 
-    this.updateListRequest = $.ajax({
-      url: '/api/notes',
-      dataType: 'json',
-      data: { search: this.state.searchQuery, page: this.state.currentPage }
+    this.updateListRequest = ajaxWithAbort('/api/notes', 'GET', {
+      search: this.state.searchQuery,
+      page: this.state.currentPage
     });
 
     this.executeUpdateListRequest();
   }
 
   executeUpdateListRequest() {
-    this.updateListRequest
-      .done((data) => {
+    this.updateListRequest.promise
+      .then((data) => {
         this.setState({ showMoreLink: true });
 
         const notes = data.notes.map(function(note) {
@@ -187,17 +186,11 @@ class NoteList extends Component {
           hasMorePages: data.has_more_pages
         });
       })
-      .fail((xhr, status, error) => {
-        // it's not a failure when the request was aborted by a subsequent
-        // request (see call to `abort()` above).
-        if (error === 'abort') {
-          return;
-        }
-
+      .catch((error) => {
         this.setState({ showMoreLink: true });
 
         AlertFlash.show('Watch out, the list is not up to date.');
-        console.error('url: ', this.props.url, 'status: ', status, 'error: ', error.toString());
+        console.error('url: ', this.props.url, 'error: ', error.toString());
       });
   }
 

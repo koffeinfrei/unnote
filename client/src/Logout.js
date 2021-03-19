@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from "react-router";
-import $ from 'jquery';
+import { withRouter } from 'react-router';
+import { ajax } from './ajax';
 import AlertFlash from './AlertFlash';
 import { scrollToTop } from './scroll';
 
@@ -9,7 +9,7 @@ import { ReactComponent as LogoutIcon } from './icons/material/logout-24px.svg';
 class Logout extends Component {
   render() {
     return (
-      <button onClick={this.handleClicked.bind(this)} className="icon-lg big pseudo">
+      <button name="logout" onClick={this.handleClicked.bind(this)} className="icon-lg big pseudo">
         <LogoutIcon />
         <span className="icon-lg-text">Logout</span>
       </button>
@@ -19,17 +19,14 @@ class Logout extends Component {
   handleClicked(e) {
     e.preventDefault();
 
-    $.ajax({
-      url: '/users/sign_out',
-      method: 'DELETE'
-    })
-    .done((data) => {
-      window.location.reload();
-    })
-    .fail(() => {
-      AlertFlash.show('Apologies, logging out did not happen.')
-    })
-    .always(scrollToTop);
+    ajax('/users/sign_out', 'DELETE')
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(() => {
+        AlertFlash.show('Apologies, logging out did not happen.')
+      })
+      .finally(scrollToTop);
   }
 }
 

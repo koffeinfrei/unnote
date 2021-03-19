@@ -28,6 +28,7 @@ Metrics/BlockLength:
     - context
     - RSpec.describe
     - describe
+    - it
 
 RSpec/RepeatedExample:
   Exclude:

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 
 class AbstractFlash extends Component {
   constructor(props, context) {
@@ -41,13 +40,15 @@ class AbstractFlash extends Component {
 
   componentDidMount() {
     // listen on global event so we can use `NoticeFlash.show('hello')`
-    $(document).on(this.constructor.getEventName(), (e, data) => {
-      this.setState({ message: data.message });
-    });
+    document.addEventListener(this.constructor.getEventName(), this.handleEvent.bind(this), false);
   }
 
   componentWillUnmount() {
-    $(document).off(this.constructor.getEventName());
+    document.removeEventListener(this.constructor.getEventName(), this.handleEvent.bind(this), false);
+  }
+
+  handleEvent(e) {
+    this.setState({ message: e.detail.message });
   }
 
   getAdditionalCssClass() {
@@ -61,11 +62,13 @@ class AbstractFlash extends Component {
   }
 
   static show(message) {
-    $(document).trigger(this.getEventName(), { message: message });
+    const e = new CustomEvent(this.getEventName(), { detail: { message: message } });
+    document.dispatchEvent(e);
   }
 
   static clear() {
-    $(document).trigger(this.getEventName(), { message: null });
+    const e = new CustomEvent(this.getEventName(), { detail: { message: null } });
+    document.dispatchEvent(e);
   }
 }
 

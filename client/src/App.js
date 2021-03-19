@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import $ from 'jquery';
+import { ajax } from './ajax';
 import NoteEdit from './NoteEdit';
 import './App.css';
 import './fonts/roboto.css';
@@ -35,17 +35,9 @@ class App extends Component {
   }
 
   setIsLoggedIn() {
-    $.ajax({
-      url: '/users/is_authenticated',
-      method: 'GET',
-      dataType: 'json',
-    })
-    .done((data, status, xhr) =>{
-      this.onLoginSuccess();
-    })
-    .fail(() => {
-      this.setState({ isLoggedIn: false });
-    });
+    ajax('/users/is_authenticated')
+      .then(() => this.onLoginSuccess())
+      .catch(() => this.setState({ isLoggedIn: false }));
   }
 
   renderLoggedIn() {

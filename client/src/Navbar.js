@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import $ from 'jquery';
 import EventHive from './EventHive';
 import Spinner from './Spinner';
 import Logout from './Logout';
@@ -60,6 +59,11 @@ class Navbar extends Component {
     this.subscribeSearch();
   }
 
+  componentWillUnmount() {
+    this.unsubscribeSpinner();
+    this.unsubscribeSearch();
+  }
+
   renderSearchBox() {
     return (
       <div className="search vertically-aligned">
@@ -68,7 +72,7 @@ class Navbar extends Component {
           className="search-input"
           placeholder="Search"
           onChange={this.props.handleSearchEnter}
-          ref={(c) => this.$searchInput = $(c)} />
+          ref={(c) => this.searchInput = c} />
         <button
           type="button"
           className="search-clear"
@@ -96,8 +100,8 @@ class Navbar extends Component {
   }
 
   handleSearchCleared(e) {
-    this.$searchInput.val('');
-    $(e.target).blur();
+    this.searchInput.value = '';
+    e.target.blur();
     this.props.handleSearchCleared();
   }
 
@@ -108,16 +112,23 @@ class Navbar extends Component {
   subscribeSpinner() {
     // listen on global event so we can toggle the spinner from unrelated
     // components
-    EventHive.subscribe('spinner.toggle', (data) => {
+    this.spinnerSubscription = EventHive.subscribe('spinner.toggle', (data) => {
       this.setState({ showSpinner: data.show });
     });
   }
 
+  unsubscribeSpinner() {
+    this.spinnerSubscription.remove();
+  }
+
   subscribeSearch() {
-    EventHive.subscribe('search.focus', () => {
-      this.$searchInput.focus();
-      this.$searchInput.select();
+    this.searchSubscription = EventHive.subscribe('search.focus', () => {
+      this.searchInput.focus();
     });
+  }
+
+  unsubscribeSearch() {
+    this.searchSubscription.remove();
   }
 }
 

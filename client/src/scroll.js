@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export function scrollToTop() {
-  $('html, body').animate({ scrollTop: 0 }, 300)
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }

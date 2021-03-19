@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import { debounce } from 'throttle-debounce';
 import './keyboard';
+import { ajax } from './ajax';
 import NoteList from './NoteList';
 import NoteForm from './NoteForm';
 import Note from './Note';
@@ -59,15 +59,20 @@ class NoteEdit extends Component {
     this.autoSave = new AutoSave(this.handleServerSync.bind(this));
     this.autoSave.startPolling();
 
-    EventHive.subscribe('note.create', (data) => {
+    this.noteCreateSubscription = EventHive.subscribe('note.create', (data) => {
       this.setNewNote(() => {
         EventHive.publish('note.update', data);
       });
     });
 
-    EventHive.subscribe('note.new', (data) => {
+    this.noteNewSubscription = EventHive.subscribe('note.new', (data) => {
       this.setNewNote();
     });
+  }
+
+  componentWillUnmount() {
+    this.noteCreateSubscription.remove();
+    this.noteNewSubscription.remove();
   }
 
   renderHeaderBar() {
@@ -86,6 +91,7 @@ class NoteEdit extends Component {
         <ActionBar
           showList={this.state.showList}
           isSynced={this.state.isSynced}
+          listNeedsUpdate={this.state.listNeedsUpdate}
           handleShowListClicked={this.handleShowListClicked.bind(this)}
           handleNewNoteClicked={this.handleNewNoteClicked.bind(this)} />
         <div className="flex one two-900">
@@ -125,23 +131,20 @@ class NoteEdit extends Component {
       ...this.getNewNoteAttributes()
     };
 
-    $.ajax({
-      url: `/api/notes/${id}`,
-      dataType: 'json',
-    })
-    .done((data) => {
-      const note = Note.fromAttributes(data.note);
-      this.setState({
-        showList: false,
-        note: note
-      }, () => this.pushState.setBrowserTitle(note));
-    })
-    .fail((xhr, status, error) => {
-      AlertFlash.show(
-        'While trying to load the note the internet broke down (or something ' +
-          'else failed, maybe the note could not be found)'
-      );
-    })
+    ajax(`/api/notes/${id}`)
+      .then((data) => {
+        const note = Note.fromAttributes(data.note);
+        this.setState({
+          showList: false,
+          note: note
+        }, () => this.pushState.setBrowserTitle(note));
+      })
+      .catch(() => {
+        AlertFlash.show(
+          'While trying to load the note the internet broke down (or something ' +
+            'else failed, maybe the note could not be found)'
+        );
+      })
   }
   /* eslint-enable react/no-direct-mutation-state */
 
@@ -199,7 +202,7 @@ class NoteEdit extends Component {
   }
 
   handleServerSync(data) {
-    let state = { isSynced: data.isSynced };
+    let state = { isSynced: data.isSynced, listNeedsUpdate: true };
     // when a note has been synced we need to set the serverUpdatedAt timestamp
     // for the conflict detection to work
     // (only do this if the current note is the synced note)
@@ -239,30 +242,28 @@ class NoteEdit extends Component {
   }
 
   deleteNote(note) {
-    $.ajax({
-      url: '/api/notes/' + note.uid,
-      method: 'DELETE',
-      dataType: 'json',
-    })
-    .done(() => {
-      SyncStorage.remove(note);
+    ajax(`/api/notes/${note.uid}`, 'DELETE')
+      .then((data) => {
+        SyncStorage.remove(note);
 
-      if (this.state.note.uid === note.uid) {
-        this.setNewNote();
-      }
-    })
-    .fail(function(xhr, status, error) {
-      var message = 'Oh my, the note could not be deleted.';
-      // 0 == UNSENT -> most probably no internet connection
-      if (xhr.readyState === 0) {
-        message += "<br>Please check your internet connection (Well yes, sorry, deleting in offline mode is not yet suppported)."
-      }
-      AlertFlash.show(message);
-      console.error('note.uid: ', note.uid, 'status: ', status, 'error: ', error.toString());
-    })
-    .always(() => {
-      this.setState({ isSynced: true });
-    });
+        if (this.state.note.uid === note.uid) {
+          this.setNewNote();
+        }
+
+        this.setState({ isSynced: true, listNeedsUpdate: true });
+      })
+      .catch((error) => {
+        let message = 'Oh my, the note could not be deleted.';
+        if (!window.navigator.onLine) {
+          message += "<br>Please check your internet connection (Apologies, deleting in offline mode is not yet suppported)."
+        }
+        AlertFlash.show(message);
+        console.error('note.uid: ', note.uid, 'error: ', error.toString());
+
+        this.setState({ isSynced: true, listNeedsUpdate: false });
+      })
+      .finally(() => {
+      });
   }
 }
 
