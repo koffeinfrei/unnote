@@ -28,8 +28,8 @@ RSpec.describe Note do
             uid: '78428484-e602-4e27-8fea-0c4e79f74c5b',
             title: 'note 1',
             content: 'content 1',
-            created_at: Time.zone.local(2016, 8, 1, 15, 33),
-            updated_at: Time.zone.local(2016, 8, 1, 15, 33),
+            created_at: Time.zone.local(2016, 8, 1, 15, 33).as_json,
+            updated_at: Time.zone.local(2016, 8, 1, 15, 33).as_json,
             archived_at: nil
           }.stringify_keys
         )
