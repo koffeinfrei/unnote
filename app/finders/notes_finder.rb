@@ -10,6 +10,7 @@ class NotesFinder
     @notes = user_scoped_notes
 
     search!
+    filter!
     order!
     limit!
 
@@ -34,6 +35,14 @@ class NotesFinder
     return if @params[:search].blank?
 
     @notes = @notes.search_by_title_and_content(@params[:search])
+  end
+
+  def filter!
+    return if @params[:filters].blank?
+
+    if @params[:filters].include?('tasks')
+      @notes = @notes.having_tasks
+    end
   end
 
   def order!

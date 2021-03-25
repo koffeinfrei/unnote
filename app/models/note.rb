@@ -32,6 +32,7 @@ class Note < ApplicationRecord
 
   scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
+  scope :having_tasks, -> { where(%{text_content like '%<ul class="task-list">%'}) }
 
   validate(
     :does_not_exceed_free_count_limit,

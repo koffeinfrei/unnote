@@ -142,6 +142,11 @@ class NoteList extends Component {
       this.listNeedsUpdate = true;
     }
 
+    // collection changed
+    if (this.props.collection !== nextProps.collection) {
+      this.listNeedsUpdate = true;
+    }
+
     this.setState( {
       isSynced: nextProps.isSynced,
       searchQuery: nextProps.searchQuery
@@ -168,7 +173,7 @@ class NoteList extends Component {
       this.updateListRequest.controller.abort();
     }
 
-    this.updateListRequest = ajaxWithAbort('/api/notes', 'GET', {
+    this.updateListRequest = ajaxWithAbort(`/api/${this.props.collection}`, 'GET', {
       search: this.state.searchQuery,
       page: this.state.currentPage
     });

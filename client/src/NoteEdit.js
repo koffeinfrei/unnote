@@ -101,6 +101,7 @@ class NoteEdit extends Component {
               isSynced={this.state.isSynced}
               showList={this.state.showList}
               searchQuery={this.state.searchQuery}
+              collection={this.props.collection}
               handleNoteClick={this.handleNoteClick.bind(this)}
               handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)}
               handleArchiveNoteClick={this.handleArchiveNoteClick.bind(this)} />

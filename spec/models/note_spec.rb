@@ -170,6 +170,26 @@ RSpec.describe Note do
     end
   end
 
+  describe '.having_tasks' do
+    it 'returns only the note containing a task' do
+      user = create_user
+
+      having_task = described_class.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        content: '<ul class="task-list"><li>a</li><li>b</li></ul>'
+      )
+
+      described_class.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        content: '<ul><li>a</li><li>b</li></ul>'
+      )
+
+      expect(described_class.having_tasks).to eq [having_task]
+    end
+  end
+
   describe 'validation: does_not_exceed_free_count_limit' do
     context 'with pro subscription' do
       let(:user) { create_user(subscription: :pro) }

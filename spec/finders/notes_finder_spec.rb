@@ -45,5 +45,23 @@ RSpec.describe NotesFinder do
         ).with('term')
       end
     end
+
+    context 'with filter param' do
+      context 'filter = tasks' do
+        it 'calls the search method on notes' do
+          user = create_user
+
+          finder = described_class.new(user, filters: ['tasks'])
+
+          notes = Note.none
+          allow(notes).to receive(:having_tasks).and_return(notes)
+          allow(finder).to receive(:user_scoped_notes).and_return(notes)
+
+          finder.call
+
+          expect(notes).to have_received(:having_tasks)
+        end
+      end
+    end
   end
 end

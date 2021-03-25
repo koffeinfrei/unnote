@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import EventHive from './EventHive';
 import Spinner from './Spinner';
 import Logout from './Logout';
@@ -27,6 +27,9 @@ class Navbar extends Component {
         <label htmlFor="bmenug" className="burger pseudo button">&#8801;</label>
 
         <div className="menu">
+          <NavLink to="/notes" className="button pseudo">All notes</NavLink>
+          <NavLink to="/task-notes" className="button pseudo">Task notes</NavLink>
+
           <button
             type="button"
             className="icon close-hamburger hidden-lg"

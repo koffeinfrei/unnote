@@ -44,8 +44,8 @@ class App extends Component {
     if (this.state.isLoggedIn === true) {
       return (
         <Switch>
-          <Route path='/notes/:id' component={ NoteEdit } />
-          <Route path='/notes' component={ NoteEdit } />
+          <Route path={['/notes', '/notes/:id']} render={ (props) => this.renderNoteEdit(props, 'notes') } />
+          <Route path={['/task-notes', '/task-notes/:id']} render={ (props) => this.renderNoteEdit(props, 'task_notes') } />
           <Redirect from='/' to='/notes' />
         </Switch>
       );
@@ -72,6 +72,14 @@ class App extends Component {
         </Switch>
       );
     }
+  }
+
+  renderNoteEdit(routerProps, collection) {
+    return (
+      <NoteEdit
+        {...routerProps}
+        collection={collection} />
+    );
   }
 }
 
