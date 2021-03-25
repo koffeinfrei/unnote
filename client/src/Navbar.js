@@ -31,7 +31,6 @@ class Navbar extends Component {
           <NavLink to="/task-notes" className="button pseudo">Task notes</NavLink>
 
           <button
-            type="button"
             className="icon close-hamburger hidden-lg"
             onClick={this.handleCloseHamburgerClicked.bind(this)}>
             <CloseIcon />
