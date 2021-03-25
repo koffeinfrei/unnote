@@ -30,7 +30,8 @@ RSpec.describe Note do
             content: 'content 1',
             created_at: Time.zone.local(2016, 8, 1, 15, 33).as_json,
             updated_at: Time.zone.local(2016, 8, 1, 15, 33).as_json,
-            archived_at: nil
+            archived_at: nil,
+            tasks: nil
           }.stringify_keys
         )
       end
@@ -170,23 +171,55 @@ RSpec.describe Note do
     end
   end
 
-  describe '.having_tasks' do
-    it 'returns only the note containing a task' do
-      user = create_user
+  describe 'task scopes' do
+    let(:user) { create_user }
 
-      having_task = described_class.create!(
+    let(:having_todo_task) do
+      described_class.create!(
         uid: SecureRandom.uuid,
         user: user,
-        content: '<ul class="task-list"><li>a</li><li>b</li></ul>'
+        content: '<ul class="task-list"><li>a</li></ul>'
       )
+    end
 
+    let(:having_done_task) do
+      described_class.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        content: '<ul class="task-list"><li class="checked">a</li></ul>'
+      )
+    end
+
+    let(:having_no_task) do
       described_class.create!(
         uid: SecureRandom.uuid,
         user: user,
         content: '<ul><li>a</li><li>b</li></ul>'
       )
+    end
 
-      expect(described_class.having_tasks).to eq [having_task]
+    before do
+      having_todo_task
+      having_done_task
+      having_no_task
+    end
+
+    describe '.having_todo_tasks' do
+      it 'returns only the note containing a todo task' do
+        expect(described_class.having_todo_tasks).to eq [having_todo_task]
+      end
+    end
+
+    describe '.having_done_tasks' do
+      it 'returns only the note containing a todo task' do
+        expect(described_class.having_done_tasks).to eq [having_done_task]
+      end
+    end
+
+    describe '.having_tasks' do
+      it 'returns only the notes containing a task' do
+        expect(described_class.having_tasks).to eq [having_todo_task, having_done_task]
+      end
     end
   end
 
@@ -238,6 +271,59 @@ RSpec.describe Note do
           'Please delete some notes or upgrade your subscription.'
         ]
       end
+    end
+  end
+
+  describe 'before_save > populate_tasks' do
+    it 'populdates the tasks from the content on create' do
+      note = described_class.create!(
+        uid: SecureRandom.uuid,
+        user: create_user,
+        content: <<~CONTENT
+          <ul class="task-list">
+            <li class="checked">task a</li>
+            <li>task b</li>
+          </ul>
+          <ul>
+            <li>not a task</li>
+          </ul>
+          <ul class="task-list">
+            <li class="checked">task c</li>
+            <li>task d</li>
+          </ul>
+        CONTENT
+      )
+
+      expect(note.reload.tasks).to eq({ 'todo' => ['task b', 'task d'], 'done' => ['task a', 'task c'] })
+    end
+
+    it 'populdates the tasks from the content on update' do
+      note = described_class.create!(
+        uid: SecureRandom.uuid,
+        user: create_user,
+        content: <<~CONTENT
+          <ul class="task-list">
+            <li class="checked">a</li>
+            <li>b</li>
+          </ul>
+          <ul>
+            <li>a</li>
+          </ul>
+        CONTENT
+      )
+
+      note.update!(
+        content: <<~CONTENT
+          <ul class="task-list">
+            <li class="checked">a</li>
+            <li class="checked">b</li>
+          </ul>
+          <ul>
+            <li>a</li>
+          </ul>
+        CONTENT
+      )
+      expect(note.reload.tasks).to eq({ 'todo' => [], 'done' => %w[a b] })
     end
   end
 end

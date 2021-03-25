@@ -30,6 +30,7 @@ class NoteList extends Component {
     return (
       <div className={this.getListCssClass()}>
         {this.renderSearchTerm()}
+        {this.renderTaskNotesFilters()}
         {this.renderList()}
         {this.renderNextPageLink()}
         {this.renderListSpinner()}
@@ -42,6 +43,19 @@ class NoteList extends Component {
 
     return (
       <div className="list-search-term">Showing results for "{this.state.searchQuery}"</div>
+    );
+  }
+
+  renderTaskNotesFilters() {
+    if (this.props.collection !== 'task_notes') { return; }
+
+    return (
+      <div className="list-filter">
+        <select onChange={this.handleTaskNoteFilterChanged.bind(this)}>
+          <option value="">Show all</option>
+          <option value="todo">Show todos</option>
+        </select>
+      </div>
     );
   }
 
@@ -168,15 +182,27 @@ class NoteList extends Component {
     });
   }
 
+  handleTaskNoteFilterChanged(e) {
+    this.setState({ filter: e.target.value }, () => {
+      this.updateList();
+    });
+  }
+
   updateList() {
     if (this.updateListRequest) {
       this.updateListRequest.controller.abort();
     }
 
-    this.updateListRequest = ajaxWithAbort(`/api/${this.props.collection}`, 'GET', {
+    const params = {
       search: this.state.searchQuery,
       page: this.state.currentPage
-    });
+    };
+
+    if (this.state.filter) {
+      params['filters[]'] = this.state.filter;
+    }
+
+    this.updateListRequest = ajaxWithAbort(`/api/${this.props.collection}`, 'GET', params);
 
     this.executeUpdateListRequest();
   }

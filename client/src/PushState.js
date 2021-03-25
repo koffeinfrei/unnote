@@ -1,14 +1,15 @@
 class PushState {
-  constructor(history) {
+  constructor(match, history) {
+    this.path = match.path;
     this.history = history;
   }
 
   setNew() {
-    this.history.push('/notes');
+    this.history.push(this.path);
   }
 
   setEdit(note) {
-    const url = `/notes/${note.uid}`;
+    const url = `${this.path}/${note.uid}`;
 
     if (this.history.location.pathname !== url) {
       this.history.push(url);

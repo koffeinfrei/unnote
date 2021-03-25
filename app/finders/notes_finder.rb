@@ -40,7 +40,9 @@ class NotesFinder
   def filter!
     return if @params[:filters].blank?
 
-    if @params[:filters].include?('tasks')
+    if @params[:filters].include?('tasks') && @params[:filters].include?('todo')
+      @notes = @notes.having_todo_tasks
+    elsif @params[:filters].include?('tasks')
       @notes = @notes.having_tasks
     end
   end

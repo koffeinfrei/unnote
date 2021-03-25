@@ -19,8 +19,6 @@ class NoteEdit extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.pushState = new PushState(this.props.history);
-
     const { match } = this.props;
 
     if (props.note) {
@@ -122,7 +120,7 @@ class NoteEdit extends Component {
     this.state = {
       note: Note.fromAttributes(note)
     };
-    this.pushState.setBrowserTitle(note);
+    new PushState(this.props.match, this.props.history).setBrowserTitle(note);
   }
 
   initStateFromNoteId(id) {
@@ -138,7 +136,7 @@ class NoteEdit extends Component {
         this.setState({
           showList: false,
           note: note
-        }, () => this.pushState.setBrowserTitle(note));
+        }, () => new PushState(this.props.match, this.props.history).setBrowserTitle(note));
       })
       .catch(() => {
         AlertFlash.show(
@@ -153,8 +151,9 @@ class NoteEdit extends Component {
     e.preventDefault();
 
     this.setState({ note: note, showList: false });
-    this.pushState.setEdit(note);
-    this.pushState.setBrowserTitle(note);
+    const pushState = new PushState(this.props.match, this.props.history);
+    pushState.setEdit(note);
+    pushState.setBrowserTitle(note);
   }
 
   handleDeleteNoteClick(note, e) {
@@ -197,7 +196,7 @@ class NoteEdit extends Component {
   }
 
   handleEditChange(note) {
-    this.pushState.setEdit(note);
+    new PushState(this.props.match, this.props.history).setEdit(note);
 
     this.autoSave.setChange(note);
   }
@@ -214,7 +213,7 @@ class NoteEdit extends Component {
     this.setState(state);
 
     if (data.isSynced) {
-      this.pushState.setBrowserTitle(this.state.note);
+      new PushState(this.props.match, this.props.history).setBrowserTitle(this.state.note);
     }
   }
 
@@ -238,8 +237,9 @@ class NoteEdit extends Component {
 
   setNewNote(afterSetState) {
     this.setState({ ...this.getNewNoteAttributes(), showList: false }, afterSetState);
-    this.pushState.setNew();
-    this.pushState.setBrowserTitle();
+    const pushState = new PushState(this.props.match, this.props.history);
+    pushState.setNew();
+    pushState.setBrowserTitle();
   }
 
   deleteNote(note) {

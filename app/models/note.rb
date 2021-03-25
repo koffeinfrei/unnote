@@ -32,13 +32,17 @@ class Note < ApplicationRecord
 
   scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
-  scope :having_tasks, -> { where(%{text_content like '%<ul class="task-list">%'}) }
+  scope :having_todo_tasks, -> { where("json_array_length(tasks -> 'todo') > 0") }
+  scope :having_done_tasks, -> { where("json_array_length(tasks -> 'done') > 0") }
+  scope :having_tasks, -> { having_todo_tasks.or(having_done_tasks) }
 
   validate(
     :does_not_exceed_free_count_limit,
     on: :create,
     if: ->(note) { note.user.free? }
   )
+
+  before_save :populate_tasks
 
   def to_param
     uid
@@ -82,5 +86,12 @@ class Note < ApplicationRecord
       "You have reached your note limit of #{FREE_COUNT_LIMIT} notes. " \
       'Please delete some notes or upgrade your subscription.'
     )
+  end
+
+  def populate_tasks
+    html = Nokogiri::HTML(content)
+    todo = html.css('ul.task-list li:not(.checked)').map(&:content)
+    done = html.css('ul.task-list li.checked').map(&:content)
+    self.tasks = { todo: todo, done: done }
   end
 end
