@@ -3,14 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Note do
-  let(:image1_data) do
-    'data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q='
-  end
-
-  let(:image2_data) do
-    'data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q='
-  end
-
   describe '#as_json' do
     context 'when no options provided' do
       it 'returns the whitelisted attributes' do
@@ -83,6 +75,14 @@ RSpec.describe Note do
   end
 
   describe '#dup' do
+    let(:image1_data) do
+      'data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q='
+    end
+
+    let(:image2_data) do
+      'data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q='
+    end
+
     it 'duplicates the images' do
       note = described_class.create!(
         uid: SecureRandom.uuid,
