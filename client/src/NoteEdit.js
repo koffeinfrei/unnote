@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { debounce } from 'throttle-debounce';
 import './keyboard';
 import { ajax } from './ajax';
 import NoteList from './NoteList';
@@ -30,8 +29,6 @@ class NoteEdit extends Component {
     else {
       this.state = { ...this.getNewNoteAttributes(), showList: true };
     }
-
-    this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
   }
 
   render() {
@@ -218,11 +215,6 @@ class NoteEdit extends Component {
   }
 
   handleSearchEnter(e) {
-    e.persist();
-    this.handleSearchEnterDebounced(e);
-  }
-
-  handleSearchEnterDebounced(e) {
     // show the list in case a note was shown
     this.setState({ searchQuery: e.target.value, showList: true });
   }

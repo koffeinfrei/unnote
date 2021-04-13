@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { debounce } from 'throttle-debounce';
 import EventHive from './EventHive';
 import Spinner from './Spinner';
 import Logout from './Logout';
@@ -14,6 +15,8 @@ class Navbar extends Component {
     super(props, context);
 
     this.state = { showSpinner: false };
+
+    this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
   }
 
   render() {
@@ -73,7 +76,7 @@ class Navbar extends Component {
           type="text"
           className="search-input"
           placeholder="Search"
-          onChange={this.props.handleSearchEnter}
+          onChange={this.handleSearchEnter.bind(this)}
           ref={(c) => this.searchInput = c} />
         <button
           type="button"
@@ -99,6 +102,15 @@ class Navbar extends Component {
     }
 
     return cssClass;
+  }
+
+  handleSearchEnter(e) {
+    e.persist();
+    this.handleSearchEnterDebounced(e);
+  }
+
+  handleSearchEnterDebounced(e) {
+    this.props.handleSearchEnter(e);
   }
 
   handleSearchCleared(e) {
