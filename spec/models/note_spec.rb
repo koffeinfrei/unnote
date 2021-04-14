@@ -275,7 +275,15 @@ RSpec.describe Note do
   end
 
   describe 'before_save > populate_tasks' do
-    it 'populdates the tasks from the content on create' do
+    it 'populates the tasks from the content on create' do
+      allow(SecureRandom).to receive(:uuid).and_return(
+        '4809eabb-a536-4f88-a752-734b82a16e96', # for note uid
+        'de509b8c',                             # for task a
+        '76de3a32',                             # for task b
+        '44d95f97',                             # for task c
+        '4aaf4bdb'                              # for task d
+      )
+
       note = described_class.create!(
         uid: SecureRandom.uuid,
         user: create_user,
@@ -294,36 +302,85 @@ RSpec.describe Note do
         CONTENT
       )
 
-      expect(note.reload.tasks).to eq({ 'todo' => ['task b', 'task d'], 'done' => ['task a', 'task c'] })
+      expect(note.reload.tasks).to eq(
+        {
+          'todo' => [
+            { '76de3a32' => 'task b' },
+            { '4aaf4bdb' => 'task d' }
+          ],
+          'done' => [
+            { 'de509b8c' => 'task a' },
+            { '44d95f97' => 'task c' }
+          ]
+        }
+      )
+      expect(note.reload.content).to eq(
+        <<~CONTENT
+          <ul class="task-list">
+            <li class="checked" data-task-id="de509b8c">task a</li>
+            <li data-task-id="76de3a32">task b</li>
+          </ul>
+          <ul>
+            <li>not a task</li>
+          </ul>
+          <ul class="task-list">
+            <li class="checked" data-task-id="44d95f97">task c</li>
+            <li data-task-id="4aaf4bdb">task d</li>
+          </ul>
+        CONTENT
+      )
     end
 
-    it 'populdates the tasks from the content on update' do
+    it 'populates the tasks from the content on update' do
       note = described_class.create!(
         uid: SecureRandom.uuid,
         user: create_user,
-        content: <<~CONTENT
-          <ul class="task-list">
-            <li class="checked">a</li>
-            <li>b</li>
-          </ul>
-          <ul>
-            <li>a</li>
-          </ul>
-        CONTENT
+        content: '<ul class="task-list">' \
+                   '<li class="checked">a</li>' \
+                   '<li>b</li>' \
+                 '</ul>' \
+                 '<ul>' \
+                   '<li>a</li>' \
+                 '</ul>'
       )
 
+      allow(SecureRandom).to receive(:uuid).and_return('de509b8c', '76de3a32')
+
       note.update!(
-        content: <<~CONTENT
-          <ul class="task-list">
-            <li class="checked">a</li>
-            <li class="checked">b</li>
-          </ul>
-          <ul>
-            <li>a</li>
-          </ul>
-        CONTENT
+        content: '<ul class="task-list">' \
+                   '<li class="checked">a</li>' \
+                   '<li class="checked">b</li>' \
+                 '</ul>' \
+                 '<ul>' \
+                   '<li>a</li>' \
+                 '</ul>'
       )
-      expect(note.reload.tasks).to eq({ 'todo' => [], 'done' => %w[a b] })
+      expect(note.reload.tasks).to eq({ 'todo' => [], 'done' => [{ 'de509b8c' => 'a' }, { '76de3a32' => 'b' }] })
+      expect(note.reload.content).to eq(
+        '<ul class="task-list">' \
+          '<li class="checked" data-task-id="de509b8c">a</li>' \
+          '<li class="checked" data-task-id="76de3a32">b</li>' \
+        '</ul>' \
+        '<ul>' \
+          '<li>a</li>' \
+        '</ul>'
+      )
+    end
+
+    it 'keeps an existing task id' do
+      note = described_class.create!(
+        uid: SecureRandom.uuid,
+        user: create_user,
+        content: '<ul class="task-list">' \
+                   '<li class="checked" data-task-id="de509b8c">a</li>' \
+                 '</ul>'
+      )
+
+      expect(note.reload.content).to eq(
+        '<ul class="task-list">' \
+          '<li class="checked" data-task-id="de509b8c">a</li>' \
+        '</ul>'
+      )
     end
   end
 end
