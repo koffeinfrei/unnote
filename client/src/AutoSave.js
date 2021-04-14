@@ -15,7 +15,11 @@ class AutoSave {
   }
 
   startPolling() {
-    setInterval(this.syncToServer.bind(this), AutoSave.POLLING_INTERVAL);
+    this.interval = setInterval(this.syncToServer.bind(this), AutoSave.POLLING_INTERVAL);
+  }
+
+  stopPolling() {
+    clearInterval(this.interval);
   }
 
   setChange(note) {

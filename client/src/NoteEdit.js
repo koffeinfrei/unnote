@@ -68,6 +68,7 @@ class NoteEdit extends Component {
   componentWillUnmount() {
     this.noteCreateSubscription.remove();
     this.noteNewSubscription.remove();
+    this.autoSave.stopPolling();
   }
 
   renderHeaderBar() {
