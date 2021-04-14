@@ -32,6 +32,7 @@ class Navbar extends Component {
         <div className="menu">
           <NavLink to="/notes" className="button pseudo">All notes</NavLink>
           <NavLink to="/task-notes" className="button pseudo">Task notes</NavLink>
+          <NavLink to="/tasks" className="button pseudo">Tasks</NavLink>
 
           <button
             className="icon close-hamburger hidden-lg"

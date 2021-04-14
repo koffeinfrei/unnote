@@ -51,7 +51,7 @@ class Note < ApplicationRecord
   def as_json(options = {})
     only = options.fetch(
       :only,
-      %i[uid title created_at updated_at archived_at content]
+      %i[uid title created_at updated_at archived_at content tasks]
     ).map(&:to_s)
     options = { only: only }.merge(options)
 
