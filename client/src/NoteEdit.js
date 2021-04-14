@@ -11,7 +11,7 @@ import EventHive from './EventHive';
 import AutoSave from './AutoSave';
 import SyncStorage from './SyncStorage';
 import Dialog from './Dialog';
-import ActionBar from './ActionBar';
+import NoteActionBar from './NoteActionBar';
 import Flash from './Flash';
 
 class NoteEdit extends Component {
@@ -83,12 +83,12 @@ class NoteEdit extends Component {
     return (
       <main>
         <Flash />
-        <ActionBar
+        <NoteActionBar
           showList={this.state.showList}
           isSynced={this.state.isSynced}
           listNeedsUpdate={this.state.listNeedsUpdate}
           handleShowListClicked={this.handleShowListClicked.bind(this)}
-          handleNewNoteClicked={this.handleNewNoteClicked.bind(this)} />
+          handleNewClicked={this.handleNewNoteClicked.bind(this)} />
         <div className="flex one two-900">
           <div className="full third-900 fourth-1200">
             <NoteList

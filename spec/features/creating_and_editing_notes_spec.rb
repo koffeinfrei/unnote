@@ -26,7 +26,7 @@ RSpec.describe 'Creating and editing notes', :js do
       sleep 0.5
 
       # create 2nd note
-      click_button 'new-note'
+      click_button 'new'
       fill_in 'Title', with: 'note 2'
       find('.ql-editor').set('note 2 content')
 
@@ -47,7 +47,7 @@ RSpec.describe 'Creating and editing notes', :js do
       sleep 0.5
 
       # create 3rd note
-      click_button 'new-note'
+      click_button 'new'
       fill_in 'Title', with: 'note 3'
       find('.ql-editor').set('note 3 content')
 
