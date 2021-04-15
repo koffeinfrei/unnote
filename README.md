@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/panter/mykonote.svg?branch=master)](https://travis-ci.org/panter/mykonote)
+[![Build Status](https://travis-ci.org/panter/mykonote.svg?branch=main)](https://travis-ci.org/panter/mykonote)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/panter/mykonote)
-[![codebeat badge](https://codebeat.co/badges/82063497-ef61-4f7c-9fb1-4bb3fe378ba5)](https://codebeat.co/projects/github-com-panter-mykonote-master)
+[![codebeat badge](https://codebeat.co/badges/6f0e1968-b451-4cb9-84d9-9cc49c68e64f)](https://codebeat.co/projects/github-com-panter-mykonote-main)
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
