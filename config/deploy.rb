@@ -5,6 +5,7 @@ lock '3.16.0'
 
 set :application, 'mykonote'
 set :repo_url, 'git@github.com:panter/mykonote.git'
+set :branch, 'main'
 
 set :linked_files, fetch(:linked_files, []).push('.env')
 set :linked_dirs, fetch(:linked_dirs, []).push('system')
