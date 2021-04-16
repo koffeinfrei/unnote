@@ -4,6 +4,7 @@ import { ajaxWithAbort } from './ajax';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
 import Spinner from './Spinner';
+import SearchTerm from './SearchTerm';
 
 import defaultNotePicture from './icons/material/short_text-24px.svg';
 import { ReactComponent as ArchiveIcon } from './icons/material/archive-24px.svg';
@@ -29,20 +30,12 @@ class NoteList extends Component {
   render() {
     return (
       <div className={this.getListCssClass()}>
-        {this.renderSearchTerm()}
+        <SearchTerm searchQuery={this.state.searchQuery} />
         {this.renderTaskNotesFilters()}
         {this.renderList()}
         {this.renderNextPageLink()}
         {this.renderListSpinner()}
       </div>
-    );
-  }
-
-  renderSearchTerm() {
-    if (!this.state.searchQuery) { return; }
-
-    return (
-      <div className="list-search-term">Showing results for "{this.state.searchQuery}"</div>
     );
   }
 

@@ -6,6 +6,7 @@ import AlertFlash from './AlertFlash';
 import AutoSave from './AutoSave';
 import Note from './Note';
 import TaskGroup from './TaskGroup';
+import SearchTerm from './SearchTerm';
 import { ajax } from './ajax';
 
 class TaskEdit extends Component {
@@ -35,6 +36,7 @@ class TaskEdit extends Component {
             isSynced={this.state.isSynced} />
           <div className="flex one">
             <div className="full">
+              <SearchTerm searchQuery={this.state.searchQuery} />
               <div className="view-filter">
                 <select onChange={this.handleFilterChanged.bind(this)}>
                   <option value="todo">Show todos</option>
