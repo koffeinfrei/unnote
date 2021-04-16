@@ -89,23 +89,6 @@ class Note < ApplicationRecord
   end
 
   def populate_tasks
-    todo = []
-    done = []
-
-    html = Nokogiri::HTML::DocumentFragment.parse(content)
-    html.css('ul.task-list li').each do |task|
-      id = task['data-task-id'] || SecureRandom.uuid[/^[^-]+/]
-      task['data-task-id'] = id
-
-      if task['class'].to_s.include?('checked')
-        done << { id => task.content }
-      else
-        todo << { id => task.content }
-      end
-    end
-
-    # save_with -> don't add newlines, it will break quill
-    self.content = html.to_html(save_with: 0)
-    self.tasks = { todo: todo, done: done }
+    NoteTaskPopulator.new(self).run
   end
 end
