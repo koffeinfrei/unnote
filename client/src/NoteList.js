@@ -50,7 +50,7 @@ class NoteList extends Component {
     if (this.props.collection !== 'task_notes') { return; }
 
     return (
-      <div className="list-filter">
+      <div className="view-filter">
         <select onChange={this.handleTaskNoteFilterChanged.bind(this)}>
           <option value="">Show all</option>
           <option value="todo">Show todos</option>

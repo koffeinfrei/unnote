@@ -15,7 +15,8 @@ class TaskEdit extends Component {
     this.state = {
       notes: [],
       currentPage: 1,
-      searchQuery: undefined
+      searchQuery: undefined,
+      filter: 'todo'
     }
   }
 
@@ -34,6 +35,12 @@ class TaskEdit extends Component {
             isSynced={this.state.isSynced} />
           <div className="flex one">
             <div className="full">
+              <div className="view-filter">
+                <select onChange={this.handleFilterChanged.bind(this)}>
+                  <option value="todo">Show todos</option>
+                  <option value="">Show all</option>
+                </select>
+              </div>
               {this.state.notes.map((note) =>
                 <TaskGroup
                   key={note.uid}
@@ -87,11 +94,21 @@ class TaskEdit extends Component {
     this.fetchTasks();
   }
 
+  handleFilterChanged(e) {
+    this.setState({ filter: e.target.value }, () => {
+      this.fetchTasks();
+    });
+  }
+
   fetchTasks() {
     const params = {
       search: this.state.searchQuery,
       page: this.state.currentPage
     };
+
+    if (this.state.filter) {
+      params['filters[]'] = this.state.filter;
+    }
 
     ajax('/api/task_notes', 'GET', params)
       .then((data) => {
