@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import Task from './Task';
 
+import { ReactComponent as MoreIcon } from './icons/material/expand_more-24px.svg';
+import { ReactComponent as LessIcon } from './icons/material/expand_less_black_24dp.svg';
+
 class TaskGroup extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      showDone: false
+    }
+  }
+
   render() {
     return (
       <div className="card">
@@ -17,7 +28,16 @@ class TaskGroup extends Component {
         }
         {this.props.note.tasks.done.length > 0 ?
           <footer>
-            {this.props.note.tasks.done.map(task => this.renderTask(task, true))}
+            <button className='icon' onClick={() => this.setState({ showDone: !this.state.showDone })}>
+              { this.state.showDone ?
+                <LessIcon /> :
+                <MoreIcon />
+              }
+            </button>
+
+            <div className={ this.state.showDone ? null : "collapsed"}>
+              {this.props.note.tasks.done.map(task => this.renderTask(task, true))}
+            </div>
           </footer>
           :
           null
