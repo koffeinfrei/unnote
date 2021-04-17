@@ -98,7 +98,7 @@ class NoteList extends Component {
     if (!this.state.showMoreLink) { return; }
 
     return (
-      <button className='icon big list-more' onClick={this.handleNextPageClick.bind(this)}>
+      <button className='icon big full-width' onClick={this.handleNextPageClick.bind(this)}>
         <MoreIcon />
       </button>
     );
@@ -108,7 +108,7 @@ class NoteList extends Component {
     if (this.state.showMoreLink) { return; }
 
     return (
-      <div className="icon big list-more">
+      <div className="icon big full-width">
         <Spinner />
       </div>
     );

@@ -28,7 +28,7 @@ class TaskGroup extends Component {
         }
         {this.props.note.tasks.done.length > 0 ?
           <footer>
-            <button className='icon' onClick={() => this.setState({ showDone: !this.state.showDone })}>
+            <button className='icon left-aligned full-width' onClick={() => this.setState({ showDone: !this.state.showDone })}>
               { this.state.showDone ?
                 <LessIcon /> :
                 <MoreIcon />
