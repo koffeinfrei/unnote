@@ -87,7 +87,6 @@ class NoteEdit extends Component {
         <NoteActionBar
           showList={this.state.showList}
           isSynced={this.state.isSynced}
-          listNeedsUpdate={this.state.listNeedsUpdate}
           handleShowListClicked={this.handleShowListClicked.bind(this)}
           handleNewClicked={this.handleNewNoteClicked.bind(this)} />
         <div className="flex one two-900">
