@@ -67,12 +67,18 @@ class TaskEdit extends Component {
     this.autoSave.stopPolling();
   }
 
-  handleTaskChecked(note, task_id, e) {
+  handleTaskChecked(note, task, e) {
+    // update the task so the change is immediately rendered, otherwise the UI
+    // updates only after the next auto poll cycle is done.
+    const associatedNote= this.state.notes.find(collectionNote => collectionNote.uid === note.uid);
+    const taskIndex = associatedNote.tasks.findIndex(collectionTask => collectionTask.id === task.id);
+    associatedNote.tasks[taskIndex] = task;
+
     // create a temporary html element so we can easily query the task element
     // and toggle the checked class
     const noteContentElement = document.createElement('div');
     noteContentElement.innerHTML = note.content;
-    const taskElement = noteContentElement.querySelector(`[data-task-id="${task_id}"]`);
+    const taskElement = noteContentElement.querySelector(`[data-task-id="${task.id}"]`);
     taskElement.classList.toggle('checked');
 
     const syncNote = Note.fromAttributes(note);
