@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 2021_03_22_175726) do
     t.tsvector "tsv_content"
     t.string "images", default: [], array: true
     t.datetime "archived_at"
-    t.json "tasks"
+    t.jsonb "tasks"
     t.index ["archived_at"], name: "index_notes_on_archived_at"
+    t.index ["tasks"], name: "index_notes_on_tasks", using: :gin
     t.index ["tsv_content"], name: "index_notes_on_tsv_content", using: :gin
     t.index ["tsv_title"], name: "index_notes_on_tsv_title", using: :gin
     t.index ["user_id"], name: "index_notes_on_user_id"

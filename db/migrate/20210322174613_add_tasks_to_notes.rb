@@ -2,6 +2,7 @@
 
 class AddTasksToNotes < ActiveRecord::Migration[6.1]
   def change
-    add_column :notes, :tasks, :json
+    add_column :notes, :tasks, :jsonb
+    add_index :notes, :tasks, using: 'gin'
   end
 end

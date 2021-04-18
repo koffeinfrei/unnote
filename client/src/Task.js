@@ -8,10 +8,10 @@ class Task extends Component {
       <label className="task">
         <input
           type="checkbox"
-          checked={this.props.done}
-          onChange={this.props.handleTaskChecked.bind(this, this.props.note, this.props.id)} />
+          checked={this.props.task.done}
+          onChange={this.props.handleTaskChecked.bind(this, this.props.note, this.props.task.id)} />
 
-        <span className="checkable">{this.props.title}</span>
+        <span className="checkable">{this.props.task.title}</span>
       </label>
     );
   }

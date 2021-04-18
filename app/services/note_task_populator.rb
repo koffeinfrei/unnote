@@ -8,17 +8,12 @@ class NoteTaskPopulator
   def run
     html = Nokogiri::HTML::DocumentFragment.parse(@note.content)
 
-    todo = html.css('ul.task-list li:not(.checked)').map do |checkbox|
-      build_task!(checkbox)
-    end
-
-    done = html.css('ul.task-list li.checked').map do |checkbox|
+    @note.tasks = html.css('ul.task-list li').map do |checkbox|
       build_task!(checkbox)
     end
 
     # save_with -> don't add newlines, it will break quill
     @note.content = html.to_html(save_with: 0)
-    @note.tasks = { todo: todo, done: done }
   end
 
   private
@@ -27,6 +22,10 @@ class NoteTaskPopulator
     id = checkbox['data-task-id'] || SecureRandom.uuid[/^[^-]+/]
     checkbox['data-task-id'] = id
 
-    { id => checkbox.content }
+    {
+      id: id,
+      title: checkbox.content,
+      done: checkbox['class'].to_s.include?('checked')
+    }
   end
 end

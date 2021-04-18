@@ -32,8 +32,9 @@ class Note < ApplicationRecord
 
   scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
-  scope :having_todo_tasks, -> { where("json_array_length(tasks -> 'todo') > 0") }
-  scope :having_done_tasks, -> { where("json_array_length(tasks -> 'done') > 0") }
+
+  scope :having_todo_tasks, -> { where(%(tasks @> '[{ "done": false }]')) }
+  scope :having_done_tasks, -> { where(%(tasks @> '[{ "done": true }]')) }
   scope :having_tasks, -> { having_todo_tasks.or(having_done_tasks) }
 
   validate(

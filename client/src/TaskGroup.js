@@ -14,19 +14,22 @@ class TaskGroup extends Component {
   }
 
   render() {
+    const done = this.props.note.tasks.filter(task => task.done);
+    const todo = this.props.note.tasks.filter(task => !task.done);
+
     return (
       <div className="card">
         <header>
           {this.props.note.title}
         </header>
-        {this.props.note.tasks.todo.length > 0 ?
+        {todo.length > 0 ?
           <footer>
-            {this.props.note.tasks.todo.map(task => this.renderTask(task, false))}
+            {todo.map(task => this.renderTask(task))}
           </footer>
           :
           null
         }
-        {this.props.note.tasks.done.length > 0 ?
+        {done.length > 0 ?
           <footer>
             <button className='icon left-aligned full-width' onClick={() => this.setState({ showDone: !this.state.showDone })}>
               { this.state.showDone ?
@@ -36,7 +39,7 @@ class TaskGroup extends Component {
             </button>
 
             <div className={ this.state.showDone ? null : "collapsed"}>
-              {this.props.note.tasks.done.map(task => this.renderTask(task, true))}
+              {done.map(task => this.renderTask(task))}
             </div>
           </footer>
           :
@@ -46,16 +49,12 @@ class TaskGroup extends Component {
     );
   }
 
-  renderTask(task, done) {
-    const [ id, title ] = Object.entries(task)[0];
-
+  renderTask(task) {
     return (
       <Task
-        key={id}
+        key={task.id}
         note={this.props.note}
-        id={id}
-        title={title}
-        done={done}
+        task={task}
         handleTaskChecked={this.props.handleTaskChecked.bind(this)} />
     );
   }

@@ -7,10 +7,10 @@ RSpec.describe NoteTaskPopulator do
     it 'initializes the tasks from the content' do
       allow(SecureRandom).to receive(:uuid).and_return(
         '4809eabb-a536-4f88-a752-734b82a16e96', # for note uid
-        '76de3a32',                             # for task b
-        '4aaf4bdb',                             # for task d
         'de509b8c',                             # for task a
-        '44d95f97'                              # for task c
+        '76de3a32',                             # for task b
+        '44d95f97',                             # for task c
+        '4aaf4bdb'                              # for task d
       )
 
       note = build_note(
@@ -32,16 +32,28 @@ RSpec.describe NoteTaskPopulator do
       described_class.new(note).run
 
       expect(note.tasks).to eq(
-        {
-          'todo' => [
-            { '76de3a32' => 'task b' },
-            { '4aaf4bdb' => 'task d' }
-          ],
-          'done' => [
-            { 'de509b8c' => 'task a' },
-            { '44d95f97' => 'task c' }
-          ]
-        }
+        [
+          {
+            'id' => 'de509b8c',
+            'title' => 'task a',
+            'done' => true
+          },
+          {
+            'id' => '76de3a32',
+            'title' => 'task b',
+            'done' => false
+          },
+          {
+            'id' => '44d95f97',
+            'title' => 'task c',
+            'done' => true
+          },
+          {
+            'id' => '4aaf4bdb',
+            'title' => 'task d',
+            'done' => false
+          }
+        ]
       )
       expect(note.content).to eq(
         <<~CONTENT
@@ -86,7 +98,20 @@ RSpec.describe NoteTaskPopulator do
 
       described_class.new(note).run
 
-      expect(note.tasks).to eq({ 'todo' => [], 'done' => [{ 'de509b8c' => 'a' }, { '76de3a32' => 'b' }] })
+      expect(note.tasks).to eq(
+        [
+          {
+            'id' => 'de509b8c',
+            'title' => 'a',
+            'done' => true
+          },
+          {
+            'id' => '76de3a32',
+            'title' => 'b',
+            'done' => true
+          }
+        ]
+      )
       expect(note.content).to eq(
         '<ul class="task-list">' \
           '<li class="checked" data-task-id="de509b8c">a</li>' \
