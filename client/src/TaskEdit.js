@@ -86,7 +86,9 @@ class TaskEdit extends Component {
   }
 
   handleServerSync(data) {
-    this.fetchTasks();
+    if (data.isSynced) {
+      this.fetchTasks();
+    }
     this.setState({ isSynced: data.isSynced });
   }
 
