@@ -59,8 +59,6 @@ class TaskEdit extends Component {
   componentDidMount() {
     this.autoSave = new AutoSave(this.handleServerSync.bind(this));
     this.autoSave.startPolling();
-
-    this.fetchTasks();
   }
 
   componentWillUnmount() {
