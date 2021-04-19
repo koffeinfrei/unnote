@@ -79,10 +79,9 @@ class TaskEdit extends Component {
     const taskElement = noteContentElement.querySelector(`[data-task-id="${task.id}"]`);
     taskElement.classList.toggle('checked');
 
-    const syncNote = Note.fromAttributes(note);
-    syncNote.content = noteContentElement.innerHTML;
+    associatedNote.content = noteContentElement.innerHTML;
 
-    this.autoSave.setChange(syncNote);
+    this.autoSave.setChange(Note.fromAttributes(associatedNote));
   }
 
   handleServerSync(data) {
