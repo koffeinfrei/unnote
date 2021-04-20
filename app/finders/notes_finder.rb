@@ -38,13 +38,16 @@ class NotesFinder
   end
 
   def filter!
-    return if @params[:filters].blank?
+    filters = @params[:filters]
 
-    if @params[:filters].include?('tasks') && @params[:filters].include?('todo')
-      @notes = @notes.having_todo_tasks
-    elsif @params[:filters].include?('tasks')
-      @notes = @notes.having_tasks
-    end
+    return if filters.blank?
+
+    @notes =
+      if filters.include?('tasks') && filters.include?('todo')
+        @notes.having_todo_tasks
+      elsif filters.include?('tasks')
+        @notes.having_tasks
+      end
   end
 
   def order!
