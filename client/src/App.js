@@ -45,9 +45,9 @@ class App extends Component {
     if (this.state.isLoggedIn === true) {
       return (
         <Switch>
-          <Route path={['/notes', '/notes/:id']} render={ (props) => this.renderNoteEdit(props, 'notes') } />
-          <Route path={['/task-notes', '/task-notes/:id']} render={ (props) => this.renderNoteEdit(props, 'task_notes') } />
-          <Route path={['/tasks', '/tasks/:id']} render={ (props) => <TaskEdit {...props} /> } />
+          <Route path={['/notes/:id', '/notes']} render={ (props) => this.renderNoteEdit(props, 'notes') } />
+          <Route path={['/task-notes/:id', '/task-notes']} render={ (props) => this.renderNoteEdit(props, 'task_notes') } />
+          <Route path={['/tasks/:id', '/tasks']} render={ (props) => <TaskEdit {...props} /> } />
           <Redirect from='/' to='/notes' />
         </Switch>
       );
