@@ -101,13 +101,15 @@ class TaskEdit extends Component {
   }
 
   handleSearchEnter(e) {
-    this.setState({ searchQuery: e.target.value });
-    this.fetchTasks();
+    this.setState({ searchQuery: e.target.value }, () => {
+      this.fetchTasks();
+    });
   }
 
   handleSearchCleared() {
-    this.setState({ searchQuery: '' });
-    this.fetchTasks();
+    this.setState({ searchQuery: '' }, () => {
+      this.fetchTasks();
+    });
   }
 
   handleFilterChanged(e) {
