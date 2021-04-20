@@ -43,6 +43,7 @@ class TaskEdit extends Component {
                   <option value="">Show all</option>
                 </select>
               </div>
+              {this.renderEmpty()}
               {this.state.notes.map((note) =>
                 <TaskGroup
                   key={note.uid}
@@ -63,6 +64,14 @@ class TaskEdit extends Component {
 
   componentWillUnmount() {
     this.autoSave.stopPolling();
+  }
+
+  renderEmpty() {
+    if (this.state.notes.length > 0) { return; }
+
+    return (
+      <div>There's nothing…</div>
+    );
   }
 
   handleTaskChecked(note, task, e) {
