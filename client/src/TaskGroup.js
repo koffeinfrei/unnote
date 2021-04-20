@@ -14,14 +14,22 @@ class TaskGroup extends Component {
   }
 
   render() {
-    const done = this.props.note.tasks.filter(task => task.done);
-    const todo = this.props.note.tasks.filter(task => !task.done);
-
     return (
       <div className="card">
         <header>
           {this.props.note.title}
         </header>
+        {this.renderTodo()}
+        {this.renderDone()}
+      </div>
+    );
+  }
+
+  renderTodo() {
+    const todo = this.props.note.tasks.filter(task => !task.done);
+
+    return (
+      <div>
         {todo.length > 0 ?
           <footer>
             {todo.map(task => this.renderTask(task))}
@@ -29,6 +37,15 @@ class TaskGroup extends Component {
           :
           null
         }
+      </div>
+    );
+  }
+
+  renderDone() {
+    const done = this.props.note.tasks.filter(task => task.done);
+
+    return (
+      <div>
         {done.length > 0 ?
           <footer>
             <button className='icon left-aligned full-width' onClick={() => this.setState({ showDone: !this.state.showDone })}>
