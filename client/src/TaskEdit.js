@@ -38,7 +38,7 @@ class TaskEdit extends Component {
             <div className="full">
               <SearchTerm searchQuery={this.state.searchQuery} />
               <div className="view-filter">
-                <select onChange={this.handleFilterChanged.bind(this)}>
+                <select name="view-filter" onChange={this.handleFilterChanged.bind(this)}>
                   <option value="todo">Show todos</option>
                   <option value="">Show all</option>
                 </select>
