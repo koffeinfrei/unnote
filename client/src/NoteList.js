@@ -3,13 +3,12 @@ import humanDate from 'human-date';
 import { ajaxWithAbort } from './ajax';
 import Note from './Note';
 import AlertFlash from './AlertFlash';
-import Spinner from './Spinner';
 import SearchTerm from './SearchTerm';
+import LoadMoreButton from './LoadMoreButton';
 
 import defaultNotePicture from './icons/material/short_text-24px.svg';
 import { ReactComponent as ArchiveIcon } from './icons/material/archive-24px.svg';
 import { ReactComponent as DeleteIcon } from './icons/material/delete-24px.svg';
-import { ReactComponent as MoreIcon } from './icons/material/expand_more-24px.svg';
 
 import './NoteList.css';
 
@@ -21,8 +20,8 @@ class NoteList extends Component {
       notes: [],
       currentPage: 1,
       hasMorePages: false,
+      isLoadingMorePages: true,
       isSynced: false,
-      showMoreLink: false,
       searchQuery: undefined
     };
   }
@@ -33,8 +32,10 @@ class NoteList extends Component {
         <SearchTerm searchQuery={this.state.searchQuery} />
         {this.renderTaskNotesFilters()}
         {this.renderList()}
-        {this.renderNextPageLink()}
-        {this.renderListSpinner()}
+        <LoadMoreButton
+          showLoadMoreButton={this.state.hasMorePages}
+          showSpinner={this.state.isLoadingMorePages}
+          handleLoadMoreClick={this.handleLoadMoreClick.bind(this)} />
       </div>
     );
   }
@@ -93,27 +94,6 @@ class NoteList extends Component {
     );
   }
 
-  renderNextPageLink() {
-    if (!this.state.hasMorePages) { return; }
-    if (!this.state.showMoreLink) { return; }
-
-    return (
-      <button className='icon big full-width' onClick={this.handleNextPageClick.bind(this)}>
-        <MoreIcon />
-      </button>
-    );
-  }
-
-  renderListSpinner() {
-    if (this.state.showMoreLink) { return; }
-
-    return (
-      <div className="icon big full-width">
-        <Spinner />
-      </div>
-    );
-  }
-
   getListItemCssClass(note) {
     let cssClass = 'card list-item';
     if (this.isActiveNote(note)) {
@@ -164,11 +144,8 @@ class NoteList extends Component {
     this.props.handleNoteClick(note, e);
   }
 
-  handleNextPageClick(e) {
-    e.preventDefault();
-    e.currentTarget.blur();
-
-    this.setState({ showMoreLink: false });
+  handleLoadMoreClick(e) {
+    this.setState({ isLoadingMorePages: true });
 
     this.setState({ currentPage: this.state.currentPage + 1 }, () => {
       this.updateList();
@@ -203,8 +180,6 @@ class NoteList extends Component {
   executeUpdateListRequest() {
     this.updateListRequest.promise
       .then((data) => {
-        this.setState({ showMoreLink: true });
-
         const notes = data.notes.map(function(note) {
           return Note.fromAttributes(note);
         });
@@ -212,11 +187,12 @@ class NoteList extends Component {
         this.setState({
           notes: notes,
           currentPage: data.current_page,
-          hasMorePages: data.has_more_pages
+          hasMorePages: data.has_more_pages,
+          isLoadingMorePages: false
         });
       })
       .catch((error) => {
-        this.setState({ showMoreLink: true });
+        this.setState({ isLoadingMorePages: false });
 
         AlertFlash.show('Watch out, the list is not up to date.');
         console.error('url: ', this.props.url, 'error: ', error.toString());
