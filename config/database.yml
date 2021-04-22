@@ -3,17 +3,17 @@ default: &default
   encoding: unicode
   pool: 5
   template: template0
-  <% if ENV['POSTGRESQL_USER'].present? %>
-  username: <%= ENV['POSTGRESQL_USER'] %>
+  <% if ENV['PGUSER'].present? %>
+  username: <%= ENV['PGUSER'] %>
   <% end %>
-  <% if ENV['POSTGRESQL_PASSWORD'].present? %>
-  password: <%= ENV['POSTGRESQL_PASSWORD'] %>
+  <% if ENV['PGPASSWORD'].present? %>
+  password: <%= ENV['PGPASSWORD'] %>
   <% end %>
-  <% if ENV['POSTGRESQL_HOST'].present? %>
-  host: <%= ENV['POSTGRESQL_HOST'] %>
+  <% if ENV['PGHOST'].present? %>
+  host: <%= ENV['PGHOST'] %>
   <% end %>
-  <% if ENV['POSTGRESQL_PORT'].present? %>
-  port: <%= ENV['POSTGRESQL_PORT'] %>
+  <% if ENV['PGPORT'].present? %>
+  port: <%= ENV['PGPORT'] %>
   <% end %>
 
 development: &development
