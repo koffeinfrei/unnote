@@ -7,6 +7,7 @@ import AutoSave from './AutoSave';
 import Note from './Note';
 import TaskGroup from './TaskGroup';
 import SearchTerm from './SearchTerm';
+import LoadMoreButton from './LoadMoreButton';
 import { ajax } from './ajax';
 
 class TaskEdit extends Component {
@@ -17,7 +18,9 @@ class TaskEdit extends Component {
       notes: [],
       currentPage: 1,
       searchQuery: undefined,
-      filter: 'todo'
+      filter: 'todo',
+      hasMorePages: false,
+      isLoadingMorePages: true
     }
   }
 
@@ -50,6 +53,10 @@ class TaskEdit extends Component {
                   note={note}
                   handleTaskChecked={this.handleTaskChecked.bind(this)} />
               )}
+              <LoadMoreButton
+                showLoadMoreButton={this.state.hasMorePages}
+                showSpinner={this.state.isLoadingMorePages}
+                handleLoadMoreClick={this.handleLoadMoreClick.bind(this)} />
             </div>
           </div>
         </main>
@@ -118,6 +125,14 @@ class TaskEdit extends Component {
     });
   }
 
+  handleLoadMoreClick(e) {
+    this.setState({ isLoadingMorePages: true });
+
+    this.setState({ currentPage: this.state.currentPage + 1 }, () => {
+      this.fetchTasks();
+    });
+  }
+
   fetchTasks() {
     const params = {
       search: this.state.searchQuery,
@@ -130,7 +145,11 @@ class TaskEdit extends Component {
 
     ajax('/api/task_notes', 'GET', params)
       .then((data) => {
-        this.setState({ notes: data.notes });
+        this.setState({
+          notes: data.notes,
+          hasMorePages: data.has_more_pages,
+          isLoadingMorePages: false
+        });
       })
       .catch((error) => {
         AlertFlash.show('Fetching the tasks failed.');

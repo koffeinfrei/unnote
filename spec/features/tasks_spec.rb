@@ -52,6 +52,33 @@ RSpec.describe 'Tasks', :js do
       expect(page).to have_content "There's nothing…"
     end
 
+    it 'I can load more tasks' do
+      Note.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        title: 'note1 with tasks',
+        content: '<ul class="task-list"><li>a</li><li>b</li></ul>'
+      )
+      Note.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        title: 'note2 with tasks',
+        content: '<ul class="task-list"><li>a</li><li>b</li></ul>'
+      )
+
+      allow(Kaminari.config).to receive(:default_per_page).and_return(1)
+
+      visit_and_wait '/#/tasks'
+
+      expect(page).to have_content 'note2 with tasks'
+      expect(page).not_to have_content 'note1 with tasks'
+
+      click_on 'load-more'
+
+      expect(page).to have_content 'note1 with tasks'
+      expect(page).not_to have_button 'load-more'
+    end
+
     it 'I can check and uncheck tasks' do
       Note.create!(
         uid: SecureRandom.uuid,

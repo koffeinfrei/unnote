@@ -17,7 +17,7 @@ class LoadMoreButton extends Component {
     if (this.props.showSpinner) { return null; }
 
     return (
-      <button className='icon big full-width' onClick={this.handleLoadMoreClick.bind(this)}>
+      <button name="load-more" className='icon big full-width' onClick={this.handleLoadMoreClick.bind(this)}>
         <MoreIcon />
       </button>
     );
