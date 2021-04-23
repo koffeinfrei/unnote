@@ -4,6 +4,7 @@ import { debounce } from 'throttle-debounce';
 import EventHive from './EventHive';
 import Logout from './Logout';
 import Logo from './Logo';
+import { isFeatureEnabled } from './feature';
 
 import { ReactComponent as CloseIcon } from './icons/material/close-24px.svg';
 
@@ -27,9 +28,15 @@ class Navbar extends Component {
         <label htmlFor="bmenug" className="burger pseudo button">&#8801;</label>
 
         <div className="menu">
-          <NavLink to="/notes" className="button pseudo">All notes</NavLink>
-          <NavLink to="/task-notes" className="button pseudo">Task notes</NavLink>
-          <NavLink to="/tasks" className="button pseudo">Tasks</NavLink>
+          { isFeatureEnabled('tasks') &&
+            <NavLink to="/notes" className="button pseudo">All notes</NavLink>
+          }
+          { isFeatureEnabled('tasks') &&
+            <NavLink to="/task-notes" className="button pseudo">Task notes</NavLink>
+          }
+          { isFeatureEnabled('tasks') &&
+            <NavLink to="/tasks" className="button pseudo">Tasks</NavLink>
+          }
 
           <button
             className="icon close-hamburger hidden-lg"
