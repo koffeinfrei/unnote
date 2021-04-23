@@ -18,27 +18,28 @@ env:
     - PGPORT=5433
     - PGUSER=travis
 
-before_install:
-  - export GECKO_URL=$(curl --fail -s -L https://github.com/mozilla/geckodriver/releases/latest | egrep -o '"/mozilla/geckodriver/releases/download/v[0-9\.]+/geckodriver-v[0-9\.]+-linux64.tar.gz"' | sed 's/"//g')
-  - echo $GECKO_URL
-  - echo $GECKO_URL | wget --no-verbose --base=https://github.com/ -i - -O /tmp/geckodriver-latest.tar.gz
-  - mkdir geckodriver
-  - tar -xzf /tmp/geckodriver-latest.tar.gz -C geckodriver
-  - export PATH=$PATH:$PWD/geckodriver
-
-before_script:
-  - bundle exec rake client:npm_install
-  - bundle exec rake client:build_and_deploy
-  - psql -c 'create database mykonote_test;' -U $PGUSER
-
 jobs:
   include:
     - stage: test
       name: Rubocop
       script: bundle exec rubocop -D
+
     - stage: test
       name: ESLint
+      before_script: bundle exec rake client:npm_install
       script: node client/node_modules/eslint/bin/eslint.js --config client/node_modules/eslint-config-react-app/index.js client/src/
+
     - stage: test
       name: RSpec
+      before_install:
+        - export GECKO_URL=$(curl --fail -s -L https://github.com/mozilla/geckodriver/releases/latest | egrep -o '"/mozilla/geckodriver/releases/download/v[0-9\.]+/geckodriver-v[0-9\.]+-linux64.tar.gz"' | sed 's/"//g')
+        - echo $GECKO_URL
+        - echo $GECKO_URL | wget --no-verbose --base=https://github.com/ -i - -O /tmp/geckodriver-latest.tar.gz
+        - mkdir geckodriver
+        - tar -xzf /tmp/geckodriver-latest.tar.gz -C geckodriver
+        - export PATH=$PATH:$PWD/geckodriver
+      before_script:
+        - bundle exec rake client:npm_install
+        - bundle exec rake client:build_and_deploy
+        - psql -c 'create database mykonote_test;' -U $PGUSER
       script: bundle exec rspec spec
