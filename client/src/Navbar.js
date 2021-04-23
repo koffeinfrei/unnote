@@ -87,24 +87,6 @@ class Navbar extends Component {
     );
   }
 
-  getSpinnerCssClass() {
-    let cssClass = 'spinner';
-    if (!this.state.showSpinner) {
-      cssClass += ' hidden';
-    }
-
-    return cssClass;
-  }
-
-  getLogoCssClass() {
-    let cssClass = 'navbar-logo';
-    if (this.state.showSpinner) {
-      cssClass += ' hidden';
-    }
-
-    return cssClass;
-  }
-
   handleSearchEnter(e) {
     e.persist();
     this.handleSearchEnterDebounced(e);
