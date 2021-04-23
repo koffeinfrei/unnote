@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { debounce } from 'throttle-debounce';
 import EventHive from './EventHive';
-import Spinner from './Spinner';
 import Logout from './Logout';
+import Logo from './Logo';
 
-import { ReactComponent as Logo } from './images/logo.svg';
 import { ReactComponent as CloseIcon } from './icons/material/close-24px.svg';
 
 import './Navbar.css';
@@ -14,15 +13,13 @@ class Navbar extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { showSpinner: false };
-
     this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
   }
 
   render() {
     return (
       <nav>
-        {this.renderLogo()}
+        <Logo />
 
         {this.props.isLoggedIn ? this.renderSearchBox() : null}
 
@@ -46,27 +43,11 @@ class Navbar extends Component {
     );
   }
 
-  renderLogo() {
-    return (
-      <Link to='/' className="brand">
-        {this.state.showSpinner ? (
-          <div className="logo">
-            <Spinner />
-          </div>
-        ) : (
-          <Logo className="logo" />
-        )}
-      </Link>
-    );
-  }
-
   componentDidMount() {
-    this.subscribeSpinner();
     this.subscribeSearch();
   }
 
   componentWillUnmount() {
-    this.unsubscribeSpinner();
     this.unsubscribeSearch();
   }
 
@@ -104,18 +85,6 @@ class Navbar extends Component {
 
   handleCloseHamburgerClicked() {
     this.showHamburger.checked = false;
-  }
-
-  subscribeSpinner() {
-    // listen on global event so we can toggle the spinner from unrelated
-    // components
-    this.spinnerSubscription = EventHive.subscribe('spinner.toggle', (data) => {
-      this.setState({ showSpinner: data.show });
-    });
-  }
-
-  unsubscribeSpinner() {
-    this.spinnerSubscription.remove();
   }
 
   subscribeSearch() {
