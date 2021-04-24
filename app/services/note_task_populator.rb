@@ -12,8 +12,10 @@ class NoteTaskPopulator
       build_task!(checkbox)
     end
 
-    # save_with -> don't add newlines, it will break quill
-    @note.text_content = html.to_html(save_with: 0)
+    nbsp = Nokogiri::HTML('&nbsp;').text
+    @note.text_content = html
+      .to_html(save_with: 0) # `save_with` -> don't add newlines, it will break quill
+      .gsub(nbsp, '&nbsp;') # keep the html entities (as quill sets them)
   end
 
   private

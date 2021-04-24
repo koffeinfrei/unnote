@@ -125,8 +125,6 @@ RSpec.describe NoteTaskPopulator do
 
     it 'keeps an existing task id' do
       note = build_note(
-        uid: SecureRandom.uuid,
-        user: create_user,
         content: '<ul class="task-list">' \
                    '<li class="checked" data-task-id="de509b8c">a</li>' \
                  '</ul>'
@@ -139,6 +137,14 @@ RSpec.describe NoteTaskPopulator do
           '<li class="checked" data-task-id="de509b8c">a</li>' \
         '</ul>'
       )
+    end
+
+    it 'keeps &nbsp;' do
+      note = build_note(content: '&nbsp;')
+
+      described_class.new(note).run
+
+      expect(note.content).to eq('&nbsp;')
     end
   end
 end
