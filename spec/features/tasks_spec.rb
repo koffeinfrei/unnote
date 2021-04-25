@@ -113,6 +113,16 @@ RSpec.describe 'Tasks', :js do
       # show all (incl. done tasks)
       select 'Show all', from: 'view-filter'
       expect(page).to have_content 'note1 with tasks'
+
+      # checkboxes are reflected in the note
+      find_button('toggle-done').click
+      toggle_checkbox 'task b'
+
+      click_on 'All notes'
+      wait_for_finished_loading
+      find('.list-item', text: 'note1 with tasks').click
+      expect(page).to have_selector 'ul.task-list > li.checked', text: 'task a'
+      expect(page).to have_selector 'ul.task-list > li:not(.checked)', text: 'task b'
     end
   end
 end
