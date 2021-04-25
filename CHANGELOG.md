@@ -1,3 +1,17 @@
+## 0.9.0 (2021-04-25)
+
+#### :rocket: Enhancement
+* [#387](https://github.com/panter/mykonote/pull/387) Show search term in list ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#386](https://github.com/panter/mykonote/pull/386) Upgrade to rails 6 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#384](https://github.com/panter/mykonote/pull/384) Remove jQuery ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 2
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## 0.8.0 (2021-03-14)
 
 #### :rocket: Enhancement
