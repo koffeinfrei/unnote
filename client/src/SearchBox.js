@@ -8,6 +8,8 @@ class SearchBox extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = { value: '' }
+
     this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
   }
 
@@ -18,12 +20,14 @@ class SearchBox extends Component {
           type="text"
           className="search-input"
           placeholder="Search"
-          onChange={this.handleSearchEnter.bind(this)}
-          ref={(c) => this.searchInput = c} />
-        <button
-          type="button"
-          className="search-clear"
-          onClick={this.handleSearchCleared.bind(this)}>×</button>
+          value={this.state.value}
+          onChange={this.handleSearchEnter.bind(this)} />
+        {this.state.value !== '' &&
+          <button
+            type="button"
+            className="search-clear"
+            onClick={this.handleSearchCleared.bind(this)}>×</button>
+        }
       </div>
     );
   }
@@ -37,17 +41,17 @@ class SearchBox extends Component {
   }
 
   handleSearchEnter(e) {
-    e.persist();
-    this.handleSearchEnterDebounced(e);
+    const value = e.target.value;
+    this.setState({ value: value }, this.handleSearchEnterDebounced);
   }
 
-  handleSearchEnterDebounced(e) {
-    this.props.handleSearchEnter(e.target.value);
+  handleSearchEnterDebounced() {
+    this.props.handleSearchEnter(this.state.value);
   }
 
   handleSearchCleared(e) {
-    this.searchInput.value = '';
     e.target.blur();
+    this.setState({ value: '' });
     this.props.handleSearchCleared();
   }
 
