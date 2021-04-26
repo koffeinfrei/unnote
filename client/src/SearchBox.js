@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import { debounce } from 'throttle-debounce';
 import EventHive from './EventHive';
 
+import { ReactComponent as SearchIcon } from './icons/material/search_black_24dp.svg';
+
 import './SearchBox.css';
 
 class SearchBox extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { value: '' }
+    this.state = {
+      value: '',
+      isActive: false
+    }
 
     this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
   }
@@ -19,14 +24,20 @@ class SearchBox extends Component {
         <input
           type="text"
           className="search-input"
-          placeholder="Search"
+          name="search"
           value={this.state.value}
-          onChange={this.handleSearchEnter.bind(this)} />
+          onChange={this.handleSearchEnter.bind(this)}
+          onFocus={() => this.setState({ isActive: true })}
+          onBlur={() => this.setState({ isActive: false })}
+          ref={(c) => this.searchInput = c} />
         {this.state.value !== '' &&
           <button
             type="button"
             className="search-clear"
             onClick={this.handleSearchCleared.bind(this)}>×</button>
+        }
+        {!this.state.isActive && this.state.value === '' &&
+          <SearchIcon onClick={() => this.searchInput.focus()} className="search-icon" />
         }
       </div>
     );
