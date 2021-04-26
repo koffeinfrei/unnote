@@ -30,6 +30,9 @@ Metrics/BlockLength:
     - describe
     - it
 
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+
 RSpec/RepeatedExample:
   Exclude:
     - 'spec/policies/**/*'

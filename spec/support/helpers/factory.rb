@@ -11,12 +11,18 @@ module Factory
     User.create!(attributes)
   end
 
-  def create_note(attributes = {})
+  def build_note(attributes = {})
     attributes = {
       uid: SecureRandom.uuid
     }.merge(attributes)
 
-    Note.create!(attributes)
+    Note.new(attributes)
+  end
+
+  def create_note(attributes = {})
+    note = build_note(attributes)
+    note.save!
+    note
   end
 end
 

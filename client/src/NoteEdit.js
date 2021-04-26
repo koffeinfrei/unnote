@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { debounce } from 'throttle-debounce';
 import './keyboard';
 import { ajax } from './ajax';
 import NoteList from './NoteList';
@@ -12,14 +11,12 @@ import EventHive from './EventHive';
 import AutoSave from './AutoSave';
 import SyncStorage from './SyncStorage';
 import Dialog from './Dialog';
-import ActionBar from './ActionBar';
+import NoteActionBar from './NoteActionBar';
 import Flash from './Flash';
 
 class NoteEdit extends Component {
   constructor(props, context) {
     super(props, context);
-
-    this.pushState = new PushState(this.props.history);
 
     const { match } = this.props;
 
@@ -32,8 +29,6 @@ class NoteEdit extends Component {
     else {
       this.state = { ...this.getNewNoteAttributes(), showList: true };
     }
-
-    this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
   }
 
   render() {
@@ -73,6 +68,7 @@ class NoteEdit extends Component {
   componentWillUnmount() {
     this.noteCreateSubscription.remove();
     this.noteNewSubscription.remove();
+    this.autoSave.stopPolling();
   }
 
   renderHeaderBar() {
@@ -88,12 +84,11 @@ class NoteEdit extends Component {
     return (
       <main>
         <Flash />
-        <ActionBar
+        <NoteActionBar
           showList={this.state.showList}
           isSynced={this.state.isSynced}
-          listNeedsUpdate={this.state.listNeedsUpdate}
           handleShowListClicked={this.handleShowListClicked.bind(this)}
-          handleNewNoteClicked={this.handleNewNoteClicked.bind(this)} />
+          handleNewClicked={this.handleNewNoteClicked.bind(this)} />
         <div className="flex one two-900">
           <div className="full third-900 fourth-1200">
             <NoteList
@@ -101,6 +96,7 @@ class NoteEdit extends Component {
               isSynced={this.state.isSynced}
               showList={this.state.showList}
               searchQuery={this.state.searchQuery}
+              collection={this.props.collection}
               handleNoteClick={this.handleNoteClick.bind(this)}
               handleDeleteNoteClick={this.handleDeleteNoteClick.bind(this)}
               handleArchiveNoteClick={this.handleArchiveNoteClick.bind(this)} />
@@ -121,7 +117,7 @@ class NoteEdit extends Component {
     this.state = {
       note: Note.fromAttributes(note)
     };
-    this.pushState.setBrowserTitle(note);
+    new PushState(this.props.match, this.props.history).setBrowserTitle(note);
   }
 
   initStateFromNoteId(id) {
@@ -137,7 +133,7 @@ class NoteEdit extends Component {
         this.setState({
           showList: false,
           note: note
-        }, () => this.pushState.setBrowserTitle(note));
+        }, () => new PushState(this.props.match, this.props.history).setBrowserTitle(note));
       })
       .catch(() => {
         AlertFlash.show(
@@ -152,8 +148,9 @@ class NoteEdit extends Component {
     e.preventDefault();
 
     this.setState({ note: note, showList: false });
-    this.pushState.setEdit(note);
-    this.pushState.setBrowserTitle(note);
+    const pushState = new PushState(this.props.match, this.props.history);
+    pushState.setEdit(note);
+    pushState.setBrowserTitle(note);
   }
 
   handleDeleteNoteClick(note, e) {
@@ -196,7 +193,7 @@ class NoteEdit extends Component {
   }
 
   handleEditChange(note) {
-    this.pushState.setEdit(note);
+    new PushState(this.props.match, this.props.history).setEdit(note);
 
     this.autoSave.setChange(note);
   }
@@ -213,16 +210,11 @@ class NoteEdit extends Component {
     this.setState(state);
 
     if (data.isSynced) {
-      this.pushState.setBrowserTitle(this.state.note);
+      new PushState(this.props.match, this.props.history).setBrowserTitle(this.state.note);
     }
   }
 
   handleSearchEnter(e) {
-    e.persist();
-    this.handleSearchEnterDebounced(e);
-  }
-
-  handleSearchEnterDebounced(e) {
     // show the list in case a note was shown
     this.setState({ searchQuery: e.target.value, showList: true });
   }
@@ -237,8 +229,9 @@ class NoteEdit extends Component {
 
   setNewNote(afterSetState) {
     this.setState({ ...this.getNewNoteAttributes(), showList: false }, afterSetState);
-    this.pushState.setNew();
-    this.pushState.setBrowserTitle();
+    const pushState = new PushState(this.props.match, this.props.history);
+    pushState.setNew();
+    pushState.setBrowserTitle();
   }
 
   deleteNote(note) {

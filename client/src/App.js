@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { ajax } from './ajax';
 import NoteEdit from './NoteEdit';
+import TaskEdit from './TaskEdit';
 import './App.css';
 import './fonts/roboto.css';
 
@@ -44,8 +45,9 @@ class App extends Component {
     if (this.state.isLoggedIn === true) {
       return (
         <Switch>
-          <Route path='/notes/:id' component={ NoteEdit } />
-          <Route path='/notes' component={ NoteEdit } />
+          <Route path={['/notes/:id', '/notes']} render={ (props) => this.renderNoteEdit(props, 'notes') } />
+          <Route path={['/task-notes/:id', '/task-notes']} render={ (props) => this.renderNoteEdit(props, 'task_notes') } />
+          <Route path={['/tasks/:id', '/tasks']} render={ (props) => <TaskEdit {...props} /> } />
           <Redirect from='/' to='/notes' />
         </Switch>
       );
@@ -72,6 +74,14 @@ class App extends Component {
         </Switch>
       );
     }
+  }
+
+  renderNoteEdit(routerProps, collection) {
+    return (
+      <NoteEdit
+        {...routerProps}
+        collection={collection} />
+    );
   }
 }
 

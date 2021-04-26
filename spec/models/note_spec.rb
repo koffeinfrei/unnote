@@ -3,14 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Note do
-  let(:image1_data) do
-    'data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q='
-  end
-
-  let(:image2_data) do
-    'data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q='
-  end
-
   describe '#as_json' do
     context 'when no options provided' do
       it 'returns the whitelisted attributes' do
@@ -30,7 +22,8 @@ RSpec.describe Note do
             content: 'content 1',
             created_at: Time.zone.local(2016, 8, 1, 15, 33).as_json,
             updated_at: Time.zone.local(2016, 8, 1, 15, 33).as_json,
-            archived_at: nil
+            archived_at: nil,
+            tasks: nil
           }.stringify_keys
         )
       end
@@ -82,6 +75,14 @@ RSpec.describe Note do
   end
 
   describe '#dup' do
+    let(:image1_data) do
+      'data:image/png;base64,/9j/4AAQSkZJRgABAQEASABKdhH//2Q='
+    end
+
+    let(:image2_data) do
+      'data:image/png;base64,/8c/4AAQSkZJRgABAQEASABKdhH//2Q='
+    end
+
     it 'duplicates the images' do
       note = described_class.create!(
         uid: SecureRandom.uuid,
@@ -170,6 +171,58 @@ RSpec.describe Note do
     end
   end
 
+  describe 'task scopes' do
+    let(:user) { create_user }
+
+    let(:having_todo_task) do
+      described_class.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        content: '<ul class="task-list"><li>a</li></ul>'
+      )
+    end
+
+    let(:having_done_task) do
+      described_class.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        content: '<ul class="task-list"><li class="checked">a</li></ul>'
+      )
+    end
+
+    let(:having_no_task) do
+      described_class.create!(
+        uid: SecureRandom.uuid,
+        user: user,
+        content: '<ul><li>a</li><li>b</li></ul>'
+      )
+    end
+
+    before do
+      having_todo_task
+      having_done_task
+      having_no_task
+    end
+
+    describe '.having_todo_tasks' do
+      it 'returns only the note containing a todo task' do
+        expect(described_class.having_todo_tasks).to eq [having_todo_task]
+      end
+    end
+
+    describe '.having_done_tasks' do
+      it 'returns only the note containing a todo task' do
+        expect(described_class.having_done_tasks).to eq [having_done_task]
+      end
+    end
+
+    describe '.having_tasks' do
+      it 'returns only the notes containing a task' do
+        expect(described_class.having_tasks).to eq [having_todo_task, having_done_task]
+      end
+    end
+  end
+
   describe 'validation: does_not_exceed_free_count_limit' do
     context 'with pro subscription' do
       let(:user) { create_user(subscription: :pro) }
@@ -218,6 +271,18 @@ RSpec.describe Note do
           'Please delete some notes or upgrade your subscription.'
         ]
       end
+    end
+  end
+
+  describe 'before_save > populate_tasks' do
+    it 'calls NoteTaskPopulator on save' do
+      note = build_note(user: create_user)
+      populator = instance_spy(NoteTaskPopulator)
+      allow(NoteTaskPopulator).to receive(:new).with(note).and_return(populator)
+
+      note.save!
+
+      expect(populator).to have_received(:run)
     end
   end
 end

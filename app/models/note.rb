@@ -33,11 +33,17 @@ class Note < ApplicationRecord
   scope :archived, -> { where.not(archived_at: nil) }
   scope :unarchived, -> { where(archived_at: nil) }
 
+  scope :having_todo_tasks, -> { where(%(tasks @> '[{ "done": false }]')) }
+  scope :having_done_tasks, -> { where(%(tasks @> '[{ "done": true }]')) }
+  scope :having_tasks, -> { having_todo_tasks.or(having_done_tasks) }
+
   validate(
     :does_not_exceed_free_count_limit,
     on: :create,
     if: ->(note) { note.user.free? }
   )
+
+  before_save :populate_tasks
 
   def to_param
     uid
@@ -46,7 +52,7 @@ class Note < ApplicationRecord
   def as_json(options = {})
     only = options.fetch(
       :only,
-      %i[uid title created_at updated_at archived_at content]
+      %i[uid title created_at updated_at archived_at content tasks]
     ).map(&:to_s)
     options = { only: only }.merge(options)
 
@@ -81,5 +87,9 @@ class Note < ApplicationRecord
       "You have reached your note limit of #{FREE_COUNT_LIMIT} notes. " \
       'Please delete some notes or upgrade your subscription.'
     )
+  end
+
+  def populate_tasks
+    NoteTaskPopulator.new(self).run
   end
 end

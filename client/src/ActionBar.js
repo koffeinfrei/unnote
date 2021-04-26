@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import SaveStateLabel from './SaveStateLabel';
 
-import { ReactComponent as ShowListIcon } from './icons/material/arrow_back-24px.svg';
 import { ReactComponent as NewIcon } from './icons/material/add-24px.svg';
 
 import './ActionBar.css';
 
 export class ActionBar extends Component { 
   render() {
-    let showListButtonClassName = 'icon big invisible-lg';
-    if (this.props.showList) {
-      showListButtonClassName += ' invisible';
-    }
-
     return (
       <div className="action-bar">
-        <button onClick={this.props.handleShowListClicked.bind(this)} className={showListButtonClassName}>
-          <ShowListIcon />
-        </button>
+        {this.props.left ? this.props.left : <div className="icon big invisible"></div>}
 
         <SaveStateLabel isSynced={this.props.isSynced} />
 
-        <button name="new-note" onClick={this.props.handleNewNoteClicked.bind(this)} className="icon big">
+        <button name="new" onClick={this.props.handleNewClicked.bind(this)} className="icon big">
           <NewIcon />
         </button>
       </div>
