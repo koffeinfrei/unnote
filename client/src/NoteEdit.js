@@ -214,9 +214,9 @@ class NoteEdit extends Component {
     }
   }
 
-  handleSearchEnter(e) {
+  handleSearchEnter(value) {
     // show the list in case a note was shown
-    this.setState({ searchQuery: e.target.value, showList: true });
+    this.setState({ searchQuery: value, showList: true });
   }
 
   handleSearchCleared() {
