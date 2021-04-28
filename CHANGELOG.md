@@ -1,3 +1,12 @@
+## 0.11.0 (2021-06-24)
+
+#### :rocket: Enhancement
+* [#431](https://github.com/panter/mykonote/pull/431) Support enter and esc for modal dialogs ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.10.0 (2021-04-28)
 
 #### :rocket: Enhancement
