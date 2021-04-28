@@ -1,3 +1,13 @@
+## 0.10.0 (2021-04-28)
+
+#### :rocket: Enhancement
+* [#403](https://github.com/panter/mykonote/pull/403) Icon as search placeholder ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#389](https://github.com/panter/mykonote/pull/389) Support for tasks [Experimental] ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :bug: Bug Fix
+* [#404](https://github.com/panter/mykonote/pull/404) Don't keep `:id` placeholder in pushed url ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.9.0 (2021-04-25)
 
 #### :rocket: Enhancement
