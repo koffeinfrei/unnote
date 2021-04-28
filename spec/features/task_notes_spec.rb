@@ -44,7 +44,7 @@ RSpec.describe 'Task notes', :js do
       expect(page).to have_content 'note2 with tasks'
 
       # search the task note
-      fill_in 'Search', with: 'note1'
+      fill_in 'search', with: 'note1'
       wait_for_finished_loading
 
       expect(page).not_to have_content 'normal note'
@@ -52,7 +52,7 @@ RSpec.describe 'Task notes', :js do
       expect(page).not_to have_content 'note2 with tasks'
 
       # search the normal note...
-      fill_in 'Search', with: 'normal'
+      fill_in 'search', with: 'normal'
       wait_for_finished_loading
 
       # ...there's not task note
@@ -71,7 +71,7 @@ RSpec.describe 'Task notes', :js do
       expect(page).not_to have_content "There's nothing…"
 
       # show all
-      fill_in 'Search', with: ''
+      fill_in 'search', with: ''
       expect(page).to have_content 'normal note'
       expect(page).to have_content 'note1 with tasks'
       expect(page).to have_content 'note2 with tasks'

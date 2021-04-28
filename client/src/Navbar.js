@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { debounce } from 'throttle-debounce';
-import EventHive from './EventHive';
 import Logout from './Logout';
 import Logo from './Logo';
+import SearchBox from './SearchBox';
 import { isFeatureEnabled } from './feature';
 
 import { ReactComponent as CloseIcon } from './icons/material/close-24px.svg';
@@ -11,18 +10,12 @@ import { ReactComponent as CloseIcon } from './icons/material/close-24px.svg';
 import './Navbar.css';
 
 class Navbar extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleSearchEnterDebounced = debounce(500, this.handleSearchEnterDebounced);
-  }
-
   render() {
     return (
       <nav>
         <Logo />
 
-        {this.props.isLoggedIn ? this.renderSearchBox() : null}
+        {this.props.isLoggedIn && <SearchBox handleSearchEnter={this.props.handleSearchEnter} handleSearchCleared={this.props.handleSearchCleared} />}
 
         <input id="bmenug" type="checkbox" className="show" ref={c => this.showHamburger = c} />
         <label htmlFor="bmenug" className="burger pseudo button">&#8801;</label>
@@ -50,58 +43,8 @@ class Navbar extends Component {
     );
   }
 
-  componentDidMount() {
-    this.subscribeSearch();
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeSearch();
-  }
-
-  renderSearchBox() {
-    return (
-      <div className="search vertically-aligned">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search"
-          onChange={this.handleSearchEnter.bind(this)}
-          ref={(c) => this.searchInput = c} />
-        <button
-          type="button"
-          className="search-clear"
-          onClick={this.handleSearchCleared.bind(this)}>×</button>
-      </div>
-    );
-  }
-
-  handleSearchEnter(e) {
-    e.persist();
-    this.handleSearchEnterDebounced(e);
-  }
-
-  handleSearchEnterDebounced(e) {
-    this.props.handleSearchEnter(e);
-  }
-
-  handleSearchCleared(e) {
-    this.searchInput.value = '';
-    e.target.blur();
-    this.props.handleSearchCleared();
-  }
-
   handleCloseHamburgerClicked() {
     this.showHamburger.checked = false;
-  }
-
-  subscribeSearch() {
-    this.searchSubscription = EventHive.subscribe('search.focus', () => {
-      this.searchInput.focus();
-    });
-  }
-
-  unsubscribeSearch() {
-    this.searchSubscription.remove();
   }
 }
 

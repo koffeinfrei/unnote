@@ -107,8 +107,8 @@ class TaskEdit extends Component {
     this.setState({ isSynced: data.isSynced });
   }
 
-  handleSearchEnter(e) {
-    this.setState({ searchQuery: e.target.value }, () => {
+  handleSearchEnter(value) {
+    this.setState({ searchQuery: value }, () => {
       this.fetchTasks();
     });
   }

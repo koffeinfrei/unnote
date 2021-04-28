@@ -36,14 +36,14 @@ RSpec.describe 'Tasks', :js do
       expect(page).to have_content 'note2 with tasks'
 
       # search the task
-      fill_in 'Search', with: 'note1'
+      fill_in 'search', with: 'note1'
       wait_for_finished_loading
 
       expect(page).to have_content 'note1 with tasks'
       expect(page).not_to have_content 'note2 with tasks'
 
       # search the normal note...
-      fill_in 'Search', with: 'normal'
+      fill_in 'search', with: 'normal'
       wait_for_finished_loading
 
       # ...there's no task
