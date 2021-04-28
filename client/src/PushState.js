@@ -1,3 +1,5 @@
+import { generatePath } from 'react-router';
+
 class PushState {
   constructor(match, history) {
     this.path = match.path;
@@ -9,7 +11,11 @@ class PushState {
   }
 
   setEdit(note) {
-    const url = `${this.path}/${note.uid}`;
+    let path = this.path;
+    if (!path.includes(':id')) {
+      path = `${path}/:id`;
+    }
+    const url = generatePath(path, { id: note.uid});
 
     if (this.history.location.pathname !== url) {
       this.history.push(url);
