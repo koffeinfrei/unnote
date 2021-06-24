@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Mousetrap from 'mousetrap'
 
 class Dialog extends Component {
   constructor(props, context) {
@@ -33,7 +34,9 @@ class Dialog extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ show: !!nextProps.show });
+    if (!!this.state.show === !!nextProps.show) { return; }
+
+    this.setState({ show: !!nextProps.show }, this.toggleKeybindings.bind(this));
   }
 
   handleOkButtonClick(e) {
@@ -48,6 +51,23 @@ class Dialog extends Component {
     e.stopPropagation();
 
     this.props.handleConfirmed(false);
+  }
+
+  toggleKeybindings () {
+    if (this.state.show) {
+      Mousetrap.bind('enter', (e) => {
+        e.preventDefault();
+        this.props.handleConfirmed(true);
+      });
+
+      Mousetrap.bind('esc', () => {
+        this.props.handleConfirmed(false);
+      });
+    }
+    else {
+      Mousetrap.unbind('enter');
+      Mousetrap.unbind('esc');
+    }
   }
 }
 
