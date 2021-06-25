@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 6.1.3'
+gem 'rails', '~> 6.1.4'
 
 # gems sorted alphabetically
 
