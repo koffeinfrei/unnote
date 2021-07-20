@@ -95,9 +95,10 @@ class NoteForm extends Component {
     // insertion of big content hangs the browser for several seconds.
     this.editor.setText('');
     this.contentElement.innerHTML = this.state.note.content;
-    this.editor.history.clear();
-    // wait on updates before attaching the `text-change` event
+    // wait on updates so the state of the editor is up to date for clearing
+    // the history and attaching events
     this.editor.update();
+    this.editor.history.clear();
     this.editor.on('text-change', this.handleContentChange.bind(this));
   }
 
