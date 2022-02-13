@@ -29,6 +29,10 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+
       - name: Cache gems
         uses: actions/cache@v1
         with:
