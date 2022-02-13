@@ -5,6 +5,19 @@ on: [push]
 jobs:
   rubocop:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST: localhost
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v1
 
@@ -31,3 +44,12 @@ jobs:
 
       - name: Run rubocop
         run: bundle exec rubocop --parallel -D
+
+      - uses: browser-actions/setup-geckodriver@latest
+
+      - name: RSpec
+        run: |
+          bundle exec rake client:npm_install
+          bundle exec rake client:build_and_deploy
+          bundle exec rake db:create
+          bundle exec rspec spec
