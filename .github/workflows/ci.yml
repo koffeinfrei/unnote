@@ -6,6 +6,9 @@ jobs:
   rubocop:
     runs-on: ubuntu-latest
 
+    env:
+      RAILS_ENV: test
+
     services:
       postgres:
         image: postgres:12
