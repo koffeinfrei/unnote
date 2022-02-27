@@ -21,9 +21,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set the ruby version env variable from .ruby-version
-        run: echo RUBY_VERSION=$(cat www/.ruby_version) >> $GITHUB_ENV
-
       - name: Set up ruby
         uses: ruby/setup-ruby@v1
         with:
