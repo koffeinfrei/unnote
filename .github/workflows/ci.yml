@@ -17,8 +17,6 @@ jobs:
       - name: Run rubocop
         run: bundle exec rubocop --parallel -D
 
-      - uses: browser-actions/setup-geckodriver@latest
-
   rspec:
     runs-on: ubuntu-latest
 
@@ -51,6 +49,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version-file: '.nvmrc'
+
+      - uses: browser-actions/setup-geckodriver@latest
 
       - name: RSpec
         run: |
