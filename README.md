@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/panter/mykonote.svg?branch=main)](https://travis-ci.org/panter/mykonote)
+[![CI](https://github.com/panter/mykonote/actions/workflows/ci.yml/badge.svg)](https://github.com/panter/mykonote/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/panter/mykonote)
 [![codebeat badge](https://codebeat.co/badges/6f0e1968-b451-4cb9-84d9-9cc49c68e64f)](https://codebeat.co/projects/github-com-panter-mykonote-main)
 

@@ -3,18 +3,18 @@ default: &default
   encoding: unicode
   pool: 5
   template: template0
-  <% if ENV['PGUSER'].present? %>
-  username: <%= ENV['PGUSER'] %>
-  <% end %>
-  <% if ENV['PGPASSWORD'].present? %>
-  password: <%= ENV['PGPASSWORD'] %>
-  <% end %>
-  <% if ENV['PGHOST'].present? %>
-  host: <%= ENV['PGHOST'] %>
-  <% end %>
-  <% if ENV['PGPORT'].present? %>
-  port: <%= ENV['PGPORT'] %>
-  <% end %>
+<% if ENV['POSTGRES_USER'].present? %>
+  username: <%= ENV['POSTGRES_USER'] %>
+<% end %>
+<% if ENV['POSTGRES_PASSWORD'].present? %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+<% end %>
+<% if ENV['POSTGRES_HOST'].present? %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+<% end %>
+<% if ENV['POSTGRES_PORT'].present? %>
+  port: <%= ENV['POSTGRES_PORT'] %>
+<% end %>
 
 development: &development
   <<: *default
