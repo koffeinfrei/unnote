@@ -14,7 +14,7 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Run rubocop
+      - name: Run RuboCop
         run: bundle exec rubocop --parallel -D
 
   rspec:
@@ -52,7 +52,7 @@ jobs:
 
       - uses: browser-actions/setup-geckodriver@latest
 
-      - name: RSpec
+      - name: Run RSpec
         run: |
           bundle exec rake client:npm_install
           bundle exec rake client:build_and_deploy
