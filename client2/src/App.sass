@@ -1,0 +1,111 @@
+@import './stylesheets/variables'
+@import './stylesheets/picnic.custom'
+
+body
+  font-family: $font-family
+  background: $light-gray
+
+main
+  max-width: map-get($devices, 'xl')
+  margin: auto $picnic-separation / 2
+  padding-top: $picnic-separation
+
+  @include media('xl')
+    margin: auto
+
+input
+  &:focus
+    border: $picnic-border // no border highlight on focus
+
+.vertically-aligned
+  position: relative
+  // fix 1px off error by usig 51 instead of 50.
+  // it may just be coincidental and temporary
+  top: 51%
+  transform: translateY(-51%)
+
+.padding-left-xl
+  @include media('xl')
+    padding-left: $picnic-separation * 2
+
+@mixin icon
+  padding: 0
+  margin: 0
+  background: transparent
+  opacity: 0.5
+  width: $icon-size-md
+  height: $icon-size-md
+  color: $picnic-black
+
+  &:hover
+    opacity: 1
+    box-shadow: none
+
+  &.big
+    width: $icon-size-lg
+    height: $icon-size-lg
+
+    // having this as a general rule somehow breaks alignment for the non-big
+    // version
+    svg
+      vertical-align: middle
+
+  svg
+    width: 100%
+    height: 100%
+
+.icon
+  @include icon
+
+  &.full-width
+    width: 100% !important
+
+  &.left-aligned
+    @include icon
+
+    text-align: left
+
+    svg
+      width: auto
+
+.icon-lg,
+button.pseudo.icon-lg
+  svg
+    vertical-align: middle
+    margin-right: $picnic-separation
+    // vertical alignment hack
+    margin-top: -0.2em
+
+  @include media('lg')
+    @include icon
+
+    .icon-lg-text
+      display: none
+
+.hidden
+  display: none
+
+.hidden-sm
+  display: none
+
+  @include media('lg')
+    display: initial
+
+.hidden-lg
+  @include media('lg')
+    display: none !important
+
+.invisible
+  visibility: hidden
+
+.invisible-lg
+  @include media('lg')
+    visibility: hidden
+
+.view-filter
+  font-size: $font-size-md
+  margin-bottom: $picnic-separation
+
+.collapsed
+  height: 0
+  overflow: hidden

@@ -12,6 +12,12 @@ module WaitHelper
     # (polling cycle is 5 seconds)
     using_wait_time 6, &block
   end
+
+  def ensure_saved
+    after_save_cycle do
+      expect(page).to have_content 'SAVED'
+    end
+  end
 end
 
 RSpec.configuration.include WaitHelper, type: :feature
