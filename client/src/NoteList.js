@@ -195,7 +195,7 @@ class NoteList extends Component {
         this.setState({ isLoadingMorePages: false });
 
         AlertFlash.show('Watch out, the list is not up to date.');
-        console.error('url: ', this.props.url, 'error: ', error.toString());
+        console.error('error: ', error.toString());
       });
   }
 
