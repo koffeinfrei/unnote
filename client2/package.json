@@ -1,0 +1,28 @@
+{
+  "name": "mykonote",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.1.0",
+    "sass": "^1.56.1",
+    "svelte": "^3.52.0",
+    "svelte-preprocess": "^4.10.7",
+    "vite": "^3.2.3"
+  },
+  "dependencies": {
+    "highlight.js": "^10.5.0",
+    "human-date": "^1.4.0",
+    "mousetrap": "^1.6.3",
+    "picnic": "^6.5.5",
+    "quill": "^1.3.7",
+    "quill-task-list": "^1.1.0",
+    "svelte-spa-router": "^3.3.0",
+    "throttle-debounce": "^3.0.0"
+  }
+}

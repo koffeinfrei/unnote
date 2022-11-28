@@ -71,7 +71,9 @@ RSpec.describe 'Task notes', :js do
       expect(page).not_to have_content "There's nothing…"
 
       # show all
-      fill_in 'search', with: ''
+      within '.search' do
+        click_on '×'
+      end
       expect(page).to have_content 'normal note'
       expect(page).to have_content 'note1 with tasks'
       expect(page).to have_content 'note2 with tasks'

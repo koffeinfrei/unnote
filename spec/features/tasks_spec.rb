@@ -118,7 +118,13 @@ RSpec.describe 'Tasks', :js do
       find_button('toggle-done').click
       toggle_checkbox 'task b'
 
+      # TODO: Switching to the notes view should keep checked state from the
+      # task view. Currently the notes view is not refreshed, while the note is
+      # correctly stored.
+      ensure_saved
+
       click_on 'All notes'
+
       wait_for_finished_loading
       find('.list-item', text: 'note1 with tasks').click
       expect(page).to have_selector 'ul.task-list > li.checked', text: 'task a'
