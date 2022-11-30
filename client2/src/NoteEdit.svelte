@@ -26,36 +26,42 @@
           on:archiveNote={handleArchiveNoteClick} />
       </div>
       <div class="full two-third-900 three-fourth-1200 padding-left-xl">
-      <!--   <NoteForm -->
-      <!--     {note} -->
-      <!--     on:change={handleEditChange} -->
-      <!--     showForm={!showList} /> -->
+        <NoteForm
+          {note}
+          on:change={handleEditChange}
+          showForm={!showList} />
       </div>
     </div>
   </main>
 
-  <!-- <Dialog -->
-  <!--   title='Archive' -->
-  <!--   text='Are you sure you want to archive this note?' -->
-  <!--   show={this.state.showArchiveDialog} -->
-  <!--   handleConfirmed={this.state.handleArchiveDialogConfirmed} /> -->
-  <!-- <Dialog -->
-  <!--   title='Delete' -->
-  <!--   text='Are you sure you want to delete this note?' -->
-  <!--   show={this.state.showDeleteDialog} -->
-  <!--   handleConfirmed={this.state.handleDeleteDialogConfirmed} /> -->
+  <Dialog
+    title='Archive'
+    text='Are you sure you want to archive this note?'
+    show={showArchiveDialog}
+    on:confirm={handleArchiveDialogConfirmed} />
+
+  <Dialog
+    title='Delete'
+    text='Are you sure you want to delete this note?'
+    show={showDeleteDialog}
+    on:confirm={handleDeleteDialogConfirmed} />
 <!-- </div> -->
 {/if}
 
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import { ajax } from './ajax';
+  import { show } from './flash';
+  import SyncStorage from './SyncStorage';
   import Note from './Note';
   import EventHive from './EventHive';
   import AutoSave from './AutoSave';
   import Flash from './Flash.svelte';
+  import NoteForm from './NoteForm.svelte';
   import NoteList from './NoteList.svelte';
   import Navbar from './Navbar.svelte';
   import NoteActionBar from './NoteActionBar.svelte';
+  import Dialog from './Dialog.svelte';
 
   export let note
   export let params = {}
@@ -123,7 +129,7 @@
         // new PushState(this.props.match, this.props.history).setBrowserTitle(note));
       })
       .catch(() => {
-        AlertFlash.show(
+        show('alert',
           'While trying to load the note the internet broke down (or something ' +
             'else failed, maybe the note could not be found)'
         );
@@ -147,10 +153,10 @@
 
     const clickedNote = e.detail
 
-    const handler = (confirmed) => {
+    const handler = (event) => {
       showDeleteDialog = false
 
-      if (confirmed) {
+      if (event.detail) {
         isSynced = false
         deleteNote(clickedNote);
       }
@@ -165,12 +171,12 @@
 
     const clickedNote = e.detail
 
-    const handler = (confirmed) => {
+    const handler = (event) => {
       showArchiveDialog = false
 
-      if (confirmed) {
+      if (event.detail) {
         clickedNote.setArchived();
-        handleEditChange(clickedNote)
+        handleEditChange(e)
         setNewNote();
       }
     };
@@ -186,7 +192,8 @@
     setNewNote(() => showList = true);
   }
 
-  const handleEditChange = (updatedNote) => {
+  const handleEditChange = (event) => {
+    const updatedNote = event.detail
     // new PushState(this.props.match, this.props.history).setEdit(note);
 
     autoSave.setChange(updatedNote);
@@ -217,10 +224,10 @@
     searchQuery = ''
   }
 
-  const setNewNote = (afterSetState) => {
+  const setNewNote = (callback) => {
     note = new Note()
     showList = false
-    afterSetState()
+    if (callback) callback()
     // const pushState = new PushState(this.props.match, this.props.history);
     // pushState.setNew();
     // pushState.setBrowserTitle();
@@ -243,7 +250,7 @@
         if (!window.navigator.onLine) {
           message += "<br>Please check your internet connection (Apologies, deleting in offline mode is not yet suppported)."
         }
-        AlertFlash.show(message);
+        show('alert', message);
         console.error('note.uid: ', note.uid, 'error: ', error.toString());
 
         isSynced = true

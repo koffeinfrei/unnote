@@ -194,7 +194,7 @@
       font-weight: normal
 
     .list-item-content
-      flex: 1 auto auto
+      flex: 1 1 auto
 
     .list-item-meta
       font-size: $font-size-sm
