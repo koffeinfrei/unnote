@@ -153,7 +153,7 @@ class TaskEdit extends Component {
       })
       .catch((error) => {
         AlertFlash.show('Fetching the tasks failed.');
-        console.error('url: ', this.props.url, 'error: ', error.toString());
+        console.error('error: ', error.toString());
       });
   }
 }

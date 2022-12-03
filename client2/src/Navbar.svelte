@@ -6,17 +6,17 @@
   {/if}
 
   <input id="bmenug" type="checkbox" class="show" bind:this={showHamburgerElement} />
-  <label htmlFor="bmenug" class="burger pseudo button">&#8801;</label>
+  <label for="bmenug" class="burger pseudo button">&#8801;</label>
 
   <div class="menu">
     {#if isFeatureEnabled('tasks')}
-      <NavLink to="/notes" class="button pseudo">All notes</NavLink>
+      <a href="/notes" class="button pseudo" use:link use:active>All notes</a>
     {/if}
     {#if isFeatureEnabled('tasks')}
-      <NavLink to="/task-notes" class="button pseudo">Task notes</NavLink>
+      <a href="/task-notes" class="button pseudo" use:link use:active>Task notes</a>
     {/if}
     {#if isFeatureEnabled('tasks')}
-      <NavLink to="/tasks" class="button pseudo">Tasks</NavLink>
+      <a href="/tasks" class="button pseudo" use:link use:active>Tasks</a>
     {/if}
 
     <button
@@ -32,6 +32,8 @@
 </nav>
 
 <script>
+  import { link } from 'svelte-spa-router'
+  import active from 'svelte-spa-router/active'
   import Logo from './Logo.svelte';
   import Logout from './Logout.svelte';
   import SearchBox from './SearchBox.svelte';

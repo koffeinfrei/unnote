@@ -1,4 +1,4 @@
-<div class:hidden-sm={showList}>
+<div class:hidden-sm={!showList}>
   <SearchTerm {searchQuery} />
 
   {#if collection === 'task_notes'}

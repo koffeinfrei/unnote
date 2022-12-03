@@ -7,6 +7,7 @@
   import { isAuthenticated } from './stores';
   import Login from './Login.svelte';
   import NoteEdit from './NoteEdit.svelte';
+  import TaskEdit from './TaskEdit.svelte';
 
   const authenticate = async () => {
     if ($isAuthenticated) return true;
@@ -35,6 +36,15 @@
     '/notes/:id?': wrap({
       component: NoteEdit,
       props: { collection: 'notes' },
+      conditions: [authenticate]
+    }),
+    '/task-notes/:id?': wrap({
+      component: NoteEdit,
+      props: { collection: 'task_notes' },
+      conditions: [authenticate]
+    }),
+    '/tasks/:id?': wrap({
+      component: TaskEdit,
       conditions: [authenticate]
     }),
     '/': wrap({
