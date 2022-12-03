@@ -1,11 +1,11 @@
 <a href="/" class="brand">
-  {#if showSpinner}
-    <div class="logo">
+  <div class="logo">
+    {#if showSpinner}
       <Spinner />
-    </div>
-  {:else}
-    <LogoImage class="logo" />
-  {/if}
+    {:else}
+      <LogoImage />
+    {/if}
+  </div>
 </a>
 
 <script>
@@ -15,3 +15,9 @@
 
   export let showSpinner = false
 </script>
+
+<style lang="sass">
+  :global
+    svg
+      height: 100%
+</style>

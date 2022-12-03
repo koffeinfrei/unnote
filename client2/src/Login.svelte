@@ -1,39 +1,44 @@
-<Flash />
-<UserForm>
-  <form on:submit={submit}>
-    <Utf8 />
+<Navbar isLoggedIn={false} />
+<main>
+  <Flash />
+  <UserForm>
+    <form on:submit={submit}>
+      <Utf8 />
 
-    <div class="flex one">
-      <TextInput
-        type="email"
-        model="user"
-        attribute="email"
-        label="Email"
-        on:change={setValue} />
-
-      <TextInput
-        type="password"
-        model="user"
-        attribute="password"
-        label="Password"
-        on:change={setValue} />
-
-      {#if !alwaysRememberMe}
-        <Checkbox model="user" attribute="remember_me" label="Remember me"
+      <div class="flex one">
+        <TextInput
+          type="email"
+          model="user"
+          attribute="email"
+          label="Email"
           on:change={setValue} />
-      {/if}
-   </div>
 
-    <SubmitButton label="Log in" />
-  </form>
-</UserForm>
+        <TextInput
+          type="password"
+          model="user"
+          attribute="password"
+          label="Password"
+          on:change={setValue} />
+
+        {#if !alwaysRememberMe}
+          <Checkbox model="user" attribute="remember_me" label="Remember me"
+            on:change={setValue} />
+        {/if}
+     </div>
+
+      <SubmitButton label="Log in" />
+    </form>
+  </UserForm>
+</main>
 
 <script>
+  import { push } from 'svelte-spa-router';
   import { ajax } from './ajax';
   import { scrollToTop } from './scroll';
   import { show, clear } from './flash';
   import { isAuthenticated } from './stores';
   import Flash from './Flash.svelte';
+  import Navbar from './Navbar.svelte';
   import UserForm from './UserForm.svelte';
   import Utf8 from './form/Utf8.svelte';
   import TextInput from './form/TextInput.svelte';
@@ -55,6 +60,7 @@
     .then((data) => {
       clear('alert');
       $isAuthenticated = true
+      push('/notes')
     })
     .catch(() => {
       show('alert', 'Sorry, that did not work. ' +

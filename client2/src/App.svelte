@@ -8,28 +8,38 @@
   import Login from './Login.svelte';
   import NoteEdit from './NoteEdit.svelte';
 
+  const authenticate = async () => {
+    if ($isAuthenticated) return true;
+
+    try {
+      await ajax('/users/is_authenticated')
+      $isAuthenticated = true
+      return true
+    } catch (e) {
+      push('/login')
+      return false
+    }
+  }
+
   const routes = {
-    '/login': Login,
+    '/login': wrap({
+      component: Login,
+      conditions: [
+        async () => {
+          const isAuthenticated = await authenticate()
+          if (isAuthenticated) push('/notes')
+          return true
+        }
+      ]
+    }),
     '/notes/:id?': wrap({
       component: NoteEdit,
-      props: { collection: 'notes' }
+      props: { collection: 'notes' },
+      conditions: [authenticate]
     }),
     '/': wrap({
       asyncComponent: () => {},
       conditions: [() => push('/notes')]
     })
   }
-
-  const authenticate = () => {
-    ajax('/users/is_authenticated')
-    .then(() => {
-      $isAuthenticated = true
-    })
-    .catch(() => push('/login'));
-  }
-
-  $: if ($isAuthenticated === undefined) authenticate()
 </script>
-
-<style>
-</style>

@@ -1,5 +1,4 @@
 {#if note}
-<!-- <div> -->
   <Navbar
     isLoggedIn={true}
     on:searchEnter={handleSearchEnter}
@@ -45,7 +44,6 @@
     text='Are you sure you want to delete this note?'
     show={showDeleteDialog}
     on:confirm={handleDeleteDialogConfirmed} />
-<!-- </div> -->
 {/if}
 
 <script>

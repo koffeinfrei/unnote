@@ -45,14 +45,18 @@
   const handleEvent = (e) => {
     message = e.detail.message;
   }
-
-  // const show = (message) => {
-  //   const e = new CustomEvent(getEventName(), { detail: { message: message } });
-  //   document.dispatchEvent(e);
-  // }
-  //
-  // const clear = () => {
-  //   const e = new CustomEvent(getEventName(), { detail: { message: null } });
-  //   document.dispatchEvent(e);
-  // }
 </script>
+
+<style lang="sass">
+  @import './stylesheets/variables'
+
+  .card.warning
+    padding-right: $picnic-separation * 2
+    border-color: $picnic-warning
+    background: transparentize($picnic-warning, 0.9)
+
+  .card.success
+    padding-right: $picnic-separation * 2
+    border-color: $picnic-success
+    background: transparentize($picnic-success, 0.9)
+</style>
