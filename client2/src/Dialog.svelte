@@ -1,5 +1,5 @@
 <div class="modal">
-  <input id={id} type="checkbox" checked={show} onChange={() => {}} />
+  <input id={id} type="checkbox" checked={show} />
   <label htmlFor={id} class="overlay"></label>
   <article>
     <header>

@@ -53,6 +53,7 @@
   import { ajax } from './ajax';
   import { show } from './flash';
   import SyncStorage from './SyncStorage';
+  import { setEdit, setNew, setBrowserTitle } from './pushState';
   import Note from './Note';
   import EventHive from './EventHive';
   import AutoSave from './AutoSave';
@@ -112,21 +113,18 @@
   })
 
   const initStateFromNote = (fromNote) => {
-    note = Note.fromAttributes(fromNote)
-    // TODO
-    // new PushState(this.props.match, this.props.history).setBrowserTitle(note);
+    note = Note.fromAttributes(fromNote);
+    setBrowserTitle(note);
   }
 
   const initStateFromNoteId = (id) => {
-    // set new note as state, otherwise the state will be undefined
     showList = false
-    note = new Note()
 
     ajax(`/api/notes/${id}`)
       .then((data) => {
         note = Note.fromAttributes(data.note);
         showList = false
-        // new PushState(this.props.match, this.props.history).setBrowserTitle(note));
+        setBrowserTitle(note);
       })
       .catch(() => {
         show('alert',
@@ -141,16 +139,12 @@
 
     note = event.detail
     showList = false
-    // TODO
-    // const pushState = new PushState(this.props.match, this.props.history);
-    // pushState.setEdit(note);
-    // pushState.setBrowserTitle(note);
+
+    setEdit(note);
+    setBrowserTitle(note);
   }
 
   const handleDeleteNoteClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
     const clickedNote = e.detail
 
     const handler = (event) => {
@@ -166,9 +160,6 @@
   }
 
   const handleArchiveNoteClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
     const clickedNote = e.detail
 
     const handler = (event) => {
@@ -194,7 +185,7 @@
 
   const handleEditChange = (event) => {
     const updatedNote = event.detail
-    // new PushState(this.props.match, this.props.history).setEdit(note);
+    setEdit(note);
 
     autoSave.setChange(updatedNote);
   }
@@ -210,7 +201,7 @@
     }
 
     if (data.isSynced) {
-      // new PushState(this.props.match, this.props.history).setBrowserTitle(this.state.note);
+      setBrowserTitle(note);
     }
   }
 
@@ -228,9 +219,8 @@
     note = new Note()
     showList = false
     if (callback) callback()
-    // const pushState = new PushState(this.props.match, this.props.history);
-    // pushState.setNew();
-    // pushState.setBrowserTitle();
+    setNew();
+    setBrowserTitle();
   }
 
   const deleteNote = (affectedNote) => {

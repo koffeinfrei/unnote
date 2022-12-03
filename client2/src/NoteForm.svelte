@@ -28,7 +28,7 @@
 
   const dispatch = createEventDispatcher();
 
-  let shouldRerender = false
+  let shouldRerender = true
   let editor
   let formContainerElement
   let titleElement
@@ -100,6 +100,8 @@
 
   // gets called initially and when a note is switched
   afterUpdate(() => {
+    // don't rerender if the RTE content changes. the cursor jumps to the
+    // beginning of the content if we re-initialize the RTE content.
     if (shouldRerender) {
       editor.off('text-change');
       // reset the content before inserting the actual content.
@@ -128,13 +130,6 @@
       focusTitleFieldIfNewNote();
     }
   }
-
-  // TODO do we need this? where to put it?
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // don't rerender if the RTE content changes. the cursor jumps to the
-  //   // beginning of the content if we re-initialize the RTE content.
-  //   return this.shouldRerender;
-  // }
 </script>
 
 <style lang="sass">

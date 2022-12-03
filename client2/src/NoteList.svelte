@@ -31,10 +31,16 @@
           </div>
         </div>
         <div class="list-item-actions">
-          <button name="archive-note" class='icon' on:click={() => dispatch('archiveNote', note)}>
+          <button name="archive-note" class='icon' on:click={event => {
+                event.stopPropagation();
+                dispatch('archiveNote', note)
+              }}>
             <ArchiveIcon />
           </button>
-          <button name="delete-note" class='icon' on:click={() => dispatch('deleteNote', note)}>
+          <button name="delete-note" class='icon' on:click={event => {
+              event.stopPropagation();
+              dispatch('deleteNote', note)
+            }}>
             <DeleteIcon />
           </button>
         </div>
