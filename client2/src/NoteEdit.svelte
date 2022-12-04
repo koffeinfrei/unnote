@@ -47,20 +47,20 @@
 {/if}
 
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { ajax } from './ajax';
-  import { show } from './flash';
-  import SyncStorage from './SyncStorage';
-  import { setEdit, setNew, setBrowserTitle } from './pushState';
-  import Note from './Note';
-  import EventHive from './EventHive';
-  import AutoSave from './AutoSave';
-  import Flash from './Flash.svelte';
-  import NoteForm from './NoteForm.svelte';
-  import NoteList from './NoteList.svelte';
-  import Navbar from './Navbar.svelte';
-  import NoteActionBar from './NoteActionBar.svelte';
-  import Dialog from './Dialog.svelte';
+  import { onMount, onDestroy } from 'svelte'
+  import { ajax } from './ajax'
+  import { show } from './flash'
+  import SyncStorage from './SyncStorage'
+  import { setEdit, setNew, setBrowserTitle } from './pushState'
+  import Note from './Note'
+  import EventHive from './EventHive'
+  import AutoSave from './AutoSave'
+  import Flash from './Flash.svelte'
+  import NoteForm from './NoteForm.svelte'
+  import NoteList from './NoteList.svelte'
+  import Navbar from './Navbar.svelte'
+  import NoteActionBar from './NoteActionBar.svelte'
+  import Dialog from './Dialog.svelte'
 
   export let note
   export let params = {}
@@ -80,39 +80,39 @@
 
   onMount(() => {
     if (note) {
-      initStateFromNote(note);
+      initStateFromNote(note)
     }
     else if (params.id) {
-      initStateFromNoteId(params.id);
+      initStateFromNoteId(params.id)
     }
     else {
       note = new Note()
       showList = true
     }
 
-    autoSave = new AutoSave(handleServerSync);
-    autoSave.startPolling();
+    autoSave = new AutoSave(handleServerSync)
+    autoSave.startPolling()
 
     noteCreateSubscription = EventHive.subscribe('note.create', (data) => {
       setNewNote(() => {
-        EventHive.publish('note.update', data);
-      });
-    });
+        EventHive.publish('note.update', data)
+      })
+    })
 
     noteNewSubscription = EventHive.subscribe('note.new', (data) => {
-      setNewNote();
-    });
+      setNewNote()
+    })
   })
 
   onDestroy(() => {
-    noteCreateSubscription.remove();
-    noteNewSubscription.remove();
-    autoSave.stopPolling();
+    noteCreateSubscription.remove()
+    noteNewSubscription.remove()
+    autoSave.stopPolling()
   })
 
   const initStateFromNote = (fromNote) => {
-    note = Note.fromAttributes(fromNote);
-    setBrowserTitle(note);
+    note = Note.fromAttributes(fromNote)
+    setBrowserTitle(note)
   }
 
   const initStateFromNoteId = (id) => {
@@ -120,26 +120,26 @@
 
     ajax(`/api/notes/${id}`)
       .then((data) => {
-        note = Note.fromAttributes(data.note);
+        note = Note.fromAttributes(data.note)
         showList = false
-        setBrowserTitle(note);
+        setBrowserTitle(note)
       })
       .catch(() => {
         show('alert',
           'While trying to load the note the internet broke down (or something ' +
             'else failed, maybe the note could not be found)'
-        );
+        )
       })
   }
 
   const handleNoteClick = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     note = event.detail
     showList = false
 
-    setEdit(note);
-    setBrowserTitle(note);
+    setEdit(note)
+    setBrowserTitle(note)
   }
 
   const handleDeleteNoteClick = (e) => {
@@ -150,9 +150,9 @@
 
       if (event.detail) {
         isSynced = false
-        deleteNote(clickedNote);
+        deleteNote(clickedNote)
       }
-    };
+    }
     showDeleteDialog = true
     handleDeleteDialogConfirmed = handler
   }
@@ -164,28 +164,28 @@
       showArchiveDialog = false
 
       if (event.detail) {
-        clickedNote.setArchived();
+        clickedNote.setArchived()
         handleEditChange(e)
-        setNewNote();
+        setNewNote()
       }
-    };
+    }
     showArchiveDialog = true
     handleArchiveDialogConfirmed = handler
   }
 
   const handleNewNoteClicked = () => {
-    setNewNote();
+    setNewNote()
   }
 
   const handleShowListClicked = () => {
-    setNewNote(() => showList = true);
+    setNewNote(() => showList = true)
   }
 
   const handleEditChange = (event) => {
     const updatedNote = event.detail
-    setEdit(note);
+    setEdit(note)
 
-    autoSave.setChange(updatedNote);
+    autoSave.setChange(updatedNote)
   }
 
   const handleServerSync = (data) => {
@@ -195,11 +195,11 @@
     // for the conflict detection to work
     // (only do this if the current note is the synced note)
     if (data.note && note.uid === data.note.uid) {
-      note.serverUpdatedAt = data.note.serverUpdatedAt;
+      note.serverUpdatedAt = data.note.serverUpdatedAt
     }
 
     if (data.isSynced) {
-      setBrowserTitle(note);
+      setBrowserTitle(note)
     }
   }
 
@@ -217,29 +217,29 @@
     note = new Note()
     showList = false
     if (callback) callback()
-    setNew();
-    setBrowserTitle();
+    setNew()
+    setBrowserTitle()
   }
 
   const deleteNote = (affectedNote) => {
     ajax(`/api/notes/${affectedNote.uid}`, 'DELETE')
       .then((data) => {
-        SyncStorage.remove(affectedNote);
+        SyncStorage.remove(affectedNote)
 
         if (note.uid === affectedNote.uid) {
-          setNewNote();
+          setNewNote()
         }
 
         isSynced = true
         listNeedsUpdate = true
       })
       .catch((error) => {
-        let message = 'Oh my, the note could not be deleted.';
+        let message = 'Oh my, the note could not be deleted.'
         if (!window.navigator.onLine) {
           message += "<br>Please check your internet connection (Apologies, deleting in offline mode is not yet suppported)."
         }
-        show('alert', message);
-        console.error('note.uid: ', note.uid, 'error: ', error.toString());
+        show('alert', message)
+        console.error('note.uid: ', note.uid, 'error: ', error.toString())
 
         isSynced = true
         listNeedsUpdate = false

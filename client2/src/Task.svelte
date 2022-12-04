@@ -8,18 +8,18 @@
 </label>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte'
 
   export let note
   export let task
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
-  const handleTaskChecked = (e) => {
+  const handleTaskChecked = () => {
     dispatch('checked', {
       note: note,
       task: { ...task, done: !task.done }
-    });
+    })
   }
 </script>
 

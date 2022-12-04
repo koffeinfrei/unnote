@@ -32,39 +32,39 @@
 </main>
 
 <script>
-  import { push } from 'svelte-spa-router';
-  import { ajax } from './ajax';
-  import { scrollToTop } from './scroll';
-  import { show, clear } from './flash';
-  import { isAuthenticated } from './stores';
-  import Flash from './Flash.svelte';
-  import Navbar from './Navbar.svelte';
-  import UserForm from './UserForm.svelte';
-  import Utf8 from './form/Utf8.svelte';
-  import TextInput from './form/TextInput.svelte';
-  import Checkbox from './form/Checkbox.svelte';
-  import SubmitButton from './form/SubmitButton.svelte';
+  import { push } from 'svelte-spa-router'
+  import { ajax } from './ajax'
+  import { scrollToTop } from './scroll'
+  import { show, clear } from './flash'
+  import { isAuthenticated } from './stores'
+  import Flash from './Flash.svelte'
+  import Navbar from './Navbar.svelte'
+  import UserForm from './UserForm.svelte'
+  import Utf8 from './form/Utf8.svelte'
+  import TextInput from './form/TextInput.svelte'
+  import Checkbox from './form/Checkbox.svelte'
+  import SubmitButton from './form/SubmitButton.svelte'
 
   export let alwaysRememberMe
 
   let values
 
   const setValue = event => {
-    values = { ...values, ...event.detail };
+    values = { ...values, ...event.detail }
   }
 
   const submit = event => {
-    event.preventDefault();
+    event.preventDefault()
 
     ajax('/users/sign_in', 'POST', values)
       .then((data) => {
-        clear('alert');
+        clear('alert')
         $isAuthenticated = true
         push('/notes')
       })
       .catch(() => {
         show('alert', 'Sorry, that did not work. Did you enter a wrong username or a wrong password?')
       })
-      .finally(scrollToTop);
+      .finally(scrollToTop)
   }
 </script>

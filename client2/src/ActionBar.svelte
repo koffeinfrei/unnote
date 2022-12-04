@@ -11,13 +11,13 @@
 </div>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import SaveStateLabel from './SaveStateLabel.svelte';
-  import NewIcon from './icons/material/add-24px.svg.svelte';
+  import { createEventDispatcher } from 'svelte'
+  import SaveStateLabel from './SaveStateLabel.svelte'
+  import NewIcon from './icons/material/add-24px.svg.svelte'
 
   export let isSynced
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 </script>
 
 <style lang="sass">

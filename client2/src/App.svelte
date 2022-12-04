@@ -1,18 +1,18 @@
 <Router {routes} />
 
 <script>
-  import Router, { push } from 'svelte-spa-router';
-  import {wrap} from 'svelte-spa-router/wrap';
-  import { ajax } from './ajax';
-  import { isAuthenticated } from './stores';
-  import Login from './Login.svelte';
-  import Register from './Register.svelte';
-  import NoteEdit from './NoteEdit.svelte';
-  import TaskEdit from './TaskEdit.svelte';
+  import Router, { push } from 'svelte-spa-router'
+  import {wrap} from 'svelte-spa-router/wrap'
+  import { ajax } from './ajax'
+  import { isAuthenticated } from './stores'
+  import Login from './Login.svelte'
+  import Register from './Register.svelte'
+  import NoteEdit from './NoteEdit.svelte'
+  import TaskEdit from './TaskEdit.svelte'
 
   const authenticate = async () => {
-    if ($isAuthenticated === true) return true;
-    if ($isAuthenticated === false) return false;
+    if ($isAuthenticated === true) return true
+    if ($isAuthenticated === false) return false
 
     try {
       await ajax('/users/is_authenticated')

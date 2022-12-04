@@ -19,45 +19,45 @@
 </div>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte'
   import Mousetrap from 'mousetrap'
 
   export let title
   export let text
   export let show
 
-  const id = Math.random().toString(16).slice(-12);
+  const id = Math.random().toString(16).slice(-12)
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
   const handleOkButtonClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
 
-    dispatch('confirm', true);
+    dispatch('confirm', true)
   }
 
   const handleCancelButtonClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault()
+    e.stopPropagation()
 
-    dispatch('confirm', false);
+    dispatch('confirm', false)
   }
 
   $: {
     if (show) {
       Mousetrap.bind('enter', (e) => {
-        e.preventDefault();
-        dispatch('confirm', true);
-      });
+        e.preventDefault()
+        dispatch('confirm', true)
+      })
 
       Mousetrap.bind('esc', () => {
-        dispatch('confirm', false);
-      });
+        dispatch('confirm', false)
+      })
     }
     else {
-      Mousetrap.unbind('enter');
-      Mousetrap.unbind('esc');
+      Mousetrap.unbind('enter')
+      Mousetrap.unbind('esc')
     }
   }
 </script>

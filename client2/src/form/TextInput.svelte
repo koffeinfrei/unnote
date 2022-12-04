@@ -11,7 +11,7 @@
 </div>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte'
   import { idValue, nameValue } from '../form'
 
   export let model
@@ -19,5 +19,5 @@
   export let type
   export let label
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 </script>

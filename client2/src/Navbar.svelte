@@ -34,18 +34,18 @@
 <script>
   import { link } from 'svelte-spa-router'
   import active from 'svelte-spa-router/active'
-  import Logo from './Logo.svelte';
-  import Logout from './Logout.svelte';
-  import SearchBox from './SearchBox.svelte';
-  import { isFeatureEnabled } from './feature';
-  import CloseIcon from './icons/material/close-24px.svg.svelte';
+  import Logo from './Logo.svelte'
+  import Logout from './Logout.svelte'
+  import SearchBox from './SearchBox.svelte'
+  import { isFeatureEnabled } from './feature'
+  import CloseIcon from './icons/material/close-24px.svg.svelte'
 
   export let isLoggedIn
 
   let showHamburgerElement
 
   const handleCloseHamburgerClicked = () => {
-    showHamburgerElement.checked = false;
+    showHamburgerElement.checked = false
   }
 </script>
 

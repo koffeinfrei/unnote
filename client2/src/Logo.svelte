@@ -9,9 +9,9 @@
 </a>
 
 <script>
-  import Spinner from './Spinner.svelte';
-  import EventHive from './EventHive';
-  import LogoImage from './images/logo.svg.svelte';
+  import Spinner from './Spinner.svelte'
+  import EventHive from './EventHive'
+  import LogoImage from './images/logo.svg.svelte'
 
   export let showSpinner = false
 </script>

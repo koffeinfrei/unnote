@@ -7,17 +7,17 @@
 {/if}
 
 <script>
-  import defaultNotePicture from './icons/material/short_text-24px.svg';
+  import defaultNotePicture from './icons/material/short_text-24px.svg'
 
   export let note
 
   const getPreviewImageUrl = (note) => {
-    var match = note.content.match(/<img.*? src=['"]([^'"]+)['"].*?>/);
+    var match = note.content.match(/<img.*? src=['"]([^'"]+)['"].*?>/)
     if (match) {
-      return match[1];
+      return match[1]
     }
     else {
-      return null;
+      return null
     }
   }
 </script>

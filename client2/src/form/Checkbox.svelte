@@ -9,12 +9,12 @@
 </label>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte'
   import { idValue, nameValue } from '../form'
 
   export let model
   export let attribute
   export let label
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 </script>

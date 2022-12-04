@@ -11,18 +11,18 @@
 {/if}
 
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import MoreIcon from './icons/material/expand_more-24px.svg.svelte';
-  import Spinner from './Spinner.svelte';
+  import { createEventDispatcher } from 'svelte'
+  import MoreIcon from './icons/material/expand_more-24px.svg.svelte'
+  import Spinner from './Spinner.svelte'
 
   export let showSpinner
   export let showLoadMoreButton
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
   const handleLoadMoreClick = (e) => {
-    e.preventDefault();
-    e.currentTarget.blur();
+    e.preventDefault()
+    e.currentTarget.blur()
 
     dispatch('loadMore')
   }

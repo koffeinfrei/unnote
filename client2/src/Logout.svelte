@@ -4,21 +4,21 @@
 </button>
 
 <script>
-  import { ajax } from './ajax';
-  import { show } from './flash';
-  import { scrollToTop } from './scroll';
-  import LogoutIcon from './icons/material/logout-24px.svg.svelte';
+  import { ajax } from './ajax'
+  import { show } from './flash'
+  import { scrollToTop } from './scroll'
+  import LogoutIcon from './icons/material/logout-24px.svg.svelte'
 
   const handleClicked = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     ajax('/users/sign_out', 'DELETE')
       .then(() => {
-        window.location.reload();
+        window.location.reload()
       })
       .catch(() => {
         show('alert', 'Apologies, logging out did not happen.')
       })
-      .finally(scrollToTop);
+      .finally(scrollToTop)
   }
 </script>

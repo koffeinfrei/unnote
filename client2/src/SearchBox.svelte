@@ -25,54 +25,50 @@
 </div>
 
 <script>
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-  import { debounce } from 'throttle-debounce';
-  import EventHive from './EventHive';
-  import SearchIcon from './icons/material/search_black_24dp.svg.svelte';
+  import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+  import { debounce } from 'throttle-debounce'
+  import EventHive from './EventHive'
+  import SearchIcon from './icons/material/search_black_24dp.svg.svelte'
 
   export let value = ''
   export let isActive = false
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
   let searchInput
   let searchSubscription
 
-  onMount(() => {
-    subscribeSearch();
-  })
-
-  onDestroy(() => {
-    unsubscribeSearch();
-  })
-
   // TODO check if ok
   const handleSearchEnter = (e) => {
-    value = e.target.value;
+    value = e.target.value
     dispatch('searchEnter', value)
-    // handleSearchEnterDebounced();
+    // handleSearchEnterDebounced()
   }
-  const handleSearchEnterDebounced = debounce(500, handleSearchEnter);
+  const handleSearchEnterDebounced = debounce(500, handleSearchEnter)
 
   // handleSearchEnterDebounced() {
-  //   this.props.handleSearchEnter(this.state.value);
+  //   this.props.handleSearchEnter(this.state.value)
   // }
 
   const handleSearchCleared = (e) => {
-    e.target.blur();
-    value = '';
-    dispatch('searchClear');
+    e.target.blur()
+    value = ''
+    dispatch('searchClear')
   }
 
   const subscribeSearch = () => {
     searchSubscription = EventHive.subscribe('search.focus', () => {
-      searchInput.focus();
-    });
+      searchInput.focus()
+    })
   }
 
   const unsubscribeSearch = () => {
-    searchSubscription.remove();
+    searchSubscription.remove()
   }
+
+  onMount(subscribeSearch)
+
+  onDestroy(unsubscribeSearch)
 </script>
 
 <style lang="sass">

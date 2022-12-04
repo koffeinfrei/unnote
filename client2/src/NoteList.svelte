@@ -32,13 +32,13 @@
         </div>
         <div class="list-item-actions">
           <button name="archive-note" class='icon' on:click={event => {
-                event.stopPropagation();
+                event.stopPropagation()
                 dispatch('archiveNote', note)
               }}>
             <ArchiveIcon />
           </button>
           <button name="delete-note" class='icon' on:click={event => {
-              event.stopPropagation();
+              event.stopPropagation()
               dispatch('deleteNote', note)
             }}>
             <DeleteIcon />
@@ -55,17 +55,17 @@
 </div>
 
 <script>
-  import { createEventDispatcher, onMount, beforeUpdate } from 'svelte';
-  import humanDate from 'human-date';
-  import { ajaxWithAbort } from './ajax';
-  import { show } from './flash';
-  import Note from './Note';
-  import AlertFlash from './AlertFlash.svelte';
-  import SearchTerm from './SearchTerm.svelte';
-  import LoadMoreButton from './LoadMoreButton.svelte';
-  import NotePicture from './NotePicture.svelte';
-  import ArchiveIcon from './icons/material/archive-24px.svg.svelte';
-  import DeleteIcon from './icons/material/delete-24px.svg.svelte';
+  import { createEventDispatcher, onMount, beforeUpdate } from 'svelte'
+  import humanDate from 'human-date'
+  import { ajaxWithAbort } from './ajax'
+  import { show } from './flash'
+  import Note from './Note'
+  import AlertFlash from './AlertFlash.svelte'
+  import SearchTerm from './SearchTerm.svelte'
+  import LoadMoreButton from './LoadMoreButton.svelte'
+  import NotePicture from './NotePicture.svelte'
+  import ArchiveIcon from './icons/material/archive-24px.svg.svelte'
+  import DeleteIcon from './icons/material/delete-24px.svg.svelte'
 
   export let activeNoteUid
   export let isSynced
@@ -81,48 +81,48 @@
   let updateListRequest
   let filter
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
   // TODO: check if this is the same as before
   $: {
     if (isSynced && listNeedsUpdate !== false) {
-      updateList();
+      updateList()
     }
 
     if (searchQuery !== undefined) {
-      updateList();
+      updateList()
     }
 
     // collection changed
     if (collection !== undefined) {
-      updateList();
+      updateList()
     }
   }
   // onMount(() => {
   //   if (listNeedsUpdate) {
-  //     this.listNeedsUpdate = false;
-  //     this.updateList();
+  //     this.listNeedsUpdate = false
+  //     this.updateList()
   //   }
   // })
 
   // beforeUpdate((nextProps) => {
   //   if (!isSynced && nextProps.isSynced && nextProps.listNeedsUpdate !== false) {
-  //     this.listNeedsUpdate = true;
+  //     this.listNeedsUpdate = true
   //   }
 
     // if (this.state.searchQuery !== nextProps.searchQuery) {
-    //   this.listNeedsUpdate = true;
+    //   this.listNeedsUpdate = true
     // }
 
     // collection changed
     // if (this.props.collection !== nextProps.collection) {
-    //   this.listNeedsUpdate = true;
+    //   this.listNeedsUpdate = true
     // }
 
     // this.setState( {
     //   isSynced: nextProps.isSynced,
     //   searchQuery: nextProps.searchQuery
-    // });
+    // })
   // })
 
   const handleNoteClick = (note, e) => {
@@ -143,40 +143,40 @@
 
   const updateList = () => {
     if (updateListRequest) {
-      updateListRequest.controller.abort();
+      updateListRequest.controller.abort()
     }
 
     const params = {
       search: searchQuery,
       page: currentPage
-    };
-
-    if (filter) {
-      params['filters[]'] = filter;
     }
 
-    updateListRequest = ajaxWithAbort(`/api/${collection}`, 'GET', params);
+    if (filter) {
+      params['filters[]'] = filter
+    }
 
-    executeUpdateListRequest();
+    updateListRequest = ajaxWithAbort(`/api/${collection}`, 'GET', params)
+
+    executeUpdateListRequest()
   }
 
   const executeUpdateListRequest = () => {
     updateListRequest.promise
       .then((data) => {
         notes = data.notes.map((note) => {
-          return Note.fromAttributes(note);
-        });
+          return Note.fromAttributes(note)
+        })
 
         currentPage = data.current_page
         hasMorePages = data.has_more_pages
         isLoadingMorePages = false
       })
       .catch((error) => {
-        isLoadingMorePages = false;
+        isLoadingMorePages = false
 
-        show('alert', 'Watch out, the list is not up to date.');
-        console.error('error: ', error.toString());
-      });
+        show('alert', 'Watch out, the list is not up to date.')
+        console.error('error: ', error.toString())
+      })
   }
 </script>
 

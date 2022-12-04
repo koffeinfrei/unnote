@@ -19,5 +19,5 @@
 </div>
 
 <script>
-  import UserLinks from './UserLinks.svelte';
+  import UserLinks from './UserLinks.svelte'
 </script>

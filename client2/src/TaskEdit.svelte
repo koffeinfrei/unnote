@@ -41,15 +41,15 @@
 <script>
   import { onMount, onDestroy } from 'svelte'
   import { push } from 'svelte-spa-router'
-  import { ajax } from './ajax';
-  import AutoSave from './AutoSave';
-  import Note from './Note';
-  import Navbar from './Navbar.svelte';
-  import ActionBar from './ActionBar.svelte';
-  import Flash from './Flash.svelte';
-  import TaskGroup from './TaskGroup.svelte';
-  import SearchTerm from './SearchTerm.svelte';
-  import LoadMoreButton from './LoadMoreButton.svelte';
+  import { ajax } from './ajax'
+  import AutoSave from './AutoSave'
+  import Note from './Note'
+  import Navbar from './Navbar.svelte'
+  import ActionBar from './ActionBar.svelte'
+  import Flash from './Flash.svelte'
+  import TaskGroup from './TaskGroup.svelte'
+  import SearchTerm from './SearchTerm.svelte'
+  import LoadMoreButton from './LoadMoreButton.svelte'
 
   let notes = []
   let currentPage = 1
@@ -65,32 +65,32 @@
 
     // update the task so the change is immediately rendered, otherwise the UI
     // updates only after the next auto poll cycle is done.
-    const associatedNote= notes.find(collectionNote => collectionNote.uid === note.uid);
-    const taskIndex = associatedNote.tasks.findIndex(collectionTask => collectionTask.id === task.id);
-    associatedNote.tasks[taskIndex] = task;
+    const associatedNote= notes.find(collectionNote => collectionNote.uid === note.uid)
+    const taskIndex = associatedNote.tasks.findIndex(collectionTask => collectionTask.id === task.id)
+    associatedNote.tasks[taskIndex] = task
 
     // create a temporary html element so we can easily query the task element
     // and toggle the checked class
-    const noteContentElement = document.createElement('div');
-    noteContentElement.innerHTML = note.content;
-    const taskElement = noteContentElement.querySelector(`[data-task-id="${task.id}"]`);
-    taskElement.classList.toggle('checked');
+    const noteContentElement = document.createElement('div')
+    noteContentElement.innerHTML = note.content
+    const taskElement = noteContentElement.querySelector(`[data-task-id="${task.id}"]`)
+    taskElement.classList.toggle('checked')
 
-    associatedNote.content = noteContentElement.innerHTML;
+    associatedNote.content = noteContentElement.innerHTML
 
-    autoSave.setChange(Note.fromAttributes(associatedNote));
+    autoSave.setChange(Note.fromAttributes(associatedNote))
   }
 
   const handleServerSync = (data) => {
     if (data.isSynced) {
-      fetchTasks();
+      fetchTasks()
     }
     isSynced = data.isSynced
   }
 
   const handleSearchEnter = (value) => {
     searchQuery = value
-    fetchTasks();
+    fetchTasks()
   }
 
   const handleSearchCleared = () => {
@@ -114,10 +114,10 @@
     const params = {
       search: searchQuery,
       page: currentPage
-    };
+    }
 
     if (filter) {
-      params['filters[]'] = filter;
+      params['filters[]'] = filter
     }
 
     ajax('/api/task_notes', 'GET', params)
@@ -127,17 +127,17 @@
         isLoadingMorePages = false
       })
       .catch((error) => {
-        show('alert', 'Fetching the tasks failed.');
-        console.error('error: ', error.toString());
-      });
+        show('alert', 'Fetching the tasks failed.')
+        console.error('error: ', error.toString())
+      })
   }
 
   onMount(() => {
-    autoSave = new AutoSave(handleServerSync);
-    autoSave.startPolling();
+    autoSave = new AutoSave(handleServerSync)
+    autoSave.startPolling()
   })
 
   onDestroy(() => {
-    autoSave.stopPolling();
+    autoSave.stopPolling()
   })
 </script>

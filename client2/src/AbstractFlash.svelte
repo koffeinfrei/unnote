@@ -16,34 +16,34 @@
 {/if}
 
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { getEventName } from './flash';
+  import { onMount, onDestroy } from 'svelte'
+  import { getEventName } from './flash'
 
   export let name
   export let addtionalCssClass
   export let message
 
   const getCssClass = () => {
-    var cssClasses = ['card', addtionalCssClass];
+    var cssClasses = ['card', addtionalCssClass]
 
-    return cssClasses.join(' ');
+    return cssClasses.join(' ')
   }
 
   const handleClose = () => {
-    message = null;
+    message = null
   }
 
   onMount(() => {
     // listen on global event so we can use `NoticeFlash.show('hello')`
-    document.addEventListener(getEventName(name), handleEvent, false);
+    document.addEventListener(getEventName(name), handleEvent, false)
   })
 
   onDestroy(() => {
-    document.removeEventListener(getEventName(name), handleEvent, false);
+    document.removeEventListener(getEventName(name), handleEvent, false)
   })
 
   const handleEvent = (e) => {
-    message = e.detail.message;
+    message = e.detail.message
   }
 </script>
 
