@@ -6,20 +6,28 @@
   import { ajax } from './ajax';
   import { isAuthenticated } from './stores';
   import Login from './Login.svelte';
+  import Register from './Register.svelte';
   import NoteEdit from './NoteEdit.svelte';
   import TaskEdit from './TaskEdit.svelte';
 
   const authenticate = async () => {
-    if ($isAuthenticated) return true;
+    if ($isAuthenticated === true) return true;
+    if ($isAuthenticated === false) return false;
 
     try {
       await ajax('/users/is_authenticated')
       $isAuthenticated = true
       return true
     } catch (e) {
-      push('/login')
+      $isAuthenticated = false
       return false
     }
+  }
+
+  const authenticateOrRedirect = async () => {
+    const isAuthenticated = await authenticate()
+    if (!isAuthenticated) push('/login')
+    return true
   }
 
   const routes = {
@@ -33,19 +41,29 @@
         }
       ]
     }),
+    '/register': wrap({
+      component: Register,
+      conditions: [
+        async () => {
+          const isAuthenticated = await authenticate()
+          if (isAuthenticated) push('/notes')
+          return true
+        }
+      ]
+    }),
     '/notes/:id?': wrap({
       component: NoteEdit,
       props: { collection: 'notes' },
-      conditions: [authenticate]
+      conditions: [authenticateOrRedirect]
     }),
     '/task-notes/:id?': wrap({
       component: NoteEdit,
       props: { collection: 'task_notes' },
-      conditions: [authenticate]
+      conditions: [authenticateOrRedirect]
     }),
     '/tasks/:id?': wrap({
       component: TaskEdit,
-      conditions: [authenticate]
+      conditions: [authenticateOrRedirect]
     }),
     '/': wrap({
       asyncComponent: () => {},

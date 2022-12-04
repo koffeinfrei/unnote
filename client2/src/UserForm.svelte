@@ -2,10 +2,10 @@
   <div class="hidden-sm"></div>
 
   <div class="full third-1000">
-    {#if intro}
+    {#if $$slots.intro}
       <div class="card">
         <footer>
-          {intro}
+          <slot name="intro"></slot>
         </footer>
       </div>
     {/if}
@@ -20,6 +20,4 @@
 
 <script>
   import UserLinks from './UserLinks.svelte';
-
-  export let intro
 </script>
