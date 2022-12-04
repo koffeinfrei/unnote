@@ -1,17 +1,17 @@
 <div class="modal">
   <input id={id} type="checkbox" checked={show} />
-  <label htmlFor={id} class="overlay"></label>
+  <label for={id} class="overlay"></label>
   <article>
     <header>
       <h3>{title}</h3>
-      <label htmlFor={id} class="close" on:click={handleCancelButtonClick}>&times;</label>
+      <label for={id} class="close" on:click={handleCancelButtonClick}>&times;</label>
     </header>
     <section class="content">
       {@html text}
     </section>
     <footer>
       <button class="button" on:click={handleOkButtonClick}>Ok</button>
-      <label htmlFor={id} class="button dangerous" on:click={handleCancelButtonClick}>
+      <label for={id} class="button dangerous" on:click={handleCancelButtonClick}>
         Cancel
       </label>
     </footer>
