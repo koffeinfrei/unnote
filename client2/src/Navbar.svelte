@@ -62,7 +62,7 @@
   // make sure that the `.icon` and `.icon-big` defintions from App.sass take
   // precedence over picnic's more specific selector
   nav .burger ~ .menu > *
-    &.icon, &.icon-big
+    &.icon
       width: auto
 
   nav
