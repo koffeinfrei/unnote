@@ -2,7 +2,7 @@
   <input
     type="checkbox"
     checked={task.done}
-    onChange={handleTaskChecked} />
+    on:change={handleTaskChecked} />
 
   <span class="checkable">{task.title}</span>
 </label>

@@ -26,8 +26,7 @@
 
       {#each notes as note}
         <TaskGroup
-          key={note.uid}
-          note={note}
+          {note}
           on:checked={handleTaskChecked} />
       {/each}
 
