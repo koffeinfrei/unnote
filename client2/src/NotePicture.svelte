@@ -25,7 +25,6 @@
 <style lang="sass">
   @import './stylesheets/variables'
 
-  /* TODO extract to variables (same as in NoteList */
   $picture-size: 2.5em
 
   .list-item-picture

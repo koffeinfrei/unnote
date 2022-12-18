@@ -183,8 +183,6 @@
 <style lang="sass">
   @import './stylesheets/variables'
 
-  $picture-size: 2.5em
-
   .card.list-item
     display: flex
     align-items: center
