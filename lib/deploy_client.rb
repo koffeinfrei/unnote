@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DeployClient
-  BUILD_DIRECTORY = 'client/build'
+  BUILD_DIRECTORY = 'client2/build'
   PUBLIC_DIRECTORY = 'public'
   MOBILE_DIRECTORY = '../mykonote-app/www/'
 
@@ -26,10 +26,10 @@ class DeployClient
   end
 
   def build
-    success = system('cd client && npm run build')
+    success = system('cd client2 && npm run build')
     return false unless success
 
-    @build_files_from_build = Dir['client/build/*']
+    @build_files_from_build = Dir['client2/dist/*']
   end
 
   def deploy(directory)
@@ -42,7 +42,7 @@ class DeployClient
     files =
       build_files_from_manifest(directory) +
       build_files_from_build.map do |file|
-        file.sub(%r{^client/build/}, "#{directory}/")
+        file.sub(%r{^client2/dist/}, "#{directory}/")
       end
 
     files.each do |file|
