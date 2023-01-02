@@ -49,6 +49,8 @@ jobs:
           node-version-file: '.nvmrc'
 
       - uses: browser-actions/setup-geckodriver@latest
+        with:
+          geckodriver-version: 0.32.0
 
       - name: Run RSpec
         run: |
