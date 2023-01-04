@@ -33,7 +33,7 @@
   const authenticateOrRedirect = async () => {
     const isAuthenticated = await authenticate()
     if (!isAuthenticated) push('/login')
-    return true
+    return isAuthenticated
   }
 
   const routes = {
