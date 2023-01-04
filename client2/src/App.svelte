@@ -1,14 +1,20 @@
-<Router {routes} />
+<Navbar isLoggedIn={$isAuthenticated} />
+<main>
+  <Flash />
+  <Router {routes} />
+</main>
 
 <script>
   import Router, { push } from 'svelte-spa-router'
-  import {wrap} from 'svelte-spa-router/wrap'
+  import { wrap } from 'svelte-spa-router/wrap'
   import { ajax } from './ajax'
   import { isAuthenticated } from './stores'
   import Login from './Login.svelte'
   import Register from './Register.svelte'
   import NoteEdit from './NoteEdit.svelte'
   import TaskEdit from './TaskEdit.svelte'
+  import Flash from './Flash.svelte'
+  import Navbar from './Navbar.svelte'
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true

@@ -1,37 +1,28 @@
 {#if note}
-  <Navbar
-    isLoggedIn={true}
-    on:searchEnter={handleSearchEnter}
-    on:searchCleared={handleSearchCleared} />
-
-  <main>
-    <Flash />
-    <NoteActionBar
-      {showList}
-      {isSynced}
-      on:showListClicked={handleShowListClicked}
-      on:newClicked={handleNewNoteClicked} />
-    <div class="flex one two-900">
-      <div class="full third-900 fourth-1200">
-        <NoteList
-          activeNoteUid={note.uid}
-          {isSynced}
-          {showList}
-          {searchQuery}
-          {listNeedsUpdate}
-          {collection}
-          on:noteClick={handleNoteClick}
-          on:deleteNote={handleDeleteNoteClick}
-          on:archiveNote={handleArchiveNoteClick} />
-      </div>
-      <div class="full two-third-900 three-fourth-1200 padding-left-xl">
-        <NoteForm
-          {note}
-          on:change={handleEditChange}
-          showForm={!showList} />
-      </div>
+  <NoteActionBar
+    {showList}
+    {isSynced}
+    on:showListClicked={handleShowListClicked}
+    on:newClicked={handleNewNoteClicked} />
+  <div class="flex one two-900">
+    <div class="full third-900 fourth-1200">
+      <NoteList
+        activeNoteUid={note.uid}
+        {isSynced}
+        {showList}
+        {listNeedsUpdate}
+        {collection}
+        on:noteClick={handleNoteClick}
+        on:deleteNote={handleDeleteNoteClick}
+        on:archiveNote={handleArchiveNoteClick} />
     </div>
-  </main>
+    <div class="full two-third-900 three-fourth-1200 padding-left-xl">
+      <NoteForm
+        {note}
+        on:change={handleEditChange}
+        showForm={!showList} />
+    </div>
+  </div>
 
   <Dialog
     title='Archive'
@@ -52,13 +43,13 @@
   import { show } from './flash'
   import SyncStorage from './SyncStorage'
   import { setEdit, setNew, setBrowserTitle } from './pushState'
+  import { searchTerm } from './stores'
   import Note from './Note'
   import EventHive from './EventHive'
   import AutoSave from './AutoSave'
   import Flash from './Flash.svelte'
   import NoteForm from './NoteForm.svelte'
   import NoteList from './NoteList.svelte'
-  import Navbar from './Navbar.svelte'
   import NoteActionBar from './NoteActionBar.svelte'
   import Dialog from './Dialog.svelte'
 
@@ -70,9 +61,10 @@
   let autoSave
   let isSynced
   let listNeedsUpdate
-  let searchQuery
   let noteCreateSubscription
   let noteNewSubscription
+  let searchEnteredSubscription
+  let searchClearedSubscription
   let showDeleteDialog
   let handleDeleteDialogConfirmed
   let showArchiveDialog
@@ -109,6 +101,8 @@
     noteNewSubscription.remove()
     autoSave.stopPolling()
   })
+
+  $: if ($searchTerm !== undefined) showList = true
 
   const initStateFromNote = (fromNote) => {
     note = Note.fromAttributes(fromNote)
@@ -201,16 +195,6 @@
     if (data.isSynced) {
       setBrowserTitle(note)
     }
-  }
-
-  const handleSearchEnter = (event) => {
-    searchQuery = event.detail
-    // show the list in case a note was shown
-    showList = true
-  }
-
-  const handleSearchCleared = () => {
-    searchQuery = ''
   }
 
   const setNewNote = (callback) => {

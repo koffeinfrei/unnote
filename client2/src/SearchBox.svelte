@@ -3,21 +3,21 @@
     type="text"
     class="search-input"
     name="search"
-    {value}
+    value={$searchTerm || ''}
     on:keyup={handleSearchEnterDebounced}
     on:focus={() => isActive = true}
     on:blur={() => isActive = false}
     bind:this={searchInput}
     />
 
-  {#if value !== ''}
+  {#if $searchTerm}
     <button
       type="button"
       class="search-clear"
       on:click={handleSearchCleared}>×</button>
   {/if}
 
-  {#if !isActive && value === ''}
+  {#if !isActive && !$searchTerm}
     <div class="search-icon">
       <SearchIcon />
     </div>
@@ -27,10 +27,10 @@
 <script>
   import { onMount, onDestroy, createEventDispatcher } from 'svelte'
   import { debounce } from 'throttle-debounce'
+  import { searchTerm } from './stores'
   import EventHive from './EventHive'
   import SearchIcon from './icons/material/search_black_24dp.svg.svelte'
 
-  export let value = ''
   export let isActive = false
 
   const dispatch = createEventDispatcher()
@@ -40,8 +40,7 @@
 
   // TODO check if ok
   const handleSearchEnter = (e) => {
-    value = e.target.value
-    dispatch('searchEnter', value)
+    $searchTerm = e.target.value
     // handleSearchEnterDebounced()
   }
   const handleSearchEnterDebounced = debounce(500, handleSearchEnter)
@@ -52,8 +51,7 @@
 
   const handleSearchCleared = (e) => {
     e.target.blur()
-    value = ''
-    dispatch('searchClear')
+    $searchTerm = undefined
   }
 
   const subscribeSearch = () => {

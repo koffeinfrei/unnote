@@ -1,5 +1,5 @@
 <div class:hidden-sm={!showList}>
-  <SearchTerm {searchQuery} />
+  <SearchTerm searchTerm={$searchTerm} />
 
   {#if collection === 'task_notes'}
     <div class="view-filter">
@@ -10,7 +10,7 @@
     </div>
   {/if}
 
-  {#if searchQuery && notes.length === 0}
+  {#if $searchTerm && notes.length === 0}
     <div>There's nothing…</div>
   {:else}
     {#each notes as note}
@@ -59,6 +59,7 @@
   import humanDate from 'human-date'
   import { ajaxWithAbort } from './ajax'
   import { show } from './flash'
+  import { searchTerm } from './stores'
   import Note from './Note'
   import AlertFlash from './AlertFlash.svelte'
   import SearchTerm from './SearchTerm.svelte'
@@ -89,7 +90,7 @@
       updateList()
     }
 
-    if (searchQuery !== undefined) {
+    if ($searchTerm !== undefined) {
       updateList()
     }
 
@@ -147,7 +148,7 @@
     }
 
     const params = {
-      search: searchQuery,
+      search: $searchTerm,
       page: currentPage
     }
 

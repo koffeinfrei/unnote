@@ -2,7 +2,7 @@
   <Logo />
 
   {#if isLoggedIn}
-    <SearchBox on:searchEnter on:searchCleared />
+    <SearchBox />
   {/if}
 
   <input id="bmenug" type="checkbox" class="show" bind:this={showHamburgerElement} />

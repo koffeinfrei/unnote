@@ -1,47 +1,39 @@
-<Navbar
-  isLoggedIn={true}
-  handleSearchEnter={handleSearchEnter}
-  handleSearchCleared={handleSearchCleared} />
+<ActionBar
+  handleNewClicked={() => push('/notes')}
+  {isSynced} />
 
-<main>
-  <Flash />
-
-  <ActionBar
-    handleNewClicked={() => push('/notes')}
-    {isSynced} />
-
-  <div class="flex one">
-    <div class="full">
-      <SearchTerm searchQuery={searchQuery} />
-      <div class="view-filter">
-        <select name="view-filter" on:change={handleFilterChanged}>
-          <option value="todo">Show todos</option>
-          <option value="">Show all</option>
-        </select>
-      </div>
-
-      {#if notes.length === 0}
-        <div>There's nothing…</div>
-      {/if}
-
-      {#each notes as note}
-        <TaskGroup
-          {note}
-          on:checked={handleTaskChecked} />
-      {/each}
-
-      <LoadMoreButton
-        showLoadMoreButton={hasMorePages}
-        showSpinner={isLoadingMorePages}
-        handleLoadMoreClick={handleLoadMoreClick} />
+<div class="flex one">
+  <div class="full">
+    <SearchTerm searchTerm={$searchTerm} />
+    <div class="view-filter">
+      <select name="view-filter" on:change={handleFilterChanged}>
+        <option value="todo">Show todos</option>
+        <option value="">Show all</option>
+      </select>
     </div>
+
+    {#if notes.length === 0}
+      <div>There's nothing…</div>
+    {/if}
+
+    {#each notes as note}
+      <TaskGroup
+        {note}
+        on:checked={handleTaskChecked} />
+    {/each}
+
+    <LoadMoreButton
+      showLoadMoreButton={hasMorePages}
+      showSpinner={isLoadingMorePages}
+      handleLoadMoreClick={handleLoadMoreClick} />
   </div>
-</main>
+</div>
 
 <script>
   import { onMount, onDestroy } from 'svelte'
   import { push } from 'svelte-spa-router'
   import { ajax } from './ajax'
+  import { searchTerm } from './stores'
   import AutoSave from './AutoSave'
   import Note from './Note'
   import Navbar from './Navbar.svelte'
@@ -53,7 +45,6 @@
 
   let notes = []
   let currentPage = 1
-  let searchQuery = undefined
   let filter = 'todo'
   let hasMorePages = false
   let isLoadingMorePages = true
@@ -88,15 +79,7 @@
     isSynced = data.isSynced
   }
 
-  const handleSearchEnter = (value) => {
-    searchQuery = value
-    fetchTasks()
-  }
-
-  const handleSearchCleared = () => {
-    searchQuery: ''
-    fetchTasks()
-  }
+  $: if ($searchTerm || true) fetchTasks()
 
   const handleFilterChanged = (e) => {
     filter: e.target.value
@@ -112,7 +95,7 @@
 
   const fetchTasks = () => {
     const params = {
-      search: searchQuery,
+      search: $searchTerm,
       page: currentPage
     }
 

@@ -1,35 +1,31 @@
-<Navbar isLoggedIn={false} />
-<main>
-  <Flash />
-  <UserForm>
-    <form on:submit={submit}>
-      <Utf8 />
+<UserForm>
+  <form on:submit={submit}>
+    <Utf8 />
 
-      <div class="flex one">
-        <TextInput
-          type="email"
-          model="user"
-          attribute="email"
-          label="Email"
+    <div class="flex one">
+      <TextInput
+        type="email"
+        model="user"
+        attribute="email"
+        label="Email"
+        on:change={setValue} />
+
+      <TextInput
+        type="password"
+        model="user"
+        attribute="password"
+        label="Password"
+        on:change={setValue} />
+
+      {#if !alwaysRememberMe}
+        <Checkbox model="user" attribute="remember_me" label="Remember me"
           on:change={setValue} />
+      {/if}
+   </div>
 
-        <TextInput
-          type="password"
-          model="user"
-          attribute="password"
-          label="Password"
-          on:change={setValue} />
-
-        {#if !alwaysRememberMe}
-          <Checkbox model="user" attribute="remember_me" label="Remember me"
-            on:change={setValue} />
-        {/if}
-     </div>
-
-      <SubmitButton label="Log in" />
-    </form>
-  </UserForm>
-</main>
+    <SubmitButton label="Log in" />
+  </form>
+</UserForm>
 
 <script>
   import { push } from 'svelte-spa-router'
