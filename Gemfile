@@ -17,8 +17,8 @@ gem 'panter-rails-deploy'
 gem 'paper_trail'
 gem 'pg'
 gem 'pg_search'
-gem 'phantomjs', require: false
 gem 'pundit'
+gem 'selenium-webdriver'
 
 group :development, :test do
   gem 'capybara'
@@ -27,7 +27,6 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'selenium-webdriver'
   gem 'spring'
   gem 'spring-commands-rspec'
 end
