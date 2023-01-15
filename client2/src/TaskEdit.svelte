@@ -25,7 +25,7 @@
     <LoadMoreButton
       showLoadMoreButton={hasMorePages}
       showSpinner={isLoadingMorePages}
-      handleLoadMoreClick={handleLoadMoreClick} />
+      on:loadMore={handleLoadMoreClick} />
   </div>
 </div>
 
@@ -56,7 +56,7 @@
 
     // update the task so the change is immediately rendered, otherwise the UI
     // updates only after the next auto poll cycle is done.
-    const associatedNote= notes.find(collectionNote => collectionNote.uid === note.uid)
+    const associatedNote = notes.find(collectionNote => collectionNote.uid === note.uid)
     const taskIndex = associatedNote.tasks.findIndex(collectionTask => collectionTask.id === task.id)
     associatedNote.tasks[taskIndex] = task
 
@@ -82,14 +82,14 @@
   $: if ($searchTerm || true) fetchTasks()
 
   const handleFilterChanged = (e) => {
-    filter: e.target.value
+    filter = e.target.value
     fetchTasks()
   }
 
   const handleLoadMoreClick = (e) => {
-    isLoadingMorePages: true
+    isLoadingMorePages = true
 
-    currentPage: currentPage + 1
+    currentPage = currentPage + 1
     fetchTasks()
   }
 

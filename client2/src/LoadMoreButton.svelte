@@ -1,5 +1,5 @@
 {#if showLoadMoreButton && !showSpinner}
-  <button name="load-more" class='icon big full-width' onClick={handleLoadMoreClick}>
+  <button name="load-more" class='icon big full-width' on:click={handleLoadMoreClick}>
     <MoreIcon />
   </button>
 {/if}
