@@ -10,10 +10,10 @@
 
   <div class="menu">
     {#if isFeatureEnabled('tasks')}
-      <a href="/notes" class="button pseudo" use:link use:active={{ path: '/notes/*' }}>All notes</a>
+      <a href="/notes" class="button pseudo" use:link use:active={{ path: /\/notes\/*.*/ }}>All notes</a>
     {/if}
     {#if isFeatureEnabled('tasks')}
-      <a href="/task-notes" class="button pseudo" use:link use:active={{ path: '/task-notes/*' }}>Task notes</a>
+      <a href="/task-notes" class="button pseudo" use:link use:active={{ path: /\/task-notes\/*.*/ }}>Task notes</a>
     {/if}
     {#if isFeatureEnabled('tasks')}
       <a href="/tasks" class="button pseudo" use:link use:active>Tasks</a>

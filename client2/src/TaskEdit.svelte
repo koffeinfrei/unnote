@@ -1,5 +1,5 @@
 <ActionBar
-  handleNewClicked={() => push('/notes')}
+  on:newClicked={() => push('/notes')}
   {isSynced} />
 
 <div class="flex one">
@@ -42,6 +42,9 @@
   import TaskGroup from './TaskGroup.svelte'
   import SearchTerm from './SearchTerm.svelte'
   import LoadMoreButton from './LoadMoreButton.svelte'
+
+  // FIXME: params are unused. this is just to suppress the svelte warning `was created with unknown prop 'params'`
+  export let params = {}
 
   let notes = []
   let currentPage = 1

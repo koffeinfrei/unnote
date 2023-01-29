@@ -53,7 +53,7 @@
   import NoteActionBar from './NoteActionBar.svelte'
   import Dialog from './Dialog.svelte'
 
-  export let note
+  export let note = undefined
   export let params = {}
   export let collection
 
