@@ -7,7 +7,9 @@ export function setNew() {
 
 export function setEdit(note) {
   const currentLocation = get(location);
-  const newLocation = `/notes/${note.uid}`;
+  // is e.g. either `notes` or `task-notes`
+  const resourceName = currentLocation.split('/')[1];
+  const newLocation = `/${resourceName}/${note.uid}`;
 
   if (currentLocation !== newLocation) {
     push(newLocation);

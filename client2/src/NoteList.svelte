@@ -71,7 +71,7 @@
   export let activeNoteUid
   export let isSynced
   export let showList
-  export let searchQuery
+  /* export let searchQuery */
   export let listNeedsUpdate
   export let collection
 

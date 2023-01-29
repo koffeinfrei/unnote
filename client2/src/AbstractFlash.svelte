@@ -21,7 +21,7 @@
 
   export let name
   export let addtionalCssClass
-  export let message
+  export let message = undefined
 
   const getCssClass = () => {
     var cssClasses = ['card', addtionalCssClass]

@@ -39,6 +39,9 @@
   const routes = {
     '/login': wrap({
       component: Login,
+      props: {
+        alwaysRememberMe: window.ALWAYS_REMEMBER_ME
+      },
       conditions: [
         async () => {
           const isAuthenticated = await authenticate()
