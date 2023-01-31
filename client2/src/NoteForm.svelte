@@ -6,7 +6,7 @@
     <input
       type="text"
       value={note.title}
-      on:keyup={handleTitleChange}
+      on:input={handleTitleChange}
       placeholder="Title"
       bind:this={titleElement}
     />
