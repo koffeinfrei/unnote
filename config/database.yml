@@ -26,7 +26,7 @@ test:
 
 production:
   <<: *default
-  database: rails_production
+  database: mykonote
   username: app
 
 local_production:

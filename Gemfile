@@ -7,13 +7,16 @@ gem 'rails', '~> 6.1.3'
 # gems sorted alphabetically
 
 gem 'bootsnap', require: false
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 gem 'carrierwave'
 gem 'carrierwave-base64_image_content'
 gem 'devise'
 gem 'foreman'
 gem 'kaminari'
 gem 'nokogiri'
-gem 'panter-rails-deploy'
 gem 'paper_trail'
 gem 'pg'
 gem 'pg_search'
