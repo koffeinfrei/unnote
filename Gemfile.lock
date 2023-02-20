@@ -83,15 +83,14 @@ GEM
       sshkit (>= 1.9.0)
     capistrano-bundler (2.0.1)
       capistrano (~> 3.1)
+    capistrano-passenger (0.2.1)
+      capistrano (~> 3.0)
     capistrano-rails (1.6.1)
       capistrano (~> 3.1)
       capistrano-bundler (>= 1.1, < 3)
     capistrano-rbenv (2.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
-    capistrano-rbenv-install (1.2.0)
-      capistrano (>= 3.0)
-      capistrano-rbenv (>= 2.0)
     capybara (3.38.0)
       addressable
       matrix
@@ -134,16 +133,11 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
-    dotenv (2.7.6)
-    dotenv-rails (2.7.6)
-      dotenv (= 2.7.6)
-      railties (>= 3.2)
     erubi (1.11.0)
     ffi (1.15.0)
     foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    highline (2.0.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
@@ -161,10 +155,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kgio (2.11.3)
     launchy (2.5.0)
       addressable (~> 2.7)
-    libv8 (8.4.255.0)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -176,8 +168,6 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    mini_racer (0.3.1)
-      libv8 (~> 8.4.255)
     minitest (5.16.3)
     msgpack (1.4.2)
     net-scp (3.0.0)
@@ -188,16 +178,6 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    panter-rails-deploy (1.4.1)
-      capistrano (~> 3.5)
-      capistrano-bundler
-      capistrano-rails
-      capistrano-rbenv
-      capistrano-rbenv-install
-      dotenv-rails
-      highline
-      mini_racer
-      unicorn-rails
     paper_trail (11.1.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -250,7 +230,6 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rainbow (3.0.0)
-    raindrops (0.19.1)
     rake (13.0.6)
     regexp_parser (2.6.0)
     request_store (1.5.0)
@@ -326,12 +305,6 @@ GEM
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
-    unicorn (6.0.0)
-      kgio (~> 2.6)
-      raindrops (~> 0.7)
-    unicorn-rails (2.2.1)
-      rack
-      unicorn
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.5)
@@ -348,6 +321,10 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap
+  capistrano (~> 3.11)
+  capistrano-passenger (~> 0.2.0)
+  capistrano-rails (~> 1.4)
+  capistrano-rbenv (~> 2.1, >= 2.1.4)
   capybara
   capybara-screenshot
   carrierwave
@@ -357,7 +334,6 @@ DEPENDENCIES
   foreman
   kaminari
   nokogiri
-  panter-rails-deploy
   paper_trail
   pg
   pg_search
