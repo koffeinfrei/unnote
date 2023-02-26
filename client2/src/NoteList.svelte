@@ -84,7 +84,6 @@
 
   const dispatch = createEventDispatcher()
 
-  // TODO: check if this is the same as before
   $: {
     if (isSynced && listNeedsUpdate !== false) {
       updateList()
@@ -99,32 +98,6 @@
       updateList()
     }
   }
-  // onMount(() => {
-  //   if (listNeedsUpdate) {
-  //     this.listNeedsUpdate = false
-  //     this.updateList()
-  //   }
-  // })
-
-  // beforeUpdate((nextProps) => {
-  //   if (!isSynced && nextProps.isSynced && nextProps.listNeedsUpdate !== false) {
-  //     this.listNeedsUpdate = true
-  //   }
-
-    // if (this.state.searchQuery !== nextProps.searchQuery) {
-    //   this.listNeedsUpdate = true
-    // }
-
-    // collection changed
-    // if (this.props.collection !== nextProps.collection) {
-    //   this.listNeedsUpdate = true
-    // }
-
-    // this.setState( {
-    //   isSynced: nextProps.isSynced,
-    //   searchQuery: nextProps.searchQuery
-    // })
-  // })
 
   const handleNoteClick = (note, e) => {
     dispatch('noteClick', note)

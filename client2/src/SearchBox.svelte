@@ -38,16 +38,10 @@
   let searchInput
   let searchSubscription
 
-  // TODO check if ok
   const handleSearchEnter = (e) => {
     $searchTerm = e.target.value
-    // handleSearchEnterDebounced()
   }
   const handleSearchEnterDebounced = debounce(500, handleSearchEnter)
-
-  // handleSearchEnterDebounced() {
-  //   this.props.handleSearchEnter(this.state.value)
-  // }
 
   const handleSearchCleared = (e) => {
     e.target.blur()
