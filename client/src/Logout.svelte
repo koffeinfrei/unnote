@@ -1,4 +1,4 @@
-<button name="logout" on:click={handleClicked} class="icon-lg big pseudo">
+<button name="logout" on:click={handleClicked} class="icon-lg big pseudo logout">
   <LogoutIcon />
   <span class="icon-lg-text">Logout</span>
 </button>
@@ -22,3 +22,10 @@
       .finally(scrollToTop)
   }
 </script>
+
+<style lang="sass">
+  @import './stylesheets/variables'
+
+  .logout
+    color: $picnic-white !important
+</style>
