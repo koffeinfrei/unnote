@@ -52,6 +52,7 @@
   import NoteList from './NoteList.svelte'
   import NoteActionBar from './NoteActionBar.svelte'
   import Dialog from './Dialog.svelte'
+  import './keyboard'
 
   export let note = undefined
   export let params = {}
