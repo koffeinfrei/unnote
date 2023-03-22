@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lock '~> 3.16.0'
+lock '~> 3.17.2'
 
 set :application, 'mykonote'
 set :repo_url, 'git@github.com:koffeinfrei/mykonote.git'

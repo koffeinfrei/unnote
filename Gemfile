@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 6.1.3'
+gem 'rails', '~> 7.0.4'
 
 # gems sorted alphabetically
 
@@ -38,10 +38,10 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller' # Needed by better_errors to enable html console
-  gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
+  gem 'rubocop', '~> 1.12.0', require: false
+  gem 'rubocop-performance', '~> 1.10.2', require: false
+  gem 'rubocop-rails', '~> 2.9.1', require: false
+  gem 'rubocop-rspec', '~> 2.2.0', require: false
   gem 'seed_box'
 end
 
