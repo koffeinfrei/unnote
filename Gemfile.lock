@@ -320,6 +320,7 @@ GEM
     unicode-display_width (2.4.2)
     warden (1.2.9)
       rack (>= 2.0.9)
+    webrick (1.8.1)
     websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
@@ -365,6 +366,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   timecop
+  webrick
 
 BUNDLED WITH
    2.1.4

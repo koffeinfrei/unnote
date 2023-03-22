@@ -32,6 +32,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'webrick'
 end
 
 group :development do
