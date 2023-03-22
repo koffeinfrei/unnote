@@ -33,6 +33,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'webrick'
 end
 
 group :development do
