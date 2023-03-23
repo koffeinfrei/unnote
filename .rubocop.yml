@@ -16,14 +16,26 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: either
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Naming/BlockForwarding:
+  Enabled: false
+
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: false
+
 Metrics/BlockLength:
-  IgnoredMethods:
+  AllowedMethods:
     - refine
     - context
     - RSpec.describe
