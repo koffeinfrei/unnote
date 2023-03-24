@@ -13,7 +13,7 @@ class NoteContentCleaner
 
     driver = Selenium::WebDriver.for :firefox, options: options
 
-    quill_js = File.read(File.expand_path('../../client2/node_modules/quill/dist/quill.js', __dir__))
+    quill_js = File.read(File.expand_path('../../client/node_modules/quill/dist/quill.js', __dir__))
     content = driver.execute_script(
       <<~SCRIPT
         #{quill_js};
