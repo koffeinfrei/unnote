@@ -27,7 +27,6 @@ import gradle from 'highlight.js/lib/languages/gradle';
 import groovy from 'highlight.js/lib/languages/groovy';
 import haml from 'highlight.js/lib/languages/haml';
 import handlebars from 'highlight.js/lib/languages/handlebars';
-import htmlbars from 'highlight.js/lib/languages/htmlbars';
 import http from 'highlight.js/lib/languages/http';
 import ini from 'highlight.js/lib/languages/ini';
 import java from 'highlight.js/lib/languages/java';
@@ -66,7 +65,7 @@ import vim from 'highlight.js/lib/languages/vim';
 import xml from 'highlight.js/lib/languages/xml';
 import yaml from 'highlight.js/lib/languages/yaml';
 
-import 'highlight.js/styles/railscasts.css';
+import 'highlight.js/styles/base16/railscasts.css';
 
 highlight.registerLanguage('asciidoc', asciidoc);
 highlight.registerLanguage('bash', bash);
@@ -95,7 +94,6 @@ highlight.registerLanguage('gradle', gradle);
 highlight.registerLanguage('groovy', groovy);
 highlight.registerLanguage('haml', haml);
 highlight.registerLanguage('handlebars', handlebars);
-highlight.registerLanguage('htmlbars', htmlbars);
 highlight.registerLanguage('http', http);
 highlight.registerLanguage('ini', ini);
 highlight.registerLanguage('java', java);
