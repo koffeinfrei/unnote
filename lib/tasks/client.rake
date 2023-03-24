@@ -3,7 +3,7 @@
 namespace :client do
   desc 'Install npm packages'
   task npm_install: :environment do
-    abort 'Could not install the npm packages' unless system('cd client2 && npm install')
+    abort 'Could not install the npm packages' unless system('cd client && npm install')
   end
 
   desc 'Build and deploy the client app to the public directory'
