@@ -7,8 +7,6 @@ set :repo_url, 'git@github.com:koffeinfrei/mykonote-new.git'
 set :branch, 'chores/new-passenger-deployment' # TODO: change to main
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :deploy_to, "/home/deploy/#{fetch :application}"
-
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'system'
 
 set :keep_releases, 5
