@@ -3,7 +3,7 @@
     type="checkbox"
     id={idValue(model, attribute)}
     name={nameValue(model, attribute)}
-    on:change={(e) => dispatch('change', nameValue(model, attribute), e.target.checked)} />
+    on:change={(e) => dispatch('change', { [nameValue(model, attribute)]: e.target.checked })} />
 
   <span class="checkable">{label}</span>
 </label>
