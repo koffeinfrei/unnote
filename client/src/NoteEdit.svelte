@@ -39,11 +39,14 @@
 
 <script>
   import { onMount, onDestroy } from 'svelte'
+  import { querystring } from 'svelte-spa-router'
   import { ajax } from './ajax'
   import { show } from './flash'
   import SyncStorage from './SyncStorage'
   import { setEdit, setNew, setBrowserTitle } from './pushState'
   import { searchTerm } from './stores'
+  import { resize } from './image'
+  import { getBlob } from './cache'
   import Note from './Note'
   import EventHive from './EventHive'
   import AutoSave from './AutoSave'
@@ -71,21 +74,39 @@
   let showArchiveDialog
   let handleArchiveDialogConfirmed
 
-  onMount(() => {
+  onMount(async () => {
+    autoSave = new AutoSave(handleServerSync)
+
     if (note) {
       initStateFromNote(note)
     }
     else if (params.id) {
       initStateFromNoteId(params.id)
     }
-    else {
+    else if ($querystring.includes('share-target')) {
+      note = new Note()
+
+      const blob = await getBlob('shared-image')
+      if (blob) {
+        const { dataUrl, width, height } = await resize(blob)
+
+        show('notice', `The image was scaled to ${width} × ${height} px`)
+
+        note.content = `<img src="${dataUrl}" />`
+
+        setEdit(note)
+        autoSave.setChange(note)
+      }
+    }
+
+    if (note === undefined) {
       note = new Note()
       showList = true
     }
 
-    autoSave = new AutoSave(handleServerSync)
     autoSave.startPolling()
 
+    // TODO obsolete
     noteCreateSubscription = EventHive.subscribe('note.create', (data) => {
       setNewNote(() => {
         EventHive.publish('note.update', data)
