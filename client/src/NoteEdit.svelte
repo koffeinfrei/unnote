@@ -50,7 +50,6 @@
   import Note from './Note'
   import EventHive from './EventHive'
   import AutoSave from './AutoSave'
-  import Flash from './Flash.svelte'
   import NoteForm from './NoteForm.svelte'
   import NoteList from './NoteList.svelte'
   import NoteActionBar from './NoteActionBar.svelte'
