@@ -46,7 +46,7 @@
   import { setEdit, setNew, setBrowserTitle } from './pushState'
   import { searchTerm } from './stores'
   import { resize } from './image'
-  import { getBlob } from './cache'
+  import { getBlob, getJson } from './cache'
   import Note from './Note'
   import EventHive from './EventHive'
   import AutoSave from './AutoSave'
@@ -86,12 +86,18 @@
       note = new Note()
 
       const blob = await getBlob('shared-image')
-      if (blob) {
-        const { dataUrl, width, height } = await resize(blob)
+      const json = await getJson('shared-data')
+      if (blob || json) {
+        if (blob) {
+          const { dataUrl, width, height } = await resize(blob)
 
-        show('notice', `The image was scaled to ${width} × ${height} px`)
+          show('notice', `The image was scaled to ${width} × ${height} px`)
 
-        note.content = `<img src="${dataUrl}" />`
+          note.content = `<img src="${dataUrl}" />`
+        } else {
+          note.title = json.title
+          note.content = [json.text, json.url].filter(x => x).join('<br/>')
+        }
 
         setEdit(note)
         autoSave.setChange(note)
