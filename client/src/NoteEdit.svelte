@@ -204,7 +204,7 @@
 
   const handleEditChange = (event) => {
     const updatedNote = event.detail
-    setEdit(note)
+    setEdit(updatedNote)
 
     autoSave.setChange(updatedNote)
   }
