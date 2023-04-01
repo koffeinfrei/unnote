@@ -23,3 +23,10 @@ task :deploy_client do
   end
 end
 before 'deploy:updated', 'deploy_client'
+after 'deploy_client', 'set_application_name' do
+  on roles(:web) do
+    within release_path do
+      execute :sed, '-i', %('s/"Mykonote"/"#{fetch(:application_name)}"/g'), 'public/manifest.json'
+    end
+  end
+end
