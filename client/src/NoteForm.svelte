@@ -81,7 +81,7 @@
 
   const focusTitleFieldIfNewNote = () => {
     if (note.isNew()) {
-      titleElement.focus()
+      setTimeout(() => titleElement.focus(), 100)
     }
   }
 
