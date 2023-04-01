@@ -186,8 +186,8 @@
 
       if (event.detail) {
         clickedNote.setArchived()
-        handleEditChange(e)
-        setNewNote()
+        autoSave.setChange(clickedNote)
+        setNewNote(() => showList = true)
       }
     }
     showArchiveDialog = true
