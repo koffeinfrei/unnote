@@ -82,7 +82,7 @@
     isSynced = data.isSynced
   }
 
-  $: if ($searchTerm || true) fetchTasks()
+  $: if ($searchTerm !== undefined) fetchTasks()
 
   const handleFilterChanged = (e) => {
     filter = e.target.value

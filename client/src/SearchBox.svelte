@@ -3,7 +3,7 @@
     type="text"
     class="search-input"
     name="search"
-    value={$searchTerm || ''}
+    value={$searchTerm}
     on:keyup={handleSearchEnterDebounced}
     on:focus={() => isActive = true}
     on:blur={() => isActive = false}
@@ -45,7 +45,7 @@
 
   const handleSearchCleared = (e) => {
     e.target.blur()
-    $searchTerm = undefined
+    $searchTerm = ''
   }
 
   const subscribeSearch = () => {
