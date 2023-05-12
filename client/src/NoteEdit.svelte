@@ -211,7 +211,7 @@
 
   const handleServerSync = (data) => {
     isSynced = data.isSynced
-    listNeedsUpdate: true
+    listNeedsUpdate = true
     // when a note has been synced we need to set the serverUpdatedAt timestamp
     // for the conflict detection to work
     // (only do this if the current note is the synced note)
