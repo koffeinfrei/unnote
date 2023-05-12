@@ -88,11 +88,15 @@
     if (isSynced && listNeedsUpdate !== false) {
       updateList()
     }
+  }
 
+  $: {
     if ($searchTerm !== undefined) {
       updateList()
     }
+  }
 
+  $: {
     // collection changed
     if (collection !== undefined) {
       updateList()
