@@ -10,10 +10,10 @@
     </div>
   {/if}
 
-  {#if $searchTerm && notes.length === 0}
+  {#if $searchTerm && $notes.length === 0}
     <div>There's nothing…</div>
   {:else}
-    {#each notes as note}
+    {#each $notes as note}
       <div
         class="card list-item"
         class:active={note.uid === activeNoteUid}
@@ -67,6 +67,7 @@
   import NotePicture from './NotePicture.svelte'
   import ArchiveIcon from './icons/material/archive-24px.svg.svelte'
   import DeleteIcon from './icons/material/delete-24px.svg.svelte'
+  import { notes } from './stores.js'
 
   export let activeNoteUid
   export let isSynced
@@ -75,7 +76,6 @@
   export let listNeedsUpdate
   export let collection
 
-  let notes = []
   let currentPage = 1
   let hasMorePages = false
   let isLoadingMorePages = true
@@ -141,7 +141,7 @@
   const executeUpdateListRequest = () => {
     updateListRequest.promise
       .then((data) => {
-        notes = data.notes.map((note) => {
+        $notes = data.notes.map((note) => {
           return Note.fromAttributes(note)
         })
 

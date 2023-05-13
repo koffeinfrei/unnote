@@ -38,13 +38,13 @@
 {/if}
 
 <script>
-  import { onMount, onDestroy } from 'svelte'
+  import { onMount, beforeUpdate, onDestroy } from 'svelte'
   import { querystring } from 'svelte-spa-router'
   import { ajax } from './ajax'
   import { show } from './flash'
   import SyncStorage from './SyncStorage'
   import { setEdit, setNew, setBrowserTitle } from './pushState'
-  import { searchTerm } from './stores'
+  import { searchTerm, notes } from './stores'
   import { resize } from './image'
   import { getBlob, getJson } from './cache'
   import Note from './Note'
@@ -56,10 +56,10 @@
   import Dialog from './Dialog.svelte'
   import './keyboard'
 
-  export let note = undefined
   export let params = {}
   export let collection
 
+  let note
   let showList
   let autoSave
   let isSynced
@@ -73,14 +73,41 @@
   let showArchiveDialog
   let handleArchiveDialogConfirmed
 
-  onMount(async () => {
-    autoSave = new AutoSave(handleServerSync)
 
-    if (note) {
-      initStateFromNote(note)
+  onMount(() => {
+    noteCreateSubscription = EventHive.subscribe('note.create', (data) => {
+      setNewNote(() => {
+        EventHive.publish('note.update', data)
+      })
+    })
+
+    noteNewSubscription = EventHive.subscribe('note.new', (data) => {
+      setNewNote()
+    })
+  })
+
+  beforeUpdate(async () => {
+    // we can't do this in `onMount` since this happens before, and `autoSave`
+    // would be `undefined`.
+    if (autoSave === undefined) {
+      autoSave = new AutoSave(handleServerSync)
+      autoSave.startPolling()
     }
-    else if (params.id) {
-      initStateFromNoteId(params.id)
+
+    if (!params.id) {
+      note = new Note()
+    }
+    else if (params.id && note?.uid !== params.id) {
+      // 1. try sync storage
+      note = Note.fromAttributes(SyncStorage.getJson({ uid: params.id }))
+      if (!note) {
+        // 2. try svelte store
+        note = $notes.find(note => note.uid === params.id)
+        if (!note) {
+          // 3. try server
+          await initStateFromNoteId(params.id)
+        }
+      }
     }
     else if ($querystring.includes('share-target')) {
       note = new Note()
@@ -108,19 +135,6 @@
       note = new Note()
       showList = true
     }
-
-    autoSave.startPolling()
-
-    // TODO obsolete
-    noteCreateSubscription = EventHive.subscribe('note.create', (data) => {
-      setNewNote(() => {
-        EventHive.publish('note.update', data)
-      })
-    })
-
-    noteNewSubscription = EventHive.subscribe('note.new', (data) => {
-      setNewNote()
-    })
   })
 
   onDestroy(() => {
@@ -131,36 +145,28 @@
 
   $: if ($searchTerm !== undefined) showList = true
 
-  const initStateFromNote = (fromNote) => {
-    note = Note.fromAttributes(fromNote)
-    setBrowserTitle(note)
-  }
-
-  const initStateFromNoteId = (id) => {
+  const initStateFromNoteId = async (id) => {
     showList = false
 
-    ajax(`/api/notes/${id}`)
-      .then((data) => {
-        note = Note.fromAttributes(data.note)
-        showList = false
-        setBrowserTitle(note)
-      })
-      .catch(() => {
-        show('alert',
-          'While trying to load the note the internet broke down (or something ' +
-            'else failed, maybe the note could not be found)'
-        )
-      })
+    try {
+      const data = await ajax(`/api/notes/${id}`)
+      note = Note.fromAttributes(data.note)
+      setBrowserTitle(note)
+    } catch (error) {
+      show('alert',
+        'While trying to load the note the internet broke down (or something ' +
+          'else failed, maybe the note could not be found)'
+      )
+    }
+
   }
 
   const handleNoteClick = (event) => {
     event.preventDefault()
 
-    note = event.detail
     showList = false
-
-    setEdit(note)
-    setBrowserTitle(note)
+    setEdit(event.detail)
+    setBrowserTitle(event.detail)
   }
 
   const handleDeleteNoteClick = (e) => {
@@ -225,7 +231,6 @@
   }
 
   const setNewNote = (callback) => {
-    note = new Note()
     showList = false
     if (callback) callback()
     setNew()

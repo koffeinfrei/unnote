@@ -14,6 +14,13 @@ class SyncStorage {
     return localStorage.getItem(SyncStorage._getKey(note));
   }
 
+  static getJson(note) {
+    note = SyncStorage.get(note)
+    if (note) {
+      return JSON.parse(note)
+    }
+  }
+
   static eachNote(callback) {
     const keys = SyncStorage._getLocalStorageKeys();
 
