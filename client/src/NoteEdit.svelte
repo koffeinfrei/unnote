@@ -64,7 +64,6 @@
   let autoSave
   let isSynced
   let listNeedsUpdate
-  let noteCreateSubscription
   let noteNewSubscription
   let searchEnteredSubscription
   let searchClearedSubscription
@@ -75,12 +74,6 @@
 
 
   onMount(() => {
-    noteCreateSubscription = EventHive.subscribe('note.create', (data) => {
-      setNewNote(() => {
-        EventHive.publish('note.update', data)
-      })
-    })
-
     noteNewSubscription = EventHive.subscribe('note.new', (data) => {
       setNewNote()
     })
@@ -140,7 +133,6 @@
   })
 
   onDestroy(() => {
-    noteCreateSubscription.remove()
     noteNewSubscription.remove()
     autoSave.stopPolling()
   })
