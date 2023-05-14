@@ -19,6 +19,7 @@
   import { createEventDispatcher, onMount, onDestroy, afterUpdate } from 'svelte'
   import './highlight.js'
   import Quill from 'quill'
+  import { searchTerm } from './stores'
   import 'quill-task-list/task_list_node'
   import 'quill/dist/quill.snow.css'
   import EventHive from './EventHive'
@@ -80,7 +81,7 @@
   }
 
   const focusTitleFieldIfNewNote = () => {
-    if (note.isNew()) {
+    if (note.isNew() && !$searchTerm) {
       setTimeout(() => titleElement.focus(), 100)
     }
   }
