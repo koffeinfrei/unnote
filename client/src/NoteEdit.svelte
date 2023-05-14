@@ -135,6 +135,8 @@
       note = new Note()
       showList = true
     }
+
+    setBrowserTitle(note)
   })
 
   onDestroy(() => {
@@ -151,7 +153,6 @@
     try {
       const data = await ajax(`/api/notes/${id}`)
       note = Note.fromAttributes(data.note)
-      setBrowserTitle(note)
     } catch (error) {
       show('alert',
         'While trying to load the note the internet broke down (or something ' +
@@ -166,7 +167,6 @@
 
     showList = false
     setEdit(event.detail)
-    setBrowserTitle(event.detail)
   }
 
   const handleDeleteNoteClick = (e) => {
@@ -224,17 +224,12 @@
     if (data.note && note.uid === data.note.uid) {
       note.serverUpdatedAt = data.note.serverUpdatedAt
     }
-
-    if (data.isSynced) {
-      setBrowserTitle(note)
-    }
   }
 
   const setNewNote = (callback) => {
     showList = false
     if (callback) callback()
     setNew()
-    setBrowserTitle()
   }
 
   const deleteNote = (affectedNote) => {
