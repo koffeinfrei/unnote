@@ -4,26 +4,16 @@
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
-*You can register for a free account at
-[mykonote.com](https://app.mykonote.com/#/register) or within the Android
-[mobile app](https://github.com/panter/mykonote-app), which is available on
-[Google Play](https://play.google.com/store/apps/details?id=com.mykonote).*
-<br>
-*The free account is limited to 100 notes.*
-
-<a
-  href='https://play.google.com/store/apps/details?id=com.mykonote&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-  <img
-    alt='Get it on Google Play'
-    src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'
-    height="60px" />
-</a>
-
----
+**Full / Desktop view**
 
 ![desktop](screenshot_desktop.png)
 
+**Mobile / PWA note view**
+
 ![mobile note](screenshot_mobile_1.png)
+
+**Mobile / PWA list view**
+
 ![mobile list](screenshot_mobile_2.png)
 
 The note taking app that doesn't suck. Made under the Mykonian sun.
@@ -39,8 +29,10 @@ What Mykonote offers:
   ruining the formatting
 * [Task lists](https://github.com/koffeinfrei/quill-task-list) (aka. todo
   lists)
-* Mobile support
-* [A mobile app](https://github.com/panter/mykonote-app)
+* PWA, so it can be installed as an app on any mobile device
+* Autosave
+* Permanent edit mode. There's no switching between read and edit mode. Just
+  edit, always.
 * Pseudo offline support, so you don't lose data when the connection is bad or even
   missing. The next time the internet is up again your edits will be synced to
   the server.
@@ -103,6 +95,7 @@ To create the new changelog entries just issue the following command:
 
 ## License
 
+    Copyright 2016 Alexis Reigel <mail@koffeinfrei.org>
     Copyright 2016 Panter AG <info@panter.ch>
 
     This program is free software: you can redistribute it and/or modify
