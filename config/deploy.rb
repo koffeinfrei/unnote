@@ -3,9 +3,8 @@
 lock '~> 3.16.0'
 
 set :application, 'mykonote'
-set :repo_url, 'git@github.com:koffeinfrei/mykonote-new.git'
-set :branch, 'chores/new-passenger-deployment' # TODO: change to main
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :repo_url, 'git@github.com:koffeinfrei/mykonote.git'
+ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'system'
 
