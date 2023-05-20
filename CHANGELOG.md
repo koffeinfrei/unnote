@@ -1,3 +1,22 @@
+## 0.12.0 (2023-05-20)
+
+#### :bug: Bug Fix
+* [#443](https://github.com/koffeinfrei/mykonote/pull/443) Properly reset undo history when switching note ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :memo: Documentation
+* [#494](https://github.com/koffeinfrei/mykonote/pull/494) update README to reflect the newest svelte version ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#491](https://github.com/koffeinfrei/mykonote/pull/491) Replace react by svelte ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#493](https://github.com/koffeinfrei/mykonote/pull/493) Upgrade to rails 7 and ruby 3.2.1 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#490](https://github.com/koffeinfrei/mykonote/pull/490) New passenger deployment ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#471](https://github.com/koffeinfrei/mykonote/pull/471) Chores/upgrade rails to 6.1.7 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#450](https://github.com/koffeinfrei/mykonote/pull/450) Migrate travis to github actions ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.11.0 (2021-06-24)
 
 #### :rocket: Enhancement
