@@ -207,7 +207,6 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
-    phantomjs (2.1.1.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -357,7 +356,6 @@ DEPENDENCIES
   paper_trail
   pg
   pg_search
-  phantomjs
   pry-byebug
   pry-rails
   pundit

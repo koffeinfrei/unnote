@@ -1,7 +1,7 @@
 import { ajax, objectWithNestedKeys } from './ajax';
 import SyncStorage from './SyncStorage';
 import Note from './Note';
-import AlertFlash from './AlertFlash';
+import { show } from './flash';
 
 class AutoSave {
   constructor(onServerSync) {
@@ -96,7 +96,7 @@ class AutoSave {
     }
 
     if (error.status === 401) {
-      AlertFlash.show(
+      show('alert',
         // we could actually link to the current page with `href=""`, but by
         // doing this the title input field contains the wrong value once we
         // are redirected back after login (the value is loaded from the
@@ -114,10 +114,10 @@ class AutoSave {
     // the most common use case is when the number of notes allowed for the
     // free subscription is exceeded.
     else if (error.status === 422) {
-      AlertFlash.show(error.responseJson.errors.join('<br>'));
+      show('alert', error.responseJson.errors.join('<br>'));
     }
     else {
-      AlertFlash.show('Something went sideways: ' + error.message);
+      show('alert', 'Something went sideways: ' + error.message);
       console.error('url: ', url, 'error: ', error.toString());
     }
   }

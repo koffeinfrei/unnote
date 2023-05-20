@@ -1,31 +1,42 @@
 # frozen_string_literal: true
 
-require 'phantomjs'
-
 class NoteContentCleaner
   def initialize(note)
     @note = note
   end
 
+  # rubocop:disable Metrics/MethodLength
   def run!
-    file = Tempfile.new('mykonote_cleanup')
-    file.write(@note.content)
-    file.close
+    # set up geckodriver
+    options = Selenium::WebDriver::Firefox::Options.new
+    options.headless!
 
-    @note.update!(content: content(file))
+    driver = Selenium::WebDriver.for :firefox, options: options
 
-    file.unlink
+    quill_js = File.read(File.expand_path('../../client/node_modules/quill/dist/quill.js', __dir__))
+    content = driver.execute_script(
+      <<~SCRIPT
+        #{quill_js};
+
+        // create a blank html document and append the container element
+        var doc = document.implementation.createHTMLDocument();
+        doc.body.innerHTML = '<div></div>';
+        document.documentElement.replaceWith(doc.documentElement);
+
+        // use quill's api to convert the html
+        var quill = new Quill(document.documentElement);
+        quill.clipboard.dangerouslyPasteHTML('#{@note.content}', 'silent');
+        quill.update();
+
+        // return the updated content
+        return quill.root.innerHTML;
+      SCRIPT
+    )
+
+    # close browser
+    driver.quit
+
+    @note.update!(content: content)
   end
-
-  private
-
-  def content(file)
-    Phantomjs.run(script_path, file.path).strip
-  end
-
-  def script_path
-    Rails.root.join(
-      'app/assets/javascripts/phantomjs/quill_format.js'
-    ).to_s
-  end
+  # rubocop:enable Metrics/MethodLength
 end

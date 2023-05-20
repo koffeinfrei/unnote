@@ -29,7 +29,7 @@ class DeployClient
     success = system('cd client && npm run build')
     return false unless success
 
-    @build_files_from_build = Dir['client/build/*']
+    @build_files_from_build = Dir['client/dist/*']
   end
 
   def deploy(directory)
@@ -42,7 +42,7 @@ class DeployClient
     files =
       build_files_from_manifest(directory) +
       build_files_from_build.map do |file|
-        file.sub(%r{^client/build/}, "#{directory}/")
+        file.sub(%r{^client/dist/}, "#{directory}/")
       end
 
     files.each do |file|
