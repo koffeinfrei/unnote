@@ -9,11 +9,23 @@
 </a>
 
 <script>
+  import { onMount, onDestroy } from 'svelte'
   import Spinner from './Spinner.svelte'
   import EventHive from './EventHive'
   import LogoImage from './images/logo.svg.svelte'
 
-  export let showSpinner = false
+  let showSpinner = false
+  let spinnerSubscription
+
+  onMount(() => {
+    spinnerSubscription = EventHive.subscribe('spinner.toggle', (data) => {
+      showSpinner = data.show
+    })
+  })
+
+  onDestroy(() => {
+    spinnerSubscription.remove()
+  })
 </script>
 
 <style lang="sass">
