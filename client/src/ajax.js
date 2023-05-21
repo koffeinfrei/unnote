@@ -97,15 +97,20 @@ function getOptions(method, signal) {
 }
 
 function handleThen(response, resolve, reject) {
+  // When using `#ajax` with `await` the promise somehow resolves always
+  // instead of failing (calls `then` instead of `catch`).
+  if (!response.ok) {
+    reject(new AjaxError(response))
+  }
   // 204 No Content
-  if (response.ok && response.status === 204) {
+  else if (response.ok && response.status === 204) {
     resolve();
   }
   else if (response.ok) {
     response.json().then(json => resolve(json));
   }
   else {
-    response.json().then(json => reject(new AjaxError(response.statusText, response.status, json)));
+    response.json().then(json => reject(new AjaxError(response, json)));
   }
 }
 
@@ -122,10 +127,10 @@ function handleCatch(error, reject) {
 }
 
 class AjaxError extends Error {
-  constructor(message, status, responseJson) {
-    super(message);
+  constructor(response, responseJson = {}) {
+    super(response.message);
     this.name = 'AjaxError';
-    this.status = status;
+    this.status = response.status;
     this.responseJson = responseJson;
   }
 

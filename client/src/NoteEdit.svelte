@@ -146,12 +146,12 @@
       const data = await ajax(`/api/notes/${id}`)
       note = Note.fromAttributes(data.note)
     } catch (error) {
+      setNew()
       show('alert',
         'While trying to load the note the internet broke down (or something ' +
           'else failed, maybe the note could not be found)'
       )
     }
-
   }
 
   const handleNoteClick = (event) => {
