@@ -105,7 +105,12 @@ function handleThen(response, resolve, reject) {
     response.json().then(json => resolve(json));
   }
   else {
-    response.json().then(json => reject(new AjaxError(response.statusText, response.status, json)));
+    response.json()
+      .then(json => reject(new AjaxError(response, json)))
+      // in case the response body is not json the call `json()` will fail.
+      // this happens e.g. for 500 or other errors not properly handled by the
+      // API
+      .catch(() => reject(new AjaxError(response)))
   }
 }
 
@@ -122,11 +127,11 @@ function handleCatch(error, reject) {
 }
 
 class AjaxError extends Error {
-  constructor(message, status, responseJson) {
-    super(message);
+  constructor(response, responseJson) {
+    super(response.message);
     this.name = 'AjaxError';
-    this.status = status;
-    this.responseJson = responseJson;
+    this.status = response.status;
+    this.responseJson = responseJson || {};
   }
 
   toString() {

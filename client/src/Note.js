@@ -56,6 +56,8 @@ class Note {
   }
 
   static fromAttributes(attributes) {
+    if (!attributes) return;
+
     return new Note(
       attributes.uid,
       attributes.title,

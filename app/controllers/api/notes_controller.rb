@@ -16,13 +16,19 @@ module Api
     end
 
     def show
-      @note = Note.find_by!(uid: params[:id])
+      @note = Note.find_by(uid: params[:id])
 
-      authorize @note
+      if @note
+        authorize @note
 
-      render json: {
-        note: @note
-      }
+        render json: {
+          note: @note
+        }
+      else
+        skip_authorization
+
+        render json: {}, status: :not_found
+      end
     end
 
     def update
