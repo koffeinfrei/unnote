@@ -4,17 +4,16 @@
 
 # Mykonote [/ˈmɪkəˌnəʊt/]
 
-**Full / Desktop view**
+**Full / Desktop**
 
 ![desktop](screenshot_desktop.png)
 
-**Mobile / PWA note view**
+**Mobile / PWA**
 
-![mobile note](screenshot_mobile_1.png)
-
-**Mobile / PWA list view**
-
-![mobile list](screenshot_mobile_2.png)
+<p>
+  <img src="screenshot_mobile_1.png" alt="mobile note" width="49%" />
+  <img src="screenshot_mobile_2.png" alt="mobile list" width="49%" />
+</p>
 
 The note taking app that doesn't suck. Made under the Mykonian sun.
 
