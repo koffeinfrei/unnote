@@ -1,3 +1,13 @@
+## 0.12.1 (2023-05-21)
+
+#### :bug: Bug Fix
+* [#492](https://github.com/koffeinfrei/mykonote/pull/492) Load note on browser back ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#509](https://github.com/koffeinfrei/mykonote/pull/509) show the spinner ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.12.0 (2023-05-20)
 
 #### :bug: Bug Fix
