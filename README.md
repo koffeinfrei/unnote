@@ -68,6 +68,13 @@ For the capybara e2e tests headless firefox / geckodriver is used.
 - [Download latest geckodriver](https://github.com/mozilla/geckodriver/releases/latest)
 - Put both binaries in your `$PATH`
 
+Make sure to build the client before running RSpec.
+
+```bash
+$ bundle exec rake client:build_and_deploy
+$ bundle exec rspec spec
+```
+
 ### Changelog
 
 For generating the changelog

@@ -25,3 +25,10 @@ npm-debug.log*
 
 # build files
 /client/src/*.css
+
+# rake client:build_and_deploy
+/public/favicon.png
+/public/icons/
+/public/index.html
+/public/manifest.json
+/public/service-worker.js
