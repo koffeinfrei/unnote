@@ -3,7 +3,6 @@
 class DeployClient
   BUILD_DIRECTORY = 'client/build'
   PUBLIC_DIRECTORY = 'public'
-  MOBILE_DIRECTORY = '../mykonote-app/www/'
 
   def deploy_public
     cleanup(PUBLIC_DIRECTORY)
@@ -11,18 +10,8 @@ class DeployClient
     deploy(PUBLIC_DIRECTORY)
   end
 
-  def deploy_mobile
-    cleanup(MOBILE_DIRECTORY)
-    build
-    deploy(MOBILE_DIRECTORY)
-  end
-
   def cleanup_public
     cleanup(PUBLIC_DIRECTORY)
-  end
-
-  def cleanup_mobile
-    cleanup(MOBILE_DIRECTORY)
   end
 
   def build
