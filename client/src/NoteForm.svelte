@@ -16,7 +16,7 @@
 </div>
 
 <script>
-  import { createEventDispatcher, onMount, onDestroy, afterUpdate } from 'svelte'
+  import { createEventDispatcher, onMount, afterUpdate } from 'svelte'
   import './highlight.js'
   import Quill from 'quill'
   import { searchTerm } from './stores'
@@ -35,7 +35,6 @@
   let titleElement
   let contentContainerElement
   let contentElement
-  let noteUpdateSubscription
 
   // prevent form submission by hitting enter.
   // changes will be asynchronously saved by ajax.
@@ -86,18 +85,7 @@
     }
   }
 
-  onMount(() => {
-    renderEditor()
-
-    // when updating the note from outside (e.g. from the mobile app), in which
-    // case a sync to the server should be triggered. if we just use the react
-    // eventing the rte won't detect the changes.
-    noteUpdateSubscription = EventHive.subscribe('note.update', (data) => {
-      titleElement.value = data.title
-      handleTitleChange()
-      editor.pasteHTML(data.content)
-    })
-  })
+  onMount(renderEditor)
 
   // gets called initially and when a note is switched
   afterUpdate(() => {
@@ -116,10 +104,6 @@
       editor.history.clear()
       editor.on('text-change', handleContentChange)
     }
-  })
-
-  onDestroy(() => {
-    noteUpdateSubscription.remove()
   })
 
   let previousNoteUid
