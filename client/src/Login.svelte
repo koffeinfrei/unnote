@@ -17,10 +17,8 @@
         label="Password"
         on:change={setValue} />
 
-      {#if !alwaysRememberMe}
-        <Checkbox model="user" attribute="remember_me" label="Remember me"
-          on:change={setValue} />
-      {/if}
+      <Checkbox model="user" attribute="remember_me" label="Remember me"
+        on:change={setValue} />
    </div>
 
     <SubmitButton label="Log in" />
@@ -40,8 +38,6 @@
   import TextInput from './form/TextInput.svelte'
   import Checkbox from './form/Checkbox.svelte'
   import SubmitButton from './form/SubmitButton.svelte'
-
-  export let alwaysRememberMe
 
   let values
 
