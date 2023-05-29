@@ -27,18 +27,4 @@ seed Note, { title: 'Ruby on Rails' }, {
   user: user
 }
 
-seed Note, { title: 'React' }, {
-  text_content: "<h1>React</h1><p><br></p><p><img src=\"6f4c116a1cb164e4d1fcbf6970a0736c4437b4d0151d83de1fa33122fef35c01\" class=\"\"></p><p><br></p><p>A JavaScript library for building user interfaces</p><h3><br></h3><pre class=\"ql-syntax\" spellcheck=\"false\"><span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">HelloMessage</span> <span class=\"hljs-keyword\">extends</span> <span class=\"hljs-title\">React</span>.<span class=\"hljs-title\">Component</span> </span>{\n" \
-    "&nbsp;render() {\n" \
-    "&nbsp;&nbsp;&nbsp;<span class=\"hljs-keyword\">return</span> &lt;div&gt;<span class=\"hljs-type\">Hello</span> {<span class=\"hljs-keyword\">this</span>.props.name}&lt;/div&gt;;\n" \
-    "&nbsp;}\n" \
-    "}\n" \
-    "\n" \
-    "<span class=\"hljs-type\">ReactDOM</span>.render(&lt;<span class=\"hljs-type\">HelloMessage</span> name=<span class=\"hljs-string\">\"John\"</span> /&gt;, mountNode);\n" \
-    '</pre><p><br></p><p><br></p><p>Source url: <a href="https://facebook.github.io/react/" target="_blank">https://facebook.github.io/react</a></p>',
-  uid: SecureRandom.uuid,
-  images: [seed_file('6f4c116a1cb164e4d1fcbf6970a0736c4437b4d0151d83de1fa33122fef35c01.png')],
-  user: user
-}
-
 # rubocop:enable Layout/LineLength
