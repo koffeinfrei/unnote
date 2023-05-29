@@ -27,7 +27,7 @@
             {note.title}
           </h4>
           <div class="list-item-meta tooltip-top" data-tooltip={humanDate.prettyPrint(note.updatedAt, { showTime: true })}>
-            {humanDate.relativeTime(note.updatedAt)}
+            {relativeTimeUpdateTrigger && humanDate.relativeTime(note.updatedAt)}
           </div>
         </div>
         <div class="list-item-actions">
@@ -81,8 +81,15 @@
   let isLoadingMorePages = true
   let updateListRequest
   let filter
+  let relativeTimeUpdateTrigger = Date.now()
 
   const dispatch = createEventDispatcher()
+
+  // update the relative `updatedAt` time shown in the list. For newly created
+  // notes where we show seconds the display gets stale otherwise
+  setInterval(() => {
+    relativeTimeUpdateTrigger = Date.now()
+  }, 1000)
 
   $: {
     if (isSynced && listNeedsUpdate !== false) {
