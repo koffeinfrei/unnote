@@ -1,3 +1,17 @@
+## 0.13.0 (2023-05-29)
+
+#### :rocket: Enhancement
+* [#514](https://github.com/koffeinfrei/mykonote/pull/514) Keep the relative note date up-to-date ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#513](https://github.com/koffeinfrei/mykonote/pull/513) Remove always remember me option ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#511](https://github.com/koffeinfrei/mykonote/pull/511) Remove obsolete mobile app things ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#510](https://github.com/koffeinfrei/mykonote/pull/510) Remove automatic client build step before rspec ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.12.1 (2023-05-21)
 
 #### :bug: Bug Fix
