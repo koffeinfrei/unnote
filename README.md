@@ -75,7 +75,25 @@ $ bundle exec rake client:build_and_deploy
 $ bundle exec rspec spec
 ```
 
-### Changelog
+### Releases (Versioning / Changelog)
+
+[Semantic Versioning](https://semver.org/) is used, obviously.
+
+There's a script that bumps the version, generates the changelog entry and
+creates a corresponding git commit / tag.
+
+```bash
+# bump the major version, e.g. from 1.2.0 to 2.0.0
+$ scripts/version bump:major
+
+# bump the minor version, e.g. from 1.2.0 to 1.3.0
+$ scripts/version bump:minor
+
+# bump the patch version, e.g. from 1.2.0 to 1.2.1
+$ scripts/version bump:patch
+```
+
+#### Changelog
 
 For generating the changelog
 [lerna-changelog](https://github.com/lerna/lerna-changelog) is used.
@@ -83,12 +101,6 @@ For generating the changelog
 To set this up locally you'll need to create the file
 `.lerna-changelog-github-token` containing a GitHub access token (with just the
 `public_repo` scope).
-
-To create the new changelog entries just issue the following command:
-
-  ```bash
-  $ npm run changelog
-  ```
 
 ## Links
 
