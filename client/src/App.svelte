@@ -1,5 +1,6 @@
 <Navbar isLoggedIn={$isAuthenticated} />
 <main>
+  <MultipleTabs />
   <Flash />
   <Router {routes} />
 </main>
@@ -15,6 +16,7 @@
   import TaskEdit from './TaskEdit.svelte'
   import Flash from './Flash.svelte'
   import Navbar from './Navbar.svelte'
+  import MultipleTabs from './MultipleTabs.svelte'
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true

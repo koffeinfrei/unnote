@@ -10,10 +10,12 @@
       {@html text}
     </section>
     <footer>
-      <button class="button" on:click={handleOkButtonClick}>Ok</button>
-      <label for={id} class="button dangerous" on:click={handleCancelButtonClick}>
-        Cancel
-      </label>
+      {#if showButtons}
+        <button class="button" on:click={handleOkButtonClick}>Ok</button>
+        <label for={id} class="button dangerous" on:click={handleCancelButtonClick}>
+          Cancel
+        </label>
+      {/if}
     </footer>
   </article>
 </div>
@@ -25,6 +27,7 @@
   export let title
   export let text
   export let show
+  export let showButtons = true
 
   const id = Math.random().toString(16).slice(-12)
 
