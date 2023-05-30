@@ -1,3 +1,12 @@
+## 0.14.0 (2023-05-30)
+
+#### :rocket: Enhancement
+* [#519](https://github.com/koffeinfrei/mykonote/pull/519) Warn on multiple open tabs ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.13.0 (2023-05-29)
 
 #### :rocket: Enhancement
