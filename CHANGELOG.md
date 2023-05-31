@@ -1,3 +1,12 @@
+## 0.14.1 (2023-05-31)
+
+#### :bug: Bug Fix
+* [#520](https://github.com/koffeinfrei/mykonote/pull/520) Prevent cursor jump in content on title change ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.14.0 (2023-05-30)
 
 #### :rocket: Enhancement
