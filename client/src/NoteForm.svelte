@@ -31,7 +31,7 @@
   let contentElement
 
   const handleTitleChange = () => {
-    shouldRerender = true
+    shouldRerender = false
     note.title = titleElement.value
     dispatch('change', note)    
   }
