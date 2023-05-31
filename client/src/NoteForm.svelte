@@ -1,18 +1,13 @@
 <div class:hidden-sm={!showForm}>
-  <form
-    bind:this={formContainerElement}
-    on:submit={handleFormSubmit}>
+  <input
+    type="text"
+    value={note.title}
+    on:input={handleTitleChange}
+    placeholder="Title"
+    bind:this={titleElement}
+  />
 
-    <input
-      type="text"
-      value={note.title}
-      on:input={handleTitleChange}
-      placeholder="Title"
-      bind:this={titleElement}
-    />
-
-    <div bind:this={contentContainerElement}></div>
-  </form>
+  <div bind:this={contentContainerElement}></div>
 </div>
 
 <script>
@@ -31,17 +26,9 @@
 
   let shouldRerender = true
   let editor
-  let formContainerElement
   let titleElement
   let contentContainerElement
   let contentElement
-
-  // prevent form submission by hitting enter.
-  // changes will be asynchronously saved by ajax.
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    return false
-  }
 
   const handleTitleChange = () => {
     shouldRerender = true
