@@ -16,7 +16,7 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "highlight.js": "^11.7.0",
+    "highlight.js": "^11.8.0",
     "human-date": "^1.4.0",
     "mousetrap": "^1.6.5",
     "picnic": "^7.1.0",
