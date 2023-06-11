@@ -18,9 +18,9 @@ export function setEdit(note) {
 
 export function setBrowserTitle(note) {
   if (note && note.title) {
-    document.title = `${note.title} | Mykonote`;
+    document.title = `${note.title} | unnote`;
   }
   else {
-    document.title = 'Mykonote';
+    document.title = 'unnote';
   }
 }

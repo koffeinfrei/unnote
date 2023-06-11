@@ -6,7 +6,7 @@
       which is why I don't want to host any private data of other users.
     </p>
     <p>
-      While I'm figuring out all that legal stuff you may <a href="https://github.com/panter/mykonote">get the source code from
+      While I'm figuring out all that legal stuff you may <a href="https://github.com/koffeinfrei/unnote">get the source code from
       GitHub</a> and install it on a server on your own.
     </p>
   </svelte:fragment>

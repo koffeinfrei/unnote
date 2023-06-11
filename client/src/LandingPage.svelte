@@ -5,7 +5,11 @@
     <h1>unnote</h1>
 
     <div class="section">
-      <strong>Privacy first, fast, simple &amp; from every device - <br />wherever you are.</strong>
+      <strong>
+        The note taking app that doesn't suck.
+        <br /><br />
+        Privacy first, fast, simple &amp; from every device - <br />wherever you are.
+      </strong>
     </div>
 
     <div class="flex one two-500 four-1000 section">
@@ -86,7 +90,7 @@
       </div>
 
       <div>
-        This is free and open source software. Source code on <a href="https://github.com/koffeinfrei/mykonote" target="_blank">GitHub</a>
+        This is free and open source software. Source code on <a href="https://github.com/koffeinfrei/unnote" target="_blank">GitHub</a>
       </div>
     </footer>
   </div>

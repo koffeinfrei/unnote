@@ -1,8 +1,10 @@
-[![CI](https://github.com/panter/mykonote/actions/workflows/ci.yml/badge.svg)](https://github.com/panter/mykonote/actions/workflows/ci.yml)
+[![CI](https://github.com/koffeinfrei/unnote/actions/workflows/ci.yml/badge.svg)](https://github.com/panter/unnote/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/panter/mykonote)
 [![codebeat badge](https://codebeat.co/badges/6f0e1968-b451-4cb9-84d9-9cc49c68e64f)](https://codebeat.co/projects/github-com-panter-mykonote-main)
 
-# Mykonote [/ˈmɪkəˌnəʊt/]
+# unnote
+
+Formerly known as Mykonote.
 
 **Full / Desktop**
 
@@ -22,7 +24,7 @@ core functionality. There won't be any fancy unnecessary features such as a
 chat. It basically meets the one requirement: Taking and managing private
 notes.
 
-What Mykonote offers:
+What unnote offers:
 
 * A [solid richtext editor](http://quilljs.com/) which works properly without
   ruining the formatting
@@ -30,7 +32,7 @@ What Mykonote offers:
   lists)
 * PWA, so it can be installed as an app on any mobile device
   * Support for the "share to" functionality of mobile phones. Pretty much any
-    image or text based content can be shared to Mykonote.
+    image or text based content can be shared to unnote.
 * Autosave
 * Permanent edit mode. There's no switching between read and edit mode. Just
   edit, always.
@@ -105,8 +107,8 @@ To set this up locally you'll need to create the file
 
 ## Links
 
-- [Homepage www.mykonote.com](https://www.mykonote.com)
-- [Web app at app.mykonote.com](https://app.mykonote.com)
+- [Homepage www.unnote.com](https://www.unnote.com)
+- [Web app at app.unnote.com](https://app.unnote.com)
 
 ## License
 
