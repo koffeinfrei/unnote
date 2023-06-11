@@ -44,7 +44,6 @@ What Mykonote offers:
   There is no [vendor lock-in](https://en.wikipedia.org/wiki/Vendor_lock-in)
   and there will never be any weird business going on with your data.
 
-
 ## Development setup
 
 To get the application started the standard rails setup routine can be
@@ -108,10 +107,6 @@ To set this up locally you'll need to create the file
 
 - [Homepage www.mykonote.com](https://www.mykonote.com)
 - [Web app at app.mykonote.com](https://app.mykonote.com)
-- [Mobile app on Google
-  Play](https://play.google.com/store/apps/details?id=com.mykonote)
-- [Mobile app source code](https://github.com/panter/mykonote-app)
-
 
 ## License
 
