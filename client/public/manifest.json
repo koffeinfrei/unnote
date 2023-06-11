@@ -1,6 +1,6 @@
 {
-  "name": "Mykonote",
-  "short_name": "Mykonote",
+  "name": "unnote",
+  "short_name": "unnote",
   "description": "The note taking app that doesn't suck. Made under the Mykonian sun.",
   "start_url": "./index.html",
   "display": "standalone",
