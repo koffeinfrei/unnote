@@ -29,6 +29,8 @@ What Mykonote offers:
 * [Task lists](https://github.com/koffeinfrei/quill-task-list) (aka. todo
   lists)
 * PWA, so it can be installed as an app on any mobile device
+  * Support for the "share to" functionality of mobile phones. Pretty much any
+    image or text based content can be shared to Mykonote.
 * Autosave
 * Permanent edit mode. There's no switching between read and edit mode. Just
   edit, always.
