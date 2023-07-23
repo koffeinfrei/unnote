@@ -85,13 +85,13 @@ creates a corresponding git commit / tag.
 
 ```bash
 # bump the major version, e.g. from 1.2.0 to 2.0.0
-$ scripts/version bump:major
+$ bin/version bump:major
 
 # bump the minor version, e.g. from 1.2.0 to 1.3.0
-$ scripts/version bump:minor
+$ bin/version bump:minor
 
 # bump the patch version, e.g. from 1.2.0 to 1.2.1
-$ scripts/version bump:patch
+$ bin/version bump:patch
 ```
 
 #### Changelog
