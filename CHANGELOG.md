@@ -1,3 +1,12 @@
+## 0.14.2 (2023-07-23)
+
+#### :bug: Bug Fix
+* [#537](https://github.com/koffeinfrei/mykonote/pull/537) fix "share to" ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.14.1 (2023-05-31)
 
 #### :bug: Bug Fix
