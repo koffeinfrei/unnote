@@ -1,6 +1,8 @@
 <Navbar isLoggedIn={$isAuthenticated} />
 <main>
-  <MultipleTabs />
+  {#if !isPwa()}
+    <MultipleTabs />
+  {/if}
   <Flash />
   <Router {routes} />
 </main>
@@ -17,6 +19,7 @@
   import Flash from './Flash.svelte'
   import Navbar from './Navbar.svelte'
   import MultipleTabs from './MultipleTabs.svelte'
+  import { isPwa } from './capabilities'
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true
