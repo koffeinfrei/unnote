@@ -38,7 +38,7 @@
 {/if}
 
 <script>
-  import { onMount, beforeUpdate, onDestroy } from 'svelte'
+  import { onMount, beforeUpdate, onDestroy, tick } from 'svelte'
   import { querystring } from 'svelte-spa-router'
   import { ajax } from './ajax'
   import { show } from './flash'
@@ -72,21 +72,10 @@
   let showArchiveDialog
   let handleArchiveDialogConfirmed
 
+  $: { $querystring; initializefromShareTarget() }
+  $: { params; initializefromParam() }
 
-  onMount(() => {
-    noteNewSubscription = EventHive.subscribe('note.new', (data) => {
-      setNewNote()
-    })
-  })
-
-  beforeUpdate(async () => {
-    // we can't do this in `onMount` since this happens before, and `autoSave`
-    // would be `undefined`.
-    if (autoSave === undefined) {
-      autoSave = new AutoSave(handleServerSync)
-      autoSave.startPolling()
-    }
-
+  const initializefromShareTarget = async () => {
     if ($querystring.includes('share-target')) {
       note = new Note()
 
@@ -109,10 +98,10 @@
         autoSave.setChange(note)
       }
     }
-    else if (!params.id) {
-      note = new Note()
-    }
-    else if (params.id && note?.uid !== params.id) {
+  }
+
+  const initializefromParam = async () => {
+    if (params.id && note?.uid !== params.id) {
       // 1. try sync storage
       note = Note.fromAttributes(SyncStorage.getJson({ uid: params.id }))
       if (!note) {
@@ -123,8 +112,25 @@
           await initStateFromNoteId(params.id)
         }
       }
+      showList = false
     }
+    else if (!params.id) {
+      note = new Note()
+    }
+  }
 
+  onMount(async () => {
+    autoSave = new AutoSave(handleServerSync)
+    autoSave.startPolling()
+
+    noteNewSubscription = EventHive.subscribe('note.new', (data) => {
+      setNewNote()
+    })
+
+    await tick()
+  })
+
+  beforeUpdate(async () => {
     if (note === undefined) {
       note = new Note()
       showList = true
