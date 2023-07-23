@@ -1,13 +1,11 @@
 export async function getBlob(name) {
   const keys = await caches.keys()
-  const mediaCache = await caches.open(
-    keys.filter((key) => key.startsWith('media'))[0],
-  )
+  const cache = await caches.open('media')
 
-  const image = await mediaCache.match(name)
+  const image = await cache.match(name)
   if (image) {
     const blob = await image.blob()
-    await mediaCache.delete(name)
+    await cache.delete(name)
 
     return blob
   }
@@ -15,14 +13,12 @@ export async function getBlob(name) {
 
 export async function getJson(name) {
   const keys = await caches.keys()
-  const mediaCache = await caches.open(
-    keys.filter((key) => key.startsWith('media'))[0],
-  )
+  const cache = await caches.open('media')
 
-  const data = await mediaCache.match(name)
+  const data = await cache.match(name)
   if (data) {
     const json = await data.json()
-    await mediaCache.delete(name)
+    await cache.delete(name)
 
     return json
   }
