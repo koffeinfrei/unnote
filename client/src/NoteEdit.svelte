@@ -87,22 +87,7 @@
       autoSave.startPolling()
     }
 
-    if (!params.id) {
-      note = new Note()
-    }
-    else if (params.id && note?.uid !== params.id) {
-      // 1. try sync storage
-      note = Note.fromAttributes(SyncStorage.getJson({ uid: params.id }))
-      if (!note) {
-        // 2. try svelte store
-        note = $notes.find(note => note.uid === params.id)
-        if (!note) {
-          // 3. try server
-          await initStateFromNoteId(params.id)
-        }
-      }
-    }
-    else if ($querystring.includes('share-target')) {
+    if ($querystring.includes('share-target')) {
       note = new Note()
 
       const blob = await getBlob('shared-image')
@@ -119,8 +104,24 @@
           note.content = [json.text, json.url].filter(x => x).join('<br/>')
         }
 
+        showList = false
         setEdit(note)
         autoSave.setChange(note)
+      }
+    }
+    else if (!params.id) {
+      note = new Note()
+    }
+    else if (params.id && note?.uid !== params.id) {
+      // 1. try sync storage
+      note = Note.fromAttributes(SyncStorage.getJson({ uid: params.id }))
+      if (!note) {
+        // 2. try svelte store
+        note = $notes.find(note => note.uid === params.id)
+        if (!note) {
+          // 3. try server
+          await initStateFromNoteId(params.id)
+        }
       }
     }
 
