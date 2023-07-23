@@ -1,3 +1,12 @@
+## 0.14.3 (2023-07-23)
+
+#### :bug: Bug Fix
+* [#539](https://github.com/koffeinfrei/mykonote/pull/539) disable multiple tabs warning for PWA ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.14.2 (2023-07-23)
 
 #### :bug: Bug Fix
