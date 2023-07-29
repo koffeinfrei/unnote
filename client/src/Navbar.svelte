@@ -25,6 +25,10 @@
       <CloseIcon />
     </button>
 
+    {#if !isApp}
+      <a href="/" class="button pseudo menu-button" use:link>Go to app</a>
+    {/if}
+
     {#if isLoggedIn}
       <Logout />
     {/if}
@@ -41,6 +45,7 @@
   import CloseIcon from './icons/material/close-24px.svg.svelte'
 
   export let isLoggedIn
+  export let isApp
 
   let showHamburgerElement
 

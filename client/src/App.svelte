@@ -1,4 +1,4 @@
-<Navbar isLoggedIn={$isAuthenticated} />
+<Navbar isLoggedIn={$isAuthenticated} isApp={$location !== '/www'} />
 <main>
   {#if !isPwa()}
     <MultipleTabs />
@@ -8,10 +8,11 @@
 </main>
 
 <script>
-  import Router, { push } from 'svelte-spa-router'
+  import Router, { push, location } from 'svelte-spa-router'
   import { wrap } from 'svelte-spa-router/wrap'
   import { ajax } from './ajax'
   import { isAuthenticated } from './stores'
+  import LandingPage from './LandingPage.svelte'
   import Login from './Login.svelte'
   import Register from './Register.svelte'
   import NoteEdit from './NoteEdit.svelte'
@@ -79,6 +80,17 @@
     '/': wrap({
       asyncComponent: () => {},
       conditions: [() => push('/notes')]
+    }),
+    '/www': wrap({
+      component: LandingPage,
+      conditions: [
+        async () => {
+          // don't `await` so the landing page is shown directly. the UI
+          // regarding auth status will update async later.
+          authenticate()
+          return true
+        }
+      ]
     })
   }
 </script>
