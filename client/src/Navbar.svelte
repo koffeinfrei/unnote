@@ -1,7 +1,7 @@
 <nav>
   <Logo />
 
-  {#if isLoggedIn}
+  {#if isLoggedIn && isApp}
     <SearchBox />
   {/if}
 
@@ -25,6 +25,14 @@
       <CloseIcon />
     </button>
 
+    {#if !isApp}
+      {#if import.meta.env.VITE_APP_URL}
+        <a href={import.meta.env.VITE_APP_URL} class="button pseudo menu-button">Go to app</a>
+      {:else}
+        <a href="/" class="button pseudo menu-button">Go to app</a>
+      {/if}
+    {/if}
+
     {#if isLoggedIn}
       <Logout />
     {/if}
@@ -41,6 +49,7 @@
   import CloseIcon from './icons/material/close-24px.svg.svelte'
 
   export let isLoggedIn
+  export let isApp
 
   let showHamburgerElement
 

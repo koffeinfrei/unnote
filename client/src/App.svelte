@@ -1,4 +1,4 @@
-<Navbar isLoggedIn={$isAuthenticated} />
+<Navbar isLoggedIn={$isAuthenticated} {isApp} />
 <main>
   {#if !isPwa()}
     <MultipleTabs />
@@ -8,7 +8,7 @@
 </main>
 
 <script>
-  import Router, { push } from 'svelte-spa-router'
+  import Router, { push, location } from 'svelte-spa-router'
   import { wrap } from 'svelte-spa-router/wrap'
   import { ajax } from './ajax'
   import { isAuthenticated } from './stores'
@@ -20,6 +20,8 @@
   import Navbar from './Navbar.svelte'
   import MultipleTabs from './MultipleTabs.svelte'
   import { isPwa } from './capabilities'
+
+  $: isApp = !window.IS_LANDING_PAGE
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true
@@ -77,8 +79,17 @@
       conditions: [authenticateOrRedirect]
     }),
     '/': wrap({
-      asyncComponent: () => {},
-      conditions: [() => push('/notes')]
+      asyncComponent: () => import('./LandingPage.svelte'),
+        conditions: [
+          async () => {
+            if (isApp) {
+              push('/notes')
+            } else {
+              authenticate()
+              return true
+            }
+          }
+        ]
     })
   }
 </script>
