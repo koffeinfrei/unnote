@@ -22,7 +22,8 @@
   import MultipleTabs from './MultipleTabs.svelte'
   import { isPwa } from './capabilities'
 
-  $: console.log('location', $location)
+  $: console.log('$location', $location)
+  $: console.log('location', window.location)
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true
