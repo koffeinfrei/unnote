@@ -1,4 +1,4 @@
-<Navbar isLoggedIn={$isAuthenticated} isApp={$location !== '/www'} />
+<Navbar isLoggedIn={$isAuthenticated} {isApp} />
 <main>
   {#if !isPwa()}
     <MultipleTabs />
@@ -22,8 +22,10 @@
   import MultipleTabs from './MultipleTabs.svelte'
   import { isPwa } from './capabilities'
 
-  $: console.log('$location', $location)
-  $: console.log('location', window.location)
+  /* $: console.log('$location', $location) */
+  /* $: console.log('location.pathname', window.location.pathname) */
+  $: isApp = window.location.pathname == '/www.html'
+  $: console.log('isApp', isApp);
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true
@@ -82,7 +84,7 @@
     }),
     '/': wrap({
       asyncComponent: () => {},
-      conditions: [() => push('/notes')]
+      conditions: [() => push(isApp ? '/www' : '/notes')]
     }),
     '/www': wrap({
       component: LandingPage,
