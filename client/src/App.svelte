@@ -85,7 +85,7 @@
     }),
     '/': wrap({
       asyncComponent: () => {},
-      conditions: [() => push(isApp ? '/www' : '/notes')]
+      conditions: [() => push(isApp ? '/notes' : '/www' )]
     }),
     '/www': wrap({
       component: LandingPage,
