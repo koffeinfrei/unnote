@@ -24,7 +24,8 @@
 
   /* $: console.log('$location', $location) */
   /* $: console.log('location.pathname', window.location.pathname) */
-  $: isApp = window.location.pathname == '/www.html'
+  /* $: isApp = window.location.pathname == '/www.html' */
+  $: isApp = !window.is_landing_page
   $: console.log('isApp', isApp);
 
   const authenticate = async () => {
