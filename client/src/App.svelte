@@ -12,7 +12,7 @@
   import { wrap } from 'svelte-spa-router/wrap'
   import { ajax } from './ajax'
   import { isAuthenticated } from './stores'
-  import LandingPage from './LandingPage.svelte'
+  /* import LandingPage from './LandingPage.svelte' */
   import Login from './Login.svelte'
   import Register from './Register.svelte'
   import NoteEdit from './NoteEdit.svelte'
@@ -25,7 +25,7 @@
   /* $: console.log('$location', $location) */
   /* $: console.log('location.pathname', window.location.pathname) */
   /* $: isApp = window.location.pathname == '/www.html' */
-  $: isApp = !window.is_landing_page
+  $: isApp = !window.IS_LANDING_PAGE
   $: console.log('isApp', isApp);
 
   const authenticate = async () => {
@@ -84,19 +84,17 @@
       conditions: [authenticateOrRedirect]
     }),
     '/': wrap({
-      asyncComponent: () => {},
-      conditions: [() => push(isApp ? '/notes' : '/www' )]
-    }),
-    '/www': wrap({
-      component: LandingPage,
-      conditions: [
-        async () => {
-          // don't `await` so the landing page is shown directly. the UI
-          // regarding auth status will update async later.
-          authenticate()
-          return true
-        }
-      ]
+      asyncComponent: () => import('./LandingPage.svelte'),
+        conditions: [
+          async () => {
+            if (isApp) {
+              push('/notes')
+            } else {
+              authenticate()
+              return true
+            }
+          }
+        ]
     })
   }
 </script>
