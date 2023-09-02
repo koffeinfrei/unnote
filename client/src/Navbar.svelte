@@ -26,7 +26,11 @@
     </button>
 
     {#if !isApp}
-      <a href={`${import.meta.env.VITE_APP_DOMAIN || ''}/`} class="button pseudo menu-button" use:link>Go to app</a>
+      {#if import.meta.env.VITE_APP_DOMAIN}
+        <a href={import.meta.env.VITE_APP_DOMAIN} class="button pseudo menu-button">Go to app</a>
+      {:else}
+        <a href="/" class="button pseudo menu-button" use:link>Go to app</a>
+      {/if}
     {/if}
 
     {#if isLoggedIn}
