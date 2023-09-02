@@ -26,7 +26,6 @@
   /* $: console.log('location.pathname', window.location.pathname) */
   /* $: isApp = window.location.pathname == '/www.html' */
   $: isApp = !window.IS_LANDING_PAGE
-  $: console.log('isApp', isApp);
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true
