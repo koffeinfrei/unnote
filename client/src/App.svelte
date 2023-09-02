@@ -8,7 +8,7 @@
 </main>
 
 <script>
-  import Router, { push, location } from 'svelte-spa-router'
+  import Router, { push, replace, location } from 'svelte-spa-router'
   import { wrap } from 'svelte-spa-router/wrap'
   import { ajax } from './ajax'
   import { isAuthenticated } from './stores'
@@ -83,7 +83,7 @@
         conditions: [
           async () => {
             if (isApp) {
-              push('/notes')
+              replace('/notes')
             } else {
               authenticate()
               return true
