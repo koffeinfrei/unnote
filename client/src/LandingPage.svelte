@@ -35,7 +35,7 @@
 
     <div class="flex one center section">
       <article class="card two-third-800 half-1000">
-        <img src="https://github.com/koffeinfrei/mykonote/raw/main/screenshot_desktop.png" />
+        <img src="https://github.com/koffeinfrei/unnote/raw/main/screenshot_desktop.png" />
         <footer>
           <h4>Browser / Full width</h4>
         </footer>
@@ -44,13 +44,13 @@
 
     <div class="flex one center section">
       <article class="card half third-800 fourth-1000">
-        <img src="https://github.com/koffeinfrei/mykonote/raw/main/screenshot_mobile_1.png" />
+        <img src="https://github.com/koffeinfrei/unnote/raw/main/screenshot_mobile_1.png" />
         <footer>
           <h4>Mobile / PWA - Note view</h4>
         </footer>
       </article>
       <article class="card half third-800 fourth-1000">
-        <img src="https://github.com/koffeinfrei/mykonote/raw/main/screenshot_mobile_2.png" />
+        <img src="https://github.com/koffeinfrei/unnote/raw/main/screenshot_mobile_2.png" />
         <footer>
           <h4>Mobile / PWA - List view</h4>
         </footer>
@@ -86,7 +86,7 @@
       </div>
 
       <div>
-        This is free and open source software. Source code on <a href="https://github.com/koffeinfrei/mykonote" target="_blank">GitHub</a>
+        This is free and open source software. Source code on <a href="https://github.com/koffeinfrei/unnote" target="_blank">GitHub</a>
       </div>
     </footer>
   </div>
