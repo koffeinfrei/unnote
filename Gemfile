@@ -40,7 +40,7 @@ group :development do
   gem 'binding_of_caller' # Needed by better_errors to enable html console
   gem 'rubocop', '~> 1.48', require: false
   gem 'rubocop-performance', '~> 1.16', require: false
-  gem 'rubocop-rails', '~> 2.18', require: false
+  gem 'rubocop-rails', '~> 2.21', require: false
   gem 'rubocop-rspec', '~> 2.19', require: false
   gem 'seed_box'
 end
