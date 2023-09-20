@@ -18,15 +18,15 @@ default: &default
 
 development: &development
   <<: *default
-  database: mykonote_development
+  database: unnote_development
 
 test:
   <<: *default
-  database: mykonote_test
+  database: unnote_test
 
 production:
   <<: *default
-  database: mykonote
+  database: unnote
   username: app
 
 local_production:

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import sveltePreprocess from 'svelte-preprocess'
 
@@ -13,6 +14,14 @@ export default defineConfig({
     proxy: {
       '^/users.*': 'http://localhost:3001',
       '^/api/.*': 'http://localhost:3001',
+    },
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        www: resolve(__dirname, 'www.html'),
+      },
     },
   },
 })

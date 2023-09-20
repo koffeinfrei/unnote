@@ -1,6 +1,6 @@
 <Dialog
   title='Multiple tabs'
-  text='You currently have Mykonote open in multiple tabs. Please close all but one of them.<br>Keeping multiple tabs active will likely lead to edit conflicts.'
+  text='You currently have unnote open in multiple tabs. Please close all but one of them.<br>Keeping multiple tabs active will likely lead to edit conflicts.'
   show={showDialog}
   showButtons={false}
   on:confirm={() => showDialog = false} />

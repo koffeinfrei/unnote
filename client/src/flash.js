@@ -10,5 +10,5 @@ export function clear(name) {
 }
 
 export function getEventName(name) {
-  return `mykonote.flash.${name}`;
+  return `unnote.flash.${name}`;
 }

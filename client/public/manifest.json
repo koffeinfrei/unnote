@@ -1,10 +1,10 @@
 {
-  "name": "Mykonote",
-  "short_name": "Mykonote",
-  "description": "The note taking app that doesn't suck. Made under the Mykonian sun.",
+  "name": "unnote",
+  "short_name": "unnote",
+  "description": "The note taking app that doesn't suck.",
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#008bce",
+  "theme_color": "#2c679f",
   "background_color": "#f9f9f9",
   "icons": [
     {

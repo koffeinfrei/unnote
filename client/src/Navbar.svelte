@@ -1,7 +1,7 @@
 <nav>
   <Logo />
 
-  {#if isLoggedIn}
+  {#if isLoggedIn && isApp}
     <SearchBox />
   {/if}
 
@@ -10,13 +10,13 @@
 
   <div class="menu">
     {#if isFeatureEnabled('tasks')}
-      <a href="/notes" class="button pseudo" use:link use:active={{ path: /\/notes\/*.*/ }}>All notes</a>
+      <a href="/notes" class="button pseudo menu-button" use:link use:active={{ path: /\/notes\/*.*/ }}>All notes</a>
     {/if}
     {#if isFeatureEnabled('tasks')}
-      <a href="/task-notes" class="button pseudo" use:link use:active={{ path: /\/task-notes\/*.*/ }}>Task notes</a>
+      <a href="/task-notes" class="button pseudo menu-button" use:link use:active={{ path: /\/task-notes\/*.*/ }}>Task notes</a>
     {/if}
     {#if isFeatureEnabled('tasks')}
-      <a href="/tasks" class="button pseudo" use:link use:active>Tasks</a>
+      <a href="/tasks" class="button pseudo menu-button" use:link use:active>Tasks</a>
     {/if}
 
     <button
@@ -24,6 +24,14 @@
       on:click={handleCloseHamburgerClicked}>
       <CloseIcon />
     </button>
+
+    {#if !isApp}
+      {#if import.meta.env.VITE_APP_URL}
+        <a href={import.meta.env.VITE_APP_URL} class="button pseudo menu-button">Go to app</a>
+      {:else}
+        <a href="/" class="button pseudo menu-button">Go to app</a>
+      {/if}
+    {/if}
 
     {#if isLoggedIn}
       <Logout />
@@ -41,6 +49,7 @@
   import CloseIcon from './icons/material/close-24px.svg.svelte'
 
   export let isLoggedIn
+  export let isApp
 
   let showHamburgerElement
 
@@ -65,17 +74,25 @@
     &.icon
       width: auto
 
+  .burger
+    color: $picnic-white
+
   nav
     text-align: center !important
     background: $picnic-primary !important
 
   .menu
     padding-top: $picnic-separation * 3
+    background: $picnic-primary
 
     @include media('lg')
       padding-top: 0
 
+  .menu-button
+    color: $picnic-white
+
   .close-hamburger
+    color: $picnic-white
     position: absolute
     top: $picnic-separation
     right: $picnic-separation
