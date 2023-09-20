@@ -60,7 +60,7 @@ You can now start the application and give it a try at
 There's a demo user `user@example.com` with the password `asdfasdf`.
 
   ```bash
-  $ rake start
+  $ bin/dev
   ```
 
 ### Testing
