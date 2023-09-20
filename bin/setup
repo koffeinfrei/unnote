@@ -24,5 +24,5 @@ FileUtils.chdir APP_ROOT do
   system! 'bin/rails log:clear tmp:clear'
 
   puts "\n== Starting application server =="
-  system! 'rake start'
+  system! 'bin/dev'
 end
