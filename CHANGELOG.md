@@ -1,3 +1,16 @@
+## 1.0.0 (2023-09-20)
+
+#### :rocket: Enhancement
+* [#553](https://github.com/koffeinfrei/unnote/pull/553) Rename to Mykonote to unnote ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#563](https://github.com/koffeinfrei/unnote/pull/563) replace `rake start` by `bin/dev` ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#555](https://github.com/koffeinfrei/unnote/pull/555) Update svelte to major version 4 and update vite ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 0.14.3 (2023-07-23)
 
 #### :bug: Bug Fix
