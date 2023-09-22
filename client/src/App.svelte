@@ -1,6 +1,6 @@
 <Navbar isLoggedIn={$isAuthenticated} {isApp} />
 <main>
-  {#if !isPwa()}
+  {#if !isPwa() && isApp && $isAuthenticated}
     <MultipleTabs />
   {/if}
   <Flash />

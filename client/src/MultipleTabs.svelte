@@ -9,7 +9,7 @@
   import { create, read, erase } from './cookie'
   import Dialog from './Dialog.svelte'
 
-  let tabs =  parseInt(read('dont-do-tabs') || 0)
+  let tabs = parseInt(read('dont-do-tabs') || 0)
   tabs += 1
 
   create('dont-do-tabs', tabs)
