@@ -1,3 +1,12 @@
+## 1.0.1 (2023-09-22)
+
+#### :bug: Bug Fix
+* [#564](https://github.com/koffeinfrei/unnote/pull/564) Only enable tab tracking in edit mode ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.0.0 (2023-09-20)
 
 #### :rocket: Enhancement
