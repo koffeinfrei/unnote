@@ -58,3 +58,10 @@ jobs:
           bundle exec rake client:build_and_deploy
           bundle exec rake db:create
           bundle exec rspec spec
+
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: capybara screenshots
+          path: tmp/capybara
+          retention-days: 1
