@@ -124,7 +124,7 @@
     autoSave.startPolling()
 
     noteNewSubscription = EventHive.subscribe('note.new', (data) => {
-      setNewNote()
+      setNewNote(() => note = new Note())
     })
 
     await tick()
@@ -200,7 +200,7 @@
   }
 
   const handleNewNoteClicked = () => {
-    setNewNote()
+    setNewNote(() => note = new Note())
   }
 
   const handleShowListClicked = () => {
