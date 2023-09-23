@@ -9,7 +9,7 @@ class NoteContentCleaner
   def run!
     # set up geckodriver
     options = Selenium::WebDriver::Firefox::Options.new
-    options.headless!
+    options.add_argument('-headless')
 
     driver = Selenium::WebDriver.for :firefox, options: options
 
