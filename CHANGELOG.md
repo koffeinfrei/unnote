@@ -1,3 +1,17 @@
+## 1.0.2 (2023-09-23)
+
+#### :bug: Bug Fix
+* [#566](https://github.com/koffeinfrei/unnote/pull/566) Focus title on new note ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#565](https://github.com/koffeinfrei/unnote/pull/565) Bump svelte from 4.2.0 to 4.2.1 in /client ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#568](https://github.com/koffeinfrei/unnote/pull/568) Fix deprecation warning for FF headless option ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#567](https://github.com/koffeinfrei/unnote/pull/567) Save capybara screenshots on CI ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.0.1 (2023-09-22)
 
 #### :bug: Bug Fix
