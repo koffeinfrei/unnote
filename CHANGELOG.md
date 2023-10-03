@@ -1,3 +1,12 @@
+## 1.1.0 (2023-10-03)
+
+#### :rocket: Enhancement
+* [#573](https://github.com/koffeinfrei/unnote/pull/573) Landing page with logo type ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.0.2 (2023-09-23)
 
 #### :bug: Bug Fix
