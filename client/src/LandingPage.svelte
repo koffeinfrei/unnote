@@ -2,7 +2,9 @@
   <div class="hidden-sm"></div>
 
   <div class="full 1000">
-    <h1>unnote</h1>
+    <h1>
+      <img src={logo_type} alt="unnote" />
+    </h1>
 
     <div class="section">
       <strong>
@@ -39,7 +41,7 @@
 
     <div class="flex one center section">
       <article class="card two-third-800 half-1000">
-        <img src={ScreenshotDesktop} />
+        <img src={screenshotDesktop} />
         <footer>
           <h4>Browser / Full width</h4>
         </footer>
@@ -48,13 +50,13 @@
 
     <div class="flex one center section">
       <article class="card half third-800 fourth-1000">
-        <img src={ScreenshotMobile1} />
+        <img src={screenshotMobile1} />
         <footer>
           <h4>Mobile / PWA - Note view</h4>
         </footer>
       </article>
       <article class="card half third-800 fourth-1000">
-        <img src={ScreenshotMobile2} />
+        <img src={screenshotMobile2} />
         <footer>
           <h4>Mobile / PWA - List view</h4>
         </footer>
@@ -99,9 +101,10 @@
 </div>
 
 <script>
-  import ScreenshotDesktop from './images/screenshot_desktop.png'
-  import ScreenshotMobile1 from './images/screenshot_mobile_1.png'
-  import ScreenshotMobile2 from './images/screenshot_mobile_2.png'
+  import screenshotDesktop from './images/screenshot_desktop.png'
+  import screenshotMobile1 from './images/screenshot_mobile_1.png'
+  import screenshotMobile2 from './images/screenshot_mobile_2.png'
+  import logo_type from './images/logo-type.svg'
 </script>
 
 <style lang="sass">
