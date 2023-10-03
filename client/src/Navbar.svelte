@@ -9,13 +9,13 @@
   <label for="bmenug" class="burger pseudo button">&#8801;</label>
 
   <div class="menu">
-    {#if isFeatureEnabled('tasks')}
+    {#if isFeatureEnabled('tasks') && isApp}
       <a href="/notes" class="button pseudo menu-button" use:link use:active={{ path: /\/notes\/*.*/ }}>All notes</a>
     {/if}
-    {#if isFeatureEnabled('tasks')}
+    {#if isFeatureEnabled('tasks') && isApp}
       <a href="/task-notes" class="button pseudo menu-button" use:link use:active={{ path: /\/task-notes\/*.*/ }}>Task notes</a>
     {/if}
-    {#if isFeatureEnabled('tasks')}
+    {#if isFeatureEnabled('tasks') && isApp}
       <a href="/tasks" class="button pseudo menu-button" use:link use:active>Tasks</a>
     {/if}
 
