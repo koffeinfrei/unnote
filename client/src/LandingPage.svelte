@@ -1,3 +1,8 @@
+<svelte:head>
+  <title>unnote - The note taking app that doesn't suck</title>
+  <meta name="description" content="Privacy first, fast, simple &amp; from every device - wherever you are." />
+</svelte:head>
+
 <div class="flex center">
   <div class="hidden-sm"></div>
 
