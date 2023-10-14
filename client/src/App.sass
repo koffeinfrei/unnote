@@ -58,9 +58,6 @@ input
 .icon
   @include icon
 
-  &.full-width
-    width: 100% !important
-
   &.left-aligned
     @include icon
 
@@ -110,3 +107,60 @@ button.pseudo.icon-lg
 .collapsed
   height: 0
   overflow: hidden
+
+// picnic tooltip overwrite / extension
+button[data-tooltip]
+  transition: none
+
+[data-tooltip]
+  &:after,
+  &:before
+    z-index: 10000
+    transition: opacity .6s ease, height 0s ease .6s, z-index 0s
+
+  &:after
+    background-color: $picnic-black !important
+
+  // disable tooltips for devices not supporting hover (i.e. touch devices)
+  @media (hover: none)
+    &:hover:after,
+    &:focus:after,
+    &:hover:before,
+    &:focus:before
+      opacity: 0
+      border-width: 0
+      height: 0
+      padding: 0
+
+.tooltip-top-left
+  &:after,
+  &:before
+    top: auto
+    bottom: calc(100% - 6px)
+    left: auto
+    right: 100%
+    margin-bottom: 12px
+    margin-right: -26px
+
+  &:before
+    border-color: $picnic-tooltip-background transparent transparent
+    left: auto
+    right: 100%
+    margin-bottom: 0
+    margin-right: -18px
+
+.tooltip-top-right
+  &:after,
+  &:before
+    top: auto
+    bottom: calc(100% - 6px)
+    left: 100%
+    margin-left: -23px
+    margin-bottom: 12px
+
+  &:before
+    border-color: $picnic-tooltip-background transparent transparent
+    left: 100%
+    right: auto
+    margin-bottom: 0
+    margin-left: -15px
