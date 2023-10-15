@@ -31,13 +31,13 @@
           </div>
         </div>
         <div class="list-item-actions">
-          <button name="archive-note" class='icon' on:click={event => {
+          <button name="archive-note" class='icon tooltip-top-left' data-tooltip="Archive note" on:click={event => {
                 event.stopPropagation()
                 dispatch('archiveNote', note)
               }}>
             <ArchiveIcon />
           </button>
-          <button name="delete-note" class='icon' on:click={event => {
+          <button name="delete-note" class='icon tooltip-top-left' data-tooltip="Delete note" on:click={event => {
               event.stopPropagation()
               dispatch('deleteNote', note)
             }}>
@@ -173,6 +173,8 @@
     align-items: center
     justify-content: space-between
     padding: 0 $picnic-separation
+    // needed for tooltip to be able to overflow
+    overflow: visible
 
     &.active
       color: $picnic-primary

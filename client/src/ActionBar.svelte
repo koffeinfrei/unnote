@@ -5,7 +5,7 @@
 
   <SaveStateLabel {isSynced} />
 
-  <button name="new" on:click={() => dispatch('newClicked')} class="icon big">
+  <button name="new" data-tooltip="Create note" on:click={() => dispatch('newClicked')} class="icon big tooltip-top-left">
     <NewIcon />
   </button>
 </div>

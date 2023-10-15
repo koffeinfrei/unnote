@@ -19,7 +19,7 @@
   <div>
     {#if done.length > 0}
       <footer>
-        <button name="toggle-done" class='icon left-aligned full-width' on:click={() => (showDone = !showDone)}>
+        <button name="toggle-done" class='icon left-aligned tooltip-top-right' data-tooltip="Show completed" on:click={() => (showDone = !showDone)}>
           {#if showDone}
             <LessIcon />
           {:else}
