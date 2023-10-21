@@ -1,7 +1,7 @@
 {
   "name": "unnote",
   "devDependencies": {
-    "lerna-changelog": "^1.0.1"
+    "lerna-changelog": "^2.2.0"
   },
   "scripts": {
     "changelog": "GITHUB_AUTH=$(cat .lerna-changelog-github-token) node_modules/.bin/lerna-changelog"
