@@ -42,8 +42,8 @@
 
 <script>
   import Task from './Task.svelte'
-  import MoreIcon from './icons/material/expand_more-24px.svg.svelte'
-  import LessIcon from './icons/material/expand_less_black_24dp.svg.svelte'
+  import MoreIcon from './icons/material/expand_more_FILL0_wght300_GRAD0_opsz24.svg.svelte'
+  import LessIcon from './icons/material/expand_less_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
   export let note
 

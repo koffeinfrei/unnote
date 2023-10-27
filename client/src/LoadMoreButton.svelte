@@ -12,7 +12,7 @@
 
 <script>
   import { createEventDispatcher } from 'svelte'
-  import MoreIcon from './icons/material/expand_more-24px.svg.svelte'
+  import MoreIcon from './icons/material/expand_more_FILL0_wght300_GRAD0_opsz24.svg.svelte'
   import Spinner from './Spinner.svelte'
 
   export let showSpinner

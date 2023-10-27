@@ -13,7 +13,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import SaveStateLabel from './SaveStateLabel.svelte'
-  import NewIcon from './icons/material/add-24px.svg.svelte'
+  import NewIcon from './icons/material/add_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
   export let isSynced
 

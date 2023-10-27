@@ -9,7 +9,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
   import ActionBar from './ActionBar.svelte'
-  import ShowListIcon from './icons/material/arrow_back-24px.svg.svelte'
+  import ShowListIcon from './icons/material/arrow_back_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
   export let showList
   export let isSynced
