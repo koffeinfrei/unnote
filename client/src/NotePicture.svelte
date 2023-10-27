@@ -1,15 +1,30 @@
 {#if note}
   <div
-    style:background-image={`url(${getPreviewImageUrl(note) || defaultNotePicture})`}
-    style:background-repeat="no-repeat"
-    style:background-size="cover"
-    class="list-item-picture"></div>
+    style:background-image={`url(${noteImage || defaultImage})`}
+    class="list-item-picture"
+    class:with-default={!noteImage}
+    class:with-image={noteImage}
+    ></div>
 {/if}
 
 <script>
-  import defaultNotePicture from './icons/material/short_text-24px.svg'
+  import noteDefault from './icons/material/notes_FILL0_wght300_GRAD0_opsz24.svg'
+  import taskDefault from './icons/material/checklist_FILL0_wght300_GRAD0_opsz24.svg'
 
   export let note
+
+  let noteImage
+  let defaultImage
+
+  $: {
+    if (note) {
+      noteImage = getPreviewImageUrl(note)
+
+      if (!noteImage) {
+        defaultImage = note.hasTasks() ? taskDefault : noteDefault
+      }
+    }
+  }
 
   const getPreviewImageUrl = (note) => {
     var match = note.content.match(/<img.*? src=['"]([^'"]+)['"].*?>/)
@@ -35,4 +50,12 @@
     margin-right: $picnic-separation * 2
     flex: 0 0 $picture-size
     opacity: 0.5
+
+  .with-default
+    background-repeat: no-repeat
+    background-position: center
+
+  .with-image
+    background-repeat: no-repeat
+    background-size: cover
 </style>

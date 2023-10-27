@@ -1,10 +1,11 @@
 import Uuid from './Uuid';
 
 class Note {
-  constructor(uid, title, content, createdAt, updatedAt, archivedAt) {
+  constructor(uid, title, content, tasks, createdAt, updatedAt, archivedAt) {
     this._uid = uid || Uuid.generateV4();
     this._title = title || '';
     this._content = content || '';
+    this._hasTasks = (tasks || []).length > 0;
     this._createdAt = createdAt || new Date();
     this._updatedAt = updatedAt || this._createdAt;
     this._serverUpdatedAt = this._updatedAt;
@@ -41,6 +42,10 @@ class Note {
     return !this.title && !this.content;
   }
 
+  hasTasks() {
+    return this._hasTasks;
+  }
+
   toJson() {
     return JSON.stringify(
       {
@@ -62,6 +67,7 @@ class Note {
       attributes.uid,
       attributes.title,
       attributes.content,
+      attributes.tasks,
       new Date(attributes.created_at),
       new Date(attributes.updated_at),
       attributes.archived_at ? new Date(attributes.archived_at) : null
