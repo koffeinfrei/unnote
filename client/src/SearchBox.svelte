@@ -29,7 +29,7 @@
   import { debounce } from 'throttle-debounce'
   import { searchTerm } from './stores'
   import EventHive from './EventHive'
-  import SearchIcon from './icons/material/search_black_24dp.svg.svelte'
+  import SearchIcon from './icons/material/search_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
   export let isActive = false
 

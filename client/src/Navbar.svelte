@@ -46,7 +46,7 @@
   import Logout from './Logout.svelte'
   import SearchBox from './SearchBox.svelte'
   import { isFeatureEnabled } from './feature'
-  import CloseIcon from './icons/material/close-24px.svg.svelte'
+  import CloseIcon from './icons/material/close_FILL0_wght300_GRAD0_opsz24_custom_color.svg.svelte'
 
   export let isLoggedIn
   export let isApp

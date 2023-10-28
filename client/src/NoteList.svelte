@@ -65,8 +65,8 @@
   import SearchTerm from './SearchTerm.svelte'
   import LoadMoreButton from './LoadMoreButton.svelte'
   import NotePicture from './NotePicture.svelte'
-  import ArchiveIcon from './icons/material/archive-24px.svg.svelte'
-  import DeleteIcon from './icons/material/delete-24px.svg.svelte'
+  import ArchiveIcon from './icons/material/archive_FILL0_wght300_GRAD0_opsz24.svg.svelte'
+  import DeleteIcon from './icons/material/delete_FILL0_wght300_GRAD0_opsz24.svg.svelte'
   import { notes } from './stores.js'
 
   export let activeNoteUid
