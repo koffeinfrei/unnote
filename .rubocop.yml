@@ -35,12 +35,9 @@ Layout/LineEndStringConcatenationIndentation:
   Enabled: false
 
 Metrics/BlockLength:
-  AllowedMethods:
-    - refine
-    - context
-    - RSpec.describe
-    - describe
-    - it
+  Exclude:
+    - 'config/**/*'
+    - 'spec/**/*'
 
 Rails/LexicallyScopedActionFilter:
   Enabled: false
