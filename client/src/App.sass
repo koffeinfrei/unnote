@@ -109,6 +109,14 @@ button.pseudo.icon-lg
   overflow: hidden
 
 // picnic tooltip overwrite / extension
+.tooltip-top
+  &:before
+    margin-bottom: 1px
+
+.tooltip-left
+  &:before
+    margin-right: -5px
+
 button[data-tooltip]
   transition: none
 
@@ -146,7 +154,7 @@ button[data-tooltip]
     border-color: $picnic-tooltip-background transparent transparent
     left: auto
     right: 100%
-    margin-bottom: 0
+    margin-bottom: 1px
     margin-right: -18px
 
 .tooltip-top-right
@@ -162,5 +170,5 @@ button[data-tooltip]
     border-color: $picnic-tooltip-background transparent transparent
     left: 100%
     right: auto
-    margin-bottom: 0
+    margin-bottom: 1px
     margin-left: -15px
