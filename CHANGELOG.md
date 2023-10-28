@@ -1,3 +1,21 @@
+## 1.2.0 (2023-10-28)
+
+#### :rocket: Enhancement
+* [#585](https://github.com/koffeinfrei/unnote/pull/585) New icons / Different default note icons ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#579](https://github.com/koffeinfrei/unnote/pull/579) Add tooltips to icon actions ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#575](https://github.com/koffeinfrei/unnote/pull/575) Add sitemap.xml ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :bug: Bug Fix
+* [#590](https://github.com/koffeinfrei/unnote/pull/590) Remove gap for the tooltip between arrow and box ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#587](https://github.com/koffeinfrei/unnote/pull/587) Upgrade rails to 7.1 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#586](https://github.com/koffeinfrei/unnote/pull/586) Upgrade ruby to 3.2.2 ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.1.0 (2023-10-03)
 
 #### :rocket: Enhancement
