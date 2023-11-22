@@ -8,7 +8,6 @@ self.addEventListener('fetch', (event) => {
         const text = formData.get('text');
         const url = formData.get('url');
 
-        const keys = await caches.keys();
         const cache = await caches.open('media');
 
         if (image) {

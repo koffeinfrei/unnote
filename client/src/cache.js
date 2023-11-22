@@ -1,5 +1,4 @@
 export async function getBlob(name) {
-  const keys = await caches.keys()
   const cache = await caches.open('media')
 
   const image = await cache.match(name)
@@ -12,7 +11,6 @@ export async function getBlob(name) {
 }
 
 export async function getJson(name) {
-  const keys = await caches.keys()
   const cache = await caches.open('media')
 
   const data = await cache.match(name)
