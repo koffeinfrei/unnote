@@ -68,3 +68,9 @@ RSpec/ExampleLength:
 
 RSpec/MultipleExpectations:
   Enabled: false
+
+Capybara/ClickLinkOrButtonStyle:
+  Enabled: false
+
+Capybara/RSpec/HaveSelector:
+  Enabled: false

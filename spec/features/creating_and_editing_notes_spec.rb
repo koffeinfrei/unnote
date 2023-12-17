@@ -67,7 +67,7 @@ RSpec.describe 'Creating and editing notes', :js do
 
         expect(page).not_to have_content 'conflict'
 
-        expect(Note.all.pluck(:title, :text_content)).to contain_exactly(
+        expect(Note.pluck(:title, :text_content)).to contain_exactly(
           ['note 1 update 2', '<p>note 1 content update 2</p>'],
           ['note 2 update 1', '<p>note 2 content update 1</p>'],
           ['note 3', '<p>note 3 content</p>']
