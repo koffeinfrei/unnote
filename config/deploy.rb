@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lock '~> 3.17.2'
+lock '~> 3.18.0'
 
 set :application, 'unnote'
 set :repo_url, 'git@github.com:koffeinfrei/unnote.git'
