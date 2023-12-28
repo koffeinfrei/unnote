@@ -1,3 +1,14 @@
+## 1.3.0 (2023-12-28)
+
+#### :house: Internal
+* [#610](https://github.com/koffeinfrei/unnote/pull/610) Carrierwave 3 broke the image upload ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#605](https://github.com/koffeinfrei/unnote/pull/605) Update gems, upgrade ruby to 3.3.0 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#609](https://github.com/koffeinfrei/unnote/pull/609) Fix production logging ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.2.0 (2023-10-28)
 
 #### :rocket: Enhancement
