@@ -120,13 +120,12 @@ GEM
     capybara-screenshot (1.0.26)
       capybara (>= 1.0, < 4)
       launchy
-    carrierwave (2.2.5)
-      activemodel (>= 5.0.0)
-      activesupport (>= 5.0.0)
+    carrierwave (3.0.5)
+      activemodel (>= 6.0.0)
+      activesupport (>= 6.0.0)
       addressable (~> 2.6)
       image_processing (~> 1.1)
       marcel (~> 1.0.0)
-      mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
     carrierwave-base64_image_content (1.0.0)
       activerecord (>= 4.2)
@@ -389,7 +388,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.1, >= 2.1.4)
   capybara
   capybara-screenshot
-  carrierwave (~> 2.2)
+  carrierwave (~> 3.0)
   carrierwave-base64_image_content
   database_cleaner
   devise
