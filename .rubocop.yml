@@ -74,3 +74,6 @@ Capybara/ClickLinkOrButtonStyle:
 
 Capybara/RSpec/HaveSelector:
   Enabled: false
+
+Capybara/NegationMatcher:
+  Enabled: false
