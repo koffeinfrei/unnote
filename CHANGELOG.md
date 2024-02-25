@@ -1,3 +1,12 @@
+## 1.4.1 (2024-02-25)
+
+#### :bug: Bug Fix
+* [#629](https://github.com/koffeinfrei/unnote/pull/629) Show default note images in list again ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.4.0 (2024-02-25)
 
 #### :house: Internal
