@@ -57,7 +57,7 @@ class Note < ApplicationRecord
     options = { only: only }.merge(options)
 
     # use the actual content (see `HasContent`)
-    json = super(options).merge('content' => content)
+    json = super.merge('content' => content)
 
     # we need to slice again for `content` to be considered as well
     json.slice(*only)

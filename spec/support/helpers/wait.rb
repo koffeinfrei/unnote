@@ -7,10 +7,10 @@ module WaitHelper
     end
   end
 
-  def after_save_cycle(&block)
+  def after_save_cycle(&)
     # worst case is we have to wait 1 full autosave polling cycle
     # (polling cycle is 5 seconds)
-    using_wait_time 6, &block
+    using_wait_time(6, &)
   end
 
   def ensure_saved
