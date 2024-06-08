@@ -67,7 +67,7 @@
   }
 
   const focusTitleFieldIfNewNote = () => {
-    if (note.isNew() && !$searchTerm) {
+    if (note.isNew()) {
       setTimeout(() => titleElement.focus(), 100)
     }
   }
