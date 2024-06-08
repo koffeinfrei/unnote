@@ -1,3 +1,14 @@
+## 1.5.0 (2024-06-08)
+
+#### :house: Internal
+* [#672](https://github.com/koffeinfrei/unnote/pull/672) Update npm packages ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#671](https://github.com/koffeinfrei/unnote/pull/671) Upgrade ruby to 3.3.2 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#670](https://github.com/koffeinfrei/unnote/pull/670) Update gems ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.4.1 (2024-02-25)
 
 #### :bug: Bug Fix
