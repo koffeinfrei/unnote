@@ -1,3 +1,12 @@
+## 1.5.1 (2024-06-08)
+
+#### :bug: Bug Fix
+* [#673](https://github.com/koffeinfrei/unnote/pull/673) focus new title when search term is present ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.5.0 (2024-06-08)
 
 #### :house: Internal
