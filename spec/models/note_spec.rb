@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Note do
+  include ActiveSupport::Testing::TimeHelpers
+
   describe '#as_json' do
     context 'when no options provided' do
       it 'returns the whitelisted attributes' do
@@ -120,16 +122,16 @@ RSpec.describe Note do
     it 'sets the archived_at timestamp' do
       now = Time.zone.local(2016, 8, 1, 15, 33)
 
-      Timecop.freeze(now) do
-        note = described_class.create!(
-          uid: SecureRandom.uuid,
-          user: create_user
-        )
+      travel_to now
 
-        note.archive!
+      note = described_class.create!(
+        uid: SecureRandom.uuid,
+        user: create_user
+      )
 
-        expect(note.archived_at).to eq now
-      end
+      note.archive!
+
+      expect(note.archived_at).to eq now
     end
   end
 
