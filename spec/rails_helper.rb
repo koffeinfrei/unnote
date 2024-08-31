@@ -11,7 +11,7 @@ require 'paper_trail/frameworks/rspec'
 require 'capybara-screenshot/rspec'
 require 'deploy_client'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Rails.root.glob('spec/support/**/*.rb').each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
