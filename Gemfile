@@ -43,7 +43,3 @@ group :development do
   gem 'rubocop-rspec', '~> 2.19', require: false
   gem 'seed_box'
 end
-
-group :test do
-  gem 'timecop'
-end
