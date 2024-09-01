@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.1.1'
+gem 'rails', '~> 7.2.1'
 
 # gems sorted alphabetically
 
@@ -14,6 +14,7 @@ gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 gem 'carrierwave', '~> 2.2'
 gem 'carrierwave-base64_image_content'
 gem 'devise'
+gem 'dotenv-rails'
 gem 'kaminari'
 gem 'nokogiri'
 gem 'paper_trail'
