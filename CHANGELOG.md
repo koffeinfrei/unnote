@@ -1,3 +1,21 @@
+## 1.6.0 (2024-09-01)
+
+#### :house: Internal
+* [#705](https://github.com/koffeinfrei/unnote/pull/705) Upgrade rails to 7.2.1 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#704](https://github.com/koffeinfrei/unnote/pull/704) Update npm packages ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#703](https://github.com/koffeinfrei/unnote/pull/703) Update lerna changelog to v2 ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#702](https://github.com/koffeinfrei/unnote/pull/702) Update gems ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#701](https://github.com/koffeinfrei/unnote/pull/701) Upgrade ruby to 3.3.4, update bundler ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#606](https://github.com/koffeinfrei/unnote/pull/606) Bump actions/upload-artifact from 3 to 4 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#592](https://github.com/koffeinfrei/unnote/pull/592) Bump actions/setup-node from 2 to 4 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#558](https://github.com/koffeinfrei/unnote/pull/558) Bump actions/checkout from 1 to 4 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#700](https://github.com/koffeinfrei/unnote/pull/700) Remove timecop gem ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#699](https://github.com/koffeinfrei/unnote/pull/699) Drop obsolete db schema load enhancement ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.5.1 (2024-06-08)
 
 #### :bug: Bug Fix
