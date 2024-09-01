@@ -20,7 +20,7 @@ npm-debug.log*
 /public/assets/
 
 # tokens / env
-/.env
+/.env.*
 /.lerna-changelog-github-token
 
 # build files
