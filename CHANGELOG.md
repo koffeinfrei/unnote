@@ -1,3 +1,16 @@
+## 1.7.0 (2024-11-11)
+
+#### :bug: Bug Fix
+* [#736](https://github.com/koffeinfrei/unnote/pull/736) use alternative fonts to roboto ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### :house: Internal
+* [#738](https://github.com/koffeinfrei/unnote/pull/738) update gems ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#737](https://github.com/koffeinfrei/unnote/pull/737) upgrade ruby to 3.3.6 ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.6.0 (2024-09-01)
 
 #### :house: Internal
