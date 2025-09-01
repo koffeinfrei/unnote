@@ -38,7 +38,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller' # Needed by better_errors to enable html console
-  gem 'rubocop', '~> 1.68.0', require: false
+  gem 'rubocop', '~> 1.80.1', require: false
   gem 'rubocop-performance', '~> 1.16', require: false
   gem 'rubocop-rails', '~> 2.27.0', require: false
   gem 'rubocop-rspec', '~> 2.19', require: false
