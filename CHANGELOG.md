@@ -1,3 +1,13 @@
+## 1.9.0 (2025-09-27)
+
+#### :house: Internal
+* [#874](https://github.com/koffeinfrei/unnote/pull/874) Update npm packages ([@koffeinfrei](https://github.com/koffeinfrei))
+* [#873](https://github.com/koffeinfrei/unnote/pull/873) Update gems ([@koffeinfrei](https://github.com/koffeinfrei))
+
+#### Committers: 1
+- Alexis Reigel ([@koffeinfrei](https://github.com/koffeinfrei))
+
+
 ## 1.8.0 (2025-03-15)
 
 #### :house: Internal
