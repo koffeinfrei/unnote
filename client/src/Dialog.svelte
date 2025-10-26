@@ -21,43 +21,41 @@
 </div>
 
 <script>
-  import { createEventDispatcher } from 'svelte'
   import Mousetrap from 'mousetrap'
 
   let {
     title,
     text,
     show,
-    showButtons = true
+    showButtons = true,
+    confirm
   } = $props();
 
   const id = Math.random().toString(16).slice(-12)
-
-  const dispatch = createEventDispatcher()
 
   const handleOkButtonClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
 
-    dispatch('confirm', true)
+    confirm(true)
   }
 
   const handleCancelButtonClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
 
-    dispatch('confirm', false)
+    confirm(false)
   }
 
   $effect(() => {
     if (show) {
       Mousetrap.bind('enter', (e) => {
         e.preventDefault()
-        dispatch('confirm', true)
+        confirm(true)
       })
 
       Mousetrap.bind('esc', () => {
-        dispatch('confirm', false)
+        confirm(false)
       })
     }
     else {

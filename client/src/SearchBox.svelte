@@ -25,7 +25,7 @@
 </div>
 
 <script>
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
   import { debounce } from 'throttle-debounce'
   import { searchTerm } from './stores'
   import EventHive from './EventHive'
@@ -38,8 +38,6 @@
 
   /** @type {Props} */
   let { isActive = $bindable(false) } = $props();
-
-  const dispatch = createEventDispatcher()
 
   let searchInput = $state()
   let searchSubscription

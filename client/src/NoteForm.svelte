@@ -1,9 +1,8 @@
-<!-- @migration-task Error while migrating Svelte code: Can't migrate code with afterUpdate. Please migrate by hand. -->
 <div class:hidden-sm={!showForm}>
   <input
     type="text"
     value={note.title}
-    on:input={handleTitleChange}
+    oninput={handleTitleChange}
     placeholder="Title"
     bind:this={titleElement}
   />
@@ -12,7 +11,7 @@
 </div>
 
 <script>
-  import { createEventDispatcher, onMount, afterUpdate } from 'svelte'
+  import { onMount } from 'svelte'
   import './highlight.js'
   import Quill from 'quill'
   import { searchTerm } from './stores'
@@ -20,27 +19,25 @@
   import 'quill/dist/quill.snow.css'
   import EventHive from './EventHive'
 
-  export let note
-  export let showForm
+  let { note, showForm, change } = $props();
 
-  const dispatch = createEventDispatcher()
-
-  let shouldRerender = true
+  let shouldRerender = $state(true)
   let editor
   let titleElement
   let contentContainerElement
   let contentElement
+  let previousNoteUid = $state()
 
   const handleTitleChange = () => {
     shouldRerender = false
     note.title = titleElement.value
-    dispatch('change', note)    
+    change(note)
   }
 
   const handleContentChange = () => {
     shouldRerender = false
     note.content = contentElement.innerHTML
-    dispatch('change', note)    
+    change(note)
   }
 
   const renderEditor = () => {
@@ -75,11 +72,21 @@
 
   onMount(renderEditor)
 
-  // gets called initially and when a note is switched
-  afterUpdate(() => {
+  // React to note changes
+  $effect(() => {
+    // a different note is shown.
+    if (titleElement && note.uid !== previousNoteUid) {
+      previousNoteUid = note.uid
+      shouldRerender = true
+      focusTitleFieldIfNewNote()
+    }
+  })
+
+  // Update editor content when shouldRerender is true
+  $effect(() => {
     // don't rerender if the RTE content changes. the cursor jumps to the
     // beginning of the content if we re-initialize the RTE content.
-    if (shouldRerender) {
+    if (shouldRerender && editor) {
       editor.off('text-change')
       // reset the content before inserting the actual content.
       // presumably because of change tracking (delta stuff) in quill the
@@ -93,16 +100,6 @@
       editor.on('text-change', handleContentChange)
     }
   })
-
-  let previousNoteUid
-  $: {
-    // a different note is shown.
-    if (titleElement && note.uid !== previousNoteUid) {
-      previousNoteUid = note.uid
-      shouldRerender = true
-      focusTitleFieldIfNewNote()
-    }
-  }
 </script>
 
 <style lang="sass">

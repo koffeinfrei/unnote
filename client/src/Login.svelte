@@ -8,17 +8,17 @@
         model="user"
         attribute="email"
         label="Email"
-        on:change={setValue} />
+        change={setValue} />
 
       <TextInput
         type="password"
         model="user"
         attribute="password"
         label="Password"
-        on:change={setValue} />
+        change={setValue} />
 
       <Checkbox model="user" attribute="remember_me" label="Remember me"
-        on:change={setValue} />
+        change={setValue} />
    </div>
 
     <SubmitButton label="Log in" />
@@ -41,8 +41,8 @@
 
   let values
 
-  const setValue = event => {
-    values = { ...values, ...event.detail }
+  const setValue = value => {
+    values = { ...values, ...value }
   }
 
   const submit = event => {

@@ -33,13 +33,13 @@
         <div class="list-item-actions">
           <button name="archive-note" class='icon tooltip-top-left' data-tooltip="Archive note" onclick={event => {
                 event.stopPropagation()
-                dispatch('archiveNote', note)
+                archiveNote(note)
               }}>
             <ArchiveIcon />
           </button>
           <button name="delete-note" class='icon tooltip-top-left' data-tooltip="Delete note" onclick={event => {
               event.stopPropagation()
-              dispatch('deleteNote', note)
+              deleteNote(note)
             }}>
             <DeleteIcon />
           </button>
@@ -51,11 +51,11 @@
   <LoadMoreButton
     showLoadMoreButton={hasMorePages}
     showSpinner={isLoadingMorePages}
-    on:loadMore={handleLoadMoreClick} />
+    loadMore={handleLoadMoreClick} />
 </div>
 
 <script>
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { onMount } from 'svelte'
   import humanDate from 'human-date'
   import { ajaxWithAbort } from './ajax'
   import { show } from './flash'
@@ -74,7 +74,10 @@
     isSynced,
     showList,
     listNeedsUpdate,
-    collection
+    collection,
+    noteClick,
+    archiveNote,
+    deleteNote
   } = $props();
 
   let currentPage = 1
@@ -84,8 +87,6 @@
   let filter
   let relativeTimeUpdateTrigger = $state(Date.now())
 
-  const dispatch = createEventDispatcher()
-
   // update the relative `updatedAt` time shown in the list. For newly created
   // notes where we show seconds the display gets stale otherwise
   setInterval(() => {
@@ -93,7 +94,7 @@
   }, 1000)
 
   const handleNoteClick = (note, e) => {
-    dispatch('noteClick', note)
+    noteClick(note)
   }
 
   const handleLoadMoreClick = () => {

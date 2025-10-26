@@ -3,7 +3,7 @@
   text='You currently have unnote open in multiple tabs. Please close all but one of them.<br>Keeping multiple tabs active will likely lead to edit conflicts.'
   show={showDialog}
   showButtons={false}
-  on:confirm={() => showDialog = false} />
+  confirm={() => showDialog = false} />
 
 <script>
   import { create, read, erase } from './cookie'

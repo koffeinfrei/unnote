@@ -10,7 +10,7 @@
           <Task
             {note}
             {task}
-            on:checked />
+            {checked} />
         {/each}
       </footer>
     {/if}
@@ -32,7 +32,7 @@
             <Task
               {note}
               {task}
-              on:checked />
+              {checked} />
           {/each}
         </div>
       </footer>
@@ -45,7 +45,7 @@
   import MoreIcon from './icons/material/expand_more_FILL0_wght300_GRAD0_opsz24.svg.svelte'
   import LessIcon from './icons/material/expand_less_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
-  let { note } = $props();
+  let { note, checked } = $props();
 
   let showDone = $state(false)
 

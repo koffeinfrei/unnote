@@ -8,17 +8,13 @@
 </label>
 
 <script>
-  import { createEventDispatcher } from 'svelte'
-
-  let { note, task } = $props();
-
-  const dispatch = createEventDispatcher()
+  let { note, task, checked } = $props();
 
   const handleTaskChecked = () => {
-    dispatch('checked', {
-      note: note,
-      task: { ...task, done: !task.done }
-    })
+    checked(
+      note,
+      { ...task, done: !task.done }
+    )
   }
 </script>
 

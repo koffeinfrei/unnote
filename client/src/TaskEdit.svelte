@@ -1,5 +1,5 @@
 <ActionBar
-  on:newClicked={() => push('/notes')}
+  newClicked={() => push('/notes')}
   {isSynced} />
 
 <div class="flex one">
@@ -19,7 +19,7 @@
     {#each notes as note}
       <TaskGroup
         {note}
-        on:checked={handleTaskChecked} />
+        checked={handleTaskChecked} />
     {/each}
 
     <LoadMoreButton
@@ -43,9 +43,6 @@
   import SearchTerm from './SearchTerm.svelte'
   import LoadMoreButton from './LoadMoreButton.svelte'
 
-  // FIXME: params are unused. this is just to suppress the svelte warning `was created with unknown prop 'params'`
-  // let { params = {} } = $props();
-
   let notes = $state([])
   let currentPage = 1
   let filter = 'todo'
@@ -54,9 +51,7 @@
   let isSynced = $state()
   let autoSave
 
-  const handleTaskChecked = (e) => {
-    const { note, task } = e.detail
-
+  const handleTaskChecked = (note, task) => {
     // update the task so the change is immediately rendered, otherwise the UI
     // updates only after the next auto poll cycle is done.
     const associatedNote = notes.find(collectionNote => collectionNote.uid === note.uid)

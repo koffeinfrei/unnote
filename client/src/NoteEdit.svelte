@@ -3,8 +3,8 @@
   <NoteActionBar
     {showList}
     {isSynced}
-    on:showListClicked={handleShowListClicked}
-    on:newClicked={handleNewNoteClicked} />
+    showListClicked={handleShowListClicked}
+    newClicked={handleNewNoteClicked} />
   <div class="flex one two-900">
     <div class="full third-900 fourth-1200">
       <NoteList
@@ -13,14 +13,14 @@
         {showList}
         {listNeedsUpdate}
         {collection}
-        on:noteClick={handleNoteClick}
-        on:deleteNote={handleDeleteNoteClick}
-        on:archiveNote={handleArchiveNoteClick} />
+        noteClick={handleNoteClick}
+        deleteNote={handleDeleteNoteClick}
+        archiveNote={handleArchiveNoteClick} />
     </div>
     <div class="full two-third-900 three-fourth-1200 padding-left-xl">
       <NoteForm
         {note}
-        on:change={handleEditChange}
+        change={handleEditChange}
         showForm={!showList} />
     </div>
   </div>
@@ -29,13 +29,13 @@
     title='Archive'
     text='Are you sure you want to archive this note?'
     show={showArchiveDialog}
-    on:confirm={handleArchiveDialogConfirmed} />
+    confirm={handleArchiveDialogConfirmed} />
 
   <Dialog
     title='Delete'
     text='Are you sure you want to delete this note?'
     show={showDeleteDialog}
-    on:confirm={handleDeleteDialogConfirmed} />
+    confirm={handleDeleteDialogConfirmed} />
 {/if}
 
 <script>
@@ -162,20 +162,16 @@
     }
   }
 
-  const handleNoteClick = (event) => {
-    event.preventDefault()
-
+  const handleNoteClick = (note) => {
     showList = false
-    setEdit(event.detail)
+    setEdit(note)
   }
 
-  const handleDeleteNoteClick = (e) => {
-    const clickedNote = e.detail
-
-    const handler = (event) => {
+  const handleDeleteNoteClick = (clickedNote) => {
+    const handler = (confirm) => {
       showDeleteDialog = false
 
-      if (event.detail) {
+      if (confirm) {
         isSynced = false
         deleteNote(clickedNote)
       }
@@ -184,13 +180,11 @@
     handleDeleteDialogConfirmed = handler
   }
 
-  const handleArchiveNoteClick = (e) => {
-    const clickedNote = e.detail
-
-    const handler = (event) => {
+  const handleArchiveNoteClick = (clickedNote) => {
+    const handler = (confirm) => {
       showArchiveDialog = false
 
-      if (event.detail) {
+      if (confirm) {
         clickedNote.setArchived()
         autoSave.setChange(clickedNote)
         setNewNote(() => showList = true)
@@ -208,8 +202,7 @@
     setNewNote(() => showList = true)
   }
 
-  const handleEditChange = (event) => {
-    const updatedNote = event.detail
+  const handleEditChange = (updatedNote) => {
     setEdit(updatedNote)
 
     autoSave.setChange(updatedNote)

@@ -5,19 +5,16 @@
 
   <SaveStateLabel {isSynced} />
 
-  <button name="new" data-tooltip="Create note" onclick={() => dispatch('newClicked')} class="icon big tooltip-top-left">
+  <button name="new" data-tooltip="Create note" onclick={() => newClicked()} class="icon big tooltip-top-left">
     <NewIcon />
   </button>
 </div>
 
 <script>
-  import { createEventDispatcher } from 'svelte'
   import SaveStateLabel from './SaveStateLabel.svelte'
   import NewIcon from './icons/material/add_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
-  let { isSynced, left } = $props();
-
-  const dispatch = createEventDispatcher()
+  let { isSynced, left, newClicked } = $props();
 </script>
 
 <style lang="sass">
