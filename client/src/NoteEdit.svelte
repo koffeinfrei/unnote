@@ -1,4 +1,3 @@
-<!-- @migration-task Error while migrating Svelte code: Can't migrate code with beforeUpdate. Please migrate by hand. -->
 {#if note}
   <NoteActionBar
     {showList}
@@ -39,7 +38,7 @@
 {/if}
 
 <script>
-  import { onMount, beforeUpdate, onDestroy, tick } from 'svelte'
+  import { onMount, onDestroy, tick } from 'svelte'
   import { querystring } from 'svelte-spa-router'
   import { ajax } from './ajax'
   import { show } from './flash'
@@ -57,24 +56,54 @@
   import Dialog from './Dialog.svelte'
   import './keyboard'
 
-  export let params = {}
-  export let collection
+  let { params = {}, collection } = $props();
 
-  let note
-  let showList
+  let note = $state()
+  let showList = $state()
   let autoSave
-  let isSynced
-  let listNeedsUpdate
+  let isSynced = $state()
+  let listNeedsUpdate = $state()
   let noteNewSubscription
   let searchEnteredSubscription
   let searchClearedSubscription
-  let showDeleteDialog
-  let handleDeleteDialogConfirmed
-  let showArchiveDialog
-  let handleArchiveDialogConfirmed
+  let showDeleteDialog = $state()
+  let handleDeleteDialogConfirmed = $state()
+  let showArchiveDialog = $state()
+  let handleArchiveDialogConfirmed = $state()
 
-  $: { $querystring; initializefromShareTarget() }
-  $: { params; initializefromParam() }
+  // Initialize note if undefined
+  $effect(() => {
+    if (note === undefined) {
+      note = new Note()
+      showList = true
+    }
+  })
+
+  // Set browser title when note changes
+  $effect(() => {
+    if (note) {
+      setBrowserTitle(note)
+    }
+  })
+
+  // React to querystring changes
+  $effect(() => {
+    $querystring
+    initializefromShareTarget()
+  })
+
+  // React to params changes
+  $effect(() => {
+    params
+    initializefromParam()
+  })
+
+  // React to search term changes
+  $effect(() => {
+    if ($searchTerm !== undefined) {
+      showList = true
+    }
+  })
 
   const initializefromShareTarget = async () => {
     if ($querystring.includes('share-target')) {
@@ -131,21 +160,10 @@
     await tick()
   })
 
-  beforeUpdate(async () => {
-    if (note === undefined) {
-      note = new Note()
-      showList = true
-    }
-
-    setBrowserTitle(note)
-  })
-
   onDestroy(() => {
     noteNewSubscription.remove()
     autoSave.stopPolling()
   })
-
-  $: if ($searchTerm !== undefined) showList = true
 
   const initStateFromNoteId = async (id) => {
     showList = false
