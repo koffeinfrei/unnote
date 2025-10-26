@@ -11,20 +11,10 @@
   import noteDefault from './icons/material/notes_FILL0_wght300_GRAD0_opsz24.svg'
   import taskDefault from './icons/material/checklist_FILL0_wght300_GRAD0_opsz24.svg'
 
-  export let note
+  let { note } = $props();
 
-  let noteImage
-  let defaultImage
-
-  $: {
-    if (note) {
-      noteImage = getPreviewImageUrl(note)
-
-      if (!noteImage) {
-        defaultImage = note.hasTasks() ? taskDefault : noteDefault
-      }
-    }
-  }
+  let noteImage = $state()
+  let defaultImage = $state()
 
   const getPreviewImageUrl = (note) => {
     var match = note.content.match(/<img.*? src=['"]([^'"]+)['"].*?>/)
@@ -35,6 +25,15 @@
       return null
     }
   }
+  $effect(() => {
+    if (note) {
+      noteImage = getPreviewImageUrl(note)
+
+      if (!noteImage) {
+        defaultImage = note.hasTasks() ? taskDefault : noteDefault
+      }
+    }
+  });
 </script>
 
 <style lang="sass">

@@ -6,7 +6,7 @@
   <div class="full">
     <SearchTerm searchTerm={$searchTerm} />
     <div class="view-filter">
-      <select name="view-filter" on:change={handleFilterChanged}>
+      <select name="view-filter" onchange={handleFilterChanged}>
         <option value="todo">Show todos</option>
         <option value="">Show all</option>
       </select>
@@ -44,14 +44,14 @@
   import LoadMoreButton from './LoadMoreButton.svelte'
 
   // FIXME: params are unused. this is just to suppress the svelte warning `was created with unknown prop 'params'`
-  export let params = {}
+  // let { params = {} } = $props();
 
-  let notes = []
+  let notes = $state([])
   let currentPage = 1
   let filter = 'todo'
-  let hasMorePages = false
-  let isLoadingMorePages = true
-  let isSynced
+  let hasMorePages = $state(false)
+  let isLoadingMorePages = $state(true)
+  let isSynced = $state()
   let autoSave
 
   const handleTaskChecked = (e) => {
@@ -82,7 +82,6 @@
     isSynced = data.isSynced
   }
 
-  $: if ($searchTerm !== undefined) fetchTasks()
 
   const handleFilterChanged = (e) => {
     filter = e.target.value
@@ -126,4 +125,7 @@
   onDestroy(() => {
     autoSave.stopPolling()
   })
+  $effect(() => {
+    if ($searchTerm !== undefined) fetchTasks()
+  });
 </script>

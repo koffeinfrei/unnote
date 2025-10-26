@@ -7,7 +7,7 @@
         <footer>
           {@html message}
         </footer>
-        <button class="close icon" type="button" on:click={handleClose}>×</button>
+        <button class="close icon" type="button" onclick={handleClose}>×</button>
       </div>
     </div>
 
@@ -19,9 +19,7 @@
   import { onMount, onDestroy } from 'svelte'
   import { getEventName } from './flash'
 
-  export let name
-  export let addtionalCssClass
-  export let message = undefined
+  let { name, addtionalCssClass, message = $bindable(undefined) } = $props();
 
   const getCssClass = () => {
     var cssClasses = ['card', addtionalCssClass]

@@ -1,4 +1,4 @@
-<button name="logout" on:click={handleClicked} class="icon-lg big pseudo logout tooltip-left" data-tooltip="Logout">
+<button name="logout" onclick={handleClicked} class="icon-lg big pseudo logout tooltip-left" data-tooltip="Logout">
   <LogoutIcon />
   <span class="icon-lg-text">Logout</span>
 </button>

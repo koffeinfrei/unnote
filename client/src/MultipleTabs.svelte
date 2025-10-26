@@ -9,7 +9,7 @@
   import { create, read, erase } from './cookie'
   import Dialog from './Dialog.svelte'
 
-  let tabs = parseInt(read('dont-do-tabs') || 0)
+  let tabs = $state(parseInt(read('dont-do-tabs') || 0))
   tabs += 1
 
   create('dont-do-tabs', tabs)
@@ -26,5 +26,5 @@
     }
   })
 
-  $: showDialog = tabs > 1
+  let showDialog = $derived(tabs > 1)
 </script>

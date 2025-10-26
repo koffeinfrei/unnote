@@ -3,7 +3,7 @@
 
   {#if collection === 'task_notes'}
     <div class="view-filter">
-      <select on:change={handleTaskNoteFilterChanged}>
+      <select onchange={handleTaskNoteFilterChanged}>
         <option value="">Show all</option>
         <option value="todo">Show todos</option>
       </select>
@@ -18,7 +18,7 @@
         class="card list-item"
         class:active={note.uid === activeNoteUid}
         key={note.uid}
-        on:click={() => handleNoteClick(note)}>
+        onclick={() => handleNoteClick(note)}>
 
         <NotePicture {note} />
 
@@ -31,13 +31,13 @@
           </div>
         </div>
         <div class="list-item-actions">
-          <button name="archive-note" class='icon tooltip-top-left' data-tooltip="Archive note" on:click={event => {
+          <button name="archive-note" class='icon tooltip-top-left' data-tooltip="Archive note" onclick={event => {
                 event.stopPropagation()
                 dispatch('archiveNote', note)
               }}>
             <ArchiveIcon />
           </button>
-          <button name="delete-note" class='icon tooltip-top-left' data-tooltip="Delete note" on:click={event => {
+          <button name="delete-note" class='icon tooltip-top-left' data-tooltip="Delete note" onclick={event => {
               event.stopPropagation()
               dispatch('deleteNote', note)
             }}>
@@ -55,7 +55,7 @@
 </div>
 
 <script>
-  import { createEventDispatcher, onMount, beforeUpdate } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
   import humanDate from 'human-date'
   import { ajaxWithAbort } from './ajax'
   import { show } from './flash'
@@ -69,19 +69,20 @@
   import DeleteIcon from './icons/material/delete_FILL0_wght300_GRAD0_opsz24.svg.svelte'
   import { notes } from './stores.js'
 
-  export let activeNoteUid
-  export let isSynced
-  export let showList
-  /* export let searchQuery */
-  export let listNeedsUpdate
-  export let collection
+  let {
+    activeNoteUid,
+    isSynced,
+    showList,
+    listNeedsUpdate,
+    collection
+  } = $props();
 
   let currentPage = 1
-  let hasMorePages = false
-  let isLoadingMorePages = true
+  let hasMorePages = $state(false)
+  let isLoadingMorePages = $state(true)
   let updateListRequest
   let filter
-  let relativeTimeUpdateTrigger = Date.now()
+  let relativeTimeUpdateTrigger = $state(Date.now())
 
   const dispatch = createEventDispatcher()
 
@@ -90,25 +91,6 @@
   setInterval(() => {
     relativeTimeUpdateTrigger = Date.now()
   }, 1000)
-
-  $: {
-    if (isSynced && listNeedsUpdate !== false) {
-      updateList()
-    }
-  }
-
-  $: {
-    if ($searchTerm !== undefined) {
-      updateList()
-    }
-  }
-
-  $: {
-    // collection changed
-    if (collection !== undefined) {
-      updateList()
-    }
-  }
 
   const handleNoteClick = (note, e) => {
     dispatch('noteClick', note)
@@ -163,6 +145,22 @@
         console.error('error: ', error.toString())
       })
   }
+  $effect(() => {
+    if (isSynced && listNeedsUpdate !== false) {
+      updateList()
+    }
+  });
+  $effect(() => {
+    if ($searchTerm !== undefined) {
+      updateList()
+    }
+  });
+  $effect(() => {
+    // collection changed
+    if (collection !== undefined) {
+      updateList()
+    }
+  });
 </script>
 
 <style lang="sass">

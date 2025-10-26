@@ -1,5 +1,5 @@
 {#if showLoadMoreButton && !showSpinner}
-  <button name="load-more" class='icon big center tooltip-top-left' data-tooltip="Load more notes" on:click={handleLoadMoreClick}>
+  <button name="load-more" class='icon big center tooltip-top-left' data-tooltip="Load more notes" onclick={handleLoadMoreClick}>
     <MoreIcon />
   </button>
 {/if}
@@ -15,8 +15,7 @@
   import MoreIcon from './icons/material/expand_more_FILL0_wght300_GRAD0_opsz24.svg.svelte'
   import Spinner from './Spinner.svelte'
 
-  export let showSpinner
-  export let showLoadMoreButton
+  let { showSpinner, showLoadMoreButton } = $props();
 
   const dispatch = createEventDispatcher()
 

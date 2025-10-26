@@ -14,7 +14,7 @@
   import EventHive from './EventHive'
   import LogoImage from './images/logo.svg.svelte'
 
-  let showSpinner = false
+  let showSpinner = $state(false)
   let spinnerSubscription
 
   onMount(() => {

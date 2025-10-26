@@ -2,7 +2,7 @@
   <input
     type="checkbox"
     checked={task.done}
-    on:change={handleTaskChecked} />
+    onchange={handleTaskChecked} />
 
   <span class="checkable">{task.title}</span>
 </label>
@@ -10,8 +10,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
 
-  export let note
-  export let task
+  let { note, task } = $props();
 
   const dispatch = createEventDispatcher()
 

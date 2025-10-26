@@ -1,5 +1,5 @@
 <input type="submit" value={label} />
 
 <script>
-  export let label
+  let { label } = $props();
 </script>

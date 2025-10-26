@@ -1,5 +1,5 @@
 <UserForm>
-  <form on:submit={submit}>
+  <form onsubmit={submit}>
     <Utf8 />
 
     <div class="flex one">

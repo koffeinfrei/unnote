@@ -21,7 +21,7 @@
   import MultipleTabs from './MultipleTabs.svelte'
   import { isPwa } from './capabilities'
 
-  $: isApp = !window.IS_LANDING_PAGE
+  let isApp = $derived(!window.IS_LANDING_PAGE)
 
   const authenticate = async () => {
     if ($isAuthenticated === true) return true

@@ -7,17 +7,19 @@
     type={type}
     id={idValue(model, attribute)}
     name={nameValue(model, attribute)}
-      on:change={(e) => dispatch('change', { [nameValue(model, attribute)]:  e.target.value})} />
+      onchange={(e) => dispatch('change', { [nameValue(model, attribute)]:  e.target.value})} />
 </div>
 
 <script>
   import { createEventDispatcher } from 'svelte'
   import { idValue, nameValue } from '../form'
 
-  export let model
-  export let attribute
-  export let type
-  export let label
+  let {
+    model,
+    attribute,
+    type,
+    label
+  } = $props();
 
   const dispatch = createEventDispatcher()
 </script>

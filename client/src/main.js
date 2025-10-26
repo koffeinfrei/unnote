@@ -1,5 +1,6 @@
 import './App.sass'
 import App from './App.svelte'
+import { mount } from "svelte";
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
@@ -7,7 +8,7 @@ if ('serviceWorker' in navigator) {
     .catch((error) => { console.error('serviceworker registration failed', error) });
 }
 
-const app = new App({
+const app = mount(App, {
   target: document.getElementById('app')
 })
 

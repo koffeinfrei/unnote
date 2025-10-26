@@ -2,15 +2,15 @@
   <div class="hidden-sm"></div>
 
   <div class="full third-1000">
-    {#if $$slots.intro}
+    {#if intro}
       <div class="card">
         <footer>
-          <slot name="intro"></slot>
+          {@render intro?.()}
         </footer>
       </div>
     {/if}
 
-    <slot></slot>
+    {@render children?.()}
 
     <UserLinks />
   </div>
@@ -20,4 +20,12 @@
 
 <script>
   import UserLinks from './UserLinks.svelte'
+  /**
+   * @typedef {Object} Props
+   * @property {import('svelte').Snippet} [intro]
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let { intro, children } = $props();
 </script>

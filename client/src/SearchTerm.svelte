@@ -3,7 +3,7 @@
 {/if}
 
 <script>
-  export let searchTerm
+  let { searchTerm } = $props();
 </script>
 
 <style lang="sass">

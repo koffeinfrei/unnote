@@ -5,7 +5,7 @@
 {/if}
 
 <script>
-  export let isSynced
+  let { isSynced } = $props();
 </script>
 
 <style lang="sass">

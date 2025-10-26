@@ -4,9 +4,9 @@
     class="search-input"
     name="search"
     value={$searchTerm}
-    on:keyup={handleSearchEnterDebounced}
-    on:focus={() => isActive = true}
-    on:blur={() => isActive = false}
+    onkeyup={handleSearchEnterDebounced}
+    onfocus={() => isActive = true}
+    onblur={() => isActive = false}
     bind:this={searchInput}
     />
 
@@ -14,7 +14,7 @@
     <button
       type="button"
       class="search-clear"
-      on:click={handleSearchCleared}>×</button>
+      onclick={handleSearchCleared}>×</button>
   {/if}
 
   {#if !isActive && !$searchTerm}
@@ -31,11 +31,17 @@
   import EventHive from './EventHive'
   import SearchIcon from './icons/material/search_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
-  export let isActive = false
+  /**
+   * @typedef {Object} Props
+   * @property {boolean} [isActive]
+   */
+
+  /** @type {Props} */
+  let { isActive = $bindable(false) } = $props();
 
   const dispatch = createEventDispatcher()
 
-  let searchInput
+  let searchInput = $state()
   let searchSubscription
 
   const handleSearchEnter = (e) => {

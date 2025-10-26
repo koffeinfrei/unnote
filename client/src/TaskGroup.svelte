@@ -19,7 +19,7 @@
   <div>
     {#if done.length > 0}
       <footer>
-        <button name="toggle-done" class='icon left-aligned tooltip-top-right' data-tooltip="Show completed" on:click={() => (showDone = !showDone)}>
+        <button name="toggle-done" class='icon left-aligned tooltip-top-right' data-tooltip="Show completed" onclick={() => (showDone = !showDone)}>
           {#if showDone}
             <LessIcon />
           {:else}
@@ -45,10 +45,10 @@
   import MoreIcon from './icons/material/expand_more_FILL0_wght300_GRAD0_opsz24.svg.svelte'
   import LessIcon from './icons/material/expand_less_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
-  export let note
+  let { note } = $props();
 
-  let showDone = false
+  let showDone = $state(false)
 
-  $: todo = note.tasks.filter(task => !task.done)
-  $: done = note.tasks.filter(task => task.done)
+  let todo = $derived(note.tasks.filter(task => !task.done))
+  let done = $derived(note.tasks.filter(task => task.done))
 </script>

@@ -1,11 +1,11 @@
 <div class="action-bar">
-  <slot name="left">
+  {#if left}{@render left()}{:else}
     <div class="icon big invisible"></div>
-  </slot>
+  {/if}
 
   <SaveStateLabel {isSynced} />
 
-  <button name="new" data-tooltip="Create note" on:click={() => dispatch('newClicked')} class="icon big tooltip-top-left">
+  <button name="new" data-tooltip="Create note" onclick={() => dispatch('newClicked')} class="icon big tooltip-top-left">
     <NewIcon />
   </button>
 </div>
@@ -15,7 +15,7 @@
   import SaveStateLabel from './SaveStateLabel.svelte'
   import NewIcon from './icons/material/add_FILL0_wght300_GRAD0_opsz24.svg.svelte'
 
-  export let isSynced
+  let { isSynced, left } = $props();
 
   const dispatch = createEventDispatcher()
 </script>

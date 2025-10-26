@@ -4,15 +4,15 @@
   <article>
     <header>
       <h3>{title}</h3>
-      <label for={id} class="close" on:click={handleCancelButtonClick}>&times;</label>
+      <label for={id} class="close" onclick={handleCancelButtonClick}>&times;</label>
     </header>
     <section class="content">
       {@html text}
     </section>
     <footer>
       {#if showButtons}
-        <button class="button" on:click={handleOkButtonClick}>Ok</button>
-        <label for={id} class="button dangerous" on:click={handleCancelButtonClick}>
+        <button class="button" onclick={handleOkButtonClick}>Ok</button>
+        <label for={id} class="button dangerous" onclick={handleCancelButtonClick}>
           Cancel
         </label>
       {/if}
@@ -24,10 +24,12 @@
   import { createEventDispatcher } from 'svelte'
   import Mousetrap from 'mousetrap'
 
-  export let title
-  export let text
-  export let show
-  export let showButtons = true
+  let {
+    title,
+    text,
+    show,
+    showButtons = true
+  } = $props();
 
   const id = Math.random().toString(16).slice(-12)
 
@@ -47,7 +49,7 @@
     dispatch('confirm', false)
   }
 
-  $: {
+  $effect(() => {
     if (show) {
       Mousetrap.bind('enter', (e) => {
         e.preventDefault()
@@ -62,5 +64,5 @@
       Mousetrap.unbind('enter')
       Mousetrap.unbind('esc')
     }
-  }
+  });
 </script>
