@@ -377,7 +377,7 @@ GEM
     seed_box (0.4.0)
       activerecord (>= 4.2)
       rails (>= 4.2)
-    selenium-webdriver (4.43.0)
+    selenium-webdriver (4.44.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
